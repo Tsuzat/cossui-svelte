@@ -1,6 +1,20 @@
-* TODO: Bring origin tables 12-20, + 9-11
-* Firefox - p-map-* don't show round corners
 
+TODO:
+* Firefox - p-map-* don't show round corners
+* Range Calandar category has no matching particules
+* Build the cossui-svelte skill, deploy similar to https://www.skills.sh/cosscom/coss/coss
+* Segmented control is missing - https://coss.com/ui/particles?tags=segmented%20control
+* Publish cossui-svelte on r/sideprojects, https://www.myvibebook.com/, echojs, hacker news, linkedin, https://svelter.me/
+* Topbar should default select the button for the matching page
+* Topbar should bringback the search documentation
+* Topbar: Mobile layout needs a rework
+* Docs
+* I don't like the file-upload visuals
+* port splitpanes
+* port rich editor
+* add pointer to design/component library from the readme
+
+* DONE: Bring origin tables 12-20, + 9-11
 * DONE: on Mobile, we need a menu to browse the pages
 * DONE: Add origin input-29
 * DONE - Drawer nested, do not stack properly on top of each others, the position is off
@@ -45,29 +59,3 @@
 * DONE - METER - this is not a bug.. but the ends should be round
 * DONE - toplevel padding
 * DONE ACCORDIONS - no animations, custom + still show an anchor
-
-TODO:
-* Port Carousel from ShadCN 
-* Port Tags, Swappable & Viewport from https://trioxide.obelus.fi/components/swappable
-* check for any origin particule with no coosui equivalent
-* bring tree & tanstack tables
-* bring file upload
-
-to port from origin -
-
-Phone number
-/src/lib/components/inputs/input-47.svelte
-Copy to clipboard
-nents/inputs/input-54.svelte
-
-Masks
-inputs/input-55.svelte
-timestamp
-inputs/input-56.svelte
-date&time input
-inputs/input-40.svelte
-Range
-inputs/input-57.svelte
-
-input with overlapping label 
-inputs/input-31.svelte  32 33
