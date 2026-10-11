@@ -1,5 +1,6 @@
 <script lang="ts">
   import { resolve } from '$app/paths';
+  import { page } from '$app/state';
   import { Button } from '#lib/components/ui/button/index.js';
   import { Separator } from '#lib/components/ui/separator/index.js';
   import { componentNavTree, type NavTree, PAGES_NEW } from '#lib/docs.js';
@@ -26,6 +27,17 @@
     products = [],
     tree = componentNavTree
   }: Props = $props();
+
+  const links = [
+    { href: '/', label: 'Components' },
+    { href: '/particles', label: 'Particles' },
+    { href: '/blocs', label: 'Blocs' },
+    { href: '/ai', label: 'Registry & AI' },
+    { href: '/docs', label: 'Docs' }
+  ] as const;
+
+  const isActive = (href: string) =>
+    href === '/' ? page.url.pathname === '/' : page.url.pathname.startsWith(href);
 </script>
 
 <SiteHeaderBase {currentProduct} {products}>
@@ -34,11 +46,15 @@
   {/snippet}
 
   <div class="flex gap-2">
-    <Button variant="ghost"><a href={resolve('/')}>Components</a></Button>
-    <Button variant="ghost"><a href={resolve('particles')}>Particles</a></Button>
-    <Button variant="ghost"><a href={resolve('blocs')}>Blocs</a></Button>
-    <Button variant="ghost"><a href={resolve('ai')}>Registry & AI</a></Button>
-    <Button variant="ghost"><a href={resolve('docs')}>Docs</a></Button>
+    {#each links as link (link.href)}
+      <Button
+        variant={isActive(link.href) ? 'secondary' : 'ghost'}
+        href={resolve(link.href)}
+        data-pressed={isActive(link.href) || undefined}
+      >
+        {link.label}
+      </Button>
+    {/each}
   </div>
 
   <MainNav class="hidden lg:flex" items={navItems} />
