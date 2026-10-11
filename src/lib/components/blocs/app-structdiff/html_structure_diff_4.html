@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HTML Structure Diff</title>
+<style>
+  :root{
+    --bg:#0f172a; --panel:#16213a; --panel2:#111a30; --border:#2a3a5c;
+    --text:#e2e8f0; --muted:#8294b3;
+    --accent:#6366f1; --accent2:#818cf8;
+    --added:#34d399; --added-bg:rgba(52,211,153,0.12);
+    --removed:#f87171; --removed-bg:rgba(248,113,113,0.12);
+    --changed:#fbbf24; --changed-bg:rgba(251,191,36,0.10);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; padding:24px; background:var(--bg); color:var(--text);
+    font-family:'SF Mono','JetBrains Mono',Consolas,monospace;
+    font-size:13px;
+  }
+  h1{
+    font-size:18px; font-weight:600; margin:0 0 4px 0;
+    background:linear-gradient(90deg,var(--accent2),#a78bfa);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .sub{color:var(--muted); margin:0 0 20px 0; font-size:12px;}
+  .inputs{display:flex; gap:16px; margin-bottom:14px;}
+  .col{flex:1; display:flex; flex-direction:column; gap:6px;}
+  .col label{font-size:12px; color:var(--muted); display:flex; justify-content:space-between; align-items:center;}
+  .col label .tag{font-weight:600; color:var(--text);}
+  .label-actions{display:flex; align-items:center; gap:8px;}
+  button.ghost{
+    background:transparent; color:var(--accent2); border:1px solid var(--border);
+    padding:3px 9px; border-radius:6px; font-size:11px; cursor:pointer; font-family:inherit;
+  }
+  button.ghost:hover{border-color:var(--accent2); background:rgba(99,102,241,0.08);}
+  textarea{
+    width:100%; height:160px; resize:vertical;
+    background:var(--panel2); color:var(--text); border:1px solid var(--border);
+    border-radius:8px; padding:10px; font-family:inherit; font-size:12px; line-height:1.5;
+  }
+  textarea:focus{outline:none; border-color:var(--accent2);}
+  input[type=file]{
+    font-size:11px; color:var(--muted);
+  }
+  .actions{display:flex; align-items:center; gap:14px; margin-bottom:18px;}
+  button.primary{
+    background:var(--accent); color:white; border:none; padding:9px 18px;
+    border-radius:8px; font-weight:600; cursor:pointer; font-size:13px;
+    font-family:inherit;
+  }
+  button.primary:hover{background:var(--accent2);}
+  .stats{font-size:12px; color:var(--muted);}
+  .stats b.added{color:var(--added);} .stats b.removed{color:var(--removed);} .stats b.changed{color:var(--changed);}
+  .legend{display:flex; gap:18px; font-size:11px; color:var(--muted); margin-bottom:10px;}
+  .legend span{display:flex; align-items:center; gap:6px;}
+  .dot{width:9px; height:9px; border-radius:50%; display:inline-block;}
+  .dot.added{background:var(--added);} .dot.removed{background:var(--removed);} .dot.changed{background:var(--changed);}
+  #results{display:none; gap:16px;}
+  .panel{
+    flex:1; background:var(--panel); border:1px solid var(--border); border-radius:10px;
+    padding:12px; max-height:560px; overflow:auto;
+  }
+  .panel h2{font-size:12px; color:var(--muted); margin:0 0 8px 4px; font-weight:600; text-transform:uppercase; letter-spacing:.04em;}
+  .node{margin-left:14px;}
+  .row{
+    display:flex; align-items:baseline; gap:6px; padding:2px 6px; border-radius:5px;
+    white-space:nowrap; width:max-content;
+  }
+  .row:hover{background:rgba(255,255,255,0.04);}
+  .status-removed > .row{background:var(--removed-bg); color:var(--removed);}
+  .status-added > .row{background:var(--added-bg); color:var(--added);}
+  .status-changed > .row{background:var(--changed-bg);}
+  .status-changed > .row .tag{color:var(--changed);}
+  .tag{color:#93c5fd; font-weight:600;}
+  .cls{color:#a78bfa; font-weight:400;}
+  .leaf{color:var(--muted); font-style:italic;}
+  .attr-note, .text-note{
+    font-size:10px; padding:1px 6px; border-radius:4px; background:rgba(251,191,36,0.18);
+    color:var(--changed); margin-left:4px;
+  }
+  .attrs{display:inline-flex; gap:4px;}
+  .attr-chip{
+    font-size:10.5px; padding:1px 6px; border-radius:4px; color:var(--muted);
+    background:rgba(255,255,255,0.04); border:1px solid var(--border);
+  }
+  .attr-chip.attr-added{color:var(--added); background:var(--added-bg); border-color:rgba(52,211,153,0.35);}
+  .attr-chip.attr-removed{color:var(--removed); background:var(--removed-bg); border-color:rgba(248,113,113,0.35); text-decoration:line-through;}
+  .attr-chip.attr-changed{color:var(--changed); background:var(--changed-bg); border-color:rgba(251,191,36,0.4); cursor:help;}
+  .toggle{
+    background:none; border:none; color:var(--muted); cursor:pointer; padding:0 2px;
+    font-size:11px; width:14px;
+  }
+  .children.collapsed{display:none;}
+  .node > .children{margin-left:6px;}
+  em{color:var(--muted);}
+</style>
+</head>
+<body>
+
+<h1>HTML Structure Diff</h1>
+<p class="sub">Paste or upload two HTML snippets. Comparison ignores whitespace and ordering noise — it diffs tags, ids, classes, attributes, and structure.</p>
+
+<div class="inputs">
+  <div class="col">
+    <label><span class="tag">Original (A)</span>
+      <span class="label-actions">
+        <button class="ghost" onclick="formatTextarea('inputA')">Format</button>
+        <input type="file" accept=".html,.htm,text/html" onchange="loadFile(this,'inputA')">
+      </span>
+    </label>
+    <textarea id="inputA" placeholder="Paste original HTML here..." oninput="saveState()"></textarea>
+  </div>
+  <div class="col">
+    <label><span class="tag">New (B)</span>
+      <span class="label-actions">
+        <button class="ghost" onclick="formatTextarea('inputB')">Format</button>
+        <input type="file" accept=".html,.htm,text/html" onchange="loadFile(this,'inputB')">
+      </span>
+    </label>
+    <textarea id="inputB" placeholder="Paste new HTML here..." oninput="saveState()"></textarea>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="primary" onclick="compare()">Compare</button>
+  <button class="ghost" onclick="clearAll()">Clear</button>
+  <span class="stats" id="stats"></span>
+</div>
+
+<div class="legend">
+  <span><span class="dot added"></span> added node</span>
+  <span><span class="dot removed"></span> removed node</span>
+  <span><span class="dot changed"></span> changed attrs / text / descendants</span>
+</div>
+
+<div id="results">
+  <div class="panel">
+    <h2>Original (A)</h2>
+    <div id="treeA"></div>
+  </div>
+  <div class="panel">
+    <h2>New (B)</h2>
+    <div id="treeB"></div>
+  </div>
+</div>
+
+<script>
+let statusA = new WeakMap();
+let statusB = new WeakMap();
+let attrInfo = new WeakMap();
+let textInfo = new WeakMap();
+
+function elementChildren(el){
+  return [...el.childNodes].filter(n => n.nodeType === 1);
+}
+
+function sig(el){
+  const id = el.id ? '#' + el.id : '';
+  const cls = el.classList.length ? '.' + [...el.classList].sort().join('.') : '';
+  return el.tagName.toLowerCase() + id + cls;
+}
+
+function lcsAlign(a, b){
+  const n = a.length, m = b.length;
+  const dp = Array.from({length: n + 1}, () => new Array(m + 1).fill(0));
+  for (let i = n - 1; i >= 0; i--){
+    for (let j = m - 1; j >= 0; j--){
+      dp[i][j] = sig(a[i]) === sig(b[j]) ? dp[i+1][j+1] + 1 : Math.max(dp[i+1][j], dp[i][j+1]);
+    }
+  }
+  let i = 0, j = 0; const ops = [];
+  while (i < n && j < m){
+    if (sig(a[i]) === sig(b[j]) && dp[i][j] === dp[i+1][j+1] + 1){
+      ops.push({type:'match', a:a[i], b:b[j]}); i++; j++;
+    } else if (dp[i+1][j] >= dp[i][j+1]){
+      ops.push({type:'del', a:a[i]}); i++;
+    } else {
+      ops.push({type:'ins', b:b[j]}); j++;
+    }
+  }
+  while (i < n){ ops.push({type:'del', a:a[i]}); i++; }
+  while (j < m){ ops.push({type:'ins', b:b[j]}); j++; }
+  return ops;
+}
+
+function diffAttrs(elA, elB){
+  const names = new Set([...elA.attributes].map(x => x.name).concat([...elB.attributes].map(x => x.name)));
+  const added = [], removed = [], changed = [];
+  for (const name of names){
+    const hasA = elA.hasAttribute(name), hasB = elB.hasAttribute(name);
+    if (hasA && !hasB) removed.push(name);
+    else if (!hasA && hasB) added.push(name);
+    else if (elA.getAttribute(name) !== elB.getAttribute(name)) changed.push(name);
+  }
+  return {added, removed, changed};
+}
+
+function markRemoved(el){
+  statusA.set(el, 'removed');
+  for (const c of elementChildren(el)) markRemoved(c);
+}
+function markAdded(el){
+  statusB.set(el, 'added');
+  for (const c of elementChildren(el)) markAdded(c);
+}
+
+function diffNodes(elA, elB){
+  const ad = diffAttrs(elA, elB);
+  attrInfo.set(elA, {...ad, other: elB});
+  attrInfo.set(elB, {...ad, other: elA});
+  const hasAttrDiff = ad.added.length || ad.removed.length || ad.changed.length;
+
+  const childElA = elementChildren(elA), childElB = elementChildren(elB);
+  let textChanged = false;
+  if (childElA.length === 0 && childElB.length === 0){
+    const tA = elA.textContent.trim(), tB = elB.textContent.trim();
+    if (tA !== tB){
+      textChanged = true;
+      textInfo.set(elA, true);
+      textInfo.set(elB, true);
+    }
+  }
+
+  let childChanged = false;
+  const ops = lcsAlign(childElA, childElB);
+  for (const op of ops){
+    if (op.type === 'match'){
+      if (diffNodes(op.a, op.b)) childChanged = true;
+    } else if (op.type === 'del'){
+      markRemoved(op.a); childChanged = true;
+    } else {
+      markAdded(op.b); childChanged = true;
+    }
+  }
+
+  const selfChanged = hasAttrDiff || textChanged || childChanged;
+  statusA.set(elA, selfChanged ? 'changed' : 'same');
+  statusB.set(elB, selfChanged ? 'changed' : 'same');
+  return selfChanged;
+}
+
+function diffForest(containerA, containerB){
+  const childElA = elementChildren(containerA), childElB = elementChildren(containerB);
+  const ops = lcsAlign(childElA, childElB);
+  for (const op of ops){
+    if (op.type === 'match') diffNodes(op.a, op.b);
+    else if (op.type === 'del') markRemoved(op.a);
+    else markAdded(op.b);
+  }
+}
+
+function escapeHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function renderAttrChips(el, side){
+  const names = [...el.attributes].map(a => a.name).filter(n => n !== 'class' && n !== 'id');
+  if (!names.length) return '';
+  const ad = attrInfo.get(el);
+  const chips = names.map(name => {
+    const val = el.getAttribute(name) || '';
+    let cls = 'attr-chip';
+    let title = '';
+    if (ad){
+      if (side === 'A' && ad.removed.includes(name)) cls += ' attr-removed';
+      else if (side === 'B' && ad.added.includes(name)) cls += ' attr-added';
+      else if (ad.changed.includes(name)){
+        cls += ' attr-changed';
+        const otherVal = ad.other ? (ad.other.getAttribute(name) || '') : '';
+        title = ` title="${side === 'A' ? 'becomes' : 'was'}: ${escapeHtml(otherVal)}"`;
+      }
+    }
+    return `<span class="${cls}"${title}>${escapeHtml(name)}="${escapeHtml(val)}"</span>`;
+  }).join('');
+  return `<span class="attrs">${chips}</span>`;
+}
+
+function renderTree(el, side){
+  const map = side === 'A' ? statusA : statusB;
+  const status = map.get(el) || 'same';
+  const kids = elementChildren(el);
+  const tag = el.tagName.toLowerCase();
+  const cls = [...el.classList].sort().join('.');
+  const idClsStr = (el.id ? '#' + el.id : '') + (cls ? '.' + cls : '');
+
+  const attrChips = renderAttrChips(el, side);
+  let textNote = '';
+  if (kids.length === 0 && textInfo.get(el)) textNote = `<span class="text-note">text differs</span>`;
+
+  const leafText = kids.length === 0 ? escapeHtml(el.textContent.trim()).slice(0, 70) : '';
+  const header = `<span class="tag">&lt;${tag}</span><span class="cls">${escapeHtml(idClsStr)}&gt;</span> ${attrChips} ${leafText ? '<span class="leaf">"' + leafText + (el.textContent.trim().length > 70 ? '…' : '') + '"</span>' : ''} ${textNote}`;
+
+  if (kids.length === 0){
+    return `<div class="node status-${status}"><div class="row">${header}</div></div>`;
+  }
+  const childrenHtml = kids.map(c => renderTree(c, side)).join('');
+  return `<div class="node status-${status}">
+    <div class="row"><button class="toggle" onclick="toggleNode(this)">▾</button>${header}</div>
+    <div class="children">${childrenHtml}</div>
+  </div>`;
+}
+
+function toggleNode(btn){
+  const children = btn.closest('.node').querySelector('.children');
+  if (!children) return;
+  children.classList.toggle('collapsed');
+  btn.textContent = children.classList.contains('collapsed') ? '▸' : '▾';
+}
+
+function countAll(root, map, target){
+  for (const el of root.querySelectorAll('*')){
+    const s = map.get(el);
+    if (s) target[s] = (target[s] || 0) + 1;
+  }
+}
+
+function loadFile(input, textareaId){
+  const f = input.files[0];
+  if (!f) return;
+  const reader = new FileReader();
+  reader.onload = e => { document.getElementById(textareaId).value = e.target.result; saveState(); };
+  reader.readAsText(f);
+}
+
+const VOID_TAGS = new Set(['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr']);
+const INLINE_TAGS = new Set(['a','b','i','em','strong','span','small','sub','sup','code','abbr','label','button']);
+
+function formatAttrs(el){
+  return [...el.attributes].map(a => ` ${a.name}="${a.value.replace(/"/g,'&quot;')}"`).join('');
+}
+
+function prettyPrint(node, depth, lines){
+  const pad = '  '.repeat(depth);
+  for (const child of node.childNodes){
+    if (child.nodeType === 3){
+      const text = child.textContent.trim();
+      if (text) lines.push(pad + escapeHtml(text));
+      continue;
+    }
+    if (child.nodeType === 8){
+      continue;
+    }
+    if (child.nodeType !== 1) continue;
+
+    const tag = child.tagName.toLowerCase();
+    const attrs = formatAttrs(child);
+    if (VOID_TAGS.has(tag)){
+      lines.push(`${pad}<${tag}${attrs}>`);
+      continue;
+    }
+    const elementChildNodes = [...child.childNodes].filter(n => n.nodeType === 1);
+    const textOnly = elementChildNodes.length === 0;
+    if (textOnly && INLINE_TAGS.has(tag) === false){
+      const text = escapeHtml(child.textContent.trim());
+      if (text.length <= 60 && !text.includes('\n')){
+        lines.push(`${pad}<${tag}${attrs}>${text}</${tag}>`);
+        continue;
+      }
+    }
+    lines.push(`${pad}<${tag}${attrs}>`);
+    prettyPrint(child, depth + 1, lines);
+    lines.push(`${pad}</${tag}>`);
+  }
+}
+
+function formatTextarea(id){
+  const ta = document.getElementById(id);
+  const wrap = document.createElement('div');
+  wrap.innerHTML = ta.value;
+  const lines = [];
+  prettyPrint(wrap, 0, lines);
+  ta.value = lines.join('\n');
+  saveState();
+}
+
+function saveState(){
+  try{
+    localStorage.setItem('htmldiff_inputA', document.getElementById('inputA').value);
+    localStorage.setItem('htmldiff_inputB', document.getElementById('inputB').value);
+  } catch(e){ /* storage unavailable, e.g. sandboxed preview */ }
+}
+
+function restoreState(){
+  try{
+    const a = localStorage.getItem('htmldiff_inputA');
+    const b = localStorage.getItem('htmldiff_inputB');
+    if (a) document.getElementById('inputA').value = a;
+    if (b) document.getElementById('inputB').value = b;
+  } catch(e){ /* storage unavailable, e.g. sandboxed preview */ }
+}
+
+function clearAll(){
+  document.getElementById('inputA').value = '';
+  document.getElementById('inputB').value = '';
+  document.getElementById('treeA').innerHTML = '';
+  document.getElementById('treeB').innerHTML = '';
+  document.getElementById('stats').innerHTML = '';
+  document.getElementById('results').style.display = 'none';
+  try{
+    localStorage.removeItem('htmldiff_inputA');
+    localStorage.removeItem('htmldiff_inputB');
+  } catch(e){ /* storage unavailable */ }
+}
+
+function setupSyncScroll(){
+  const panels = document.querySelectorAll('.panel');
+  if (panels.length < 2) return;
+  const [p1, p2] = panels;
+  let syncing = false;
+  const sync = (source, target) => () => {
+    if (syncing) return;
+    syncing = true;
+    target.scrollTop = source.scrollTop;
+    target.scrollLeft = source.scrollLeft;
+    syncing = false;
+  };
+  p1.addEventListener('scroll', sync(p1, p2));
+  p2.addEventListener('scroll', sync(p2, p1));
+}
+setupSyncScroll();
+restoreState();
+
+function compare(){
+  statusA = new WeakMap();
+  statusB = new WeakMap();
+  attrInfo = new WeakMap();
+  textInfo = new WeakMap();
+
+  const htmlA = document.getElementById('inputA').value;
+  const htmlB = document.getElementById('inputB').value;
+
+  const wrapA = document.createElement('div'); wrapA.innerHTML = htmlA;
+  const wrapB = document.createElement('div'); wrapB.innerHTML = htmlB;
+
+  diffForest(wrapA, wrapB);
+
+  const treeA = elementChildren(wrapA).map(c => renderTree(c, 'A')).join('') || '<em>empty</em>';
+  const treeB = elementChildren(wrapB).map(c => renderTree(c, 'B')).join('') || '<em>empty</em>';
+  document.getElementById('treeA').innerHTML = treeA;
+  document.getElementById('treeB').innerHTML = treeB;
+
+  const statsA = {}, statsB = {};
+  countAll(wrapA, statusA, statsA);
+  countAll(wrapB, statusB, statsB);
+  const added = statsB.added || 0, removed = statsA.removed || 0, changed = statsB.changed || 0;
+  document.getElementById('stats').innerHTML =
+    `<b class="added">${added}</b> added · <b class="removed">${removed}</b> removed · <b class="changed">${changed}</b> changed`;
+
+  document.getElementById('results').style.display = 'flex';
+}
+</script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 // Each bloc's entry point is `<name>/page.svelte`, rendered full-page at `/blocs/view/<name>`.
 // Ported from shadcn-svelte blocks (https://shadcn-svelte.com/blocks).
 
-export type BlocCategory = 'sidebar' | 'dashboard' | 'login' | 'signup' | 'otp' | 'calendar' | 'apps';
+export type BlocCategory = 'sidebar' | 'login' | 'signup' | 'otp' | 'calendar' | 'apps';
 
 export interface BlocMeta {
   category: BlocCategory;
@@ -17,7 +17,6 @@ export const DEFAULT_IFRAME_HEIGHT = '930px';
 
 export const blocCategories: { slug: BlocCategory; name: string }[] = [
   { slug: 'sidebar', name: 'Sidebar' },
-  { slug: 'dashboard', name: 'Dashboard' },
   { slug: 'login', name: 'Login' },
   { slug: 'signup', name: 'Signup' },
   { slug: 'otp', name: 'OTP' },
@@ -25,7 +24,7 @@ export const blocCategories: { slug: BlocCategory; name: string }[] = [
   { slug: 'apps', name: 'Apps' }
 ];
 
-export const FEATURED_BLOCS = ['app-calcom', 'dashboard-01'];
+export const FEATURED_BLOCS = ['app-calcom', 'app-dashboard'];
 
 const CALENDAR_CONTAINER =
   'flex min-h-svh w-full min-w-0 items-start justify-center bg-background px-6 py-12 md:pt-20 xl:py-24';
@@ -41,11 +40,6 @@ const calendar = (description: string, extra: Partial<BlocMeta> = {}): BlocMeta 
 });
 
 export const blocMetadata: Record<string, BlocMeta> = {
-  'dashboard-01': {
-    category: 'dashboard',
-    description: 'A dashboard with sidebar, charts and data table.'
-  },
-
   'sidebar-01': {
     category: 'sidebar',
     description: 'A simple sidebar with navigation grouped by section.'
@@ -65,10 +59,20 @@ export const blocMetadata: Record<string, BlocMeta> = {
   'sidebar-14': { category: 'sidebar', description: 'A sidebar on the right.' },
   'sidebar-15': { category: 'sidebar', description: 'A left and right sidebar.' },
   'sidebar-16': { category: 'sidebar', description: 'A sidebar with a sticky site header.' },
+  'app-dashboard': {
+    category: 'apps',
+    description: 'A dashboard with sidebar, charts and data table.'
+  },
   'app-calcom': {
     category: 'apps',
     description:
       'A full Cal.com style app: icon-collapsing sidebar, bookings, event types, members and settings.',
+    iframeHeight: '930px'
+  },
+  'app-structdiff': {
+    category: 'apps',
+    description:
+      'An HTML structure diff tool: compare two snippets by tags, ids, classes, attributes and structure.',
     iframeHeight: '930px'
   },
 

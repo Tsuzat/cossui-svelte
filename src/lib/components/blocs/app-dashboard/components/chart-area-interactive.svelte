@@ -145,14 +145,16 @@
   );
 
   const chartConfig = {
-    desktop: { label: 'Desktop', color: 'var(--primary)' },
-    mobile: { label: 'Mobile', color: 'var(--primary)' }
+    desktop: { label: 'Desktop', color: '#4de0b3' },
+    mobile: { label: 'Mobile', color: '#5b9cf5' }
   } satisfies ChartConfig;
 </script>
 
-<Card class="@container/card">
+<Card class="@container/card rounded-3xl shadow-none">
   <CardHeader>
-    <CardTitle>Total Visitors</CardTitle>
+    <CardTitle class="font-mono text-[11px] font-medium tracking-[0.16em] text-primary uppercase">
+      Total Visitors
+    </CardTitle>
     <CardDescription>
       <span class="hidden @[540px]/card:block"> Total for the last 3 months </span>
       <span class="@[540px]/card:hidden">Last 3 months</span>
