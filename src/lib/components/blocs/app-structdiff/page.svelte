@@ -70,14 +70,25 @@
     save();
   }
 
-  // Keep both tree panels scrolled in lockstep.
-  let syncing = false;
+  // Keep both tree panels scrolled in lockstep. Scroll events fire asynchronously, so a plain
+  // re-entrancy flag can't stop the echo; remember what we programmatically set on the target
+  // and ignore the resulting event. The target may clamp the value when the panels differ in
+  // height, so the echo is compared against the clamped (read-back) position.
+  let echo: { el: HTMLDivElement; top: number; left: number } | null = null;
   function syncScroll(source: HTMLDivElement | null, target: HTMLDivElement | null) {
-    if (syncing || !source || !target) return;
-    syncing = true;
+    if (!source || !target) return;
+    if (echo?.el === source) {
+      const isEcho = echo.top === source.scrollTop && echo.left === source.scrollLeft;
+      echo = null;
+      if (isEcho) return;
+    }
+    if (target.scrollTop === source.scrollTop && target.scrollLeft === source.scrollLeft) return;
+    const { scrollTop: prevTop, scrollLeft: prevLeft } = target;
     target.scrollTop = source.scrollTop;
     target.scrollLeft = source.scrollLeft;
-    syncing = false;
+    if (target.scrollTop !== prevTop || target.scrollLeft !== prevLeft) {
+      echo = { el: target, top: target.scrollTop, left: target.scrollLeft };
+    }
   }
 </script>
 
@@ -126,8 +137,10 @@
     <header>
       <h1 class="text-lg font-semibold">HTML Structure Diff</h1>
       <p class="text-sm text-muted-foreground">
-        Paste or upload two HTML snippets. Comparison ignores whitespace and ordering noise — it
-        diffs tags, ids, classes, attributes, and structure.
+        This utility facilitates rapid comparison of two comparable HTML structures. The analysis
+        disregards whitespace and positional variations, focusing instead on tags, identifiers,
+        classes, attributes, and hierarchical organization. Discrepancies are visualized within a
+        tree view with coloring.
       </p>
     </header>
 

@@ -53,7 +53,8 @@
   {/if}
 {/snippet}
 
-<div class="ml-3.5" data-status={node.status}>
+<!-- w-max: the collapsible panel is overflow-hidden, so each node must grow to its widest descendant row or wide rows get clipped when the panel scrolls horizontally -->
+<div class="ml-3.5 w-max" data-status={node.status}>
   {#if node.children.length === 0}
     <div
       class={cn(
