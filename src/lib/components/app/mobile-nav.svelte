@@ -1,6 +1,6 @@
 <script lang="ts">
   import { resolve } from '$app/paths';
-  import Menu from '@lucide/svelte/icons/menu';
+  import Equal from '@lucide/svelte/icons/equal';
   import { Badge } from '#lib/components/ui/badge/index.js';
   import { buttonVariants } from '#lib/components/ui/button/index.js';
   import {
@@ -36,7 +36,7 @@
       className
     )}
   >
-    <Menu class="size-5" strokeWidth={2} />
+    <Equal class="size-5" strokeWidth={2} />
     <span class="sr-only">Toggle Menu</span>
   </DrawerTrigger>
   <DrawerPopup showCloseButton variant="straight">
