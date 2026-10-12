@@ -49,7 +49,11 @@
 {/snippet}
 
 {#if scrollable}
-  <ScrollArea class="touch-auto flex-1" overscrollContain {scrollFade}>
+  <ScrollArea
+    class="touch-auto flex-1 *:data-[slot=scroll-area-viewport]:pb-0!"
+    overscrollContain
+    {scrollFade}
+  >
     {@render panel()}
   </ScrollArea>
 {:else}

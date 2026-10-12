@@ -21,7 +21,8 @@
   bind:ref
   class={cn(
     'fixed inset-0 z-50 touch-none [--bleed:--spacing(12)] [--inset:0px]',
-    position === 'bottom' && 'grid grid-rows-[1fr_auto] pt-12',
+    position === 'bottom' &&
+      'grid grid-rows-[1fr_auto] pt-[max(--spacing(2),env(safe-area-inset-top,0px))]',
     position === 'top' && 'grid grid-rows-[auto_1fr] pb-12',
     position === 'left' && 'flex justify-start',
     position === 'right' && 'flex justify-end',
