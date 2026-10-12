@@ -51,7 +51,7 @@
 			"type": "registry:ui",
 			"path": "alert-dialog/alert-dialog-overlay.svelte",
 			"target": "$lib/components/ui/alert-dialog/alert-dialog-overlay.svelte",
-			"content": "<script lang=\"ts\">\n  import { AlertDialog as AlertDialogPrimitive } from '@shardsui/svelte/alert-dialog';\n  import type { ComponentProps } from 'svelte';\n  import { cn } from '#lib/utils.js';\n\n  let {\n    ref = $bindable(null),\n    class: className,\n    ...restProps\n  }: ComponentProps<typeof AlertDialogPrimitive.Backdrop> = $props();\n</script>\n\n<AlertDialogPrimitive.Backdrop\n  bind:ref\n  data-slot=\"alert-dialog-backdrop\"\n  class={cn(\n    'fixed inset-0 z-50 bg-black/32 backdrop-blur-sm transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0',\n    className\n  )}\n  {...restProps}\n/>\n"
+			"content": "<script lang=\"ts\">\n  import { AlertDialog as AlertDialogPrimitive } from '@shardsui/svelte/alert-dialog';\n  import type { ComponentProps } from 'svelte';\n  import { cn } from '#lib/utils.js';\n\n  let {\n    ref = $bindable(null),\n    class: className,\n    ...restProps\n  }: ComponentProps<typeof AlertDialogPrimitive.Backdrop> = $props();\n</script>\n\n<AlertDialogPrimitive.Backdrop\n  bind:ref\n  data-slot=\"alert-dialog-backdrop\"\n  class={cn(\n    'fixed inset-0 z-50 bg-black/32 backdrop-blur-sm transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute',\n    className\n  )}\n  {...restProps}\n/>\n"
 		},
 		{
 			"type": "registry:ui",

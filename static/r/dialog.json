@@ -9,7 +9,7 @@
 			"type": "registry:ui",
 			"path": "dialog/dialog-backdrop.svelte",
 			"target": "$lib/components/ui/dialog/dialog-backdrop.svelte",
-			"content": "<script lang=\"ts\">\n  import { Dialog as DialogPrimitive } from '@shardsui/svelte/dialog';\n  import type { ComponentProps } from 'svelte';\n  import { cn } from '#lib/utils.js';\n\n  let {\n    ref = $bindable(null),\n    class: className,\n    ...restProps\n  }: ComponentProps<typeof DialogPrimitive.Backdrop> = $props();\n</script>\n\n<DialogPrimitive.Backdrop\n  bind:ref\n  data-slot=\"dialog-backdrop\"\n  class={cn(\n    'fixed inset-0 z-50 bg-black/32 backdrop-blur-sm transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0',\n    className\n  )}\n  {...restProps}\n/>\n"
+			"content": "<script lang=\"ts\">\n  import { Dialog as DialogPrimitive } from '@shardsui/svelte/dialog';\n  import type { ComponentProps } from 'svelte';\n  import { cn } from '#lib/utils.js';\n\n  let {\n    ref = $bindable(null),\n    class: className,\n    ...restProps\n  }: ComponentProps<typeof DialogPrimitive.Backdrop> = $props();\n</script>\n\n<DialogPrimitive.Backdrop\n  bind:ref\n  data-slot=\"dialog-backdrop\"\n  class={cn(\n    'fixed inset-0 z-50 bg-black/32 backdrop-blur-sm transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute',\n    className\n  )}\n  {...restProps}\n/>\n"
 		},
 		{
 			"type": "registry:ui",

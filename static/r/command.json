@@ -9,7 +9,7 @@
 			"type": "registry:ui",
 			"path": "command/command-dialog-backdrop.svelte",
 			"target": "$lib/components/ui/command/command-dialog-backdrop.svelte",
-			"content": "<script lang=\"ts\">\n  import { Dialog as CommandDialogPrimitive } from '@shardsui/svelte/dialog';\n  import type { ComponentProps } from 'svelte';\n  import { cn } from '#lib/utils.js';\n\n  let { class: className, ...restProps }: ComponentProps<typeof CommandDialogPrimitive.Backdrop> =\n    $props();\n</script>\n\n<CommandDialogPrimitive.Backdrop\n  class={cn(\n    'fixed inset-0 z-50 bg-black/32 backdrop-blur-sm transition-all duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0',\n    className\n  )}\n  data-slot=\"command-dialog-backdrop\"\n  {...restProps}\n/>\n"
+			"content": "<script lang=\"ts\">\n  import { Dialog as CommandDialogPrimitive } from '@shardsui/svelte/dialog';\n  import type { ComponentProps } from 'svelte';\n  import { cn } from '#lib/utils.js';\n\n  let { class: className, ...restProps }: ComponentProps<typeof CommandDialogPrimitive.Backdrop> =\n    $props();\n</script>\n\n<CommandDialogPrimitive.Backdrop\n  class={cn(\n    'fixed inset-0 z-50 bg-black/32 backdrop-blur-sm transition-all duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute',\n    className\n  )}\n  data-slot=\"command-dialog-backdrop\"\n  {...restProps}\n/>\n"
 		},
 		{
 			"type": "registry:ui",
