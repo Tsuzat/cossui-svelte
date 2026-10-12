@@ -190,7 +190,7 @@
 <Dialog bind:open>
   <DialogTrigger class={cn(buttonVariants({ variant: 'outline' }), 'gap-2 text-muted-foreground')}>
     <Search class="size-4" strokeWidth={2} />
-    <span class="hidden sm:inline">Search documentation…</span>
+  
     <KbdGroup class="gap-1">
       <Kbd>{isMac.cmdOrCtrl}</Kbd>
       <Kbd class="aspect-square">K</Kbd>

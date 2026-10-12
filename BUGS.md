@@ -5,13 +5,13 @@ TODO:
 * Build the cossui-svelte skill, deploy similar to https://www.skills.sh/cosscom/coss/coss
 * Segmented control is missing - https://coss.com/ui/particles?tags=segmented%20control
 * Publish cossui-svelte on r/sideprojects, https://www.myvibebook.com/, echojs, hacker news, linkedin, https://svelter.me/
-* Topbar should bringback the search documentation
-* Topbar: Mobile layout needs a rework
 * Docs
 * port splitpanes
 * port rich editor
 * add pointer to design/component library from the readme
 
+* DONE: Topbar should bringback the search documentation
+* DONE: Mobile layout needs a rework
 * DONE: I don't like the file-upload visuals
 * DONE: Topbar should default select the button for the matching page
 * DONE: Bring origin tables 12-20, + 9-11

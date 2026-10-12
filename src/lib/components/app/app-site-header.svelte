@@ -7,6 +7,7 @@
   import MainNav from './main-nav.svelte';
   import MobileNav from './mobile-nav.svelte';
   import SiteHeaderBase from './site-header.svelte';
+    import CommandMenu from './command-menu.svelte';
 
   interface ProductItem {
     href: string;
@@ -44,7 +45,7 @@
     <MobileNav class="flex lg:hidden" items={navItems} pagesNew={PAGES_NEW} {tree} />
   {/snippet}
 
-  <div class="flex gap-2">
+  <div class="hidden gap-2 lg:flex">
     {#each links as link (link.href)}
       <Button
         variant={isActive(link.href) ? 'secondary' : 'ghost'}
@@ -58,11 +59,9 @@
 
   <MainNav class="hidden lg:flex" items={navItems} />
 
-  <!-- 
-  SEARCH DOCS
   <div class="mx-2 hidden w-full flex-1 md:flex md:w-auto md:flex-none">
     <CommandMenu {navItems} {tree} />
-  </div> -->
+  </div>
 
   <Separator class="h-5 max-md:hidden" orientation="vertical" />
 </SiteHeaderBase>
