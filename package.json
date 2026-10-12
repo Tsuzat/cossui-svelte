@@ -20,7 +20,7 @@
     "build": "vite build",
     "cf:deploy": "pnpm run build && wrangler deploy",
     "cf:typegen": "wrangler types src/worker-configuration.d.ts",
-    "check": "svelte-kit sync && svelte-check --workspace .",
+    "check": "rm -rf .svelte-kit/output .svelte-kit/cloudflare && svelte-kit sync && svelte-check --workspace .",
     "cz": "tsx ./node_modules/cz-customizable/standalone.js",
     "dev": "vite dev --host",
     "dev:registry": "jsrepo build --watch",
