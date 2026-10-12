@@ -32,7 +32,6 @@
     { href: '/', label: 'Components' },
     { href: '/particles', label: 'Particles' },
     { href: '/blocs', label: 'Blocs' },
-    { href: '/ai', label: 'Registry & AI' },
     { href: '/docs', label: 'Docs' }
   ] as const;
 

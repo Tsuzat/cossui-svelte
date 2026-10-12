@@ -50,7 +50,7 @@ Both trees have a hand-maintained metadata file (`custom-component-metadata.ts` 
 3. clears `static/r/*.json`, then `jsrepo build` regenerates the static registry JSON consumed by the CLI/docs
 4. `pnpm format`
 
-See `scripts/README.md` for the step-by-step for updating from upstream Coss UI (`registry.json`) or adding a new component/particle — it also spells out that any new UI component needs a thumbnail entry in `$lib/components/app/category-thumbnails.svelte`.
+See `scripts/README.md` for the step-by-step for updating from upstream Coss UI (`registry.json`) or adding a new component/particle — it also spells out that any new UI component needs a thumbnail entry in `$lib/components/app/component-thumbnails.svelte`.
 
 ### Routes
 

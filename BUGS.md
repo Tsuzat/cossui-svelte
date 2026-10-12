@@ -8,11 +8,11 @@ TODO:
 * Topbar should bringback the search documentation
 * Topbar: Mobile layout needs a rework
 * Docs
-* I don't like the file-upload visuals
 * port splitpanes
 * port rich editor
 * add pointer to design/component library from the readme
 
+* DONE: I don't like the file-upload visuals
 * DONE: Topbar should default select the button for the matching page
 * DONE: Bring origin tables 12-20, + 9-11
 * DONE: on Mobile, we need a menu to browse the pages

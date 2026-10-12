@@ -7,6 +7,7 @@
   import ChevronRight from '@lucide/svelte/icons/chevron-right';
   import CircleAlert from '@lucide/svelte/icons/circle-alert';
   import Ellipsis from '@lucide/svelte/icons/ellipsis';
+  import FileIcon from '@lucide/svelte/icons/file';
   import GripVertical from '@lucide/svelte/icons/grip-vertical';
   import ImageIcon from '@lucide/svelte/icons/image';
   import Info from '@lucide/svelte/icons/info';
@@ -14,13 +15,13 @@
   import ListIcon from '@lucide/svelte/icons/list';
   import MapPin from '@lucide/svelte/icons/map-pin';
   import Minus from '@lucide/svelte/icons/minus';
-  import MousePointer2 from '@lucide/svelte/icons/mouse-pointer-2';
   import Pipette from '@lucide/svelte/icons/pipette';
   import Plus from '@lucide/svelte/icons/plus';
   import Search from '@lucide/svelte/icons/search';
   import Star from '@lucide/svelte/icons/star';
   import TextCursor from '@lucide/svelte/icons/text-cursor';
   import Underline from '@lucide/svelte/icons/underline';
+  import Upload from '@lucide/svelte/icons/upload';
   import UserRound from '@lucide/svelte/icons/user-round';
   import X from '@lucide/svelte/icons/x';
   import { type Component } from 'svelte';
@@ -437,17 +438,18 @@
     {@render formField()}
   </div>
 {:else if slug === 'file-upload'}
-  <div class="flex max-w-50 flex-1 items-center">
+  <div class="flex max-w-50 flex-1 flex-col gap-2">
     <div
-      class="h-20 w-32 shrink-0 rounded-xl border-2 border-dashed border-muted-foreground/25"
-    ></div>
-    <div class={cardCls('-ms-8 w-28 shrink-0 [--radius-2xl:14px]')}>
-      <div class={cpCls('flex flex-col gap-3 p-4')}>
-        {@render textSnip()}
-        {@render textSnip('w-[70%]', 'secondary')}
-        <div class="flex justify-end">
-          {@render iconSnip(MousePointer2, 'text-foreground')}
-        </div>
+      class="flex flex-col items-center gap-2 rounded-xl border-2 border-dashed border-muted-foreground/25 px-4 py-5"
+    >
+      {@render iconSnip(Upload, 'size-5')}
+      {@render textSnip('w-[60%]')}
+      {@render textSnip('w-[40%]', 'secondary')}
+    </div>
+    <div class={cardCls('[--radius-2xl:10px]')}>
+      <div class={cpCls('flex items-center gap-2 p-2')}>
+        {@render iconSnip(FileIcon)}
+        {@render textSnip('w-[50%]')}
       </div>
     </div>
   </div>
