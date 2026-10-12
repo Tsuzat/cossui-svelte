@@ -12,7 +12,7 @@
 
 <div
   bind:this={ref}
-  class={cn('font-heading font-semibold text-xl', className)}
+  class={cn('font-bold font-heading text-xl', className)}
   data-slot="empty-title"
   {...restProps}
 >

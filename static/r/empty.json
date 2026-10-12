@@ -33,7 +33,7 @@
 			"type": "registry:ui",
 			"path": "empty/empty-title.svelte",
 			"target": "$lib/components/ui/empty/empty-title.svelte",
-			"content": "<script lang=\"ts\">\n  import type { HTMLAttributes } from 'svelte/elements';\n  import { cn, type WithElementRef } from '#lib/utils.js';\n\n  let {\n    ref = $bindable(null),\n    class: className,\n    children,\n    ...restProps\n  }: WithElementRef<HTMLAttributes<HTMLDivElement>> = $props();\n</script>\n\n<div\n  bind:this={ref}\n  class={cn('font-heading font-semibold text-xl', className)}\n  data-slot=\"empty-title\"\n  {...restProps}\n>\n  {@render children?.()}\n</div>\n"
+			"content": "<script lang=\"ts\">\n  import type { HTMLAttributes } from 'svelte/elements';\n  import { cn, type WithElementRef } from '#lib/utils.js';\n\n  let {\n    ref = $bindable(null),\n    class: className,\n    children,\n    ...restProps\n  }: WithElementRef<HTMLAttributes<HTMLDivElement>> = $props();\n</script>\n\n<div\n  bind:this={ref}\n  class={cn('font-bold font-heading text-xl', className)}\n  data-slot=\"empty-title\"\n  {...restProps}\n>\n  {@render children?.()}\n</div>\n"
 		},
 		{
 			"type": "registry:ui",

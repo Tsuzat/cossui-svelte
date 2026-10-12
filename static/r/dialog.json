@@ -57,7 +57,7 @@
 			"type": "registry:ui",
 			"path": "dialog/dialog-title.svelte",
 			"target": "$lib/components/ui/dialog/dialog-title.svelte",
-			"content": "<script lang=\"ts\">\n  import { Dialog as DialogPrimitive } from '@shardsui/svelte/dialog';\n  import type { ComponentProps } from 'svelte';\n  import { cn } from '#lib/utils.js';\n\n  let {\n    ref = $bindable(null),\n    class: className,\n    ...restProps\n  }: ComponentProps<typeof DialogPrimitive.Title> = $props();\n</script>\n\n<DialogPrimitive.Title\n  bind:ref\n  data-slot=\"dialog-title\"\n  class={cn('font-heading font-semibold text-xl leading-none', className)}\n  {...restProps}\n/>\n"
+			"content": "<script lang=\"ts\">\n  import { Dialog as DialogPrimitive } from '@shardsui/svelte/dialog';\n  import type { ComponentProps } from 'svelte';\n  import { cn } from '#lib/utils.js';\n\n  let {\n    ref = $bindable(null),\n    class: className,\n    ...restProps\n  }: ComponentProps<typeof DialogPrimitive.Title> = $props();\n</script>\n\n<DialogPrimitive.Title\n  bind:ref\n  data-slot=\"dialog-title\"\n  class={cn('font-bold font-heading text-xl leading-none', className)}\n  {...restProps}\n/>\n"
 		},
 		{
 			"type": "registry:ui",
