@@ -9,18 +9,6 @@ We think Base UI is the best foundation for modern web applications. We've taken
 
 This is the component library we'll be progressively adopting for [Cal.com](https://cal.com). We're building it in the open for anyone who wants to create beautiful, reliable user interfaces.
 
-<Alert className="bg-muted/24">
-  <InfoIcon />
-  <AlertTitle>Early Access</AlertTitle>
-  <AlertDescription>
-    coss ui is currently in early development. We're building this library in
-    the open and actively working on new components and features. Base UI itself
-    is also in beta, so you may encounter breaking changes as both projects
-    evolve. We recommend using this in projects where you're comfortable
-    adapting to changes.
-  </AlertDescription>
-</Alert>
-
 ## How It Works
 
 Our approach is simple: you should own your code. We're inspired by the copy-paste ethos of **shadcn/ui**.
@@ -42,13 +30,13 @@ While shadcn/ui is now available with Base UI, coss ui isn't about re-implementi
 - **Thoughtful defaults** optimized for modern, dense UIs
 - **Consistent design system** across all components
 
-If you're migrating from shadcn/ui or Radix UI, we provide a comprehensive [migration guide](/docs/radix-migration) to make the transition smooth.
+If you're migrating from shadcn/ui or Radix UI, we provide a comprehensive [migration guide](/ui/docs/radix-shadcn-migration) to make the transition smooth.
 
 ## Primitives, Particles and Atoms
 
 At the core of coss ui are the **UI primitives**—unstyled, accessible building blocks powered by Base UI. These are the foundation: low-level components that handle accessibility, focus management, and keyboard interactions, without dictating design.
 
-On top of these primitives, we introduce [particles](/particles). Particles are **pre-assembled components**—like authentication forms, tables, or date pickers—that combine multiple primitives into ready-to-use solutions. They’re a bit more opinionated in design, but still easy to customize, extend, or break apart when needed.
+On top of these primitives, we introduce [particles](/ui/particles). Particles are **pre-assembled components**—like authentication forms, tables, or date pickers—that combine multiple primitives into ready-to-use solutions. They’re a bit more opinionated in design, but still easy to customize, extend, or break apart when needed.
 
 Finally, we go a step further with [atoms](https://cal.com/atoms). Atoms are **API-enhanced Particles**: components that don’t just manage UI state locally, but also integrate with external data and services. Think of them as smart components that connect UI to APIs, providing out-of-the-box behaviors for common patterns (authentication flows, scheduling, etc.).
 

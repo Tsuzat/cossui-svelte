@@ -13,10 +13,10 @@ A segmented control is a visual pattern, not a standalone behavior. COSS uses th
 
 | Intent | Use | Why |
 | ------ | --- | --- |
-| Choose one value in a form | [Radio Group](/docs/components/radio-group) | Represents a mutually exclusive value and participates in form state. |
+| Choose one value in a form | [Radio Group](/ui/docs/components/radio-group) | Represents a mutually exclusive value and participates in form state. |
 | Navigate to another URL or route | Navigation links | Preserves link behavior, browser history, and `aria-current`. |
-| Apply an exclusive filter or mode | [Toggle Group](/docs/components/toggle-group) | Represents the pressed state of an action that may be cleared. |
-| Switch between related panels | [Tabs](/docs/components/tabs) | Connects each tab to an associated content panel. |
+| Apply an exclusive filter or mode | [Toggle Group](/ui/docs/components/toggle-group) | Represents the pressed state of an action that may be cleared. |
+| Switch between related panels | [Tabs](/ui/docs/components/tabs) | Connects each tab to an associated content panel. |
 
 Choose the primitive from the interaction first, then apply the segmented-control styling. Visual similarity alone is not a reason to use Tabs or Toggle Group.
 
@@ -45,10 +45,11 @@ For a custom composition, install the styling library directly:
 npx shadcn@latest add @coss/segmented-control
 ```
 
-The library exports a root class and an item recipe:
+The library exports a root class, an item recipe, and a shared item layout class for icons:
 
 ```tsx
 import {
+  segmentedControlItemLayoutClassName,
   segmentedControlItemVariants,
   segmentedControlRootClassName,
 } from "@/lib/segmented-control"
@@ -66,7 +67,7 @@ const itemClassName = segmentedControlItemVariants({
 | `size` | `"sm" \| "default" \| "lg"` | Controls item height and horizontal padding. |
 | `state` | `"checked" \| "current" \| "pressed"` | Selects the state attribute used by the underlying element. |
 
-Use `checked` with Radio Group, `current` with navigation links, and `pressed` with Toggle Group. Tabs retain their own animated indicator and do not use the shared state recipe.
+Use `checked` with Radio Group, `current` with navigation links, and `pressed` with Toggle Group. Tabs retain their own animated indicator and do not use the shared state recipe. They reuse `segmentedControlItemLayoutClassName` so icons match the other segmented implementations.
 
 At the outside edges, the item padding and the surface's `p-0.5` inset combine to match the horizontal padding of the corresponding Button size. The outer segmented surface is slightly taller than that Button to optically balance its inset selected item when the controls appear next to each other.
 

@@ -25,25 +25,21 @@ This guide is for developers who already have applications built on Radix-based 
 One of the most common migration changes is replacing Radix UI's `asChild` prop with Base UI's `render` prop (especially on trigger/close/composed parts):
 
 <span data-lib="radix-ui">
-
 ```tsx title="Radix"
 // [!code word:asChild]
 <DropdownMenuTrigger asChild>
   <Button>Edit profile</Button>
 </DropdownMenuTrigger>
 ```
-
 </span>
 
 Not every component uses this pattern. Apply it where the coss component supports `render`.
 
 <span data-lib="base-ui">
-
 ```tsx title="coss ui"
 // [!code word:render]
 <MenuTrigger render={<Button />}>Edit profile</MenuTrigger>
 ```
-
 </span>
 
 ### Component Naming Conventions
@@ -75,7 +71,6 @@ Some components have updated names for clarity and consistency:
 **Comparison Example:**
 
 <span data-lib="radix-ui">
-
 ```tsx title="shadcn/ui"
 // [!code word:type="multiple"]
 // [!code word:collapsible]
@@ -87,11 +82,9 @@ Some components have updated names for clarity and consistency:
   </AccordionItem>
 </Accordion>
 ```
-
 </span>
 
 <span data-lib="base-ui">
-
 ```tsx title="coss ui"
 // [!code word:multiple={true}]
 // [!code word:\{\["item-1"\]\}]
@@ -102,7 +95,6 @@ Some components have updated names for clarity and consistency:
   </AccordionItem>
 </Accordion>
 ```
-
 </span>
 
 ### Alert
@@ -140,7 +132,6 @@ Ensure you have the following variables imported in your CSS file:
 **Comparison Example:**
 
 <span data-lib="radix-ui">
-
 ```tsx title="shadcn/ui"
 // [!code word:asChild]
 // [!code word:AlertDialogCancel]
@@ -165,11 +156,9 @@ Ensure you have the following variables imported in your CSS file:
   </AlertDialogContent>
 </AlertDialog>
 ```
-
 </span>
 
 <span data-lib="base-ui">
-
 ```tsx title="coss ui"
 // [!code word:render]
 // [!code word:AlertDialogClose]
@@ -195,7 +184,6 @@ Ensure you have the following variables imported in your CSS file:
   </AlertDialogPopup>
 </AlertDialog>
 ```
-
 </span>
 
 ### Avatar
@@ -206,7 +194,6 @@ Ensure you have the following variables imported in your CSS file:
 **Comparison Example:**
 
 <span data-lib="radix-ui">
-
 ```tsx title="shadcn/ui"
 // [!code word:asChild]
 <Avatar asChild>
@@ -216,11 +203,9 @@ Ensure you have the following variables imported in your CSS file:
   </Link>
 </Avatar>
 ```
-
 </span>
 
 <span data-lib="base-ui">
-
 ```tsx title="coss ui"
 // [!code word:render]
 <Avatar render={<Link href="/profile" />}>
@@ -228,7 +213,6 @@ Ensure you have the following variables imported in your CSS file:
   <AvatarFallback>U</AvatarFallback>
 </Avatar>
 ```
-
 </span>
 
 ### Badge
@@ -266,23 +250,19 @@ Ensure you have the following variables imported in your CSS file:
 **Comparison Example:**
 
 <span data-lib="radix-ui">
-
 ```tsx title="shadcn/ui"
 // [!code word:asChild]
 <Badge asChild>
   <Link href="/new">New</Link>
 </Badge>
 ```
-
 </span>
 
 <span data-lib="base-ui">
-
 ```tsx title="coss ui"
 // [!code word:render]
 <Badge render={<Link href="/new" />}>New</Badge>
 ```
-
 </span>
 
 ### Button
@@ -317,23 +297,19 @@ We've added a new `destructive-outline` variant for better UX patterns:
 **Comparison Example:**
 
 <span data-lib="radix-ui">
-
 ```tsx title="shadcn/ui"
 // [!code word:asChild]
 <Button asChild>
   <Link href="/login">Login</Link>
 </Button>
 ```
-
 </span>
 
 <span data-lib="base-ui">
-
 ```tsx title="coss ui"
 // [!code word:render]
 <Button render={<Link href="/login" />}>Login</Button>
 ```
-
 </span>
 
 ### Card
@@ -356,7 +332,6 @@ We've added a new `destructive-outline` variant for better UX patterns:
 **Comparison Example:**
 
 <span data-lib="radix-ui">
-
 ```tsx title="shadcn/ui"
 // [!code word:asChild]
 <Collapsible>
@@ -366,11 +341,9 @@ We've added a new `destructive-outline` variant for better UX patterns:
   <CollapsibleContent>Content here</CollapsibleContent>
 </Collapsible>
 ```
-
 </span>
 
 <span data-lib="base-ui">
-
 ```tsx title="coss ui"
 // [!code word:render]
 // [!code word:CollapsiblePanel]
@@ -379,7 +352,6 @@ We've added a new `destructive-outline` variant for better UX patterns:
   <CollapsiblePanel>Content here</CollapsiblePanel>
 </Collapsible>
 ```
-
 </span>
 
 ### Command
@@ -406,7 +378,6 @@ The API is significantly different from shadcn/ui (cmdk). Please review both doc
 **Comparison Example:**
 
 <span data-lib="radix-ui">
-
 ```tsx title="shadcn/ui"
 // [!code word:asChild]
 <Dialog>
@@ -426,11 +397,9 @@ The API is significantly different from shadcn/ui (cmdk). Please review both doc
   </DialogContent>
 </Dialog>
 ```
-
 </span>
 
 <span data-lib="base-ui">
-
 ```tsx title="coss ui"
 // [!code word:render]
 // [!code word:<DialogPanel>Content</DialogPanel>]
@@ -450,7 +419,6 @@ The API is significantly different from shadcn/ui (cmdk). Please review both doc
   </DialogPopup>
 </Dialog>
 ```
-
 </span>
 
 ### Group (Button Group)
@@ -488,7 +456,6 @@ coss does **not** use the community [`input-otp`](https://github.com/guilhermero
 **Comparison Example:**
 
 <span data-lib="radix-ui">
-
 ```tsx title="shadcn/ui + input-otp"
 <InputOTP maxLength={6} value={value} onChange={setValue}>
   <InputOTPGroup>
@@ -504,11 +471,9 @@ coss does **not** use the community [`input-otp`](https://github.com/guilhermero
   </InputOTPGroup>
 </InputOTP>
 ```
-
 </span>
 
 <span data-lib="base-ui">
-
 ```tsx title="coss ui"
 <OTPField aria-label="Verification code" length={6} value={value} onValueChange={setValue}>
   <OTPFieldInput />
@@ -520,7 +485,6 @@ coss does **not** use the community [`input-otp`](https://github.com/guilhermero
   <OTPFieldInput aria-label="Character 6 of 6" />
 </OTPField>
 ```
-
 </span>
 
 ### Menu
@@ -545,7 +509,6 @@ coss does **not** use the community [`input-otp`](https://github.com/guilhermero
 **Comparison Example:**
 
 <span data-lib="radix-ui">
-
 ```tsx title="shadcn/ui"
 // [!code word:onSelect]
 <DropdownMenu>
@@ -563,11 +526,9 @@ coss does **not** use the community [`input-otp`](https://github.com/guilhermero
   </DropdownMenuContent>
 </DropdownMenu>
 ```
-
 </span>
 
 <span data-lib="base-ui">
-
 ```tsx title="coss ui"
 // [!code word:onClick]
 <Menu>
@@ -585,7 +546,6 @@ coss does **not** use the community [`input-otp`](https://github.com/guilhermero
   </MenuPopup>
 </Menu>
 ```
-
 </span>
 
 ### Popover
@@ -603,7 +563,6 @@ Base UI introduces `PopoverTitle` and `PopoverDescription` to structure headings
 **Comparison Example:**
 
 <span data-lib="radix-ui">
-
 ```tsx title="shadcn/ui"
 // [!code word:asChild]
 <Popover>
@@ -616,11 +575,9 @@ Base UI introduces `PopoverTitle` and `PopoverDescription` to structure headings
   </PopoverContent>
 </Popover>
 ```
-
 </span>
 
 <span data-lib="base-ui">
-
 ```tsx title="coss ui"
 // [!code word:PopoverTitle]
 // [!code word:PopoverDescription]
@@ -637,7 +594,6 @@ Base UI introduces `PopoverTitle` and `PopoverDescription` to structure headings
   </PopoverPopup>
 </Popover>
 ```
-
 </span>
 
 ### Preview Card
@@ -651,7 +607,6 @@ Base UI introduces `PopoverTitle` and `PopoverDescription` to structure headings
 **Comparison Example:**
 
 <span data-lib="radix-ui">
-
 ```tsx title="shadcn/ui"
 // [!code word:asChild]
 <HoverCard>
@@ -661,11 +616,9 @@ Base UI introduces `PopoverTitle` and `PopoverDescription` to structure headings
   <HoverCardContent>Preview Card Content</HoverCardContent>
 </HoverCard>
 ```
-
 </span>
 
 <span data-lib="base-ui">
-
 ```tsx title="coss ui"
 // [!code word:render]
 <PreviewCard>
@@ -675,7 +628,6 @@ Base UI introduces `PopoverTitle` and `PopoverDescription` to structure headings
   <PreviewCardPopup>Preview Card Content</PreviewCardPopup>
 </PreviewCard>
 ```
-
 </span>
 
 ### Progress
@@ -741,7 +693,6 @@ So, for example, if you were using the `default` size in shadcn/ui and you want 
 **Comparison Example:**
 
 <span data-lib="radix-ui">
-
 ```tsx title="shadcn/ui"
 // [!code word:placeholder="Select a framework"]
 <Select>
@@ -755,11 +706,9 @@ So, for example, if you were using the `default` size in shadcn/ui and you want 
   </SelectContent>
 </Select>
 ```
-
 </span>
 
 <span data-lib="base-ui">
-
 ```tsx title="coss ui"
 // [!code word:alignItemWithTrigger={false}]
 // [!code word:items:2]
@@ -785,7 +734,6 @@ const items = [
   </SelectPopup>
 </Select>
 ```
-
 </span>
 
 ### Sheet
@@ -799,7 +747,6 @@ const items = [
 **Comparison Example:**
 
 <span data-lib="radix-ui">
-
 ```tsx title="shadcn/ui"
 // [!code word:asChild]
 <Sheet>
@@ -819,11 +766,9 @@ const items = [
   </SheetContent>
 </Sheet>
 ```
-
 </span>
 
 <span data-lib="base-ui">
-
 ```tsx title="coss ui"
 // [!code word:render]
 // [!code word:<SheetPanel>Content here</SheetPanel>]
@@ -842,7 +787,6 @@ const items = [
   </SheetPopup>
 </Sheet>
 ```
-
 </span>
 
 ### Slider
@@ -873,7 +817,6 @@ Compared to shadcn/ui, our `TabsList` component adds `variant` prop, which allow
 **Comparison Example:**
 
 <span data-lib="radix-ui">
-
 ```tsx title="shadcn/ui"
 // [!code word:TabsContent]
 <Tabs defaultValue="tab-1">
@@ -887,11 +830,9 @@ Compared to shadcn/ui, our `TabsList` component adds `variant` prop, which allow
   <TabsContent value="tab-3">Tab 3 content</TabsContent>
 </Tabs>
 ```
-
 </span>
 
 <span data-lib="base-ui">
-
 ```tsx title="coss ui"
 // [!code word:TabsPanel]
 <Tabs defaultValue="tab-1">
@@ -905,7 +846,6 @@ Compared to shadcn/ui, our `TabsList` component adds `variant` prop, which allow
   <TabsPanel value="tab-3">Tab 3 content</TabsPanel>
 </Tabs>
 ```
-
 </span>
 
 ### Textarea
@@ -1019,7 +959,6 @@ So, for example, if you were using the `default` size in shadcn/ui and you want 
 **Comparison Example:**
 
 <span data-lib="radix-ui">
-
 ```tsx title="shadcn/ui"
 // [!code word:type="multiple"]
 <ToggleGroup type="multiple" defaultValue={["bold"]}>
@@ -1028,11 +967,9 @@ So, for example, if you were using the `default` size in shadcn/ui and you want 
   <ToggleGroupItem value="underline">U</ToggleGroupItem>
 </ToggleGroup>
 ```
-
 </span>
 
 <span data-lib="base-ui">
-
 ```tsx title="coss ui"
 // [!code word:multiple]
 <ToggleGroup multiple defaultValue={["bold"]}>
@@ -1041,7 +978,6 @@ So, for example, if you were using the `default` size in shadcn/ui and you want 
   <ToggleGroupItem value="underline">U</ToggleGroupItem>
 </ToggleGroup>
 ```
-
 </span>
 
 ### Tooltip
@@ -1053,7 +989,6 @@ So, for example, if you were using the `default` size in shadcn/ui and you want 
 **Comparison Example:**
 
 <span data-lib="radix-ui">
-
 ```tsx title="shadcn/ui"
 // [!code word:asChild]
 <Tooltip>
@@ -1063,11 +998,9 @@ So, for example, if you were using the `default` size in shadcn/ui and you want 
   <TooltipContent>Tooltip content</TooltipContent>
 </Tooltip>
 ```
-
 </span>
 
 <span data-lib="base-ui">
-
 ```tsx title="coss ui"
 // [!code word:render]
 <Tooltip>
@@ -1077,7 +1010,6 @@ So, for example, if you were using the `default` size in shadcn/ui and you want 
   <TooltipPopup>Tooltip content</TooltipPopup>
 </Tooltip>
 ```
-
 </span>
 
 ## Verify After Migration
@@ -1094,8 +1026,8 @@ After converting components, run a quick verification pass:
 ## Additional Resources
 
 - [Base UI Documentation](https://base-ui.com/) - Official Base UI docs
-- [Component Documentation](/docs/components) - Individual component docs with examples
-- [Styling Guide](/docs/styling) - Learn about our color system and theming
+- [Component Documentation](/ui/docs/components) - Individual component docs with examples
+- [Styling Guide](/ui/docs/styling) - Learn about our color system and theming
 
 ## Need Help?
 

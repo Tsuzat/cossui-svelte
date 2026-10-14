@@ -47,11 +47,11 @@ Or add only the color tokens:
 npx shadcn@latest add @coss/ui @coss/colors-neutral
 ```
 
-See the [Styling](/docs/styling) guide for more details.
+See the [Styling](/ui/docs/styling) guide for more details.
 
 ### Manually
 
-1.  **Find a component** on the [Components](/docs) or [Particles](/particles) pages.
+1.  **Find a component** on the [Components](/ui/docs) or [Particles](/ui/particles) pages.
 2.  **Copy the code** from the **Code** tab.
 3.  **Create a new file** in your project (e.g., `components/ui/button.tsx`) and paste the code.
 4.  **Install any dependencies** listed on the component's page.
@@ -82,7 +82,7 @@ coss components use three CSS custom properties for typography:
 
 When you use `@coss/style`, `@coss/fonts` is installed automatically — Inter for `--font-sans` and `--font-heading`, Geist Mono for `--font-mono` — all wired in your `layout.tsx`.
 
-coss.com uses **Cal Sans 2.0** variable from `@coss/ui/fonts` for both body and headings. By default the theme aliases `--font-heading` to `--font-sans`, so one `--font-sans` variable is enough. You can wire a separate `--font-heading` when titles should use a different family — see [Styling — Font Variables](/docs/styling#font-variables).
+coss.com uses **Cal Sans 2.0** variable from `@coss/ui/fonts` for both body and headings. By default the theme aliases `--font-heading` to `--font-sans`, so one `--font-sans` variable is enough. You can wire a separate `--font-heading` when titles should use a different family — see [Styling — Font Variables](/ui/docs/styling#font-variables).
 
 ### Custom fonts
 
@@ -141,6 +141,6 @@ For developers migrating from **Radix UI**, many of our **UI primitives** includ
 
 We structure the documentation to make the components **AI-friendly**, so language models can understand, reason about, and modify them. To support this, we include:
 
-- **[Agent Skills](/docs/skills)** — Install coss knowledge directly into your AI assistant with `npx skills add cosscom/coss`. Covers all 53 primitives, styling conventions, migration patterns, and particle examples.
-- A [llms.txt](/llms.txt) file that provides a map of the documentation and component structure for your AI agent.
+- **[Agent Skills](/ui/docs/skills)** — Install coss knowledge directly into your AI assistant with `npx skills add cosscom/coss`. Covers all 53 primitives, styling conventions, migration patterns, and particle examples.
+- A [llms.txt](/ui/llms.txt) file that provides a map of the documentation and component structure for your AI agent.
 - A **Copy Markdown** button on every page, so you can easily share content or feed it to your AI workflows.

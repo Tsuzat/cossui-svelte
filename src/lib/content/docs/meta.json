@@ -1,4 +1,4 @@
 {
-  "pages": ["index", "get-started", "styling", "radix-migration", "skills", "changelog", "roadmap"],
-  "title": "Overview"
+  "pages": ["(root)", "components", "hooks", "resources"],
+  "root": true
 }
