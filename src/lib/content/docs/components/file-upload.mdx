@@ -1,0 +1,74 @@
+---
+title: File Upload
+description: Drag-and-drop file upload built on the useFileUpload hook.
+---
+
+<ComponentPreview name="p-file-upload-1" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTab value="cli">CLI</TabsTab>
+  <TabsTab value="manual">Manual</TabsTab>
+</TabsList>
+<TabsPanel value="cli">
+
+```bash
+npx shadcn@latest add @coss/use-file-upload
+```
+
+</TabsPanel>
+
+<TabsPanel value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-file-upload" title="hooks/use-file-upload.svelte.ts" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsPanel>
+
+</CodeTabs>
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import { Button } from '$lib/components/ui/button';
+  import { useFileUpload } from '$lib/hooks/use-file-upload.svelte';
+
+  const fileUpload = useFileUpload({ accept: 'image/*', multiple: true, maxFiles: 5 });
+</script>
+
+<input {...fileUpload.inputProps} class="sr-only" />
+<Button onclick={() => fileUpload.openFileDialog()}>Choose files</Button>
+
+{#each fileUpload.files as { id, file } (id)}
+  <p>{file.name}</p>
+{/each}
+```
+
+## API Reference
+
+File upload is not a single component: it is a headless `useFileUpload` hook (`$lib/hooks/use-file-upload.svelte`) plus the particles that compose it with other UI components.
+
+### useFileUpload(options)
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `accept` | `string` |  |
+| `multiple` | `boolean` | `false` |
+| `maxFiles` | `number` | `Infinity` |
+| `maxSize` | `number (bytes)` |  |
+| `initialFiles` | `FileMetadata[]` |  |
+| `onFilesChange` | `(files: FileWithPreview[]) => void` |  |
+| `onFilesAdded` | `(files: FileWithPreview[]) => void` |  |
+
+Returns reactive `files`, `isDragging`, `errors`, `fileInput` and `inputProps` values, along with methods to open the file dialog, add and remove files, and drag-and-drop handlers. Each file is a `FileWithPreview`: `{ id, file, preview? }`.

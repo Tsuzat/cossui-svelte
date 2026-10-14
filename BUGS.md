@@ -1,7 +1,7 @@
 
 TODO:
 * Firefox - p-map-* don't show round corners
-* Range Calandar category has no matching particules
+* range-calendar should not exist as a category
 * Build the cossui-svelte skill, deploy similar to https://www.skills.sh/cosscom/coss/coss
 * Segmented control is missing - https://coss.com/ui/particles?tags=segmented%20control
 * Publish cossui-svelte on r/sideprojects, https://www.myvibebook.com/, echojs, hacker news, linkedin, https://svelter.me/

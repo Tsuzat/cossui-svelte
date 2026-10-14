@@ -1,0 +1,76 @@
+---
+title: Places Autocomplete
+description: An address autocomplete input powered by Google Places.
+---
+
+<ComponentPreview name="p-places-autocomplete-1" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTab value="cli">CLI</TabsTab>
+  <TabsTab value="manual">Manual</TabsTab>
+</TabsList>
+<TabsPanel value="cli">
+
+```bash
+npx shadcn@latest add @coss/places-autocomplete
+```
+
+</TabsPanel>
+
+<TabsPanel value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="places-autocomplete" title="components/ui/places-autocomplete" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsPanel>
+
+</CodeTabs>
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import { PlacesAutocomplete, type SelectedPlace } from '$lib/components/ui/places-autocomplete';
+
+  let place = $state<SelectedPlace | null>(null);
+</script>
+
+<PlacesAutocomplete
+  apiKey={GOOGLE_MAPS_API_KEY}
+  countryCode="us"
+  onPlaceSelect={(p) => (place = p)}
+/>
+```
+
+## API Reference
+
+Requires a Google Maps API key with the Places API enabled. The Google script is loaded on demand. Built on [Autocomplete](/docs/autocomplete).
+
+### PlacesAutocomplete
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `apiKey` | `string` |  |
+| `onPlaceSelect` | `(place: SelectedPlace) => void` |  |
+| `countryCode` | `string | null` |  |
+| `value` | `string` |  |
+| `defaultValue` | `string` | `''` |
+| `onValueChange` | `(value: string) => void` |  |
+| `debounceMs` | `number` | `300` |
+| `placeholder` | `string` | `'Start typing an address'` |
+| `disabled` | `boolean` | `false` |
+| `showPoweredByGoogle` | `boolean` | `true` |
+| `class / inputClass` | `string` |  |
+
+`SelectedPlace` includes `address`, `placeId`, `lat` and `lng`.

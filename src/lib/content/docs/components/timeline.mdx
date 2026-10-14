@@ -1,0 +1,84 @@
+---
+title: Timeline
+description: A component for displaying a series of events in chronological order.
+---
+
+<ComponentPreview name="p-timeline-1" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTab value="cli">CLI</TabsTab>
+  <TabsTab value="manual">Manual</TabsTab>
+</TabsList>
+<TabsPanel value="cli">
+
+```bash
+npx shadcn@latest add @coss/timeline
+```
+
+</TabsPanel>
+
+<TabsPanel value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="timeline" title="components/ui/timeline" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsPanel>
+
+</CodeTabs>
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import {
+    Timeline,
+    TimelineHeader,
+    TimelineIndicator,
+    TimelineItem,
+    TimelineSeparator,
+    TimelineTitle
+  } from '$lib/components/ui/timeline';
+</script>
+
+<Timeline defaultValue={2}>
+  <TimelineItem step={1}>
+    <TimelineHeader>
+      <TimelineSeparator />
+      <TimelineTitle>Project Kickoff</TimelineTitle>
+      <TimelineIndicator />
+    </TimelineHeader>
+  </TimelineItem>
+</Timeline>
+```
+
+## API Reference
+
+### Timeline
+
+| Prop            | Type                         | Default      |
+| --------------- | ---------------------------- | ------------ |
+| `defaultValue`  | `number`                     | `1`          |
+| `value`         | `number`                     |              |
+| `onValueChange` | `(value: number) => void`    |              |
+| `orientation`   | `"horizontal" \| "vertical"` | `"vertical"` |
+
+### TimelineItem
+
+| Prop   | Type     | Default |
+| ------ | -------- | ------- |
+| `step` | `number` |         |
+
+Items whose `step` is less than or equal to the active step are marked completed.
+
+`TimelineHeader`, `TimelineSeparator`, `TimelineIndicator`, `TimelineTitle`, `TimelineDate` and `TimelineContent` are styled wrappers that accept standard element attributes.

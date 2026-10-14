@@ -1,0 +1,90 @@
+---
+title: Cropper
+description: An image cropper with zoom, drag and keyboard support.
+---
+
+<ComponentPreview name="p-cropper-1" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTab value="cli">CLI</TabsTab>
+  <TabsTab value="manual">Manual</TabsTab>
+</TabsList>
+<TabsPanel value="cli">
+
+```bash
+npx shadcn@latest add @coss/cropper
+```
+
+</TabsPanel>
+
+<TabsPanel value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="cropper" title="components/ui/cropper" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsPanel>
+
+</CodeTabs>
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import {
+    Cropper,
+    CropperCropArea,
+    CropperDescription,
+    CropperImage,
+    type Area
+  } from '$lib/components/ui/cropper';
+
+  let crop = $state<Area | null>(null);
+</script>
+
+<Cropper class="h-80" image="/photo.jpg" aspectRatio={1} onCropChange={(area) => (crop = area)}>
+  <CropperDescription>Drag to reposition, scroll to zoom.</CropperDescription>
+  <CropperImage />
+  <CropperCropArea />
+</Cropper>
+```
+
+## API Reference
+
+### Cropper
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `image` | `string` |  |
+| `aspectRatio` | `number` | `1` |
+| `cropPadding` | `number` | `25` |
+| `minZoom` | `number` | `1` |
+| `maxZoom` | `number` | `3` |
+| `zoom` | `number` | `minZoom` |
+| `zoomSensitivity` | `number` | `0.005` |
+| `keyboardStep` | `number` | `10` |
+| `onCropChange` | `(area: Area | null) => void` |  |
+
+`zoom` is bindable. `Area` is `{ x, y, width, height }` in source-image pixels.
+
+### CropperDescription
+
+Required for accessibility; the cropper warns when it is missing. Hide it visually with `class="sr-only"`.
+
+### CropperImage
+
+The image being cropped. Takes the `image` from the parent `Cropper`.
+
+### CropperCropArea
+
+The visible crop frame. Accepts standard `div` attributes.

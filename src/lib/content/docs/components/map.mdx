@@ -1,0 +1,118 @@
+---
+title: Map
+description: Interactive maps built on MapLibre GL, with markers, popups, routes and clusters.
+---
+
+<ComponentPreview name="p-map-1" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTab value="cli">CLI</TabsTab>
+  <TabsTab value="manual">Manual</TabsTab>
+</TabsList>
+<TabsPanel value="cli">
+
+```bash
+npx shadcn@latest add @coss/map
+```
+
+</TabsPanel>
+
+<TabsPanel value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="map" title="components/ui/map" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsPanel>
+
+</CodeTabs>
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import { Map, MapControls, MapMarker, MarkerContent, MarkerTooltip } from '$lib/components/ui/map';
+</script>
+
+<Map class="h-80" center={[-74.006, 40.7128]} zoom={10}>
+  <MapControls />
+  <MapMarker longitude={-74.006} latitude={40.7128}>
+    <MarkerContent />
+    <MarkerTooltip>New York</MarkerTooltip>
+  </MapMarker>
+</Map>
+```
+
+## API Reference
+
+Uses [MapLibre GL](https://maplibre.org) with Carto basemaps that follow the light/dark theme. Coordinates are `[longitude, latitude]`.
+
+### Map
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `center` | `[number, number]` |  |
+| `zoom` | `number` |  |
+| `theme` | `'light' | 'dark'` | `auto` |
+| `styles` | `{ light, dark }` | `Carto` |
+| `viewport` | `Partial<MapViewport>` |  |
+| `onviewportchange` | `(viewport: MapViewport) => void` |  |
+| `map` | `MapLibreGL.Map | null` | `null` |
+| `blank` | `boolean` | `false` |
+| `loading` | `boolean` | `false` |
+| `projection` | `ProjectionSpecification` |  |
+| `options` | `MapOptions` |  |
+| `onstyleloaded` | `() => void` |  |
+
+### MapMarker
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `longitude` | `number` |  |
+| `latitude` | `number` |  |
+| `draggable` | `boolean` | `false` |
+| `anchor` | `Anchor` |  |
+| `offset` | `PointLike` |  |
+| `rotation` | `number` |  |
+| `onclick` | `(e: MouseEvent) => void` |  |
+| `ondragstart / ondrag / ondragend` | `(lngLat) => void` |  |
+
+Compose a marker with `MarkerContent`, `MarkerLabel`, `MarkerPopup` and `MarkerTooltip`.
+
+### MapPopup
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `longitude` | `number` |  |
+| `latitude` | `number` |  |
+| `closeButton` | `boolean` |  |
+| `closeOnClick` | `boolean` |  |
+| `closeOnMove` | `boolean` |  |
+| `maxWidth` | `string` |  |
+| `onclose` | `() => void` |  |
+
+### MapRoute
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `coordinates` | `[number, number][]` |  |
+| `color` | `string` |  |
+| `width` | `number` |  |
+| `opacity` | `number` |  |
+| `dashArray` | `[number, number]` |  |
+| `interactive` | `boolean` |  |
+| `onclick / onmouseenter / onmouseleave` | `() => void` |  |
+
+### Other parts
+
+`MapControls` (zoom, compass, locate via `onlocate`), `MapArc`, `MapGeoJSON`, `MapClusterLayer`, and the `useMap()` hook to access the underlying map from any child.

@@ -1,0 +1,78 @@
+---
+title: Link Preview
+description: A popup that previews the content behind a link on hover.
+---
+
+<ComponentPreview name="p-link-preview-1" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTab value="cli">CLI</TabsTab>
+  <TabsTab value="manual">Manual</TabsTab>
+</TabsList>
+<TabsPanel value="cli">
+
+```bash
+npx shadcn@latest add @coss/link-preview
+```
+
+</TabsPanel>
+
+<TabsPanel value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="link-preview" title="components/ui/link-preview" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsPanel>
+
+</CodeTabs>
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import {
+    LinkPreviewCard,
+    LinkPreviewContent,
+    LinkPreviewTrigger
+  } from '$lib/components/ui/link-preview';
+</script>
+
+<LinkPreviewCard>
+  <LinkPreviewTrigger href="https://svelte.dev">@svelte</LinkPreviewTrigger>
+  <LinkPreviewContent>The Svelte Framework.</LinkPreviewContent>
+</LinkPreviewCard>
+```
+
+## API Reference
+
+A thin wrapper over [Preview Card](/docs/preview-card).
+
+### LinkPreviewCard
+
+Root. Same props as `PreviewCard` (`open` is bindable).
+
+### LinkPreviewTrigger
+
+The link that opens the preview. Accepts `delay` and `closeDelay`.
+
+### LinkPreviewContent
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `side` | `'top' | 'right' | 'bottom' | 'left'` | `bottom` |
+| `align` | `'start' | 'center' | 'end'` | `center` |
+| `sideOffset` | `number` | `4` |
+| `alignOffset` | `number` |  |
+| `showArrow` | `boolean` | `false` |
+| `portalProps` | `PortalProps` |  |

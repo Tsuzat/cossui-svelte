@@ -1,0 +1,107 @@
+---
+title: Sidebar
+description: A composable, collapsible sidebar with mobile support.
+---
+
+<ComponentPreview name="p-sidebar-1" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTab value="cli">CLI</TabsTab>
+  <TabsTab value="manual">Manual</TabsTab>
+</TabsList>
+<TabsPanel value="cli">
+
+```bash
+npx shadcn@latest add @coss/sidebar
+```
+
+</TabsPanel>
+
+<TabsPanel value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="sidebar" title="components/ui/sidebar" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsPanel>
+
+</CodeTabs>
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import {
+    Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
+    SidebarInset, SidebarMenu, SidebarMenuButton, SidebarMenuItem,
+    SidebarProvider, SidebarTrigger
+  } from '$lib/components/ui/sidebar';
+</script>
+
+<SidebarProvider>
+  <Sidebar>
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Application</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton isActive>Home</SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
+  <SidebarInset>
+    <SidebarTrigger />
+  </SidebarInset>
+</SidebarProvider>
+```
+
+## API Reference
+
+### SidebarProvider
+
+Wraps the layout and holds the open state. The state is persisted in a cookie.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `open` | `boolean` | `true` |
+| `onOpenChange` | `(open: boolean) => void` |  |
+
+### Sidebar
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `side` | `'left' | 'right'` | `left` |
+| `variant` | `'sidebar' | 'floating' | 'inset'` | `sidebar` |
+| `collapsible` | `'offcanvas' | 'icon' | 'none'` | `offcanvas` |
+
+### SidebarMenuButton
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `isActive` | `boolean` | `false` |
+| `variant` | `'default' | 'outline'` | `default` |
+| `size` | `'default' | 'sm' | 'lg'` | `default` |
+| `tooltipContent` | `Snippet | string` |  |
+| `child` | `Snippet<[{ props }]>` |  |
+
+### useSidebar
+
+Returns the sidebar state (`open`, `isMobile`, `state`) and helpers such as `toggle()` and `setOpen()`.
+
+### Other parts
+
+`SidebarHeader`, `SidebarContent`, `SidebarFooter`, `SidebarGroup`, `SidebarGroupLabel`, `SidebarGroupAction`, `SidebarGroupContent`, `SidebarMenu`, `SidebarMenuItem`, `SidebarMenuAction`, `SidebarMenuBadge`, `SidebarMenuSkeleton`, `SidebarMenuSub`, `SidebarMenuSubItem`, `SidebarMenuSubButton`, `SidebarInput`, `SidebarInset`, `SidebarRail`, `SidebarSeparator`, `SidebarTrigger`.

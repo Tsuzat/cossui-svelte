@@ -1,0 +1,77 @@
+---
+title: Star Rating
+description: An accessible star rating input with optional half-star support.
+---
+
+<ComponentPreview name="p-starrating-1" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTab value="cli">CLI</TabsTab>
+  <TabsTab value="manual">Manual</TabsTab>
+</TabsList>
+<TabsPanel value="cli">
+
+```bash
+npx shadcn@latest add @coss/starrating
+```
+
+</TabsPanel>
+
+<TabsPanel value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="starrating" title="components/ui/starrating" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsPanel>
+
+</CodeTabs>
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import { StarRating } from '$lib/components/ui/starrating';
+
+  let value = $state(3);
+</script>
+
+<StarRating bind:value />
+```
+
+## API Reference
+
+### StarRating
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `number` | `0` |
+| `max` | `number` | `5` |
+| `allowHalf` | `boolean` | `false` |
+| `size` | `'sm' | 'default' | 'lg' | 'xl'` | `default` |
+| `disabled` | `boolean` | `false` |
+| `readonly` | `boolean` | `false` |
+| `label` | `string` | `'Rating'` |
+| `name` | `string` |  |
+| `icon` | `Snippet<[{ index, state }]>` |  |
+
+`value` is bindable. Passing `name` renders a hidden input for native form submission. `icon` customizes each star; `state` is `'empty' | 'half' | 'full'`.
+
+### StarRatingValue
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `number` |  |
+| `max` | `number` |  |
+
+Renders the numeric value as text.

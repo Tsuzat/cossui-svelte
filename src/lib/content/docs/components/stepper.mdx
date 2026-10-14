@@ -1,0 +1,88 @@
+---
+title: Stepper
+description: A component for displaying a series of steps in a process.
+---
+
+<ComponentPreview name="p-stepper-1" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTab value="cli">CLI</TabsTab>
+  <TabsTab value="manual">Manual</TabsTab>
+</TabsList>
+<TabsPanel value="cli">
+
+```bash
+npx shadcn@latest add @coss/stepper
+```
+
+</TabsPanel>
+
+<TabsPanel value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="stepper" title="components/ui/stepper" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsPanel>
+
+</CodeTabs>
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import {
+    Stepper, StepperDescription, StepperIndicator, StepperItem,
+    StepperSeparator, StepperTitle, StepperTrigger
+  } from '$lib/components/ui/stepper';
+
+  let step = $state(1);
+</script>
+
+<Stepper bind:step>
+  <StepperItem step={1}>
+    <StepperTrigger>
+      <StepperIndicator />
+      <StepperTitle>Account</StepperTitle>
+      <StepperDescription>Create your account</StepperDescription>
+    </StepperTrigger>
+    <StepperSeparator />
+  </StepperItem>
+</Stepper>
+```
+
+## API Reference
+
+### Stepper
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `step` | `number` | `1` |
+| `orientation` | `'horizontal' | 'vertical'` | `horizontal` |
+
+`step` is bindable.
+
+### StepperItem
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `step` | `number` | `auto` |
+| `completed` | `boolean` | `false` |
+| `disabled` | `boolean` | `false` |
+| `loading` | `boolean` | `false` |
+
+Steps before the active one are marked completed. When `step` is omitted it is numbered by order of appearance.
+
+### StepperTrigger, StepperIndicator, StepperTitle, StepperDescription, StepperSeparator
+
+Styled parts. `StepperTrigger` activates its item on click; `StepperIndicator` shows the step number, a check, or a spinner depending on state.

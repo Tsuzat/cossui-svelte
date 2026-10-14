@@ -41,7 +41,9 @@ export function docEntries(): { slug: string }[] {
 }
 
 export async function loadDocPage(slugParts: string[]): Promise<DocPage | undefined> {
-  const path = slugToPath.get(slugParts.join('/'));
+  const slug = slugParts.join('/');
+  // Nav links are `/docs/<component>`; the content lives under `components/`.
+  const path = slugToPath.get(slug) ?? slugToPath.get(`components/${slug}`);
   if (!path) return undefined;
 
   const [mod, raw] = await Promise.all([compiledPages[path](), rawPages[path]()]);

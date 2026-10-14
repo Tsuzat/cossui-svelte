@@ -1,0 +1,68 @@
+---
+title: Color Picker
+description: A specialized dropdown for selecting colors.
+---
+
+<ComponentPreview name="p-colorpicker-1" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTab value="cli">CLI</TabsTab>
+  <TabsTab value="manual">Manual</TabsTab>
+</TabsList>
+<TabsPanel value="cli">
+
+```bash
+npx shadcn@latest add @coss/colorpicker
+```
+
+</TabsPanel>
+
+<TabsPanel value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="colorpicker" title="components/ui/colorpicker" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsPanel>
+
+</CodeTabs>
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import { ColorPicker } from '$lib/components/ui/colorpicker';
+
+  let color = $state('#4f46e5');
+</script>
+
+<ColorPicker bind:color />
+```
+
+## API Reference
+
+Built on [Huey](https://github.com/hueycolor/huey) (`@hueycolor/svelte`) and the [Popover](/docs/popover) component.
+
+### ColorPicker
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `color` | `string | HueyColor` |  |
+| `swatches` | `string[]` |  |
+| `showSaturationArea` | `boolean` | `true` |
+| `showInputs` | `boolean` | `true` |
+| `showColorDropper` | `boolean` | `true` |
+| `showColorSliders` | `boolean` | `true` |
+| `swatchesEditable` | `boolean` | `true` |
+
+`color` and `swatches` are bindable.

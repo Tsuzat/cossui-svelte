@@ -1,0 +1,98 @@
+---
+title: Tree
+description: A hierarchical tree view with keyboard navigation and drag and drop, built on Headless Tree.
+---
+
+<ComponentPreview name="p-tree-1" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTab value="cli">CLI</TabsTab>
+  <TabsTab value="manual">Manual</TabsTab>
+</TabsList>
+<TabsPanel value="cli">
+
+```bash
+npx shadcn@latest add @coss/tree
+```
+
+</TabsPanel>
+
+<TabsPanel value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="tree" title="components/ui/tree" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsPanel>
+
+</CodeTabs>
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import { hotkeysCoreFeature, syncDataLoaderFeature } from '@headless-tree/core';
+  import { Tree, TreeItem, TreeLabel, useTree } from '$lib/components/ui/tree';
+
+  const items = {
+    root: { name: 'Root', children: ['a'] },
+    a: { name: 'Folder A' }
+  };
+
+  const tree = useTree({
+    rootItemId: 'root',
+    dataLoader: {
+      getItem: (id) => items[id],
+      getChildren: (id) => items[id].children ?? []
+    },
+    features: [syncDataLoaderFeature, hotkeysCoreFeature],
+    getItemName: (item) => item.getItemData().name,
+    isItemFolder: (item) => !!item.getItemData().children?.length,
+    indent: 20
+  });
+</script>
+
+<Tree {tree} indent={20}>
+  {#each tree.current.getItems() as item (item.getId())}
+    <TreeItem {item}>
+      <TreeLabel>{item.getItemData().name}</TreeLabel>
+    </TreeItem>
+  {/each}
+</Tree>
+```
+
+## API Reference
+
+Uses [Headless Tree](https://headless-tree.lukasbach.com). `useTree` accepts the regular Headless Tree configuration and returns a reactive wrapper; read the live instance from `tree.current`.
+
+### Tree
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `tree` | `ReactiveTree<T>` |  |
+| `indent` | `number` | `20` |
+
+### TreeItem
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `item` | `ReactiveItemInstance<T>` |  |
+| `child` | `Snippet<[{ props }]>` |  |
+
+### TreeLabel
+
+The item label, including the expand/collapse indicator for folders.
+
+### TreeDragLine, TreeAssistiveTreeDescription
+
+`TreeDragLine` renders the drop indicator for drag and drop; `TreeAssistiveTreeDescription` adds a screen-reader description of the tree.

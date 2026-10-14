@@ -1,0 +1,84 @@
+---
+title: Chart
+description: Beautiful charts built on LayerChart, themed through a shared config.
+---
+
+<ComponentPreview name="p-chart-1" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTab value="cli">CLI</TabsTab>
+  <TabsTab value="manual">Manual</TabsTab>
+</TabsList>
+<TabsPanel value="cli">
+
+```bash
+npx shadcn@latest add @coss/chart
+```
+
+</TabsPanel>
+
+<TabsPanel value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="chart" title="components/ui/chart" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsPanel>
+
+</CodeTabs>
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import { BarChart } from 'layerchart';
+  import { Chart, ChartTooltip, type ChartConfig } from '$lib/components/ui/chart';
+
+  const data = [
+    { month: 'January', desktop: 186 },
+    { month: 'February', desktop: 305 }
+  ];
+
+  const config = {
+    desktop: { label: 'Desktop', color: 'var(--chart-1)' }
+  } satisfies ChartConfig;
+</script>
+
+<Chart {config} class="h-72 w-full">
+  <BarChart {data} x="month" series={[{ key: 'desktop', color: config.desktop.color }]}>
+    {#snippet tooltip()}
+      <ChartTooltip />
+    {/snippet}
+  </BarChart>
+</Chart>
+```
+
+## API Reference
+
+`Chart` wraps [LayerChart](https://layerchart.com) components. It exposes the `config` colors and labels as CSS variables (`--color-<key>`) and provides them to `ChartTooltip`.
+
+### Chart
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `config` | `ChartConfig` |  |
+| `id` | `string` | `auto` |
+| `ref` | `HTMLElement | null` | `null` |
+
+Each `config` entry accepts a `label`, an `icon`, and either a single `color` or a `theme` object (`{ light, dark }`).
+
+### ChartTooltip
+
+A tooltip content component to pass to LayerChart's `tooltip` snippet. It reads labels and colors from the surrounding `Chart` config.
+
+The `getPayloadConfigFromPayload` helper is also exported for building custom tooltips.
