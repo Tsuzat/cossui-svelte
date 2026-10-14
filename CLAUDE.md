@@ -8,9 +8,9 @@ An unofficial Svelte 5 / SvelteKit port of [Coss UI](https://cossui.com/) (origi
 
 ## Commands
 
-Package manager is **pnpm** (not npm/yarn) — `packageManager: pnpm@11.22.0`.
+Package manager is **pnpm** (not npm/yarn) — `packageManager: pnpm@12.10.1`.
 
-- `pnpm dev` — start dev server (opens browser)
+- `pnpm dev` — start dev server (`vite dev --host`; opens browser)
 - `pnpm build` — production build (vite build)
 - `pnpm check` — svelte-kit sync + svelte-check across the workspace (type/template errors)
 - `pnpm lint:typecheck` — `tsc --noEmit`
@@ -37,7 +37,7 @@ Do not introduce another formatter/linter without checking whether a gap is inte
 
 ### Two parallel component trees
 
-- `src/lib/components/ui/<name>/` — the actual reusable component primitives (72 components: button, dialog, combobox, select, tree, etc.). Each has an `index.ts` barrel export. This is what gets published to the registry and consumed by downstream apps.
+- `src/lib/components/ui/<name>/` — the actual reusable component primitives (70 components: button, dialog, combobox, select, tree, etc.). Each has an `index.ts` barrel export. This is what gets published to the registry and consumed by downstream apps.
 - `src/lib/components/particles/<name>/p-<name>-<index>.svelte` — demo/showcase variants of each component (e.g. `p-combobox-9.svelte`, `p-group-14.svelte`) shown verbatim in the docs site. These are self-contained snippets, not meant to be "fixed" the way library code is — e.g. their internal nav links are intentionally placeholder `#` fragments (see `oxvelte.demos.json`).
 
 Both trees have a hand-maintained metadata file (`custom-component-metadata.ts` in `ui/`, `custom-particle-metadata.ts` in `particles/`) that layers extra data (description, category, `isnew`/`istodo` tags) onto the generated registry entries. Edit these by hand; everything else under `src/lib/registry/generated-*` is generated — don't hand-edit it.
@@ -50,17 +50,17 @@ Both trees have a hand-maintained metadata file (`custom-component-metadata.ts` 
 3. clears `static/r/*.json`, then `jsrepo build` regenerates the static registry JSON consumed by the CLI/docs
 4. `pnpm format`
 
-See `scripts/README.md` for the step-by-step for updating from upstream Coss UI (`registry.json`) or adding a new component/particle — it also spells out that any new UI component needs a thumbnail entry in `$lib/components/app/component-thumbnails.svelte`.
+See `scripts/upstream/README.md` for the step-by-step for updating from upstream Coss UI (`registry.json`). Any new UI component also needs a thumbnail entry in `$lib/components/app/component-thumbnails.svelte`.
 
 ### Routes
 
-SvelteKit routes under `src/routes/`: `docs/[...slug]` (component docs), `particle/[id]` and `particles` (particle showcase/search), `blocs`, `credits`, `ai`, `api` (including `api/source`). Path aliases: `$lib` → `src/lib`, `$assets` → `src/lib/assets`, `$data` → `src/lib/data` (defined in both `svelte.config.js` and `vite.config.ts` — keep them in sync if changed).
+SvelteKit routes under `src/routes/`: `docs/[...slug]` (component docs), `particle/[id]` and `particles` (particle showcase/search), `blocs`, `credits`, `ai`, `api` (`api/source`, `api/component-source`, `api/bloc-source`), `sitemap.xml`. SvelteKit config lives inline in the `sveltekit({...})` call in `vite.config.ts` (there is no `svelte.config.js`). The only path alias in use is the built-in `$lib` → `src/lib`.
 
 ### Adding a new Component
 
 1. Ensure the component has a `src/lib/components/ui/<COMPONENT>/index.ts` file
 2. If the component is not in `scripts/upstream/registry.json` add it to `src/lib/components/ui/custom-component-metadata.ts`. `registry.json` must stay untouched, any incremental change should be made to `custom-component-metadata.ts`
-3. Ensure `src/lib/components/app/category-thumbnails.svelte` has a matching thumbnail for component <COMPONENT>. if not, generate one.
+3. Ensure `src/lib/components/app/component-thumbnails.svelte` has a matching thumbnail for component <COMPONENT>. if not, generate one.
 4. run `pnpm gen:registry`
 
 ### Adding a new Particle
@@ -71,8 +71,8 @@ SvelteKit routes under `src/routes/`: `docs/[...slug]` (component docs), `partic
 
 ### Deployment
 
-Cloudflare Workers via `@sveltejs/adapter-cloudflare` + `wrangler.jsonc`. `nodejs_compat` is enabled; `/api/*` and `_app/env*` are routed to the worker first. Don't set `not_found_handling: single-page-application` — the adapter would overwrite the prerendered `index.html` with a fallback shell (`adapter_fallback_overwrites` warning).
+Cloudflare Workers via `@sveltejs/adapter-cloudflare` + `wrangler.jsonc`. `nodejs_compat` and `nodejs_als` are enabled; `/api/*`, `/_app/env.js` and `/_app/env.script.js` are routed to the worker first. Don't set `not_found_handling: single-page-application` — the adapter would overwrite the prerendered `index.html` with a fallback shell (`adapter_fallback_overwrites` warning).
 
 ## Known open issues
 
-`BUGS.md` tracks a running list of known bugs/TODOs (e.g. nested drawer stacking, Firefox rounded-corner clipping on map particles, broken sliders) and a backlog of components still to port from origin-ui. Check it before assuming an odd visual behavior is a regression you introduced.
+`BUGS.md` tracks a running list of known bugs/TODOs (open items such as Firefox rounded-corner clipping on map particles; fixed ones are marked `DONE`) and a backlog of components still to port from origin-ui. Check it before assuming an odd visual behavior is a regression you introduced.
