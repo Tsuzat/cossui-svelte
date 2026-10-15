@@ -1,0 +1,10 @@
+<script lang="ts">
+  import type { HTMLAttributes } from 'svelte/elements';
+  import { cn } from '#lib/utils.js';
+
+  let { class: className, children, ...restProps }: HTMLAttributes<HTMLElement> = $props();
+</script>
+
+<li class={cn('mt-2', className)} {...restProps}>
+  {@render children?.()}
+</li>

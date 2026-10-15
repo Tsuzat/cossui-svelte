@@ -1,4 +1,5 @@
 import GithubSlugger from 'github-slugger';
+import { fileURLToPath } from 'node:url';
 import remarkGfm from 'remark-gfm';
 import { codeToHtml } from 'shiki';
 import { visit } from 'unist-util-visit';
@@ -100,6 +101,7 @@ async function highlighter(code, lang, meta) {
 
 export const mdsvexOptions = {
   extensions: ['.mdx'],
+  layout: fileURLToPath(new URL('./src/lib/components/app/docs/mdx-layout.svelte', import.meta.url)),
   highlight: { highlighter },
   remarkPlugins: [remarkGfm, remarkInjectDocsComponents, remarkToc]
 };
