@@ -2,7 +2,7 @@
   import type { Snippet } from 'svelte';
   import DocsSidebar from '#lib/components/app/docs/docs-sidebar.svelte';
   import SidebarProvider from '#lib/components/ui/sidebar/sidebar-provider.svelte';
-  import { componentNavTree } from '#lib/docs.js';
+  import { docsNavTree } from '#lib/docs.js';
 
   let { children }: { children: Snippet } = $props();
 </script>
@@ -11,7 +11,7 @@
   <SidebarProvider
     class="container min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]"
   >
-    <DocsSidebar tree={componentNavTree} />
+    <DocsSidebar tree={docsNavTree} />
     <div class="h-full w-full">{@render children()}</div>
   </SidebarProvider>
 </main>

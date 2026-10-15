@@ -35,6 +35,7 @@
   }
 
   interface FolderNode {
+    $id?: string;
     children: (PageNode | FolderNode)[];
     name: string | unknown;
     type: 'folder';
@@ -84,7 +85,7 @@
             const items: PageItem[] = [];
             group.children.forEach((item) => {
               if (item.type === 'page') {
-                const isComponent = item.url.includes('/components/');
+                const isComponent = group.$id === 'components';
                 const itemName = String(item.name ?? '');
                 items.push({
                   isComponent,
@@ -127,20 +128,20 @@
     if (item.isComponent) {
       const componentName = item.url.split('/').pop();
       selectedType = 'component';
-      const registryItem = `@coss/${componentName}`;
+      const registryItem = `https://cossui-svelte.com/r/${componentName}.json`;
       let cmd: string;
       switch (packageManager) {
         case 'pnpm':
-          cmd = `pnpm dlx shadcn@latest add ${registryItem}`;
+          cmd = `pnpm dlx shadcn-svelte@latest add ${registryItem}`;
           break;
         case 'bun':
-          cmd = `bunx --bun shadcn@latest add ${registryItem}`;
+          cmd = `bunx --bun shadcn-svelte@latest add ${registryItem}`;
           break;
         case 'yarn':
-          cmd = `yarn dlx shadcn@latest add ${registryItem}`;
+          cmd = `yarn dlx shadcn-svelte@latest add ${registryItem}`;
           break;
         default:
-          cmd = `npx shadcn@latest add ${registryItem}`;
+          cmd = `npx shadcn-svelte@latest add ${registryItem}`;
       }
       copyPayload = cmd;
     } else {
@@ -190,7 +191,7 @@
 <Dialog bind:open>
   <DialogTrigger class={cn(buttonVariants({ variant: 'outline' }), 'gap-2 text-muted-foreground')}>
     <Search class="size-4" strokeWidth={2} />
-  
+
     <KbdGroup class="gap-1">
       <Kbd>{isMac.cmdOrCtrl}</Kbd>
       <Kbd class="aspect-square">K</Kbd>

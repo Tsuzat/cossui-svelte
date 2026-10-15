@@ -3,11 +3,11 @@
   import { page } from '$app/state';
   import { Button } from '#lib/components/ui/button/index.js';
   import { Separator } from '#lib/components/ui/separator/index.js';
-  import { componentNavTree, type NavTree, PAGES_NEW } from '#lib/docs.js';
+  import { docsNavTree, type NavTree, PAGES_NEW } from '#lib/docs.js';
+  import CommandMenu from './command-menu.svelte';
   import MainNav from './main-nav.svelte';
   import MobileNav from './mobile-nav.svelte';
   import SiteHeaderBase from './site-header.svelte';
-    import CommandMenu from './command-menu.svelte';
 
   interface ProductItem {
     href: string;
@@ -22,12 +22,7 @@
     tree?: NavTree;
   }
 
-  let {
-    navItems = [],
-    currentProduct = 'ui',
-    products = [],
-    tree = componentNavTree
-  }: Props = $props();
+  let { navItems = [], currentProduct = 'ui', products = [], tree = docsNavTree }: Props = $props();
 
   const links = [
     { href: '/', label: 'Components' },
