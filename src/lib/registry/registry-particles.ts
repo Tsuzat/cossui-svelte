@@ -1,5 +1,5 @@
 import type { Component } from 'svelte';
-import { idToName } from '../utils/particle-id';
+import { idToName } from '../utils';
 import { metadata } from './generated-particle-metadata';
 
 // this one is typically done by hand

@@ -10,7 +10,7 @@ import { visit } from 'unist-util-visit';
  * no MDXProvider-style global registration. Rather than repeat the same
  * imports across every docs page, inject one shared instance-script block
  * covering every custom tag actually used live (outside code fences/inline
- * code) across src/lib/content/docs/**\/*.mdx.
+ * code) across src/lib/components/app/content/**\/*.mdx.
  */
 function remarkInjectDocsComponents() {
   const script = `<script>

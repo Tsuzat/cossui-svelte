@@ -1,9 +1,9 @@
 <script lang="ts">
+  import RiFacebookFill from '#lib/components/icons/FacebookFillLogos.svelte';
+  import RiGithubFill from '#lib/components/icons/GithubFillLogos.svelte';
+  import RiGoogleFill from '#lib/components/icons/GoogleFillLogos.svelte';
+  import RiTwitterXFill from '#lib/components/icons/TwitterXFillLogos.svelte';
   import { Button } from '#lib/components/ui/button/index.js';
-  import RiFacebookFill from '#lib/icons/FacebookFillLogos.svelte';
-  import RiGithubFill from '#lib/icons/GithubFillLogos.svelte';
-  import RiGoogleFill from '#lib/icons/GoogleFillLogos.svelte';
-  import RiTwitterXFill from '#lib/icons/TwitterXFillLogos.svelte';
 </script>
 
 <div class="inline-flex flex-wrap gap-2">

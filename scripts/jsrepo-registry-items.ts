@@ -11,7 +11,7 @@ import type { RegistryItem } from 'jsrepo/config';
 
 import { allComponents } from '../src/lib/registry/generated-registry-components';
 import { metadata as particleMetadata } from '../src/lib/registry/generated-particle-metadata';
-import { idToName } from '../src/lib/utils/particle-id';
+import { idToName } from '../src/lib/utils';
 
 async function isDirectory(path: string): Promise<boolean> {
   try {
@@ -73,7 +73,7 @@ async function getHookItems(cwd: string): Promise<RegistryItem[]> {
 }
 
 async function getIconItems(cwd: string): Promise<RegistryItem[]> {
-  const iconsDir = resolve(cwd, 'src/lib/icons');
+  const iconsDir = resolve(cwd, 'src/lib/components/icons');
   if (!(await isDirectory(iconsDir))) return [];
 
   const entries = await readdir(iconsDir, { withFileTypes: true });
@@ -83,7 +83,7 @@ async function getIconItems(cwd: string): Promise<RegistryItem[]> {
     name: 'icon-types',
     type: 'lib',
     title: 'Icon Types',
-    files: [{ path: 'src/lib/icons/types.ts', target: '$lib/icons/types.ts' }]
+    files: [{ path: 'src/lib/components/icons/types.ts', target: '$lib/components/icons/types.ts' }]
   });
 
   for (const entry of entries) {
@@ -98,8 +98,8 @@ async function getIconItems(cwd: string): Promise<RegistryItem[]> {
       registryDependencies: ['icon-types'],
       files: [
         {
-          path: `src/lib/icons/${entry.name}`,
-          target: `$lib/icons/${entry.name}`
+          path: `src/lib/components/icons/${entry.name}`,
+          target: `$lib/components/icons/${entry.name}`
         }
       ]
     });

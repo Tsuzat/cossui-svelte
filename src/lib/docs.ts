@@ -33,7 +33,7 @@ interface DocsMeta {
   title?: string;
 }
 
-const docsMeta = import.meta.glob<DocsMeta>('/src/lib/content/docs/**/meta.json', {
+const docsMeta = import.meta.glob<DocsMeta>('/src/lib/components/app/content/**/meta.json', {
   eager: true,
   import: 'default'
 });
@@ -68,18 +68,20 @@ function metaPage(folder: string, entry: string): PageNode {
   return { name: humanize(entry), type: 'page', url };
 }
 
-/** Docs sidebar, driven by `content/docs/meta.json` and the `meta.json` of each section folder. */
+/** Docs sidebar, driven by `components/app/content/meta.json` and the `meta.json` of each section folder. */
 export const docsNavTree: NavTree = {
-  children: (docsMeta['/src/lib/content/docs/meta.json']?.pages ?? []).flatMap((folder) => {
-    const meta = docsMeta[`/src/lib/content/docs/${folder}/meta.json`];
-    if (!meta) return [];
-    return [
-      {
-        $id: folder,
-        children: meta.pages.map((entry) => metaPage(folder, entry)),
-        name: meta.title ?? humanize(folder),
-        type: 'folder' as const
-      }
-    ];
-  })
+  children: (docsMeta['/src/lib/components/app/content/meta.json']?.pages ?? []).flatMap(
+    (folder) => {
+      const meta = docsMeta[`/src/lib/components/app/content/${folder}/meta.json`];
+      if (!meta) return [];
+      return [
+        {
+          $id: folder,
+          children: meta.pages.map((entry) => metaPage(folder, entry)),
+          name: meta.title ?? humanize(folder),
+          type: 'folder' as const
+        }
+      ];
+    }
+  )
 };

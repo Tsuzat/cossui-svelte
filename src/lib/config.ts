@@ -1,4 +1,4 @@
-export const PROJECT_NAME = 'CossUI - Svelte' as const;
+export const PROJECT_NAME = 'Cossui-Svelte' as const;
 
 const REPO_NAME = 'cossui-svelte/cossui-svelte';
 

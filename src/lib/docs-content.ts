@@ -24,15 +24,15 @@ export interface DocPage {
 // Bundled at build time (both compiled-component and raw-text variants of the
 // same files) so pages are available in the deployed Worker, which has no
 // filesystem access to read from src/ at request time.
-const compiledPages = import.meta.glob<DocModule>('/src/lib/content/docs/**/*.mdx');
-const rawPages = import.meta.glob('/src/lib/content/docs/**/*.mdx', {
+const compiledPages = import.meta.glob<DocModule>('/src/lib/components/app/content/**/*.mdx');
+const rawPages = import.meta.glob('/src/lib/components/app/content/**/*.mdx', {
   import: 'default',
   query: '?raw'
 });
 
 function pathToSlug(path: string): string {
   return path
-    .replace('/src/lib/content/docs/', '')
+    .replace('/src/lib/components/app/content/', '')
     .replace('(root)/', '')
     .replace(/\.mdx$/, '');
 }

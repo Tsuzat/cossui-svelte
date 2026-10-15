@@ -28,7 +28,7 @@
     "gen:registry": "tsx scripts/generateComponentRegistry.ts -w src/lib/registry/generated-registry-components.ts && tsx scripts/generateParticleRegistry.ts && rm -f static/r/*.json && jsrepo build && pnpm format",
     "lint": "oxlint && pnpm lint:svelte",
     "lint:audit": "pnpx knip --max-show-issues 20",
-    "lint:svelte": "oxvelte lint src/routes src/lib/components/app src/lib/components/ui src/lib/hooks src/lib/icons && oxvelte lint --config oxvelte.demos.json src/lib/components/particles src/lib/components/blocs",
+    "lint:svelte": "oxvelte lint src/routes src/lib/components/app src/lib/components/ui src/lib/hooks src/lib/components/icons && oxvelte lint --config oxvelte.demos.json src/lib/components/particles src/lib/components/blocs",
     "lint:typecheck": "tsc --noEmit",
     "migrate": "wrangler types src/worker-configuration.d.ts && tsx ./scripts/transformLucideImports.ts",
     "mrproper": "rm -rf node_modules dist build .svelte-kit",
