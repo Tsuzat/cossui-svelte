@@ -2,7 +2,7 @@
   import ExternalLink from '@lucide/svelte/icons/external-link';
   import DocsCopyPage from '#lib/components/app/docs/docs-copy-page.svelte';
   import DocsToc from '#lib/components/app/docs/docs-toc.svelte';
-  import { Button } from '#lib/components/ui/button/index.js';
+  import { buttonVariants } from '#lib/components/ui/button/index.js';
   import { Card, CardFrame, CardPanel } from '#lib/components/ui/card/index.js';
   import { ScrollArea } from '#lib/components/ui/scroll-area/index.js';
   import type { PageData } from './$types';
@@ -30,13 +30,16 @@
                 </div>
                 <div class="flex items-center space-x-2 pt-4">
                   {#if data.metadata.links?.doc}
-                    <Button size="xs" variant="outline">
-                      <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- external URL from frontmatter, not an app route -->
-                      <a href={data.metadata.links.doc} rel="noreferrer" target="_blank">
-                        <ExternalLink />
-                        API Reference
-                      </a>
-                    </Button>
+                    <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- external URL from frontmatter, not an app route -->
+                    <a
+                      class={buttonVariants({ size: 'xs', variant: 'outline' })}
+                      href={data.metadata.links.doc}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      <ExternalLink />
+                      API Reference
+                    </a>
                   {/if}
                   <DocsCopyPage page={data.raw} />
                 </div>

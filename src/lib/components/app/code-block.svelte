@@ -129,6 +129,29 @@
       border-width: 0;
     }
 
+    /* Shiki output: let the figure provide the background and pad the code. */
+    :global([data-rehype-pretty-code-figure] pre) {
+      background-color: transparent !important;
+      width: max-content;
+      min-width: 100%;
+      margin: 0;
+      padding: calc(var(--spacing) * 3.5) calc(var(--spacing) * 4);
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      outline: none;
+    }
+
+    :global([data-rehype-pretty-code-figure] pre code) {
+      font-size: inherit;
+      background: none;
+      padding: 0;
+    }
+
+    :global(.dark [data-rehype-pretty-code-figure] pre),
+    :global(.dark [data-rehype-pretty-code-figure] pre span) {
+      color: var(--shiki-dark) !important;
+    }
+
     :global([data-rehype-pretty-code-title]) {
       min-height: calc(var(--spacing) * 11);
       border-bottom: color-mix(in oklab, var(--border) 64%, transparent);
