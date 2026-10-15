@@ -27,12 +27,6 @@ export interface NavItem {
   }[];
 }
 
-export interface User {
-  avatar: string;
-  email: string;
-  name: string;
-}
-
 export const navMainItems: NavItem[] = [
   {
     icon: Link2Icon,
@@ -114,9 +108,3 @@ export const navFooterItems: NavItem[] = [
     url: '/settings'
   }
 ];
-
-export const user: User = {
-  avatar: '',
-  email: 'pasqua@example.com',
-  name: 'Pasquale'
-};

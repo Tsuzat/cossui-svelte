@@ -1,7 +1,7 @@
 // Minimal hash router so the whole app can live inside one bloc (`/blocs/view/app-calcom#/event-types`).
 // It replaces Next.js `usePathname` / `useRouter` / `<Link>` from the original app.
 
-export const DEFAULT_PATH = '/event-types';
+const DEFAULT_PATH = '/event-types';
 
 function readPath(): string {
   if (typeof window === 'undefined') return DEFAULT_PATH;

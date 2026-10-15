@@ -26,7 +26,7 @@ export interface RegistryParticuleEntry {
   tags: string[];
 }
 
-export type RegistryParticuleData = Record<string, RegistryParticuleEntry>;
+type RegistryParticuleData = Record<string, RegistryParticuleEntry>;
 
 const modules = import.meta.glob<{ default: Component }>('../components/particles/**/p-*.svelte');
 

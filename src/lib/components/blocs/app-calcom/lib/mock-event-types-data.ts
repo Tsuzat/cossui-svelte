@@ -11,7 +11,7 @@ import type { SchedulingType } from './event-types-types';
 /**
  * User type matching Cal.com's user select in eventTypeRepository
  */
-export interface EventTypeUser {
+interface EventTypeUser {
   id: number;
   name: string | null;
   username: string | null;
@@ -22,7 +22,7 @@ export interface EventTypeUser {
 /**
  * Host type for team event types
  */
-export interface EventTypeHost {
+interface EventTypeHost {
   isFixed: boolean;
   userId: number;
   priority: number | null;
@@ -34,7 +34,7 @@ export interface EventTypeHost {
 /**
  * Hashed link for private event URLs
  */
-export interface HashedLink {
+interface HashedLink {
   id: number;
   link: string;
   expiresAt: Date | null;
@@ -45,7 +45,7 @@ export interface HashedLink {
 /**
  * Child event type (for managed event types)
  */
-export interface ChildEventType {
+interface ChildEventType {
   id: number;
   slug: string;
   hidden: boolean;
@@ -55,7 +55,7 @@ export interface ChildEventType {
 /**
  * Event type color configuration
  */
-export interface EventTypeColor {
+interface EventTypeColor {
   lightEventTypeColor: string;
   darkEventTypeColor: string;
 }
@@ -63,7 +63,7 @@ export interface EventTypeColor {
 /**
  * Recurring event configuration
  */
-export interface RecurringEvent {
+interface RecurringEvent {
   freq: number; // 0 = yearly, 1 = monthly, 2 = weekly, 3 = daily
   count: number;
   interval: number;
@@ -72,7 +72,7 @@ export interface RecurringEvent {
 /**
  * AI Phone Call configuration
  */
-export interface AIPhoneCallConfig {
+interface AIPhoneCallConfig {
   enabled: boolean;
   templateType: string;
   generalPrompt: string | null;
@@ -82,7 +82,7 @@ export interface AIPhoneCallConfig {
 /**
  * Instant meeting schedule
  */
-export interface InstantMeetingSchedule {
+interface InstantMeetingSchedule {
   id: number;
   name: string;
 }
@@ -192,7 +192,7 @@ export interface EventType {
 /**
  * Profile information for URL construction
  */
-export interface EventTypeProfile {
+interface EventTypeProfile {
   slug: string | null;
   name: string | null;
   image: string | null;
@@ -1000,20 +1000,6 @@ export const mockEventTypeGroups: EventTypeGroup[] = [
 ];
 
 /**
- * Helper to get personal event types
- */
-export function getPersonalEventTypes(): EventType[] {
-  return mockEventTypes.filter((et) => et.teamId === null);
-}
-
-/**
- * Helper to get team event types
- */
-export function getTeamEventTypes(teamId: number): EventType[] {
-  return mockEventTypes.filter((et) => et.teamId === teamId);
-}
-
-/**
  * Helper to format duration for display
  */
 export function formatDuration(minutes: number): string {
@@ -1026,11 +1012,4 @@ export function formatDuration(minutes: number): string {
     return `${hours}h`;
   }
   return `${hours}h ${remainingMinutes}m`;
-}
-
-/**
- * Helper to build event type URL path
- */
-export function buildEventTypePath(eventType: EventType, profile: EventTypeProfile): string {
-  return `/${profile.slug}/${eventType.slug}`;
 }

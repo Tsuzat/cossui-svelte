@@ -1,8 +1,8 @@
 import type { Component } from 'svelte';
 
-export type RouteLayout = 'dashboard' | 'settings';
+type RouteLayout = 'dashboard' | 'settings';
 
-export interface Route {
+interface Route {
   /** `:name` segments are captured and passed to the page as `params`. */
   pattern: string;
   layout: RouteLayout;
@@ -11,7 +11,7 @@ export interface Route {
 }
 
 // Mirrors the Next.js `app/` tree of the original calcom example. Pages live in `./pages/<route>/page.svelte`.
-export const routes: Route[] = [
+const routes: Route[] = [
   { pattern: '/', layout: 'dashboard', redirect: '/event-types' },
   { pattern: '/booking', layout: 'dashboard', redirect: '/booking/upcoming' },
   { pattern: '/settings', layout: 'settings', redirect: '/settings/my-account/general' },

@@ -18,6 +18,6 @@
 	"dependencies": [
 		"#lib",
 		"@headless-tree/core",
-		"@headless-tree/core@^1.7.0"
+		"@headless-tree/core@^1.8.0"
 	]
 }

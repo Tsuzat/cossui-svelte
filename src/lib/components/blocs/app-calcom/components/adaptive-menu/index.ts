@@ -24,11 +24,9 @@
  * Items inside the drawer close it on click. Trigger forwards extra attributes (aria-label, disabled, onclick, ...).
  */
 export { default as AdaptiveMenu } from './adaptive-menu.svelte';
-export { default as AdaptiveMenuCheckboxItem } from './adaptive-menu-checkbox-item.svelte';
 export { default as AdaptiveMenuGroup } from './adaptive-menu-group.svelte';
 export { default as AdaptiveMenuGroupLabel } from './adaptive-menu-group-label.svelte';
 export { default as AdaptiveMenuItem } from './adaptive-menu-item.svelte';
 export { default as AdaptiveMenuPopup } from './adaptive-menu-popup.svelte';
 export { default as AdaptiveMenuSeparator } from './adaptive-menu-separator.svelte';
 export { default as AdaptiveMenuTrigger } from './adaptive-menu-trigger.svelte';
-export type { AdaptiveMenuVariant, AdaptiveMenuVisibility } from './context.js';

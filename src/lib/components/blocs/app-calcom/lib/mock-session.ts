@@ -9,7 +9,7 @@ const mockUserEmails: Record<number, string> = {
   3: 'peer@cal.com'
 };
 
-export function getMockUserEmail(userId = mockLoggedInUserId): string | null {
+function getMockUserEmail(userId = mockLoggedInUserId): string | null {
   return mockUserEmails[userId] ?? null;
 }
 

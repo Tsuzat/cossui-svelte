@@ -4,7 +4,7 @@
 export type DiffStatus = 'same' | 'added' | 'removed' | 'changed';
 export type AttrState = 'same' | 'added' | 'removed' | 'changed';
 
-export interface DiffAttr {
+interface DiffAttr {
   name: string;
   value: string;
   state: AttrState;
@@ -24,7 +24,7 @@ export interface DiffNode {
   children: DiffNode[];
 }
 
-export interface DiffStats {
+interface DiffStats {
   added: number;
   removed: number;
   changed: number;

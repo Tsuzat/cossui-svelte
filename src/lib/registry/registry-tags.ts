@@ -6,7 +6,7 @@ import { allComponents } from './generated-registry-components';
 const allComponentKeys = Object.keys(allComponents);
 
 // This is used by the search to find particules
-export const registryCategories = [
+const registryCategories = [
   // UI components
   ...allComponentKeys,
   // Features and states

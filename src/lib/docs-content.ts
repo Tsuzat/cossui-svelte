@@ -1,12 +1,12 @@
 import type { Component } from 'svelte';
 
-export interface DocTocItem {
+interface DocTocItem {
   depth: number;
   title: string;
   url: string;
 }
 
-export interface DocMetadata {
+interface DocMetadata {
   description?: string;
   links?: { doc?: string };
   title: string;
@@ -31,7 +31,10 @@ const rawPages = import.meta.glob('/src/lib/content/docs/**/*.mdx', {
 });
 
 function pathToSlug(path: string): string {
-  return path.replace('/src/lib/content/docs/', '').replace(/\.mdx$/, '');
+  return path
+    .replace('/src/lib/content/docs/', '')
+    .replace('(root)/', '')
+    .replace(/\.mdx$/, '');
 }
 
 const slugToPath = new Map(Object.keys(compiledPages).map((path) => [pathToSlug(path), path]));

@@ -172,9 +172,3 @@ export const orgSettingsItems: SettingsNavItem[] = [
     url: '/settings/organizations'
   }
 ];
-
-export const settingsNavItems: SettingsNavItem[] = [
-  ...userSettingsItems,
-  ...orgSettingsItems,
-  ...adminSettingsItems
-];

@@ -18,7 +18,6 @@
  * Differences from the React original: `attributes`/`listeners`/`setNodeRef` are replaced by the `ref`
  * attachment; no custom drop animation (data-drag-release is not set) and default pointer/keyboard sensors.
  */
-export { arrayMove } from '@dnd-kit/helpers';
 export { default as SortableItem } from './sortable-item.svelte';
 export { default as SortableList } from './sortable-list.svelte';
 export type { SortableItemRenderProps } from './types.js';

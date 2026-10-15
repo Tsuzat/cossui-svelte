@@ -3,7 +3,7 @@ import { isBookingAttendee, isBookingHost, mockLoggedInUserId } from './mock-ses
 
 export type BookingListingStatus = 'upcoming' | 'past' | 'cancelled' | 'unconfirmed' | 'recurring';
 
-export type DisableScope = 'HOST_AND_ATTENDEE' | 'ATTENDEE_ONLY';
+type DisableScope = 'HOST_AND_ATTENDEE' | 'ATTENDEE_ONLY';
 
 export type BookingActionId =
   | 'reschedule'
@@ -36,7 +36,7 @@ export interface BookingActionContext {
   listingStatus: BookingListingStatus;
 }
 
-export function isActionDisabledByScope({
+function isActionDisabledByScope({
   disableFlag,
   isHost,
   scope
@@ -56,7 +56,7 @@ export function isActionDisabledByScope({
   return true;
 }
 
-export function isWithinMinimumRescheduleNotice(
+function isWithinMinimumRescheduleNotice(
   bookingStartTime: Date | null,
   minimumRescheduleNotice: number | null
 ): boolean {

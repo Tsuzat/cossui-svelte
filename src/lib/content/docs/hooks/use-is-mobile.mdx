@@ -1,0 +1,48 @@
+---
+title: IsMobile
+description: Reactive flag that is true when the viewport is narrower than the mobile breakpoint.
+---
+
+A small class built on Svelte's [`MediaQuery`](https://svelte.dev/docs/svelte/svelte-reactivity#MediaQuery) that matches viewports below `800px`. Read `.current` anywhere reactive, such as a template or `$derived`.
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTab value="cli">CLI</TabsTab>
+  <TabsTab value="manual">Manual</TabsTab>
+</TabsList>
+<TabsPanel value="cli">
+
+```bash
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/use-is-mobile.json
+```
+
+</TabsPanel>
+
+<TabsPanel value="manual">
+
+Copy `src/lib/hooks/use-is-mobile.svelte.ts` into your project.
+
+</TabsPanel>
+
+</CodeTabs>
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import { IsMobile } from '$lib/hooks/use-is-mobile.svelte';
+
+  const isMobile = new IsMobile();
+</script>
+
+{#if isMobile.current}
+  <MobileNav />
+{:else}
+  <DesktopNav />
+{/if}
+```
+
+`current` is `false` during SSR. For other queries, use `MediaQuery` from `svelte/reactivity` directly.

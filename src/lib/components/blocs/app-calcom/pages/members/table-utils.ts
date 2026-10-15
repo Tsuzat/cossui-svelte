@@ -32,7 +32,7 @@ export const features = tableFeatures({
 
 export type MemberColumn = Column<typeof features, Member, unknown>;
 
-export const FILLER_EXCLUDED_COLUMN_IDS = new Set(['select', 'actions']);
+const FILLER_EXCLUDED_COLUMN_IDS = new Set(['select', 'actions']);
 
 export const INITIAL_COLUMN_PINNING = {
   end: ['actions'],

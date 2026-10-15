@@ -765,7 +765,7 @@
 			"description": "A chart component for visualizing data in various formats.",
 			"type": "registry:ui",
 			"dependencies": [
-				"layerchart@^2.5.1"
+				"layerchart@^2.8.0"
 			],
 			"registryDependencies": [
 				"utils"
@@ -1917,7 +1917,7 @@
 			"type": "registry:ui",
 			"dependencies": [
 				"geojson",
-				"maplibre-gl@^6.12.0"
+				"maplibre-gl@^6.14.0"
 			],
 			"registryDependencies": [
 				"utils"
@@ -3560,7 +3560,7 @@
 			"description": "A component for displaying a hierarchical tree of items.",
 			"type": "registry:ui",
 			"dependencies": [
-				"@headless-tree/core@^1.7.0",
+				"@headless-tree/core@^1.8.0",
 				"runed@0.37.1",
 				"svelte-toolbelt@^0.10.6"
 			],
@@ -7514,7 +7514,7 @@
 			"dependencies": [
 				"#lib",
 				"layerchart",
-				"layerchart@^2.5.1"
+				"layerchart@^2.8.0"
 			],
 			"registryDependencies": [
 				"chart"
@@ -7537,7 +7537,7 @@
 				"d3-scale",
 				"layerchart",
 				"d3-scale@^4.0.2",
-				"layerchart@^2.5.1"
+				"layerchart@^2.8.0"
 			],
 			"registryDependencies": [
 				"chart"
@@ -7558,7 +7558,7 @@
 			"dependencies": [
 				"#lib",
 				"layerchart",
-				"layerchart@^2.5.1"
+				"layerchart@^2.8.0"
 			],
 			"registryDependencies": [
 				"chart"
@@ -7581,7 +7581,7 @@
 				"d3-scale",
 				"layerchart",
 				"d3-scale@^4.0.2",
-				"layerchart@^2.5.1"
+				"layerchart@^2.8.0"
 			],
 			"registryDependencies": [
 				"chart"
@@ -7606,7 +7606,7 @@
 				"layerchart",
 				"d3-scale@^4.0.2",
 				"d3-shape@^3.2.0",
-				"layerchart@^2.5.1"
+				"layerchart@^2.8.0"
 			],
 			"registryDependencies": [
 				"chart"
@@ -7631,7 +7631,7 @@
 				"layerchart",
 				"d3-scale@^4.0.2",
 				"d3-shape@^3.2.0",
-				"layerchart@^2.5.1"
+				"layerchart@^2.8.0"
 			],
 			"registryDependencies": [
 				"chart"
@@ -7656,7 +7656,7 @@
 				"layerchart",
 				"d3-scale@^4.0.2",
 				"d3-shape@^3.2.0",
-				"layerchart@^2.5.1"
+				"layerchart@^2.8.0"
 			],
 			"registryDependencies": [
 				"chart"
@@ -7677,7 +7677,7 @@
 			"dependencies": [
 				"#lib",
 				"layerchart",
-				"layerchart@^2.5.1"
+				"layerchart@^2.8.0"
 			],
 			"registryDependencies": [
 				"chart"
@@ -7698,7 +7698,7 @@
 			"dependencies": [
 				"#lib",
 				"layerchart",
-				"layerchart@^2.5.1"
+				"layerchart@^2.8.0"
 			],
 			"registryDependencies": [
 				"chart"
@@ -7721,7 +7721,7 @@
 				"d3-scale",
 				"layerchart",
 				"d3-scale@^4.0.2",
-				"layerchart@^2.5.1"
+				"layerchart@^2.8.0"
 			],
 			"registryDependencies": [
 				"chart"
@@ -10505,7 +10505,7 @@
 			"dependencies": [
 				"#lib",
 				"zod",
-				"zod@^4.6.5"
+				"zod@^4.6.7"
 			],
 			"registryDependencies": [
 				"button",
@@ -12414,7 +12414,7 @@
 			"dependencies": [
 				"#lib",
 				"maplibre-gl",
-				"maplibre-gl@^6.12.0"
+				"maplibre-gl@^6.14.0"
 			],
 			"registryDependencies": [
 				"button",
@@ -17608,7 +17608,7 @@
 			"dependencies": [
 				"#lib",
 				"@headless-tree/core",
-				"@headless-tree/core@^1.7.0"
+				"@headless-tree/core@^1.8.0"
 			],
 			"registryDependencies": [
 				"tree"
@@ -17629,7 +17629,7 @@
 			"dependencies": [
 				"#lib",
 				"@headless-tree/core",
-				"@headless-tree/core@^1.7.0"
+				"@headless-tree/core@^1.8.0"
 			],
 			"registryDependencies": [
 				"tree"
@@ -17651,7 +17651,7 @@
 				"#lib",
 				"@headless-tree/core",
 				"@lucide/svelte",
-				"@headless-tree/core@^1.7.0"
+				"@headless-tree/core@^1.8.0"
 			],
 			"registryDependencies": [
 				"tree"
@@ -17673,7 +17673,7 @@
 				"#lib",
 				"@headless-tree/core",
 				"@lucide/svelte",
-				"@headless-tree/core@^1.7.0"
+				"@headless-tree/core@^1.8.0"
 			],
 			"registryDependencies": [
 				"tree"
@@ -17695,7 +17695,7 @@
 				"#lib",
 				"@headless-tree/core",
 				"@lucide/svelte",
-				"@headless-tree/core@^1.7.0"
+				"@headless-tree/core@^1.8.0"
 			],
 			"registryDependencies": [
 				"tree"
@@ -17717,7 +17717,7 @@
 				"#lib",
 				"@headless-tree/core",
 				"@lucide/svelte",
-				"@headless-tree/core@^1.7.0"
+				"@headless-tree/core@^1.8.0"
 			],
 			"registryDependencies": [
 				"tree"
@@ -17739,7 +17739,7 @@
 				"#lib",
 				"@headless-tree/core",
 				"@lucide/svelte",
-				"@headless-tree/core@^1.7.0"
+				"@headless-tree/core@^1.8.0"
 			],
 			"registryDependencies": [
 				"input",
@@ -17762,7 +17762,7 @@
 				"#lib",
 				"@headless-tree/core",
 				"@lucide/svelte",
-				"@headless-tree/core@^1.7.0"
+				"@headless-tree/core@^1.8.0"
 			],
 			"registryDependencies": [
 				"input",

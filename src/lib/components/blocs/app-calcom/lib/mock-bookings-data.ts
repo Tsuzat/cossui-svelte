@@ -9,11 +9,11 @@
 // TYPE DEFINITIONS
 // =============================================================================
 
-export type BookingStatus = 'ACCEPTED' | 'PENDING' | 'CANCELLED' | 'REJECTED' | 'AWAITING_HOST';
+type BookingStatus = 'ACCEPTED' | 'PENDING' | 'CANCELLED' | 'REJECTED' | 'AWAITING_HOST';
 
-export type SchedulingType = 'ROUND_ROBIN' | 'COLLECTIVE' | 'MANAGED' | null;
+type SchedulingType = 'ROUND_ROBIN' | 'COLLECTIVE' | 'MANAGED' | null;
 
-export interface BookingUser {
+interface BookingUser {
   id: number;
   name: string | null;
   email: string;
@@ -32,9 +32,9 @@ export interface BookingAttendee {
   noShow: boolean | null;
 }
 
-export type DisableScope = 'HOST_AND_ATTENDEE' | 'ATTENDEE_ONLY';
+type DisableScope = 'HOST_AND_ATTENDEE' | 'ATTENDEE_ONLY';
 
-export interface BookingEventType {
+interface BookingEventType {
   id: number;
   slug: string;
   title: string;
@@ -86,7 +86,7 @@ export interface BookingEventType {
   }[];
 }
 
-export interface BookingReference {
+interface BookingReference {
   id: number;
   type: string;
   uid: string;
@@ -99,7 +99,7 @@ export interface BookingReference {
   credentialId: number | null;
 }
 
-export interface BookingPayment {
+interface BookingPayment {
   paymentOption: string | null;
   amount: number;
   currency: string;
@@ -108,21 +108,21 @@ export interface BookingPayment {
   refunded: boolean;
 }
 
-export interface BookingSeat {
+interface BookingSeat {
   referenceUid: string;
   attendee: {
     email: string;
   };
 }
 
-export interface AssignmentReason {
+interface AssignmentReason {
   id: number;
   reasonString: string;
   bookingId: number;
   createdAt: Date;
 }
 
-export interface BookingReport {
+interface BookingReport {
   id: number;
   reportedById: number;
   reason: string;
@@ -1789,154 +1789,4 @@ export function getLocationLabel(location: string | null): string {
     'integrations:zoom': 'Join Zoom'
   };
   return locationMap[location] || location;
-}
-
-export function getLocationIcon(location: string | null): 'video' | 'phone' | 'location' | null {
-  if (!location) return null;
-  if (location.startsWith('integrations:')) return 'video';
-  if (location.includes('phone')) return 'phone';
-  return 'location';
-}
-
-// =============================================================================
-// FILTER FUNCTIONS
-// =============================================================================
-
-export interface BookingFilter {
-  categoryId: string;
-  selectedOptionIds: string[];
-}
-
-export function filterBookings(bookings: Booking[], filters: BookingFilter[]): Booking[] {
-  if (filters.length === 0) return bookings;
-
-  return bookings.filter((booking) => {
-    return filters.every((filter) => {
-      const { categoryId, selectedOptionIds } = filter;
-      if (selectedOptionIds.length === 0) return true;
-
-      switch (categoryId) {
-        case 'event-type': {
-          const eventTypeTitle = booking.eventType?.title?.toLowerCase() ?? '';
-          const eventTypeSlug = booking.eventType?.slug?.toLowerCase() ?? '';
-          return selectedOptionIds.some((optionId) => {
-            const optionLabel = getEventTypeLabel(optionId).toLowerCase();
-            return (
-              eventTypeTitle.includes(optionLabel) ||
-              eventTypeSlug.includes(optionId.replace(/-/g, ''))
-            );
-          });
-        }
-        case 'member': {
-          const hostName = booking.user?.name?.toLowerCase() ?? '';
-          const hostEmail = booking.user?.email?.toLowerCase() ?? '';
-          return selectedOptionIds.some((optionId) => {
-            const memberName = optionId.replace(/-/g, ' ').toLowerCase();
-            return hostName.includes(memberName) || hostEmail.includes(optionId.replace(/-/g, ''));
-          });
-        }
-        case 'attendees-name': {
-          return selectedOptionIds.some((optionId) => {
-            const searchName = optionId.replace(/-/g, ' ').toLowerCase();
-            return booking.attendees.some((attendee) =>
-              attendee.name.toLowerCase().includes(searchName)
-            );
-          });
-        }
-        case 'attendee-email': {
-          return selectedOptionIds.some((optionId) => {
-            return booking.attendees.some((attendee) =>
-              attendee.email.toLowerCase().includes(optionId.split('-')[0] ?? '')
-            );
-          });
-        }
-        case 'date-range': {
-          const now = new Date();
-          const bookingDate = new Date(booking.startTime);
-          return selectedOptionIds.some((optionId) => {
-            switch (optionId) {
-              case 'today':
-                return isSameDay(bookingDate, now);
-              case 'yesterday':
-                return isSameDay(bookingDate, addDays(now, -1));
-              case 'this-week':
-                return isWithinWeek(bookingDate, now);
-              case 'last-week':
-                return isWithinLastWeek(bookingDate, now);
-              case 'this-month':
-                return isSameMonth(bookingDate, now);
-              case 'last-month':
-                return isLastMonth(bookingDate, now);
-              default:
-                return true;
-            }
-          });
-        }
-        case 'booking-uid': {
-          return selectedOptionIds.some((optionId) =>
-            booking.uid.toLowerCase().includes(optionId.toLowerCase())
-          );
-        }
-        default:
-          return true;
-      }
-    });
-  });
-}
-
-function getEventTypeLabel(optionId: string): string {
-  const labels: Record<string, string> = {
-    '15-min': '15 Min Meeting',
-    '30-min': '30 Min Meeting',
-    '60-min': '60 Min Meeting',
-    consultation: 'Consultation',
-    interview: 'Interview',
-    onboarding: 'Onboarding Call'
-  };
-  return labels[optionId] ?? optionId;
-}
-
-function isSameDay(date1: Date, date2: Date): boolean {
-  return (
-    date1.getFullYear() === date2.getFullYear() &&
-    date1.getMonth() === date2.getMonth() &&
-    date1.getDate() === date2.getDate()
-  );
-}
-
-function addDays(date: Date, days: number): Date {
-  const result = new Date(date);
-  result.setDate(result.getDate() + days);
-  return result;
-}
-
-function isWithinWeek(date: Date, referenceDate: Date): boolean {
-  const startOfWeek = new Date(referenceDate);
-  startOfWeek.setDate(referenceDate.getDate() - referenceDate.getDay());
-  startOfWeek.setHours(0, 0, 0, 0);
-  const endOfWeek = new Date(startOfWeek);
-  endOfWeek.setDate(startOfWeek.getDate() + 7);
-  return date >= startOfWeek && date < endOfWeek;
-}
-
-function isWithinLastWeek(date: Date, referenceDate: Date): boolean {
-  const startOfLastWeek = new Date(referenceDate);
-  startOfLastWeek.setDate(referenceDate.getDate() - referenceDate.getDay() - 7);
-  startOfLastWeek.setHours(0, 0, 0, 0);
-  const endOfLastWeek = new Date(startOfLastWeek);
-  endOfLastWeek.setDate(startOfLastWeek.getDate() + 7);
-  return date >= startOfLastWeek && date < endOfLastWeek;
-}
-
-function isSameMonth(date: Date, referenceDate: Date): boolean {
-  return (
-    date.getFullYear() === referenceDate.getFullYear() &&
-    date.getMonth() === referenceDate.getMonth()
-  );
-}
-
-function isLastMonth(date: Date, referenceDate: Date): boolean {
-  const lastMonth = new Date(referenceDate);
-  lastMonth.setMonth(lastMonth.getMonth() - 1);
-  return date.getFullYear() === lastMonth.getFullYear() && date.getMonth() === lastMonth.getMonth();
 }
