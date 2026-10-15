@@ -9,6 +9,9 @@ TODO:
 * port splitpanes
 * port rich editor
 * add pointer to design/component library from the readme
+* file-upload: it's a hook (useFileUpload) plus particles, not a component, because ui/
+* implement rich-editor and split-pane
+* review navigation category: it's a particle-only category with no component behind it.
 
 * DONE: Topbar should bringback the search documentation
 * DONE: Mobile layout needs a rework
