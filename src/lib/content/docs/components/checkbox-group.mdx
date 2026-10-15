@@ -1,9 +1,6 @@
 ---
 title: Checkbox Group
 description: Provides shared state to a series of checkboxes.
-
-links:
-  doc: https://base-ui.com/react/components/checkbox-group#api-reference
 ---
 
 <ComponentPreview name="p-checkbox-group-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/checkbox-group
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/checkbox-group.json
 ```
 
 </TabsPanel>
@@ -31,14 +28,14 @@ npx shadcn@latest add @coss/checkbox-group
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource
   name="checkbox-group"
-  title="components/ui/checkbox-group.tsx"
+  title="components/ui/checkbox-group"
 />
 
 <Step>Update the import paths to match your project setup.</Step>
@@ -51,23 +48,26 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import { Checkbox } from "@/components/ui/checkbox"
-import { CheckboxGroup } from "@/components/ui/checkbox-group"
-```
+```svelte
+<script lang="ts">
+  import { Checkbox } from '$lib/components/ui/checkbox';
+  import { CheckboxGroup } from '$lib/components/ui/checkbox-group';
+  import { Label } from '$lib/components/ui/label';
 
-```tsx
-<CheckboxGroup>
+  let value = $state(['next']);
+</script>
+
+<CheckboxGroup aria-label="Select frameworks" bind:value>
   <Label>
-    <Checkbox defaultChecked />
+    <Checkbox value="next" />
     Next.js
   </Label>
   <Label>
-    <Checkbox />
+    <Checkbox value="vite" />
     Vite
   </Label>
   <Label>
-    <Checkbox />
+    <Checkbox value="astro" />
     Astro
   </Label>
 </CheckboxGroup>
@@ -77,11 +77,17 @@ import { CheckboxGroup } from "@/components/ui/checkbox-group"
 
 ### CheckboxGroup
 
-Styled wrapper for `CheckboxGroup` from Base UI. Provides shared state management for a group of checkboxes with flex column layout.
+Styled wrapper for `CheckboxGroup` from ShardsUI. Provides shared state management for a group of checkboxes with flex column layout.
+
+| Prop    | Type       | Default | Description                                                    |
+| ------- | ---------- | ------- | -------------------------------------------------------------- |
+| `value` | `string[]` | `[]`    | Values of the checked checkboxes. Bindable with `bind:value`   |
+
+`CheckboxTree` is also exported as a demo-only helper for the parent checkbox examples (not production-tested).
 
 ## Examples
 
-For accessible group labelling and validation, prefer wrapping checkbox groups with `Field` and `Fieldset`. See the related example: [Checkbox group field](/ui/docs/components/field#checkbox-group-field).
+For accessible group labelling and validation, prefer wrapping checkbox groups with `Field` and `Fieldset`. See the related example: [Checkbox group field](/docs/field#checkbox-group-field).
 
 ### With Disabled Item
 

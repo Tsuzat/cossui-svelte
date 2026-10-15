@@ -1,9 +1,6 @@
 ---
 title: Radio Group
 description: A set of checkable buttons where no more than one of the buttons can be checked at a time.
-
-links:
-  doc: https://base-ui.com/react/components/radio#api-reference
 ---
 
 <ComponentPreview name="p-radio-group-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/radio-group
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/radio-group.json
 ```
 
 </TabsPanel>
@@ -31,12 +28,12 @@ npx shadcn@latest add @coss/radio-group
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="radio-group" title="components/ui/radio-group.tsx" />
+<ComponentSource name="radio-group" title="components/ui/radio-group" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -48,22 +45,18 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import { Label } from "@/components/ui/label"
-import { Radio, RadioGroup } from "@/components/ui/radio-group"
-```
+```svelte
+<script lang="ts">
+  import { Label } from '$lib/components/ui/label';
+  import { Radio, RadioGroup } from '$lib/components/ui/radio-group';
 
-```tsx
-<RadioGroup defaultValue="next">
-  <Label>
-    <Radio value="next" /> Next.js
-  </Label>
-  <Label>
-    <Radio value="vite" /> Vite
-  </Label>
-  <Label>
-    <Radio value="astro" /> Astro
-  </Label>
+  let value = $state('next');
+</script>
+
+<RadioGroup bind:value>
+  <Label><Radio value="next" /> Next.js</Label>
+  <Label><Radio value="vite" /> Vite</Label>
+  <Label><Radio value="astro" /> Astro</Label>
 </RadioGroup>
 ```
 
@@ -71,17 +64,19 @@ import { Radio, RadioGroup } from "@/components/ui/radio-group"
 
 ### RadioGroup
 
-Root component. Styled wrapper for `RadioGroup.Root` from Base UI with flex column layout.
+Root component. Styled wrapper for `RadioGroup` from ShardsUI with flex column layout. `value` is bindable (`bind:value`); `defaultValue`, `onValueChange`, `disabled`, `name` and the other primitive props are forwarded.
 
 ### Radio
 
-Individual radio button. Styled wrapper for `Radio.Root` from Base UI with built-in indicator. Also exported as `RadioGroupItem`.
+Individual radio button. Styled wrapper for `Radio.Root` from ShardsUI with built-in indicator. Takes a `value`. Also exported as `RadioGroupItem`.
+
+The `RadioPrimitive` and `RadioGroupPrimitive` namespaces are re-exported for custom compositions.
 
 ## Examples
 
-For accessible labelling and validation, prefer using the `Field` component to wrap radio buttons. See the related example: [Radio Group field](/ui/docs/components/field#radio-group-field).
+For accessible labelling and validation, prefer using the `Field` component to wrap radio buttons. See the related example: [Radio Group field](/docs/field#radio-group-field).
 
-For tabs-style mutually exclusive choices, see the [Segmented Control](/ui/docs/components/segmented-control) pattern.
+For tabs-style mutually exclusive choices, see the [Segmented Control](/docs/segmented-control) pattern.
 
 ### Disabled
 

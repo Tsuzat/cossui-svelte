@@ -16,7 +16,7 @@ description: Renders an accessible label associated with controls.
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/label
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/label.json
 ```
 
 </TabsPanel>
@@ -27,7 +27,7 @@ npx shadcn@latest add @coss/label
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="label" title="components/ui/label.tsx" />
+<ComponentSource name="label" title="components/ui/label" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -39,30 +39,20 @@ npx shadcn@latest add @coss/label
 
 ## Usage
 
-```tsx
-import { Label } from "@/components/ui/label"
-```
+```svelte
+<script lang="ts">
+  import { Label } from '$lib/components/ui/label';
+</script>
 
-```tsx
-<Label htmlFor="email">Email</Label>
+<Label for="email">Email</Label>
 ```
 
 ## API Reference
 
-This is a custom component using Base UI's `useRender` hook, not a direct Base UI wrapper.
-
 ### Label
 
-A label component that can be rendered as different elements.
-
-| Prop     | Type                   | Default | Description                                      |
-| -------- | ---------------------- | ------- | ------------------------------------------------ |
-| `render` | `React.ReactElement`   | -       | Render as a different element                    |
+A plain styled `<label>` element. It accepts `class`, `bind:ref`, children and all standard label attributes (such as `for`).
 
 ## Examples
 
-For accessible labelling and validation, prefer using the `FieldLabel` component. See some [related examples](/ui/docs/components/field).
-
-### With Checkbox
-
-<ComponentPreview name="checkbox-demo" />
+For accessible labelling and validation, prefer using the `FieldLabel` component. See some [related examples](/docs/field).

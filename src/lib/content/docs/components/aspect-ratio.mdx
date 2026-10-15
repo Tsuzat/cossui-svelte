@@ -16,7 +16,7 @@ description: Displays content within a desired ratio.
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/aspect-ratio
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/aspect-ratio.json
 ```
 
 </TabsPanel>
@@ -44,7 +44,7 @@ npx shadcn@latest add @coss/aspect-ratio
   import { AspectRatio } from '$lib/components/ui/aspect-ratio';
 </script>
 
-<div class="relative w-full max-w-sm">
+<div class="w-full max-w-sm">
   <AspectRatio ratio={16 / 9}>
     <img alt="Landscape" class="size-full rounded-lg object-cover" src="/photo.jpg" />
   </AspectRatio>
@@ -53,7 +53,7 @@ npx shadcn@latest add @coss/aspect-ratio
 
 ## API Reference
 
-The component is absolutely positioned: place it in a `relative` container, which is what reserves the space for the ratio.
+The component renders its own sized wrapper (width 100%, height derived from `ratio`) and absolutely positions its content inside it, so children should fill it (e.g. `size-full`).
 
 ### AspectRatio
 

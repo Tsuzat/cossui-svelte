@@ -1,9 +1,6 @@
 ---
 title: Calendar
 description: A date picker component with range and multi-select support.
-
-links:
-  doc: https://daypicker.dev/
 ---
 
 <ComponentPreview name="p-calendar-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/calendar
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/calendar.json
 ```
 
 </TabsPanel>
@@ -31,12 +28,12 @@ npx shadcn@latest add @coss/calendar
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @daypicker/react
+npm install @internationalized/date svelte-toolbelt runed
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="calendar" title="components/ui/calendar.tsx" />
+<ComponentSource name="calendar" title="components/ui/calendar" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -48,55 +45,53 @@ npm install @daypicker/react
 
 ## Usage
 
-```tsx
-import { Calendar } from "@/components/ui/calendar"
+```svelte
+<script lang="ts">
+  import { getLocalTimeZone, today } from '@internationalized/date';
+  import { Calendar } from '$lib/components/ui/calendar';
+
+  let value = $state(today(getLocalTimeZone()));
+</script>
+
+<Calendar mode="single" bind:value />
 ```
 
-```tsx
-<Calendar />
-```
+Dates are [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/) `DateValue` objects (e.g. `CalendarDate`), not JavaScript `Date`s. For range selection, use `RangeCalendar` (`$lib/components/ui/range-calendar`) or `mode="range"`.
 
 ## API Reference
 
-This component wraps [@daypicker/react](https://daypicker.dev/) with custom styling.
+This is a custom Svelte component (with its own calendar state), not a ShardsUI wrapper. It depends on the `button` and `range-calendar` registry items.
 
 ### Calendar
 
 A calendar component for date selection.
 
-| Prop              | Type                                                | Default    | Description                                      |
-| ----------------- | --------------------------------------------------- | ---------- | ------------------------------------------------ |
-| `mode`            | `"single" \| "multiple" \| "range"`                 | `"single"` | Selection mode for the calendar                  |
-| `captionLayout`   | `"label" \| "dropdown" \| "dropdown-months" \| "dropdown-years"` | `"label"` | Caption layout - use `"dropdown"` for month/year dropdowns |
-| `selected`        | `Date \| Date[] \| DateRange`                       | -          | The selected date(s)                             |
-| `onSelect`        | `(date: Date \| Date[] \| DateRange) => void`       | -          | Callback when date selection changes             |
-| `showOutsideDays` | `boolean`                                           | `true`     | Show days from adjacent months                   |
-| `startMonth`      | `Date`                                              | -          | First month to show in dropdown navigation       |
-| `endMonth`        | `Date`                                              | -          | Last month to show in dropdown navigation        |
-| `buttonVariant`   | `"ghost" \| "outline" \| ...`                       | `"ghost"`  | Button variant for navigation buttons            |
-| `classNames`      | `object`                                            | -          | Custom class names for calendar parts            |
-| `components`      | `object`                                            | -          | Custom components to override defaults           |
-
-For the full list of props, see the [@daypicker/react documentation](https://daypicker.dev/).
+| Prop                      | Type                                                             | Default    | Description                                                          |
+| ------------------------- | ---------------------------------------------------------------- | ---------- | -------------------------------------------------------------------- |
+| `mode`                    | `"single" \| "multiple" \| "range"`                              | -          | Selection mode for the calendar                                      |
+| `value`                   | `DateValue \| DateValue[] \| DateRange`                           | -          | The selected date(s). Bindable with `bind:value`                     |
+| `onValueChange`           | `(value) => void`                                                | -          | Callback when the selection changes                                  |
+| `placeholder`             | `DateValue`                                                      | -          | The month shown when nothing is selected. Bindable                   |
+| `captionLayout`           | `"label" \| "dropdown" \| "dropdown-months" \| "dropdown-years"` | `"label"`  | Caption layout - use `"dropdown"` for month/year dropdowns           |
+| `minValue` / `maxValue`   | `DateValue`                                                      | -          | Earliest / latest selectable date                                    |
+| `years` / `months`        | `number[]`                                                       | -          | Options for the year / month dropdowns                               |
+| `numberOfMonths`          | `number`                                                         | -          | Number of months displayed                                           |
+| `showOutsideDays`         | `boolean`                                                        | `true`     | Render days from adjacent months                                     |
+| `disableDaysOutsideMonth` | `boolean`                                                        | `false`    | Disable outside days instead of hiding them                          |
+| `isDateDisabled`          | `(date: DateValue) => boolean`                                   | -          | Matcher for disabled dates                                           |
+| `isDateUnavailable`       | `(date: DateValue) => boolean`                                   | -          | Matcher for unavailable dates                                        |
+| `weekStartsOn`            | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6`                                  | -          | First day of the week                                                |
+| `locale`                  | `string`                                                         | `"en-US"`  | Locale used for formatting                                           |
+| `buttonVariant`           | `ButtonVariant`                                                  | `"ghost"`  | Button variant for navigation buttons                                |
+| `day`                     | `Snippet<[{ day: DateValue; outsideMonth: boolean }]>`           | -          | Custom day cell content                                              |
+| `disabled` / `readonly`   | `boolean`                                                        | `false`    | Disable or lock the calendar                                         |
 
 ### Customizing Cell Size
 
-The calendar uses CSS custom properties for cell sizing. By default, the cell size is `--spacing(9)` on mobile and `--spacing(8)` on larger screens:
+The calendar uses the `--cell-size` CSS custom property for cell sizing. By default, the cell size is `--spacing(10)` on mobile and `--spacing(9)` on larger screens. Override it with a custom `class`:
 
-```css
-[--cell-size:--spacing(10)] sm:[--cell-size:--spacing(9)]
-```
-
-You can customize the cell size by passing a custom `className`:
-
-```tsx
-<Calendar className="[--cell-size:--spacing(11)]" />
-```
-
-Or use responsive values:
-
-```tsx
-<Calendar className="[--cell-size:--spacing(11)] sm:[--cell-size:--spacing(10)]" />
+```svelte
+<Calendar class="[--cell-size:--spacing(11)] sm:[--cell-size:--spacing(10)]" />
 ```
 
 ## Examples
@@ -111,22 +106,6 @@ Or use responsive values:
 
 ### Dropdown Navigation
 
-Use `captionLayout="dropdown"` with `startMonth` and `endMonth` to enable month/year dropdown navigation:
+Use `captionLayout="dropdown"` with `minValue`, `maxValue` and `years` to enable month/year dropdown navigation:
 
 <ComponentPreview name="p-calendar-4" />
-
-### Select Dropdown for Month/Year
-
-Calendar with a custom Select component for month and year navigation:
-
-<ComponentPreview name="p-calendar-5" />
-
-### Combobox Dropdown for Month/Year
-
-Calendar with a searchable Combobox for month and year navigation:
-
-<ComponentPreview name="p-calendar-6" />
-
-## Changelog
-
-- [July 26, 2026](/ui/docs/changelog#react-daypicker-10) — Upgraded to **React DayPicker 10** and migrated from **`react-day-picker`** to **`@daypicker/react`**. Applications with custom calendar wrappers should follow the linked migration guide.

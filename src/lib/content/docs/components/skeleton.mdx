@@ -16,7 +16,7 @@ description: A loading state skeleton for your components.
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/skeleton
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/skeleton.json
 ```
 
 </TabsPanel>
@@ -25,9 +25,15 @@ npx shadcn@latest add @coss/skeleton
 
 <Steps>
 
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @aejkatappaja/phantom-ui
+```
+
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="skeleton" title="components/ui/skeleton.tsx" />
+<ComponentSource name="skeleton" title="components/ui/skeleton" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -39,21 +45,26 @@ npx shadcn@latest add @coss/skeleton
 
 ## Usage
 
-```tsx
-import { Skeleton } from "@/components/ui/skeleton"
-```
+```svelte
+<script lang="ts">
+  import { Skeleton } from '$lib/components/ui/skeleton';
 
-```tsx
-<Skeleton className="size-10 rounded-full" />
+  let loading = $state(true);
+</script>
+
+<Skeleton {loading} class="flex items-center gap-4">
+  <div class="size-10 rounded-full"></div>
+  <div class="h-4 w-40"></div>
+</Skeleton>
 ```
 
 ## API Reference
 
-This is a custom component, not a Base UI wrapper.
+This is a thin wrapper around the `<phantom-ui>` custom element from [`@aejkatappaja/phantom-ui`](https://github.com/Aejkatappaja/phantom-ui), not a ShardsUI wrapper.
 
 ### Skeleton
 
-A simple div with animated pulse effect for loading states. Apply sizing and shape via className.
+Wraps its children and, while `loading` is true, overlays an animated shimmer that mirrors the layout of the rendered content, so you don't draw skeleton shapes by hand. Children must be rendered (`children` is required); size and shape them with `class`. All `phantom-ui` attributes (`loading`, etc.) are forwarded.
 
 ## Examples
 

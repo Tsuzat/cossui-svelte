@@ -16,7 +16,7 @@ description: A component for visually grouping a series of controls.
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/group
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/group.json
 ```
 
 </TabsPanel>
@@ -25,15 +25,9 @@ npx shadcn@latest add @coss/group
 
 <Steps>
 
-<Step>Install the following dependencies:</Step>
-
-```bash
-npm install @base-ui/react
-```
-
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="group" title="components/ui/group.tsx" />
+<ComponentSource name="group" title="components/ui/group" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -45,12 +39,12 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import { Button } from "@/components/ui/button"
-import { Group, GroupSeparator } from "@/components/ui/group"
-```
+```svelte
+<script lang="ts">
+  import { Button } from '$lib/components/ui/button';
+  import { Group, GroupSeparator } from '$lib/components/ui/group';
+</script>
 
-```tsx
 <Group>
   <Button>Button</Button>
   <GroupSeparator />
@@ -64,7 +58,7 @@ import { Group, GroupSeparator } from "@/components/ui/group"
 - Use `Tab` to navigate between the controls in the group.
 - Use `aria-label` or `aria-labelledby` to label the group.
 
-```tsx showLineNumbers
+```svelte showLineNumbers
 <Group aria-label="Media controls">
   <Button variant="outline">Play</Button>
   <GroupSeparator />
@@ -87,7 +81,7 @@ The `Group` component is a container that visually groups a series of related co
 | ------------- | ---------------------------- | -------------- |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 
-```tsx
+```svelte
 <Group>
   <Button>Button 1</Button>
   <GroupSeparator />
@@ -97,7 +91,7 @@ The `Group` component is a container that visually groups a series of related co
 
 Nest multiple groups to create complex layouts with spacing. See the [nested groups](#nested-groups) example for more details.
 
-```tsx
+```svelte
 <Group>
   <Group>
     <Button>1</Button>
@@ -120,7 +114,7 @@ The `GroupSeparator` component visually divides controls within a group.
 | ------------- | ---------------------------- | ------------ |
 | `orientation` | `"horizontal" \| "vertical"` | `"vertical"` |
 
-```tsx
+```svelte
 <Group>
   <Button>Button 1</Button>
   <GroupSeparator />
@@ -132,13 +126,9 @@ The `GroupSeparator` component visually divides controls within a group.
 
 ### GroupText
 
-Use this component to display text within a group, such as labels or prefixes.
+Use this component to display text within a group, such as labels or prefixes. It renders a `div` and accepts `class`, `bind:ref` and standard div attributes.
 
-| Prop     | Type                       | Default |
-| -------- | -------------------------- | ------- |
-| `render` | `React.ReactNode \| null` | `null`  |
-
-```tsx
+```svelte
 <Group>
   <GroupText>https://</GroupText>
   <GroupSeparator />
@@ -146,17 +136,19 @@ Use this component to display text within a group, such as labels or prefixes.
 </Group>
 ```
 
-Use the `render` prop to render a custom component as the text, for example a label.
+To use a label as the text, place a `Label` inside `GroupText`.
 
-```tsx
+```svelte
 <Group>
-  <GroupText render={<Label htmlFor="domain" aria-label="Domain" />}>
-    https://
+  <GroupText>
+    <Label for="domain">https://</Label>
   </GroupText>
   <GroupSeparator />
   <Input id="domain" placeholder="example.com" />
 </Group>
 ```
+
+`Group`, `GroupSeparator` and `GroupText` are also exported as `ButtonGroup`, `ButtonGroupSeparator` and `ButtonGroupText`.
 
 ## Examples
 

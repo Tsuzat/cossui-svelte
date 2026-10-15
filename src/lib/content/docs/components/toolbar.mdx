@@ -1,9 +1,6 @@
 ---
 title: Toolbar
 description: A container for grouping a set of buttons and controls.
-
-links:
-  doc: https://base-ui.com/react/components/toolbar#api-reference
 ---
 
 <ComponentPreview name="p-toolbar-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/toolbar
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/toolbar.json
 ```
 
 </TabsPanel>
@@ -31,12 +28,12 @@ npx shadcn@latest add @coss/toolbar
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="toolbar" title="components/ui/toolbar.tsx" />
+<ComponentSource name="toolbar" title="components/ui/toolbar" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -48,25 +45,26 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import { Button } from "@/registry/default/ui/button"
-import { Toggle } from "@/registry/default/ui/toggle"
-import {
-  Toolbar,
-  ToolbarButton,
-  ToolbarGroup,
-  ToolbarSeparator,
-} from "@/registry/default/ui/toolbar"
-```
+```svelte
+<script lang="ts">
+  import { Button } from '$lib/components/ui/button';
+  import {
+    Toolbar,
+    ToolbarButton,
+    ToolbarGroup,
+    ToolbarSeparator
+  } from '$lib/components/ui/toolbar';
+</script>
 
-```tsx
 <Toolbar>
   <ToolbarGroup>
-    <ToolbarButton render={<Toggle />}>Bold</ToolbarButton>
-    <ToolbarButton render={<Toggle />}>Underline</ToolbarButton>
+    <ToolbarButton>Bold</ToolbarButton>
+    <ToolbarButton>Underline</ToolbarButton>
   </ToolbarGroup>
   <ToolbarSeparator />
-  <ToolbarButton render={<Button />}>Save</ToolbarButton>
+  <ToolbarGroup>
+    <Button>Save</Button>
+  </ToolbarGroup>
 </Toolbar>
 ```
 
@@ -74,20 +72,24 @@ import {
 
 ### Toolbar
 
-Root component. Styled wrapper for `Toolbar.Root` from Base UI with flex layout.
+Root component. Styled wrapper for `Toolbar.Root` from ShardsUI with flex layout.
 
 ### ToolbarGroup
 
-Groups related toolbar items. Styled wrapper for `Toolbar.Group` from Base UI.
+Groups related toolbar items. Styled wrapper for `Toolbar.Group` from ShardsUI.
 
 ### ToolbarButton
 
-Button within the toolbar. Alias for `Toolbar.Button` from Base UI. Use with `render` prop to render as Toggle or Button.
+Button within the toolbar. Styled wrapper for `Toolbar.Button` from ShardsUI.
+
+### ToolbarInput
+
+Input within the toolbar. Styled wrapper for `Toolbar.Input` from ShardsUI.
 
 ### ToolbarSeparator
 
-Visual separator between toolbar items. Styled wrapper for `Toolbar.Separator` from Base UI.
+Visual separator between toolbar items. Styled wrapper for `Toolbar.Separator` from ShardsUI.
 
 ### ToolbarLink
 
-Link within the toolbar. Alias for `Toolbar.Link` from Base UI.
+Link within the toolbar. Styled wrapper for `Toolbar.Link` from ShardsUI.

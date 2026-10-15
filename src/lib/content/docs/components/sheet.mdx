@@ -1,9 +1,6 @@
 ---
 title: Sheet
 description: A flyout that opens from the side of the screen, based on the dialog component.
-
-links:
-  doc: https://base-ui.com/react/components/dialog#api-reference
 ---
 
 <ComponentPreview name="p-sheet-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/sheet
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/sheet.json
 ```
 
 </TabsPanel>
@@ -31,12 +28,12 @@ npx shadcn@latest add @coss/sheet
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="sheet" title="components/ui/sheet.tsx" />
+<ComponentSource name="sheet" title="components/ui/sheet" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -48,29 +45,29 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetPanel,
-  SheetPopup,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
-```
+```svelte
+<script lang="ts">
+  import {
+    Sheet,
+    SheetClose,
+    SheetDescription,
+    SheetFooter,
+    SheetHeader,
+    SheetPanel,
+    SheetPopup,
+    SheetTitle,
+    SheetTrigger
+  } from '$lib/components/ui/sheet';
+</script>
 
-```tsx
 <Sheet>
   <SheetTrigger>Open</SheetTrigger>
   <SheetPopup>
     <SheetHeader>
       <SheetTitle>Are you absolutely sure?</SheetTitle>
       <SheetDescription>
-        This action cannot be undone. This will permanently delete your account
-        and remove your data from our servers.
+        This action cannot be undone. This will permanently delete your account and remove your
+        data from our servers.
       </SheetDescription>
     </SheetHeader>
     <SheetPanel>Content</SheetPanel>
@@ -85,60 +82,44 @@ import {
 
 ### Sheet
 
-Root component. Alias for `Dialog.Root` from Base UI.
+Root component. Wrapper for `Dialog.Root` from ShardsUI. `open` is bindable (`bind:open`); `onOpenChange` and the other root props are forwarded.
 
 ### SheetTrigger
 
-Trigger button that opens the sheet. Alias for `Dialog.Trigger` from Base UI.
+Trigger button that opens the sheet. Wrapper for `Dialog.Trigger` from ShardsUI. Use the `child` snippet to render a custom element.
 
 ### SheetPopup
 
-Popup container that displays the sheet content. Also exported as `SheetContent`.
+Popup container that displays the sheet content, including the backdrop and viewport. Also exported as `SheetContent`.
 
 | Prop              | Type                                      | Default     | Description                                      |
 | ----------------- | ----------------------------------------- | ----------- | ------------------------------------------------ |
 | `side`            | `"right" \| "left" \| "top" \| "bottom"`  | `"right"`   | Controls which side of the screen the sheet opens from |
 | `variant`         | `"default" \| "inset"`                    | `"default"` | Controls the sheet style. `inset` adds spacing around the sheet on desktop screens |
 | `showCloseButton` | `boolean`                                 | `true`      | When true, displays a close button in the top-right corner |
-| `closeProps`      | `Dialog.Close.Props`                      | -           | Props forwarded to the internal close button, useful for overriding `aria-label` |
-| `portalProps`     | `Dialog.Portal.Props`                     | -           | Props forwarded to the internal portal (`keepMounted`, `container`, etc.); see Base UI Dialog portal API |
+| `closeProps`      | `Dialog.Close` props                      | -           | Props forwarded to the internal close button, useful for overriding `aria-label` |
+| `portalProps`     | `Dialog.Portal` props                     | -           | Props forwarded to the internal portal (`keepMounted`, `container`, etc.) |
 
 **Example:**
 
-```tsx
-// Right side sheet (default)
-<SheetPopup side="right">
-  ...
-</SheetPopup>
+```svelte
+<!-- Right side sheet (default) -->
+<SheetPopup side="right">...</SheetPopup>
 
-// Left side sheet
-<SheetPopup side="left">
-  ...
-</SheetPopup>
+<!-- Left side sheet -->
+<SheetPopup side="left">...</SheetPopup>
 
-// Top sheet
-<SheetPopup side="top">
-  ...
-</SheetPopup>
-
-// Bottom sheet
-<SheetPopup side="bottom">
-  ...
-</SheetPopup>
-
-// Sheet with inset variant
-<SheetPopup side="right" variant="inset">
-  ...
-</SheetPopup>
+<!-- Sheet with inset variant -->
+<SheetPopup side="right" variant="inset">...</SheetPopup>
 ```
 
 ### SheetHeader
 
-Container for the sheet title and description. Supports the `render` prop for polymorphic composition (e.g. `render={<Link href="/" />}`).
+Container for the sheet title and description. Renders a `div` and accepts standard div attributes.
 
 ### SheetFooter
 
-Footer section for action buttons. Supports the `render` prop for polymorphic composition.
+Footer section for action buttons. Renders a `div`.
 
 | Prop        | Type                     | Default     | Description                                      |
 | ----------- | ------------------------ | ----------- | ------------------------------------------------ |
@@ -146,15 +127,15 @@ Footer section for action buttons. Supports the `render` prop for polymorphic co
 
 ### SheetTitle
 
-Title component. Alias for `Dialog.Title` from Base UI.
+Title component. Wrapper for `Dialog.Title` from ShardsUI.
 
 ### SheetDescription
 
-Description component. Alias for `Dialog.Description` from Base UI.
+Description component. Wrapper for `Dialog.Description` from ShardsUI.
 
 ### SheetPanel
 
-Scrollable content container. Automatically wraps content in a `ScrollArea` component. Supports the `render` prop for polymorphic composition.
+Scrollable content container. Automatically wraps content in a `ScrollArea` component. Renders a `div`.
 
 | Prop         | Type      | Default | Description                                      |
 | ------------ | --------- | ------- | ------------------------------------------------ |
@@ -162,24 +143,28 @@ Scrollable content container. Automatically wraps content in a `ScrollArea` comp
 
 **Example:**
 
-```tsx
+```svelte
 <SheetPanel>
-  {/* Long content that will scroll if it exceeds the sheet height */}
+  <!-- Long content that will scroll if it exceeds the sheet height -->
   <div>...</div>
 </SheetPanel>
 ```
 
 ### SheetClose
 
-Close button component. Alias for `Dialog.Close` from Base UI.
+Close button component. Wrapper for `Dialog.Close` from ShardsUI.
 
 ### SheetPortal
 
-Portal component for rendering outside the DOM hierarchy. Alias for `Dialog.Portal` from Base UI.
+Portal component for rendering outside the DOM hierarchy. Alias for `Dialog.Portal` from ShardsUI.
 
 ### SheetBackdrop
 
-Backdrop/overlay component. Also exported as `SheetOverlay`. Alias for `Dialog.Backdrop` from Base UI.
+Backdrop/overlay component. Also exported as `SheetOverlay`. Wrapper for `Dialog.Backdrop` from ShardsUI.
+
+### SheetViewport
+
+Positions the popup on the chosen `side`; rendered by `SheetPopup`.
 
 ## Examples
 

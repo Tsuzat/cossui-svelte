@@ -1,9 +1,6 @@
 ---
 title: Drawer
 description: A panel that slides in from the edge of the screen with swipe gestures, snap points, and nested drawer support.
-
-links:
-  doc: https://base-ui.com/react/components/drawer
 ---
 
 <ComponentPreview name="p-drawer-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/drawer
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/drawer.json
 ```
 
 </TabsPanel>
@@ -31,12 +28,12 @@ npx shadcn@latest add @coss/drawer
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="drawer" title="components/ui/drawer.tsx" />
+<ComponentSource name="drawer" title="components/ui/drawer" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -48,34 +45,24 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import {
-  Drawer,
-  DrawerCreateHandle,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerMenu,
-  DrawerMenuCheckboxItem,
-  DrawerMenuGroup,
-  DrawerMenuGroupLabel,
-  DrawerMenuItem,
-  DrawerMenuRadioGroup,
-  DrawerMenuRadioItem,
-  DrawerMenuSeparator,
-  DrawerPanel,
-  DrawerPopup,
-  DrawerMenuTrigger,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer"
-```
+```svelte
+<script lang="ts">
+  import { buttonVariants } from '$lib/components/ui/button';
+  import {
+    Drawer,
+    DrawerClose,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerPanel,
+    DrawerPopup,
+    DrawerTitle,
+    DrawerTrigger
+  } from '$lib/components/ui/drawer';
+</script>
 
-```tsx
 <Drawer>
-  <DrawerTrigger>Open</DrawerTrigger>
+  <DrawerTrigger class={buttonVariants({ variant: 'outline' })}>Open</DrawerTrigger>
   <DrawerPopup>
     <DrawerHeader>
       <DrawerTitle>Drawer Title</DrawerTitle>
@@ -83,7 +70,7 @@ import {
     </DrawerHeader>
     <DrawerPanel>Content</DrawerPanel>
     <DrawerFooter>
-      <DrawerClose>Close</DrawerClose>
+      <DrawerClose class={buttonVariants({ variant: 'ghost' })}>Close</DrawerClose>
     </DrawerFooter>
   </DrawerPopup>
 </Drawer>
@@ -93,22 +80,22 @@ import {
 
 ### Drawer
 
-Root component. Wraps `Drawer.Root` from Base UI with automatic `swipeDirection` mapping based on `position`.
+Root component. Wraps `Drawer.Root` from ShardsUI with automatic `swipeDirection` mapping based on `position`.
 
 | Prop             | Type                                     | Default   | Description                                      |
 | ---------------- | ---------------------------------------- | --------- | ------------------------------------------------ |
 | `position`       | `"right" \| "left" \| "top" \| "bottom"` | `"bottom"` | Controls which edge the drawer opens from. Sets the swipe direction automatically and flows to child components via context |
 | `swipeDirection` | `"up" \| "down" \| "left" \| "right"`   | derived   | Overrides the swipe direction derived from `position`. Use when you need different swipe behavior |
 
-All other props from `Drawer.Root` are supported, including `open`, `onOpenChange`, `modal`, `snapPoints`, `snapPoint`, `onSnapPointChange`, and `snapToSequentialPoints`. Note: Snap points only work for bottom drawers.
+All other props from `Drawer.Root` are supported, including `open` and `snapPoint` (both bindable), `onOpenChange`, `modal`, `snapPoints`, `onSnapPointChange`, and `snapToSequentialPoints`. Note: Snap points only work for bottom drawers.
 
 ### DrawerCreateHandle
 
-Creates a handle for detached drawer triggers. Use it when triggers and drawer content need to be coordinated across different parts of the tree.
+Returns a new `Drawer.Handle` from ShardsUI for detached drawer triggers. Use it when triggers and drawer content need to be coordinated across different parts of the tree.
 
 ### DrawerTrigger
 
-Trigger button that opens the drawer. Alias for `Drawer.Trigger` from Base UI.
+Trigger button that opens the drawer. Wrapper for `Drawer.Trigger` from ShardsUI.
 
 ### DrawerPopup
 
@@ -119,27 +106,28 @@ Popup container that displays the drawer content.
 | `variant`         | `"default" \| "straight" \| "inset"`     | `"default"` | Controls the drawer style. `straight` removes rounded corners, `inset` adds spacing around the drawer on desktop screens |
 | `showCloseButton` | `boolean`                                 | `false`     | When true, displays a close button in the top-right corner |
 | `showBar`         | `boolean`                                 | `false`     | When true, displays a drag bar indicator |
-| `portalProps`     | `Drawer.Portal.Props`                     | -           | Props forwarded to the internal portal (`keepMounted`, `container`, etc.); see Base UI Drawer portal API |
+| `position`        | `"right" \| "left" \| "top" \| "bottom"` | from `Drawer` | Overrides the position inherited from the `Drawer` root |
+| `portalProps`     | `Drawer.Portal.Props`                     | -           | Props forwarded to the internal portal (`keepMounted`, `container`, etc.); see ShardsUI Drawer portal API |
 
 **Example:**
 
-```tsx
-// Bottom drawer (default)
+```svelte
+<!-- Bottom drawer (default) -->
 <Drawer>
   <DrawerPopup>...</DrawerPopup>
 </Drawer>
 
-// Right side drawer
+<!-- Right side drawer -->
 <Drawer position="right">
   <DrawerPopup>...</DrawerPopup>
 </Drawer>
 
-// Left side drawer
+<!-- Left side drawer -->
 <Drawer position="left">
   <DrawerPopup>...</DrawerPopup>
 </Drawer>
 
-// Drawer with inset variant
+<!-- Drawer with inset variant -->
 <Drawer position="right">
   <DrawerPopup variant="inset">...</DrawerPopup>
 </Drawer>
@@ -147,7 +135,7 @@ Popup container that displays the drawer content.
 
 ### DrawerHeader
 
-Container for the drawer title and description. Supports the `render` prop for polymorphic composition (e.g. `render={<header />}`).
+Container for the drawer title and description.
 
 | Prop           | Type      | Default | Description                                      |
 | -------------- | --------- | ------- | ------------------------------------------------ |
@@ -155,7 +143,7 @@ Container for the drawer title and description. Supports the `render` prop for p
 
 ### DrawerFooter
 
-Footer section for action buttons. Supports the `render` prop for polymorphic composition.
+Footer section for action buttons.
 
 | Prop           | Type                     | Default     | Description                                      |
 | -------------- | ------------------------ | ----------- | ------------------------------------------------ |
@@ -164,15 +152,15 @@ Footer section for action buttons. Supports the `render` prop for polymorphic co
 
 ### DrawerTitle
 
-Title component. Alias for `Drawer.Title` from Base UI.
+Title component. Wrapper for `Drawer.Title` from ShardsUI.
 
 ### DrawerDescription
 
-Description component. Alias for `Drawer.Description` from Base UI.
+Description component. Wrapper for `Drawer.Description` from ShardsUI.
 
 ### DrawerPanel
 
-Content container. When `scrollable` is true (default), wraps content in a `ScrollArea` component. Supports the `render` prop for polymorphic composition.
+Content container. When `scrollable` is true (default), wraps content in a `ScrollArea` component.
 
 | Prop           | Type      | Default | Description                                      |
 | -------------- | --------- | ------- | ------------------------------------------------ |
@@ -182,34 +170,34 @@ Content container. When `scrollable` is true (default), wraps content in a `Scro
 
 ### DrawerMenu
 
-Container for drawer menu items. Use with `DrawerMenuItem`, `DrawerMenuSeparator`, `DrawerMenuGroup`, `DrawerMenuGroupLabel`, `DrawerMenuCheckboxItem`, `DrawerMenuRadioGroup`, `DrawerMenuRadioItem`, and `DrawerMenuTrigger` to build menus that mirror the Menu component API. Supports the `render` prop for polymorphic composition.
+Container for drawer menu items. Use with `DrawerMenuItem`, `DrawerMenuSeparator`, `DrawerMenuGroup`, `DrawerMenuGroupLabel`, `DrawerMenuCheckboxItem`, `DrawerMenuRadioGroup`, `DrawerMenuRadioItem`, and `DrawerMenuTrigger` to build menus that mirror the Menu component API.
 
 ### DrawerMenuItem
 
-Styled menu item that matches `MenuItem` appearance. Does not close the drawer — wrap with `DrawerClose` when close-on-click is needed. Supports the `render` prop for polymorphic composition.
+Styled menu item that matches `MenuItem` appearance. Does not close the drawer — wrap with `DrawerClose` when close-on-click is needed.
 
 | Prop      | Type                                | Default     | Description                                      |
 | --------- | ----------------------------------- | ----------- | ------------------------------------------------ |
 | `variant` | `"default" \| "destructive"`        | `"default"` | When `destructive`, uses destructive text color  |
 | `disabled`| `boolean`                           | —           | When true, disables the item                     |
 
-**Example:** Use with `DrawerClose` for close-on-click: `<DrawerClose render={<DrawerMenuItem />}>Edit</DrawerClose>`
+**Example:** For close-on-click, use `DrawerClose` styled with the exported `drawerMenuItemClass`: `<DrawerClose class={drawerMenuItemClass}>Edit</DrawerClose>`
 
 ### DrawerMenuSeparator
 
-Horizontal separator between menu items or groups. Supports the `render` prop for polymorphic composition.
+Horizontal separator between menu items or groups.
 
 ### DrawerMenuGroup
 
-Container for grouping related menu items. Use with `DrawerMenuGroupLabel` for labeled sections. Supports the `render` prop for polymorphic composition.
+Container for grouping related menu items. Use with `DrawerMenuGroupLabel` for labeled sections.
 
 ### DrawerMenuGroupLabel
 
-Label for a `DrawerMenuGroup` section. Renders muted, smaller text above a group of items. In nested drawers, use as a section title at the top of the menu (no back button needed — swipe to go back). Supports the `render` prop for polymorphic composition.
+Label for a `DrawerMenuGroup` section. Renders muted, smaller text above a group of items. In nested drawers, use as a section title at the top of the menu (no back button needed — swipe to go back).
 
 ### DrawerMenuTrigger
 
-Trigger that opens a nested drawer. Styled like a menu item with a trailing chevron. Use for menu items that open nested drawers (e.g. "Add to Playlist" → nested drawer with playlist options). Wraps `DrawerTrigger` internally.
+Trigger that opens a nested drawer. Styled like a menu item with a trailing chevron. Use for menu items that open nested drawers (e.g. "Add to Playlist" → nested drawer with playlist options). Wraps `DrawerTrigger` internally (accepts the same props).
 
 **Example:** `<DrawerMenuTrigger>Add to Playlist</DrawerMenuTrigger>` opens a nested drawer when tapped.
 
@@ -227,19 +215,19 @@ Radio menu item. Must be used inside `DrawerMenuRadioGroup` with a `value` prop.
 
 ### DrawerClose
 
-Close button component. Alias for `Drawer.Close` from Base UI.
+Close button component. Wrapper for `Drawer.Close` from ShardsUI.
 
 ### DrawerPortal
 
-Portal component for rendering outside the DOM hierarchy. Alias for `Drawer.Portal` from Base UI.
+Portal component for rendering outside the DOM hierarchy. Wrapper for `Drawer.Portal` from ShardsUI.
 
 ### DrawerBackdrop
 
-Backdrop/overlay component. Alias for `Drawer.Backdrop` from Base UI.
+Backdrop/overlay component. Wrapper for `Drawer.Backdrop` from ShardsUI.
 
 ### DrawerViewport
 
-Viewport component for positioning. Alias for `Drawer.Viewport` from Base UI. Typically not used directly — `DrawerPopup` renders it internally.
+Viewport component for positioning. Wrapper for `Drawer.Viewport` from ShardsUI. Typically not used directly — `DrawerPopup` renders it internally.
 
 ### DrawerBar
 
@@ -247,7 +235,7 @@ Drag handle indicator shown when `showBar` is true on `DrawerPopup`. Typically n
 
 ### DrawerContent
 
-Primitive content wrapper used for polymorphic composition with the `render` prop. Alias for `Drawer.Content` from Base UI.
+Primitive content wrapper that reduces swipe interference during text selection. Wrapper for `Drawer.Content` from ShardsUI.
 
 ## Examples
 
@@ -267,48 +255,7 @@ Primitive content wrapper used for polymorphic composition with the `render` pro
 
 Bottom drawers automatically handle software-keyboard focus and spacing for inputs, textareas, and contenteditable fields. No additional prop is needed. Drawers without a focused input keep their normal layout. With snap points, the drawer moves up as needed while the keyboard is open and returns to the selected snap point when it closes.
 
-Put scrolling fields in `DrawerPanel`. For a persistent input or action row, place it after the panel, outside its scroll area. Set `--drawer-height` on `DrawerPopup` when the layout needs a fixed height; keyboard handling does not set the drawer height.
-
-<ComponentPreview name="p-drawer-15" />
-
-```tsx
-import { ArrowUpIcon } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import {
-  Composer,
-  ComposerActionGroup,
-  ComposerActions,
-  ComposerInput,
-  ComposerSubmit,
-} from "@/components/ui/composer"
-
-<Drawer>
-  <DrawerTrigger>Open chat</DrawerTrigger>
-  <DrawerPopup className="[--drawer-height:calc(100dvh-3rem)]">
-    <DrawerHeader><DrawerTitle>Chat</DrawerTitle></DrawerHeader>
-    <div className="min-h-0 flex-1">
-      <DrawerPanel>Conversation</DrawerPanel>
-    </div>
-    <Composer
-      className="mx-3 mb-3"
-      value={value}
-      onValueChange={setValue}
-      onSubmit={onSend}
-    >
-      <ComposerInput aria-label="Message" placeholder="Write a message…" />
-      <ComposerActions>
-        <ComposerActionGroup align="end">
-          <ComposerSubmit render={
-            <Button aria-label="Send message" size="icon">
-              <ArrowUpIcon aria-hidden="true" />
-            </Button>
-          } />
-        </ComposerActionGroup>
-      </ComposerActions>
-    </Composer>
-  </DrawerPopup>
-</Drawer>
-```
+Put scrolling fields in `DrawerPanel`. For a persistent input or action row, place it after the panel, outside its scroll area. Set `--drawer-height` on `DrawerPopup` (for example via `class="[--drawer-height:calc(100dvh-3rem)]"`) when the layout needs a fixed height; keyboard handling does not set the drawer height.
 
 ### Nested drawers
 

@@ -16,7 +16,7 @@ description: A component for displaying keyboard keys and shortcuts.
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/kbd
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/kbd.json
 ```
 
 </TabsPanel>
@@ -27,7 +27,7 @@ npx shadcn@latest add @coss/kbd
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="kbd" title="components/ui/kbd.tsx" />
+<ComponentSource name="kbd" title="components/ui/kbd" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -39,19 +39,21 @@ npx shadcn@latest add @coss/kbd
 
 ## Usage
 
-```tsx
-import { Kbd, KbdGroup } from "@/components/ui/kbd"
+```svelte
+<script lang="ts">
+  import { Kbd, KbdGroup } from '$lib/components/ui/kbd';
+</script>
 ```
 
 Single key:
 
-```tsx
+```svelte
 <Kbd>K</Kbd>
 ```
 
 Multiple keys (key combination):
 
-```tsx
+```svelte
 <KbdGroup>
   <Kbd>⌘</Kbd>
   <Kbd>K</Kbd>
@@ -66,7 +68,7 @@ Displays a single keyboard key.
 
 | Prop        | Type     | Default |
 | ----------- | -------- | ------- |
-| `className` | `string` |         |
+| `class`    | `string` |         |
 
 ### KbdGroup
 
@@ -74,10 +76,10 @@ Groups multiple keyboard keys for key combinations.
 
 | Prop        | Type     | Default |
 | ----------- | -------- | ------- |
-| `className` | `string` |         |
+| `class`    | `string` |         |
 
 ## Examples
 
 ### Input Group
 
-<ComponentPreview name="p-input-group-11" className="[&_.preview>*]:w-full [&_.preview>*]:max-w-64" />
+<ComponentPreview name="p-input-group-11" class="[&_.preview>*]:w-full [&_.preview>*]:max-w-64" />

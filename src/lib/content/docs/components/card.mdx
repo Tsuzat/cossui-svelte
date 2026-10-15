@@ -16,7 +16,7 @@ description: A content container for grouping related information.
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/card
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/card.json
 ```
 
 </TabsPanel>
@@ -27,7 +27,7 @@ npx shadcn@latest add @coss/card
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="card" title="components/ui/card.tsx" />
+<ComponentSource name="card" title="components/ui/card" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -39,18 +39,18 @@ npx shadcn@latest add @coss/card
 
 ## Usage
 
-```tsx
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardPanel,
-  CardTitle,
-} from "@/components/ui/card"
-```
+```svelte
+<script lang="ts">
+  import {
+    Card,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardPanel,
+    CardTitle
+  } from '$lib/components/ui/card';
+</script>
 
-```tsx
 <Card>
   <CardHeader>
     <CardTitle>Title</CardTitle>
@@ -65,27 +65,28 @@ import {
 
 Use `CardFrame` when you need a framed layout with an action button in the header (e.g. "Add", "Connect"):
 
-```tsx
-import {
-  CardFrame,
-  CardFrameAction,
-  CardFrameDescription,
-  CardFrameHeader,
-  CardFrameTitle,
-  CardPanel,
-} from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { PlusIcon } from "lucide-react"
+```svelte
+<script lang="ts">
+  import Plus from '@lucide/svelte/icons/plus';
+  import { Button } from '$lib/components/ui/button';
+  import {
+    Card,
+    CardFrame,
+    CardFrameAction,
+    CardFrameDescription,
+    CardFrameHeader,
+    CardFrameTitle,
+    CardPanel
+  } from '$lib/components/ui/card';
+</script>
 
 <CardFrame>
   <CardFrameHeader>
     <CardFrameTitle>Project</CardFrameTitle>
-    <CardFrameDescription>
-      Manage your project settings and configuration
-    </CardFrameDescription>
+    <CardFrameDescription>Manage your project settings and configuration</CardFrameDescription>
     <CardFrameAction>
       <Button variant="outline">
-        <PlusIcon />
+        <Plus />
         Add
       </Button>
     </CardFrameAction>
@@ -98,43 +99,39 @@ import { PlusIcon } from "lucide-react"
 
 ### CardFrame with a table
 
-For lists or data grids, render a [Table](/ui/docs/components/table) with `variant="card"` inside `CardFrame` so the grid matches the frame’s border and radius. See the CardFrame example in the Table docs. Add `@coss/table` if it is not already in the project.
+For lists or data grids, render a [Table](/docs/table) with `variant="card"` inside `CardFrame` so the grid matches the frame's border and radius. See the CardFrame example in the Table docs. Add the `table` registry item if it is not already in the project.
 
 ## API Reference
 
-This is a custom component using Base UI's `useRender` hook, not a direct Base UI wrapper.
+These are custom components, not ShardsUI wrappers. Each renders a styled `div` and accepts standard `div` attributes (`class`, `children`, etc.).
 
 ### Card
 
-Root container for the card. Supports the `render` prop.
-
-| Prop     | Type                   | Default | Description                                      |
-| -------- | ---------------------- | ------- | ------------------------------------------------ |
-| `render` | `React.ReactElement`   | -       | Render as a different element                    |
+Root container for the card.
 
 ### CardHeader
 
-Header section container. Supports the `render` prop.
+Header section container.
 
 ### CardTitle
 
-Title text for the card. Supports the `render` prop.
+Title text for the card.
 
 ### CardDescription
 
-Description text for the card. Supports the `render` prop.
+Description text for the card.
 
 ### CardAction
 
-Container for action buttons in the header. Automatically positions to the right. Supports the `render` prop.
+Container for action buttons in the header. Automatically positions to the right.
 
 ### CardPanel
 
-Main content area of the card. Also exported as `CardContent`. Supports the `render` prop.
+Main content area of the card. Also exported as `CardContent`.
 
 ### CardFooter
 
-Footer section for the card. Supports the `render` prop.
+Footer section for the card.
 
 ## CardFrame API Reference
 
@@ -142,24 +139,24 @@ Footer section for the card. Supports the `render` prop.
 
 ### CardFrame
 
-Root container for the framed card layout. Supports the `render` prop.
+Root container for the framed card layout.
 
 ### CardFrameHeader
 
-Header section for the frame. Contains title, description, and optionally `CardFrameAction`. Supports the `render` prop.
+Header section for the frame. Contains title, description, and optionally `CardFrameAction`.
 
 ### CardFrameTitle
 
-Title text for the frame. Supports the `render` prop.
+Title text for the frame.
 
 ### CardFrameDescription
 
-Description text for the frame. Supports the `render` prop.
+Description text for the frame.
 
 ### CardFrameAction
 
-Container for action buttons (e.g. "Add", "Edit") in the header. Place it as a sibling of `CardFrameTitle` and `CardFrameDescription` inside `CardFrameHeader`. It is positioned in the top-right via CSS grid (`col-start-2`, `row-span-2`, `self-center`, `justify-self-end`). Use it for primary actions that apply to the entire frame. Supports the `render` prop.
+Container for action buttons (e.g. "Add", "Edit") in the header. Place it as a sibling of `CardFrameTitle` and `CardFrameDescription` inside `CardFrameHeader`. It is positioned in the top-right via CSS grid. Use it for primary actions that apply to the entire frame.
 
 ### CardFrameFooter
 
-Footer section for the frame. Supports the `render` prop.
+Footer section for the frame.

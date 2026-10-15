@@ -16,7 +16,7 @@ description: A flexible component for grouping inputs with addons, buttons, and 
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/input-group
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/input-group.json
 ```
 
 </TabsPanel>
@@ -25,15 +25,9 @@ npx shadcn@latest add @coss/input-group
 
 <Steps>
 
-<Step>Install the following dependencies:</Step>
-
-```bash
-npm install @base-ui/react
-```
-
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="input-group" title="components/ui/input-group.tsx" />
+<ComponentSource name="input-group" title="components/ui/input-group" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -45,17 +39,12 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import { Input } from "@/components/ui/input"
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-  InputGroupText,
-} from "@/components/ui/input-group"
-```
+```svelte
+<script lang="ts">
+  import MailIcon from '@lucide/svelte/icons/mail';
+  import { InputGroup, InputGroupAddon, InputGroupInput } from '$lib/components/ui/input-group';
+</script>
 
-```tsx
 <InputGroup>
   <InputGroupInput type="email" placeholder="Email" />
   <InputGroupAddon>
@@ -72,8 +61,8 @@ The main component that wraps inputs and addons.
 
 | Prop        | Type                          | Description                                      |
 | ----------- | ----------------------------- | ------------------------------------------------ |
-| `className` | `string`                      | Additional CSS classes to apply to the component |
-| `...props`  | `React.ComponentProps<'div'>` | All standard div attributes are supported        |
+| `class`     | `string`                      | Additional CSS classes to apply to the component |
+| `...props`  | `HTMLAttributes<HTMLDivElement>` | All standard div attributes are supported        |
 
 ### InputGroupAddon
 
@@ -82,16 +71,14 @@ A container for addons like icons, text, buttons, and other elements. Can be pos
 | Prop        | Type                                                              | Default          | Description                                                                                                                        |
 | ----------- | ----------------------------------------------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `align`     | `'inline-start' \| 'inline-end' \| 'block-start' \| 'block-end'` | `'inline-start'` | The position of the addon relative to the input. Use `inline-start` or `inline-end` for inputs, and `block-start` or `block-end` for textareas |
-| `className` | `string`                                                          |                  | Additional CSS classes to apply to the component                                                                                   |
-| `...props`  | `React.ComponentProps<'div'>`                                     |                  | All standard div attributes are supported                                                                                          |
+| `class` | `string`                                                          |                  | Additional CSS classes to apply to the component                                                                                   |
+| `...props`  | `HTMLAttributes<HTMLDivElement>`                                     |                  | All standard div attributes are supported                                                                                          |
 
-<Alert className="bg-muted/24">
-  <InfoIcon />
-  <AlertDescription>
-    For proper focus navigation, the `InputGroupAddon` component should be placed
-    after the input in the DOM order.
-  </AlertDescription>
-</Alert>
+> For proper focus navigation, place `InputGroupAddon` after the input in the DOM order.
+
+### InputGroupButton
+
+A `Button` for use inside an `InputGroupAddon`. Accepts the `Button` props, including `loading`; `type` defaults to `"button"`.
 
 ### InputGroupText
 
@@ -99,26 +86,26 @@ A text container component for displaying text content within an `InputGroupAddo
 
 | Prop        | Type                           | Description                                      |
 | ----------- | ------------------------------ | ------------------------------------------------ |
-| `className` | `string`                       | Additional CSS classes to apply to the component |
-| `...props`  | `React.ComponentProps<'span'>` | All standard span attributes are supported       |
+| `class` | `string`                       | Additional CSS classes to apply to the component |
+| `...props`  | `HTMLAttributes<HTMLSpanElement>` | All standard span attributes are supported       |
 
 ### InputGroupInput
 
-A specialized input component for use within InputGroup. It's essentially an unstyled Input component that inherits styling from the parent InputGroup.
+A specialized input component for use within InputGroup. It wraps the `Input` component (`bind:value` and `bind:ref` supported) that inherits styling from the parent InputGroup.
 
 | Prop        | Type         | Description                                                                                           |
 | ----------- | ------------ | ----------------------------------------------------------------------------------------------------- |
-| `className` | `string`     | Additional CSS classes to apply to the component                                                      |
-| `...props`  | `InputProps` | All props from the Input component are supported, including `type`, `placeholder`, `disabled`, etc. |
+| `class` | `string`     | Additional CSS classes to apply to the component                                                      |
+| `...props`  | `Input` props | All props from the Input component are supported, including `type`, `placeholder`, `disabled`, etc. |
 
 ### InputGroupTextarea
 
-A specialized textarea component for use within InputGroup. It's essentially an unstyled Textarea component that inherits styling from the parent InputGroup.
+A specialized textarea component for use within InputGroup. It wraps the `Textarea` component (`bind:value` and `bind:ref` supported) that inherits styling from the parent InputGroup.
 
 | Prop        | Type            | Description                                                                                              |
 | ----------- | --------------- | -------------------------------------------------------------------------------------------------------- |
-| `className` | `string`        | Additional CSS classes to apply to the component                                                         |
-| `...props`  | `TextareaProps` | All props from the Textarea component are supported, including `placeholder`, `disabled`, `rows`, etc. |
+| `class` | `string`        | Additional CSS classes to apply to the component                                                         |
+| `...props`  | `Textarea` props | All props from the Textarea component are supported, including `placeholder`, `disabled`, `rows`, etc. |
 
 ## Examples
 

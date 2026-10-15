@@ -1,9 +1,6 @@
 ---
 title: Tooltip
 description: A popup that appears when an element is hovered or focused, showing a hint for sighted users.
-
-links:
-  doc: https://base-ui.com/react/components/tooltip#api-reference
 ---
 
 <ComponentPreview name="p-tooltip-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/tooltip
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/tooltip.json
 ```
 
 </TabsPanel>
@@ -31,12 +28,12 @@ npx shadcn@latest add @coss/tooltip
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="tooltip" title="components/ui/tooltip.tsx" />
+<ComponentSource name="tooltip" title="components/ui/tooltip" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -48,53 +45,56 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import {
-  Tooltip,
-  TooltipCreateHandle,
-  TooltipPopup,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
-```
+```svelte
+<script lang="ts">
+  import { buttonVariants } from '$lib/components/ui/button';
+  import {
+    Tooltip,
+    TooltipPopup,
+    TooltipProvider,
+    TooltipTrigger
+  } from '$lib/components/ui/tooltip';
+</script>
 
-```tsx
-<Tooltip>
-  <TooltipTrigger render={<Button variant="outline" />}>
-    Hover me
-  </TooltipTrigger>
-  <TooltipPopup>Helpful hint</TooltipPopup>
-</Tooltip>
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger class={buttonVariants({ variant: 'outline' })}>Hover me</TooltipTrigger>
+    <TooltipPopup>Helpful hint</TooltipPopup>
+  </Tooltip>
+</TooltipProvider>
 ```
 
 ## API Reference
 
 ### Tooltip
 
-Root component. Alias for `Tooltip.Root` from Base UI.
+Root component. Wraps `Tooltip.Root` from ShardsUI. `open` is bindable. Optional `delay` and `closeDelay` props (ms) wrap the tooltip in its own provider.
 
 ### TooltipTrigger
 
-Trigger element that shows the tooltip on hover/focus. Alias for `Tooltip.Trigger` from Base UI.
+Trigger element that shows the tooltip on hover/focus. Styled wrapper for `Tooltip.Trigger` from ShardsUI.
 
 ### TooltipPopup
 
 Popup container that displays the tooltip content. Also exported as `TooltipContent`.
 
-| Prop         | Type                                     | Default    | Description                                      |
-| ------------ | ---------------------------------------- | ---------- | ------------------------------------------------ |
-| `side`       | `"top" \| "bottom" \| "left" \| "right"` | `"top"`    | Side of the trigger to position the tooltip      |
-| `align`      | `"start" \| "center" \| "end"`           | `"center"` | Alignment relative to the trigger                |
-| `sideOffset` | `number`                                 | `4`        | Distance from the trigger in pixels              |
-| `portalProps` | `Tooltip.Portal.Props`                  | -          | Props forwarded to the internal portal (`keepMounted`, `container`, etc.); see Base UI Tooltip portal API |
+| Prop           | Type                                     | Default    | Description                                      |
+| -------------- | ---------------------------------------- | ---------- | ------------------------------------------------ |
+| `side`         | `"top" \| "bottom" \| "left" \| "right"` | `"top"`    | Side of the trigger to position the tooltip      |
+| `align`        | `"start" \| "center" \| "end"`           | `"center"` | Alignment relative to the trigger                |
+| `sideOffset`   | `number`                                 | `4`        | Distance from the trigger in pixels              |
+| `alignOffset`  | `number`                                 | `0`        | Offset along the alignment axis                  |
+| `showArrow`    | `boolean`                                | `false`    | Render an arrow pointing at the trigger          |
+| `customAnchor` | `Element`                                | -          | Anchor the popup to an element other than the trigger |
+| `portalProps`  | `ComponentProps<typeof TooltipPrimitive.Portal>` | - | Props forwarded to the internal portal (`keepMounted`, `container`, etc.) |
 
 ### TooltipProvider
 
-Provider for grouping tooltips. Alias for `Tooltip.Provider` from Base UI.
+Provider for grouping tooltips. Styled wrapper for `Tooltip.Provider` from ShardsUI.
 
-### TooltipCreateHandle
+### TooltipHandle
 
-Creates a handle for detached tooltip triggers. Returns a handle object to attach to multiple triggers for animated transitions.
+Alias for `TooltipPrimitive.Handle` from ShardsUI, used to connect detached triggers to a tooltip. `TooltipPrimitive` is also exported.
 
 ## Examples
 
@@ -104,15 +104,8 @@ To group multiple tooltips so they appear instantly after the first one is opene
 
 <ComponentPreview name="p-tooltip-2" />
 
-### Animated Tooltips
+### Shared Tooltips
 
-You can create animated tooltips that smoothly transition between different triggers using detached triggers. This pattern allows multiple triggers to share a single tooltip popup, with automatic animations for position, size, and content changes.
-
-To create detached triggers:
-
-1. Create a handle using `TooltipCreateHandle`
-2. Attach the same handle to multiple `TooltipTrigger` components
-3. Each trigger provides a `payload` prop containing the content component
-4. Use a single `Tooltip` component with the handle to render the popup
+Bind each trigger's `ref` and pass it to `TooltipPopup` through `customAnchor` to anchor a tooltip to an element other than its own trigger, for example when the trigger is a `ToggleGroupItem`. Control `open` with `bind:open` on `Tooltip`.
 
 <ComponentPreview name="p-tooltip-3" />

@@ -1,14 +1,9 @@
 ---
 title: OTP Field
 description: A segmented input for one-time passwords and verification codes.
-
-links:
-  doc: https://base-ui.com/react/components/otp-field
 ---
 
 <ComponentPreview name="p-otp-field-1" />
-
-This component wraps [Base UI OTP Field](https://base-ui.com/react/components/otp-field).
 
 ## Installation
 
@@ -21,7 +16,7 @@ This component wraps [Base UI OTP Field](https://base-ui.com/react/components/ot
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/otp-field
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/otp-field.json
 ```
 
 </TabsPanel>
@@ -33,13 +28,12 @@ npx shadcn@latest add @coss/otp-field
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react lucide-react
+npm install @shardsui/svelte svelte-toolbelt
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="otp-field" title="components/ui/otp-field.tsx" />
-<ComponentSource name="separator" title="components/ui/separator.tsx" />
+<ComponentSource name="otp-field" title="components/ui/otp-field" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -51,56 +45,62 @@ npm install @base-ui/react lucide-react
 
 ## Usage
 
-```tsx
-import {
-  OTPField,
-  OTPFieldInput,
-  OTPFieldSeparator,
-} from "@/components/ui/otp-field"
-```
+```svelte
+<script lang="ts">
+  import { OTPField, OTPFieldInput, OTPFieldSeparator } from '$lib/components/ui/otp-field';
 
-```tsx
-<OTPField aria-label="Verification code" length={6}>
-  <OTPFieldInput />
-  <OTPFieldInput aria-label="Character 2 of 6" />
-  <OTPFieldInput aria-label="Character 3 of 6" />
-  <OTPFieldSeparator />
-  <OTPFieldInput aria-label="Character 4 of 6" />
-  <OTPFieldInput aria-label="Character 5 of 6" />
-  <OTPFieldInput aria-label="Character 6 of 6" />
+  let value = $state('');
+</script>
+
+<OTPField aria-label="Verification code" maxlength={6} bind:value>
+  {#snippet children({ cells })}
+    {#each cells.slice(0, 3) as cell, i (i)}
+      <OTPFieldInput aria-label={`Character ${i + 1} of 6`} {cell} />
+    {/each}
+    <OTPFieldSeparator />
+    {#each cells.slice(3) as cell, i (i)}
+      <OTPFieldInput aria-label={`Character ${i + 4} of 6`} {cell} />
+    {/each}
+  {/snippet}
 </OTPField>
 ```
 
 ## API Reference
 
-This component is built on [Base UI OTP Field](https://base-ui.com/react/components/otp-field). Each slot is a real `<input>`; order in the tree must match `length` on the root.
+A custom Svelte component built on a single hidden input (not a ShardsUI wrapper). The `OTPField` `children` snippet receives `{ cells, isFocused, isHovering }`; render one `OTPFieldInput` per cell and pass it the `cell`.
 
 ### OTPField
 
-Root component. Accepts the same props as `OTPField.Root`; `className` is merged with the default layout styles.
+Root component. Accepts standard input attributes; `class` is merged with the default layout styles.
 
-Use **`length`** (required) for the number of characters. The previous `maxLength` prop from the legacy `input-otp` package is not used.
-
-| Prop   | Type                  | Default     | Description                          |
-| ------ | --------------------- | ----------- | ------------------------------------ |
-| `size` | `"default" \| "lg"` | `"default"` | Size applied to all slots in the field |
-| `validationType` | `"numeric" \| "alpha" \| "alphanumeric" \| "none"` | `numeric` | Which characters are accepted; see [Base UI OTP Field](https://base-ui.com/react/components/otp-field) |
-| `mask` | `boolean` | `false` | When `true`, masks entered characters in each slot |
+| Prop            | Type                                | Default         | Description                          |
+| --------------- | ----------------------------------- | --------------- | ------------------------------------ |
+| `maxlength`     | `number`                            | `6`             | Number of characters (cells)         |
+| `value`         | `string`                            | `""`            | Current value (bindable)             |
+| `onValueChange` | `(value: string) => void`           | -               | Called when the value changes        |
+| `onComplete`    | `(value: string) => void`           | -               | Called when all cells are filled     |
+| `size`          | `"default" \| "lg"`                 | `"default"`     | Size applied to all slots            |
+| `pattern`       | `string \| RegExp`                  | -               | Restricts accepted characters (for example `^[0-3]+$`) |
+| `inputmode`     | `string`                            | `"numeric"`     | Virtual keyboard hint                |
+| `disabled`      | `boolean`                           | `false`         | Disables the field                   |
+| `pasteTransformer` | `(text: string) => string`       | -               | Sanitizes pasted text before it is inserted |
 
 ### OTPFieldInput
 
-Renders one OTP character input (Base UI `OTPField.Input`). Slots are ordered by **DOM order** in the tree (no `index` prop).
+Renders one OTP character cell.
 
-| Prop    | Type     | Description                                      |
-| ------- | -------- | ------------------------------------------------ |
-| `className` | `string` | Merged with the default slot styles              |
-| `placeholder` | `string` | Native placeholder; pair with `focus-visible:placeholder:text-transparent` if hints should hide when typing |
+| Prop          | Type      | Description                                      |
+| ------------- | --------- | ------------------------------------------------ |
+| `cell`        | `PinInputCell` | The cell from the `children` snippet (required) |
+| `class`       | `string`  | Merged with the default slot styles              |
+| `placeholder` | `string`  | Shown in empty slots                             |
+| `mask`        | `boolean` | When `true`, masks the entered character         |
 
-Label the OTP control on the root (`OTPField`) with `aria-label` or a visible `<label>`/`FieldLabel`. In Base UI 1.6+, the first `OTPFieldInput` should inherit that field label, while subsequent slots can use `aria-label` (for example, `Character 2 of 6`).
+Label the OTP control on `OTPField` with `aria-label` or a visible `Label`, and give each slot an `aria-label` such as `Character 2 of 6`.
 
 ### OTPFieldSeparator
 
-Visual separator between slot groups. Uses the design-system `Separator` inside `OTPField.Separator` for layout and accessibility.
+Visual separator between slot groups. Styled wrapper for `Separator` from ShardsUI.
 
 ## Examples
 
@@ -116,9 +116,9 @@ Visual separator between slot groups. Uses the design-system `Separator` inside 
 
 <ComponentPreview name="p-otp-field-4" />
 
-### Custom normalization
+### Custom validation
 
-Set `validationType="none"` with `normalizeValue` when you need to normalize pasted input before it reaches state, or to enforce custom character rules. Use `inputMode` for the virtual keyboard hint, and `onValueInvalid` when you want to react to characters that were rejected after normalization.
+Use `pattern` together with `inputmode` to restrict accepted characters, and `pasteTransformer` to sanitize pasted text.
 
 <ComponentPreview name="p-otp-field-6" />
 
@@ -128,22 +128,18 @@ Set `validationType="none"` with `normalizeValue` when you need to normalize pas
 
 ### Alphanumeric
 
-Use `validationType="alphanumeric"` for recovery, backup, or invite codes that mix letters and numbers.
+Use `inputmode="text"` without a numeric `pattern` for recovery, backup, or invite codes that mix letters and numbers.
 
 <ComponentPreview name="p-otp-field-8" />
 
 ### Placeholder hints
 
-Each slot is a real `<input>`, so `placeholder` and CSS behave as usual. Hide the placeholder on focus when the active slot should not show a hint.
+Pass `placeholder` to `OTPFieldInput` to hint at empty slots.
 
 <ComponentPreview name="p-otp-field-9" />
 
 ### Masked entry
 
-Pass `mask` on the root when the code should be obscured while it is typed (e.g. shared screens).
+Pass `mask` on `OTPFieldInput` when the code should be obscured while it is typed (e.g. shared screens).
 
 <ComponentPreview name="p-otp-field-10" />
-
-## Changelog
-
-- [Apr 14, 2026](/ui/docs/changelog#otp-field) — `input-otp.tsx` removed in favor of `otp-field.tsx` (`@coss/otp-field`)

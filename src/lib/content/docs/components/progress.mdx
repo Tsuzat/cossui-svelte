@@ -1,9 +1,6 @@
 ---
 title: Progress
 description: Displays the status of a task that takes a long time.
-
-links:
-  doc: https://base-ui.com/react/components/progress#api-reference
 ---
 
 <ComponentPreview name="p-progress-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/progress
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/progress.json
 ```
 
 </TabsPanel>
@@ -31,12 +28,12 @@ npx shadcn@latest add @coss/progress
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="progress" title="components/ui/progress.tsx" />
+<ComponentSource name="progress" title="components/ui/progress" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -48,41 +45,37 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import {
-  Progress,
-  ProgressLabel,
-  ProgressValue,
-} from "@/components/ui/progress"
-```
+```svelte
+<script lang="ts">
+  import { Progress, ProgressLabel, ProgressValue } from '$lib/components/ui/progress';
+</script>
 
-```tsx
 <Progress value={40} />
 ```
 
-Note: If you render children inside `Progress`, you must also include `ProgressTrack` and `ProgressIndicator` inside it. Without them, the bar will not display. When no children are provided, a default track and indicator are rendered for you.
+Note: If you pass children to `Progress`, you must also include `ProgressTrack` and `ProgressIndicator` inside it. Without them, the bar will not display. When no children are provided, a default track and indicator are rendered for you.
 
 ## API Reference
 
 ### Progress
 
-Root component. Styled wrapper for `Progress.Root` from Base UI. When no children are provided, automatically renders a track and indicator.
+Root component. Styled wrapper for `Progress.Root` from ShardsUI. Accepts `value` (default `0`), `min` (default `0`) and `max` (default `100`). When no children are provided, automatically renders a track and indicator.
 
 ### ProgressTrack
 
-Track container for the progress indicator. Styled wrapper for `Progress.Track` from Base UI.
+Track container for the progress indicator. Styled wrapper for `Progress.Track` from ShardsUI.
 
 ### ProgressIndicator
 
-Visual indicator showing the current progress. Styled wrapper for `Progress.Indicator` from Base UI.
+Visual indicator showing the current progress. Styled wrapper for `Progress.Indicator` from ShardsUI.
 
 ### ProgressLabel
 
-Label text for the progress bar. Styled wrapper for `Progress.Label` from Base UI.
+Label text for the progress bar. Styled wrapper for `Progress.Label` from ShardsUI.
 
 ### ProgressValue
 
-Displays the current value. Styled wrapper for `Progress.Value` from Base UI.
+Displays the current value (an em dash when indeterminate). Styled wrapper for `Progress.Value` from ShardsUI.
 
 ## Examples
 

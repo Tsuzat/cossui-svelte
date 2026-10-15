@@ -1,9 +1,6 @@
 ---
 title: Alert Dialog
 description: A dialog that requires user response to proceed.
-
-links:
-  doc: https://base-ui.com/react/components/alert-dialog#api-reference
 ---
 
 <ComponentPreview name="p-alert-dialog-1" />
@@ -20,7 +17,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/alert-dialog
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/alert-dialog.json
 ```
 
 </TabsPanel>
@@ -32,12 +29,12 @@ npx shadcn@latest add @coss/alert-dialog
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="alert-dialog" title="components/ui/alert-dialog.tsx" />
+<ComponentSource name="alert-dialog" title="components/ui/alert-dialog" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -49,20 +46,20 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import {
-  AlertDialog,
-  AlertDialogClose,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogPopup,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-```
+```svelte
+<script lang="ts">
+  import {
+    AlertDialog,
+    AlertDialogClose,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogPopup,
+    AlertDialogTitle,
+    AlertDialogTrigger
+  } from '$lib/components/ui/alert-dialog';
+</script>
 
-```tsx
 <AlertDialog>
   <AlertDialogTrigger>Delete Account</AlertDialogTrigger>
   <AlertDialogPopup>
@@ -85,20 +82,20 @@ import {
 
 ### AlertDialog
 
-Root component. Alias for `AlertDialog.Root` from Base UI.
+Root component. Wraps `AlertDialog.Root` from ShardsUI. Use `bind:open` for controlled state.
 
 ### AlertDialogTrigger
 
-Trigger button that opens the alert dialog. Alias for `AlertDialog.Trigger` from Base UI.
+Trigger button that opens the alert dialog. Wraps `AlertDialog.Trigger` from ShardsUI. Use the `child` snippet to render a custom element.
 
 ### AlertDialogPopup
 
-Popup container that displays the alert dialog content. Also exported as `AlertDialogContent`.
+Popup container that displays the alert dialog content (renders the portal, backdrop and viewport for you). Also exported as `AlertDialogContent`.
 
-| Prop                  | Type                         | Default | Description                                      |
-| --------------------- | ---------------------------- | ------- | ------------------------------------------------ |
-| `bottomStickOnMobile` | `boolean`                    | `true`  | When true, sticks to the bottom of the screen on mobile devices |
-| `portalProps`         | `AlertDialog.Portal.Props`   | -       | Props forwarded to the internal portal (`keepMounted`, `container`, etc.); see Base UI Alert Dialog portal API |
+| Prop                  | Type                                  | Default | Description                                      |
+| --------------------- | ------------------------------------- | ------- | ------------------------------------------------ |
+| `bottomStickOnMobile` | `boolean`                             | `true`  | When true, sticks to the bottom of the screen on mobile devices |
+| `portalProps`         | `AlertDialogPortal` props             | -       | Props forwarded to the internal portal (`keepMounted`, `container`, etc.) |
 
 ### AlertDialogHeader
 
@@ -108,7 +105,7 @@ Container for the alert dialog title and description.
 
 Footer section for action buttons.
 
-Unlike [Dialog](/docs/components/dialog), alert dialog has no `AlertDialogPanel`. Put title and description in `AlertDialogHeader`, actions in `AlertDialogFooter`, and use a plain element with `className` if you need extra body content between them.
+Unlike [Dialog](/docs/dialog), alert dialog has no `AlertDialogPanel`. Put title and description in `AlertDialogHeader`, actions in `AlertDialogFooter`, and use a plain element with `class` if you need extra body content between them.
 
 | Prop        | Type                     | Default     | Description                                      |
 | ----------- | ------------------------ | ----------- | ------------------------------------------------ |
@@ -116,14 +113,14 @@ Unlike [Dialog](/docs/components/dialog), alert dialog has no `AlertDialogPanel`
 
 **Example:**
 
-```tsx
-// Default variant (with border and background)
+```svelte
+<!-- Default variant (with border and background) -->
 <AlertDialogFooter>
   <AlertDialogClose>Cancel</AlertDialogClose>
   <AlertDialogClose>Delete</AlertDialogClose>
 </AlertDialogFooter>
 
-// Bare variant (no border or background)
+<!-- Bare variant (no border or background) -->
 <AlertDialogFooter variant="bare">
   <AlertDialogClose>Cancel</AlertDialogClose>
   <AlertDialogClose>Delete</AlertDialogClose>
@@ -132,27 +129,39 @@ Unlike [Dialog](/docs/components/dialog), alert dialog has no `AlertDialogPanel`
 
 ### AlertDialogTitle
 
-Title component. Alias for `AlertDialog.Title` from Base UI.
+Title component. Styled wrapper for `AlertDialog.Title` from ShardsUI.
 
 ### AlertDialogDescription
 
-Description component. Alias for `AlertDialog.Description` from Base UI.
+Description component. Styled wrapper for `AlertDialog.Description` from ShardsUI.
 
 ### AlertDialogClose
 
-Close button component. Alias for `AlertDialog.Close` from Base UI.
+Close button component. Wraps `AlertDialog.Close` from ShardsUI (defaults to `type="button"`).
+
+### AlertDialogAction
+
+Plain `<button>` styled with `buttonVariants`. Accepts `variant` and `size` like [Button](/docs/button).
+
+### AlertDialogMedia
+
+Plain container for an optional icon or illustration.
 
 ### AlertDialogPortal
 
-Portal component for rendering outside the DOM hierarchy. Alias for `AlertDialog.Portal` from Base UI.
+Portal component for rendering outside the DOM hierarchy. Wraps `AlertDialog.Portal` from ShardsUI.
 
-### AlertDialogBackdrop
+### AlertDialogOverlay
 
-Backdrop/overlay component. Also exported as `AlertDialogOverlay`. Alias for `AlertDialog.Backdrop` from Base UI.
+Backdrop/overlay component. Styled wrapper for `AlertDialog.Backdrop` from ShardsUI.
 
 ### AlertDialogViewport
 
-Viewport component for positioning. Alias for `AlertDialog.Viewport` from Base UI.
+Viewport component for positioning. Styled wrapper for `AlertDialog.Viewport` from ShardsUI.
+
+### AlertDialogCreateHandle
+
+Factory returning a new ShardsUI `AlertDialog.Handle`, for opening a dialog from a trigger placed elsewhere.
 
 ## Examples
 

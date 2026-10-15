@@ -22,7 +22,7 @@ The Date Picker is a composition pattern, not a standalone component. Install th
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/calendar @coss/popover @coss/button
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/calendar.json https://cossui-svelte.com/r/popover.json https://cossui-svelte.com/r/button.json
 ```
 
 </TabsPanel>
@@ -34,12 +34,12 @@ npx shadcn@latest add @coss/calendar @coss/popover @coss/button
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @daypicker/react date-fns lucide-react @base-ui/react
+npm install @internationalized/date @lucide/svelte
 ```
 
 <Step>Copy the Calendar, Popover, and Button components to your project.</Step>
 
-See the [Calendar](/ui/docs/components/calendar), [Popover](/ui/docs/components/popover), and [Button](/ui/docs/components/button) documentation for installation instructions.
+See the [Calendar](/docs/calendar), [Popover](/docs/popover), and [Button](/docs/button) documentation for installation instructions.
 
 </Steps>
 
@@ -49,41 +49,29 @@ See the [Calendar](/ui/docs/components/calendar), [Popover](/ui/docs/components/
 
 ## Usage
 
-```tsx
-import { format } from "date-fns"
-import { CalendarIcon } from "lucide-react"
-import { useState } from "react"
+```svelte
+<script lang="ts">
+  import { DateFormatter, type DateValue, getLocalTimeZone } from '@internationalized/date';
+  import CalendarIcon from '@lucide/svelte/icons/calendar';
+  import { buttonVariants } from '$lib/components/ui/button';
+  import { Calendar } from '$lib/components/ui/calendar';
+  import { Popover, PopoverPopup, PopoverTrigger } from '$lib/components/ui/popover';
+  import { cn } from '$lib/utils';
 
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
-import {
-  Popover,
-  PopoverPopup,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-```
+  const df = new DateFormatter('en-US', { dateStyle: 'long' });
 
-```tsx
-const [date, setDate] = useState<Date>()
+  let value = $state<DateValue | undefined>(undefined);
+</script>
 
-return (
-  <Popover>
-    <PopoverTrigger
-      render={
-        <Button
-          className="w-[280px] justify-start text-left font-normal"
-          variant="outline"
-        />
-      }
-    >
-      <CalendarIcon />
-      {date ? format(date, "PPP") : <span>Pick a date</span>}
-    </PopoverTrigger>
-    <PopoverPopup align="start" className="w-auto p-0">
-      <Calendar mode="single" selected={date} onSelect={setDate} />
-    </PopoverPopup>
-  </Popover>
-)
+<Popover>
+  <PopoverTrigger class={cn(buttonVariants({ variant: 'outline' }), 'w-70 justify-start')}>
+    <CalendarIcon aria-hidden="true" />
+    {value ? df.format(value.toDate(getLocalTimeZone())) : 'Pick a date'}
+  </PopoverTrigger>
+  <PopoverPopup>
+    <Calendar bind:value mode="single" />
+  </PopoverPopup>
+</Popover>
 ```
 
 ## Examples
@@ -94,7 +82,7 @@ return (
 
 ### With Dropdown Navigation
 
-Use `captionLayout="dropdown"` for date of birth or historical date selection:
+Use `captionLayout="dropdown"` on the `Calendar` for date of birth or historical date selection:
 
 <ComponentPreview name="p-date-picker-3" />
 
@@ -108,7 +96,7 @@ Use `captionLayout="dropdown"` for date of birth or historical date selection:
 
 ### Close on Select
 
-Control the popover state to close it when a date is selected:
+Bind the popover `open` state to close it when a date is selected:
 
 <ComponentPreview name="p-date-picker-6" />
 

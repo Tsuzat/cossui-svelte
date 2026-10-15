@@ -1,9 +1,6 @@
 ---
 title: Form
 description: A form wrapper component that simplifies validation and submission.
-
-links:
-  doc: https://base-ui.com/react/components/form#api-reference
 ---
 
 <ComponentPreview name="p-form-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/form
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/form.json
 ```
 
 </TabsPanel>
@@ -31,12 +28,12 @@ npx shadcn@latest add @coss/form
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react zod
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="form" title="components/ui/form.tsx" />
+<ComponentSource name="form" title="components/ui/form" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -48,24 +45,17 @@ npm install @base-ui/react zod
 
 ## Usage
 
-```tsx
-import {
-  Field,
-  FieldError,
-  FieldLabel,
-} from "@/components/ui/field"
-import { Form } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-```
+```svelte
+<script lang="ts">
+  import { Field, FieldError, FieldLabel } from '$lib/components/ui/field';
+  import { Form, type FormErrors } from '$lib/components/ui/form';
+  import { Input } from '$lib/components/ui/input';
 
-```tsx
-<Form
-  className="flex w-full flex-col gap-4"
-  onSubmit={(e) => {
-    /* handle submit */
-  }}
->
-  <Field>
+  let errors = $state<FormErrors>({});
+</script>
+
+<Form class="flex w-full flex-col gap-4" {errors}>
+  <Field name="email">
     <FieldLabel>Email</FieldLabel>
     <Input name="email" type="email" required />
     <FieldError>Please enter a valid email.</FieldError>
@@ -77,16 +67,12 @@ import { Input } from "@/components/ui/input"
 
 ### Form
 
-Thin wrapper around Base UI `Form` with no default layout. Pass **`className`** for spacing and structure (for example `flex w-full flex-col gap-4` for a vertical field stack).
+Thin wrapper around `Form` from ShardsUI with no default layout. Pass `class` for spacing and structure (for example `flex w-full flex-col gap-4` for a vertical field stack). Accepts the ShardsUI `Form` props, including `errors` (`FormErrors`), `validationMode` (`FormValidationMode`) and `bind:ref`. The unstyled primitive is also exported as `FormPrimitive`.
 
-**Dialog, sheet, drawer:** Place **`DialogHeader`** (or sheet/drawer header) **outside** the form. Wrap **`DialogPanel`** and **`DialogFooter`** only in **`<Form className="contents">`** (or **`<form className="contents">`**). The **`contents`** display value keeps panel and footer participating correctly in the popup flex layout without nesting the header inside the `<form>`.
+**Dialog, sheet, drawer:** Place the header **outside** the form. Wrap the panel and footer only in `<Form class="contents">`. The `contents` display value keeps panel and footer participating correctly in the popup flex layout without nesting the header inside the `<form>`.
 
 ## Examples
 
 ### Using with Zod
 
 <ComponentPreview name="p-form-2" />
-
-## Changelog
-
-- [Apr 17, 2026](/ui/docs/changelog#form) — **`Form`** no longer applies default layout classes; pass **`className`** for stacked fields (`flex w-full flex-col gap-4`); for overlays, wrap **panel + footer** in **`Form className="contents"`** with **header** outside.

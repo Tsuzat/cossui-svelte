@@ -1,9 +1,6 @@
 ---
 title: Slider
 description: An input where the user selects a value from within a given range.
-
-links:
-  doc: https://base-ui.com/react/components/slider#api-reference
 ---
 
 <ComponentPreview name="p-slider-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/slider
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/slider.json
 ```
 
 </TabsPanel>
@@ -31,12 +28,12 @@ npx shadcn@latest add @coss/slider
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="slider" title="components/ui/slider.tsx" />
+<ComponentSource name="slider" title="components/ui/slider" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -48,34 +45,38 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import { Slider, SliderValue } from "@/components/ui/slider"
-```
+```svelte
+<script lang="ts">
+  import { Slider, SliderValue } from '$lib/components/ui/slider';
 
-```tsx
-<Slider />
+  let value = $state(50);
+</script>
+
+<Slider bind:value aria-label="Volume" />
 ```
 
 ## API Reference
 
 ### Slider
 
-Root component. Styled wrapper for `Slider.Root` from Base UI with default min/max values and edge-aligned thumbs.
+Root component. Styled wrapper for `Slider.Root` from ShardsUI that renders the control, track, indicator and thumbs for you. `value` is bindable (a number, or an array of numbers for a range slider). `min`, `max`, `step`, `disabled`, `onValueChange` and the other root props are forwarded.
 
-| Prop  | Type     | Default | Description                                      |
-| ----- | -------- | ------- | ------------------------------------------------ |
-| `min` | `number` | `0`     | Minimum value of the slider                      |
-| `max` | `number` | `100`   | Maximum value of the slider                      |
+| Prop                     | Type                              | Default        | Description                                      |
+| ------------------------ | --------------------------------- | -------------- | ------------------------------------------------ |
+| `orientation`            | `"horizontal" \| "vertical"`      | `"horizontal"` | Slider orientation                               |
+| `thumbCollisionBehavior` | `"push" \| "swap" \| "none"`      | `"push"`       | How adjacent thumbs behave when dragged into each other |
+| `showTooltip`            | `boolean`                         | `false`        | Shows a tooltip with the value above each thumb while dragging |
+| `tooltipContent`         | `(value: number) => number \| string` | -         | Formats the tooltip text                         |
 
-Note: The component sets `thumbAlignment="edge"` by default, which aligns thumbs to the edge of the track rather than centering them.
+Note: The component sets `thumbAlignment="edge"`, which aligns thumbs to the edge of the track rather than centering them.
 
 ### SliderValue
 
-Displays the current value. Styled wrapper for `Slider.Value` from Base UI.
+Displays the current value. Styled wrapper for `Slider.Value` from ShardsUI.
 
 ## Examples
 
-For accessible labelling and validation, prefer using the `Field` component to wrap checkboxes. See the related example: [Slider field](/ui/docs/components/field#slider-field).
+For accessible labelling and validation, prefer using the `Field` component to wrap sliders. See the related example: [Slider field](/docs/field#slider-field).
 
 ### With Label and Value
 

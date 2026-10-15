@@ -1,9 +1,6 @@
 ---
 title: Menu
 description: A list of actions in a dropdown, enhanced with keyboard navigation.
-
-links:
-  doc: https://base-ui.com/react/components/menu#api-reference
 ---
 
 <ComponentPreview name="p-menu-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/menu
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/menu.json
 ```
 
 </TabsPanel>
@@ -31,7 +28,7 @@ npx shadcn@latest add @coss/menu
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte @lucide/svelte
 ```
 
 <Step>Import the following variables into your CSS file</Step>
@@ -52,7 +49,7 @@ npm install @base-ui/react
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="menu" title="components/ui/menu.tsx" />
+<ComponentSource name="menu" title="components/ui/menu" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -64,26 +61,28 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import {
-  Menu,
-  MenuCheckboxItem,
-  MenuGroup,
-  MenuGroupLabel,
-  MenuItem,
-  MenuLinkItem,
-  MenuPopup,
-  MenuRadioGroup,
-  MenuRadioItem,
-  MenuSeparator,
-  MenuSub,
-  MenuSubPopup,
-  MenuSubTrigger,
-  MenuTrigger,
-} from "@/components/ui/menu"
-```
+```svelte
+<script lang="ts">
+  import {
+    Menu,
+    MenuCheckboxItem,
+    MenuGroup,
+    MenuGroupLabel,
+    MenuItem,
+    MenuPopup,
+    MenuRadioGroup,
+    MenuRadioItem,
+    MenuSeparator,
+    MenuSub,
+    MenuSubPopup,
+    MenuSubTrigger,
+    MenuTrigger
+  } from '$lib/components/ui/menu';
 
-```tsx
+  let shuffle = $state(false);
+  let sortBy = $state('artist');
+</script>
+
 <Menu>
   <MenuTrigger>Open</MenuTrigger>
   <MenuPopup align="start" sideOffset={4}>
@@ -98,18 +97,17 @@ import {
 
     <MenuSeparator />
 
-    <MenuCheckboxItem>Shuffle</MenuCheckboxItem>
-    <MenuCheckboxItem>Repeat</MenuCheckboxItem>
+    <MenuCheckboxItem bind:checked={shuffle}>Shuffle</MenuCheckboxItem>
     <MenuCheckboxItem variant="switch">Auto save</MenuCheckboxItem>
 
     <MenuSeparator />
 
     <MenuGroup>
       <MenuGroupLabel>Sort by</MenuGroupLabel>
-      <MenuRadioGroup>
-        <MenuRadioItem>Artist</MenuRadioItem>
-        <MenuRadioItem>Album</MenuRadioItem>
-        <MenuRadioItem>Title</MenuRadioItem>
+      <MenuRadioGroup bind:value={sortBy}>
+        <MenuRadioItem value="artist">Artist</MenuRadioItem>
+        <MenuRadioItem value="album">Album</MenuRadioItem>
+        <MenuRadioItem value="title">Title</MenuRadioItem>
       </MenuRadioGroup>
     </MenuGroup>
 
@@ -130,11 +128,11 @@ import {
 
 ### Menu
 
-Root component. Alias for `Menu.Root` from Base UI. Also exported as `DropdownMenu`.
+Root component. Wrapper for `Menu.Root` from ShardsUI (`open` is bindable). Also exported as `DropdownMenu`.
 
 ### MenuTrigger
 
-Trigger button that opens the menu. Alias for `Menu.Trigger` from Base UI. Also exported as `DropdownMenuTrigger`.
+Trigger button that opens the menu. Wrapper for `Menu.Trigger` from ShardsUI. Also exported as `DropdownMenuTrigger`.
 
 ### MenuPopup
 
@@ -146,11 +144,11 @@ Popup container that displays the menu content. Also exported as `DropdownMenuCo
 | `align`       | `"start" \| "center" \| "end"`                 | `"center"` | Alignment relative to the trigger                |
 | `sideOffset`  | `number`                                       | `4`        | Distance from the trigger in pixels              |
 | `alignOffset` | `number`                                       | -          | Offset along the alignment axis                  |
-| `portalProps` | `Menu.Portal.Props`                            | -          | Props forwarded to the internal portal (`keepMounted`, `container`, etc.); see Base UI Menu portal API |
+| `portalProps` | `PortalProps`                            | -          | Props forwarded to the internal portal (`keepMounted`, `container`, etc.) |
 
 ### MenuGroup
 
-Groups related menu items. Alias for `Menu.Group` from Base UI. Also exported as `DropdownMenuGroup`.
+Groups related menu items. Wrapper for `Menu.Group` from ShardsUI. Also exported as `DropdownMenuGroup`.
 
 ### MenuItem
 
@@ -163,15 +161,16 @@ Individual menu item. Also exported as `DropdownMenuItem`.
 
 **Using `inset`:** When mixing items with and without icons, use `inset` on icon-less items to maintain alignment:
 
-```tsx
+```svelte
 <MenuItem><PencilIcon /> Edit</MenuItem>
 <MenuItem><TrashIcon /> Delete</MenuItem>
-<MenuItem inset>Profile</MenuItem>  {/* Aligns with icon items above */}
+<MenuItem inset>Profile</MenuItem>  <!-- Aligns with icon items above -->
 ```
+
 
 ### MenuLinkItem
 
-Link menu item for navigation. **`LinkItem`** renders a native **`<a>`** when you pass **`href`**. Styled like **`MenuItem`**.
+Link menu item for navigation. Renders a native `<a>` when you pass `href`. Styled like **`MenuItem`**.
 
 | Prop           | Type                          | Default     | Description                                      |
 | -------------- | ----------------------------- | ----------- | ------------------------------------------------ |
@@ -179,21 +178,25 @@ Link menu item for navigation. **`LinkItem`** renders a native **`<a>`** when yo
 | `variant`      | `"default" \| "destructive"`  | `"default"` | Controls the item styling                        |
 | `closeOnClick` | `boolean`                     | `true`      | Whether the menu closes when the link is clicked |
 
-If you were using **`MenuItem render={<Link href="..." />}`**, migrate to **`MenuLinkItem`** but **keep `render`** — do not replace it with **`href`** alone when using a router **`Link`**.
+For router-aware navigation, pass the `child` snippet to render your own link element:
 
-```tsx
-<MenuLinkItem render={<Link href="/docs" />}>Docs</MenuLinkItem>
+```svelte
+<MenuLinkItem>
+  {#snippet child({ props })}
+    <a {...props} href="/docs">Docs</a>
+  {/snippet}
+</MenuLinkItem>
 ```
 
-Use **`href`** only for plain anchor links:
+Use `href` for plain anchor links:
 
-```tsx
+```svelte
 <MenuLinkItem href="/docs">Docs</MenuLinkItem>
 ```
 
 ### MenuCheckboxItem
 
-Checkbox menu item. Also exported as `DropdownMenuCheckboxItem`.
+Checkbox menu item (`checked` is bindable). Also exported as `DropdownMenuCheckboxItem`.
 
 | Prop      | Type                       | Default     | Description                                      |
 | --------- | -------------------------- | ----------- | ------------------------------------------------ |
@@ -201,11 +204,11 @@ Checkbox menu item. Also exported as `DropdownMenuCheckboxItem`.
 
 ### MenuRadioGroup
 
-Groups radio menu items. Alias for `Menu.RadioGroup` from Base UI. Also exported as `DropdownMenuRadioGroup`.
+Groups radio menu items. Wrapper for `Menu.RadioGroup` from ShardsUI (`value` is bindable). Also exported as `DropdownMenuRadioGroup`.
 
 ### MenuRadioItem
 
-Radio menu item. Styled wrapper for `Menu.RadioItem` from Base UI. Also exported as `DropdownMenuRadioItem`.
+Radio menu item. Styled wrapper for `Menu.RadioItem` from ShardsUI. Also exported as `DropdownMenuRadioItem`.
 
 ### MenuGroupLabel
 
@@ -217,15 +220,15 @@ Label for a menu group. Also exported as `DropdownMenuLabel`.
 
 ### MenuSeparator
 
-Visual separator between menu items. Styled wrapper for `Menu.Separator` from Base UI. Also exported as `DropdownMenuSeparator`.
+Visual separator between menu items. Styled wrapper for `Menu.Separator` from ShardsUI. Also exported as `DropdownMenuSeparator`.
 
 ### MenuShortcut
 
-Displays keyboard shortcut text. Custom component (not a Base UI wrapper). Also exported as `DropdownMenuShortcut`.
+Displays keyboard shortcut text. Custom component (not a ShardsUI wrapper). Also exported as `DropdownMenuShortcut`.
 
 ### MenuSub
 
-Submenu container. Alias for `Menu.SubmenuRoot` from Base UI. Also exported as `DropdownMenuSub`.
+Submenu container. Wrapper for `Menu.SubmenuRoot` from ShardsUI. Also exported as `DropdownMenuSub`.
 
 ### MenuSubTrigger
 

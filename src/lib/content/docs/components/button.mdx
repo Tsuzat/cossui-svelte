@@ -16,7 +16,7 @@ description: A button or a component that looks like a button.
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/button
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/button.json
 ```
 
 </TabsPanel>
@@ -28,7 +28,7 @@ npx shadcn@latest add @coss/button
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Import the following variables into your CSS file</Step>
@@ -49,7 +49,7 @@ npm install @base-ui/react
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="button" title="components/ui/button.tsx" />
+<ComponentSource name="button" title="components/ui/button" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -61,31 +61,39 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import { Button } from "@/components/ui/button"
-```
+```svelte
+<script lang="ts">
+  import { Button } from '$lib/components/ui/button';
+</script>
 
-```tsx
 <Button>Button</Button>
 ```
 
 ## Link
 
-You can use the [`render`](https://base-ui.com/react/utils/use-render#migrating-from-radix-ui) prop to make another component look like a button. Here's an example of a link that looks like a button.
+Pass an `href` to render an anchor (`<a>`) with button styling. Here's an example of a link that looks like a button.
 
-```tsx
-import Link from "next/link"
+```svelte
+<script lang="ts">
+  import { Button } from '$lib/components/ui/button';
+</script>
 
-import { Button } from "@/components/ui/button"
+<Button href="/login">Login</Button>
+```
 
-export function LinkAsButton() {
-  return <Button render={<Link href="/login" />}>Login</Button>
-}
+To apply button styles to another element or component, use `buttonVariants`:
+
+```svelte
+<script lang="ts">
+  import { buttonVariants } from '$lib/components/ui/button';
+</script>
+
+<a href="/login" class={buttonVariants({ variant: 'outline' })}>Login</a>
 ```
 
 ## API Reference
 
-This is a custom component using Base UI's `useRender` hook, not a direct Base UI wrapper.
+This is a custom component built on `Button` from ShardsUI (rendered as a plain `<a>` when `href` is set).
 
 ### Button
 
@@ -96,7 +104,7 @@ A button component with variant, size, and loading states.
 | `variant` | `"default" \| "destructive" \| "destructive-outline" \| "ghost" \| "link" \| "outline" \| "secondary"`         | `"default"` | Controls the button styling                                                 |
 | `size`    | `"default" \| "icon" \| "icon-lg" \| "icon-sm" \| "icon-xl" \| "icon-xs" \| "lg" \| "sm" \| "xl" \| "xs"`     | `"default"` | Controls the button size                                                    |
 | `loading` | `boolean`                                                                                                         | `false`     | Shows a spinner and forces disabled button behavior while loading           |
-| `render`  | `React.ReactElement`                                                                                              | -           | Render as a different element (e.g., Link)                                  |
+| `href`    | `string`                                                                                                          | -           | Renders an anchor instead of a button                                       |
 
 When `loading` is `true`, the component:
 

@@ -1,9 +1,6 @@
 ---
 title: Accordion
 description: A set of collapsible panels with headings and content.
-
-links:
-  doc: https://base-ui.com/react/components/accordion#api-reference
 ---
 
 <ComponentPreview name="p-accordion-1" align="start" />
@@ -20,7 +17,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/accordion
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/accordion.json
 ```
 
 </TabsPanel>
@@ -32,12 +29,12 @@ npx shadcn@latest add @coss/accordion
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="accordion" title="components/ui/accordion.tsx" />
+<ComponentSource name="accordion" title="components/ui/accordion" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -49,22 +46,20 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import {
-  Accordion,
-  AccordionItem,
-  AccordionPanel,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-```
+```svelte
+<script lang="ts">
+  import {
+    Accordion,
+    AccordionItem,
+    AccordionPanel,
+    AccordionTrigger
+  } from '$lib/components/ui/accordion';
+</script>
 
-```tsx
 <Accordion>
   <AccordionItem value="item-1">
     <AccordionTrigger>Is it accessible?</AccordionTrigger>
-    <AccordionPanel>
-      Yes. It adheres to the WAI-ARIA design pattern.
-    </AccordionPanel>
+    <AccordionPanel>Yes. It adheres to the WAI-ARIA design pattern.</AccordionPanel>
   </AccordionItem>
 </Accordion>
 ```
@@ -73,19 +68,25 @@ import {
 
 ### Accordion
 
-Root component. Alias for `Accordion.Root` from Base UI.
+Root component. Wraps `Accordion.Root` from ShardsUI.
+
+| Prop       | Type                 | Default | Description                                                                 |
+| ---------- | -------------------- | ------- | --------------------------------------------------------------------------- |
+| `value`    | `string \| string[]` | -       | Open item value(s). Bindable with `bind:value` (array when `multiple`)      |
+| `multiple` | `boolean`            | `false` | Allow several items to be open at once                                      |
+| `disabled` | `boolean`            | `false` | Disable all items                                                           |
 
 ### AccordionItem
 
-Individual accordion item container. Styled wrapper for `Accordion.Item` from Base UI with bottom border styling.
+Individual accordion item container. Styled wrapper for `Accordion.Item` from ShardsUI with bottom border styling. Takes a `value` prop.
 
 ### AccordionTrigger
 
-Trigger button that toggles the accordion panel. Styled wrapper for `Accordion.Trigger` from Base UI. Includes a built-in chevron icon that rotates when expanded.
+Trigger button that toggles the accordion panel. Styled wrapper for `Accordion.Trigger` from ShardsUI, rendered inside an `Accordion.Header`. Includes a built-in chevron icon that rotates when expanded.
 
 ### AccordionPanel
 
-Collapsible content panel. Styled wrapper for `Accordion.Panel` from Base UI with animated height transitions. Also exported as `AccordionContent`.
+Collapsible content panel. Styled wrapper for `Accordion.Panel` from ShardsUI with animated height transitions. Also exported as `AccordionContent`.
 
 ## Examples
 

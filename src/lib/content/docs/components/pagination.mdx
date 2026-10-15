@@ -16,7 +16,7 @@ description: A pagination with page navigation, next and previous links.
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/pagination
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/pagination.json
 ```
 
 </TabsPanel>
@@ -27,7 +27,7 @@ npx shadcn@latest add @coss/pagination
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="pagination" title="components/ui/pagination.tsx" />
+<ComponentSource name="pagination" title="components/ui/pagination" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -39,19 +39,19 @@ npx shadcn@latest add @coss/pagination
 
 ## Usage
 
-```tsx
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination"
-```
+```svelte
+<script lang="ts">
+  import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious
+  } from '$lib/components/ui/pagination';
+</script>
 
-```tsx
 <Pagination>
   <PaginationContent>
     <PaginationItem>
@@ -72,7 +72,7 @@ import {
 
 ## API Reference
 
-This is a custom component, not a Base UI wrapper.
+This is a custom component, not a ShardsUI wrapper. Parts accept `class`, `bind:ref` and standard HTML attributes.
 
 ### Pagination
 
@@ -88,13 +88,12 @@ Individual list item container.
 
 ### PaginationLink
 
-Link element for page numbers. Supports the `render` prop.
+Anchor element for page numbers.
 
 | Prop       | Type                                  | Default     | Description                                      |
 | ---------- | ------------------------------------- | ----------- | ------------------------------------------------ |
 | `isActive` | `boolean`                             | -           | Highlights the link as the current page          |
-| `size`     | `"default" \| "icon"`                 | `"icon"`    | Controls the link size                           |
-| `render`   | `React.ReactElement`                  | -           | Render as a different element (e.g., Next.js Link) |
+| `size`     | `ButtonSize`                          | `"icon"`    | Controls the link size (same sizes as `Button`)  |
 
 ### PaginationPrevious
 

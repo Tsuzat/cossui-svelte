@@ -1,9 +1,6 @@
 ---
 title: Context Menu
 description: A menu that appears at the pointer on right click or long press.
-
-links:
-  doc: https://base-ui.com/react/components/context-menu#api-reference
 ---
 
 <ComponentPreview name="p-context-menu-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/context-menu
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/context-menu.json
 ```
 
 </TabsPanel>
@@ -31,7 +28,7 @@ npx shadcn@latest add @coss/context-menu
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Import the following variables into your CSS file</Step>
@@ -52,7 +49,7 @@ npm install @base-ui/react
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="context-menu" title="components/ui/context-menu.tsx" />
+<ComponentSource name="context-menu" title="components/ui/context-menu" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -64,37 +61,30 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import {
-  ContextMenu,
-  ContextMenuCheckboxItem,
-  ContextMenuGroup,
-  ContextMenuGroupLabel,
-  ContextMenuItem,
-  ContextMenuLinkItem,
-  ContextMenuPopup,
-  ContextMenuRadioGroup,
-  ContextMenuRadioItem,
-  ContextMenuSeparator,
-  ContextMenuSub,
-  ContextMenuSubPopup,
-  ContextMenuSubTrigger,
-  ContextMenuTrigger,
-} from "@/components/ui/context-menu"
-```
+```svelte
+<script lang="ts">
+  import {
+    ContextMenu,
+    ContextMenuItem,
+    ContextMenuLinkItem,
+    ContextMenuPopup,
+    ContextMenuSeparator,
+    ContextMenuSub,
+    ContextMenuSubPopup,
+    ContextMenuSubTrigger,
+    ContextMenuTrigger
+  } from '$lib/components/ui/context-menu';
+</script>
 
-```tsx
 <ContextMenu>
-  <ContextMenuTrigger className="flex h-32 items-center justify-center rounded-lg border border-dashed">
+  <ContextMenuTrigger class="flex h-32 items-center justify-center rounded-lg border border-dashed">
     Right click here
   </ContextMenuTrigger>
   <ContextMenuPopup>
     <ContextMenuItem>Back</ContextMenuItem>
     <ContextMenuItem>Forward</ContextMenuItem>
     <ContextMenuSeparator />
-    <ContextMenuLinkItem render={<Link href="/docs" />}>
-      Documentation
-    </ContextMenuLinkItem>
+    <ContextMenuLinkItem href="/docs">Documentation</ContextMenuLinkItem>
     <ContextMenuSeparator />
     <ContextMenuSub>
       <ContextMenuSubTrigger>More tools</ContextMenuSubTrigger>
@@ -111,7 +101,7 @@ import {
 
 ### ContextMenu
 
-Root component. Alias for `ContextMenu.Root` from Base UI.
+Root component. Wrapper for `ContextMenu.Root` from ShardsUI. `open` is bindable (`bind:open`).
 
 ### ContextMenuTrigger
 
@@ -127,11 +117,12 @@ Popup container that displays the menu content at the pointer.
 | `align`       | `"start" \| "center" \| "end"`                 | `"center"` | Alignment relative to the anchor                   |
 | `sideOffset`  | `number`                                       | `4`        | Distance from the anchor in pixels               |
 | `alignOffset` | `number`                                       | -          | Offset along the alignment axis                  |
-| `portalProps` | `ContextMenu.Portal.Props`                     | -          | Props forwarded to the internal portal (`keepMounted`, `container`, etc.); see Base UI Context Menu portal API |
+| `anchor`      | positioner `anchor`                            | -          | Custom anchor element for positioning            |
+| `portalProps` | props of `ContextMenu.Portal`                  | -          | Props forwarded to the internal portal (`keepMounted`, `container`, etc.); see the ShardsUI Context Menu portal API |
 
 ### ContextMenuGroup
 
-Groups related menu items. Alias for `ContextMenu.Group` from Base UI.
+Groups related menu items. Wrapper for `ContextMenu.Group` from ShardsUI.
 
 ### ContextMenuItem
 
@@ -144,7 +135,7 @@ Individual menu item.
 
 **Using `inset`:** When mixing items with and without icons, use `inset` on icon-less items to maintain alignment:
 
-```tsx
+```svelte
 <ContextMenuItem><PencilIcon /> Edit</ContextMenuItem>
 <ContextMenuItem inset>Properties</ContextMenuItem>
 ```
@@ -159,21 +150,13 @@ Link menu item for navigation. **`LinkItem`** renders a native **`<a>`** when yo
 | `variant`      | `"default" \| "destructive"`  | `"default"` | Controls the item styling                        |
 | `closeOnClick` | `boolean`                     | `true`      | Whether the menu closes when the link is clicked |
 
-If you were using **`ContextMenuItem render={<Link href="..." />}`**, migrate to **`ContextMenuLinkItem`** but **keep `render`** — do not replace it with **`href`** alone when using a router **`Link`**.
-
-```tsx
-<ContextMenuLinkItem render={<Link href="/docs" />}>Docs</ContextMenuLinkItem>
-```
-
-Use **`href`** only for plain anchor links:
-
-```tsx
+```svelte
 <ContextMenuLinkItem href="/docs">Docs</ContextMenuLinkItem>
 ```
 
 ### ContextMenuCheckboxItem
 
-Checkbox menu item.
+Checkbox menu item. `checked` is bindable (`bind:checked`).
 
 | Prop      | Type                       | Default     | Description                                      |
 | --------- | -------------------------- | ----------- | ------------------------------------------------ |
@@ -181,11 +164,11 @@ Checkbox menu item.
 
 ### ContextMenuRadioGroup
 
-Groups radio menu items. Alias for `ContextMenu.RadioGroup` from Base UI.
+Groups radio menu items. Wrapper for `ContextMenu.RadioGroup` from ShardsUI. `value` is bindable (`bind:value`).
 
 ### ContextMenuRadioItem
 
-Radio menu item. Styled wrapper for `ContextMenu.RadioItem` from Base UI.
+Radio menu item. Styled wrapper for `ContextMenu.RadioItem` from ShardsUI.
 
 ### ContextMenuGroupLabel
 
@@ -201,11 +184,11 @@ Visual separator between menu items.
 
 ### ContextMenuShortcut
 
-Displays keyboard shortcut text. Custom component (not a Base UI wrapper).
+Displays keyboard shortcut text. Custom component (not a ShardsUI wrapper).
 
 ### ContextMenuSub
 
-Submenu container. Alias for `ContextMenu.SubmenuRoot` from Base UI.
+Submenu container. Wrapper for `ContextMenu.SubmenuRoot` from ShardsUI.
 
 ### ContextMenuSubTrigger
 

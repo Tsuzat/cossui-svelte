@@ -16,7 +16,7 @@ description: A badge or a component that looks like a badge.
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/badge
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/badge.json
 ```
 
 </TabsPanel>
@@ -28,7 +28,7 @@ npx shadcn@latest add @coss/badge
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Import the following variables into your CSS file</Step>
@@ -67,7 +67,7 @@ npm install @base-ui/react
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="badge" title="components/ui/badge.tsx" />
+<ComponentSource name="badge" title="components/ui/badge" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -79,31 +79,29 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import { Badge } from "@/components/ui/badge"
-```
+```svelte
+<script lang="ts">
+  import { Badge } from '$lib/components/ui/badge';
+</script>
 
-```tsx
 <Badge>Badge</Badge>
 ```
 
 ## Link
 
-You can use the [`render`](https://base-ui.com/react/utils/use-render#migrating-from-radix-ui) prop to make another component look like a badge. Here's an example of a link that looks like a badge.
+Pass an `href` to render the badge as an anchor (`<a>`) instead of a `<span>`.
 
-```tsx
-import Link from "next/link"
+```svelte
+<script lang="ts">
+  import { Badge } from '$lib/components/ui/badge';
+</script>
 
-import { Badge } from "@/components/ui/badge"
-
-export function LinkAsBadge() {
-  return <Badge render={<Link href="/pricing" />}>New</Badge>
-}
+<Badge href="/pricing">New</Badge>
 ```
 
 ## API Reference
 
-This is a custom component using Base UI's `useRender` hook, not a direct Base UI wrapper.
+This is a custom component, not a ShardsUI wrapper. It renders a `<span>`, or an `<a>` when `href` is set.
 
 ### Badge
 
@@ -113,7 +111,7 @@ A badge component with variant and size options.
 | --------- | ------------------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------ |
 | `variant` | `"default" \| "destructive" \| "error" \| "info" \| "outline" \| "secondary" \| "success" \| "warning"` | `"default"` | Controls the badge styling and color scheme      |
 | `size`    | `"default" \| "sm" \| "lg"`                                                                             | `"default"` | Controls the badge size                          |
-| `render`  | `React.ReactElement`                                                                                    | -           | Render as a different element (e.g., Link)       |
+| `href`    | `string`                                                                                                | -           | Renders the badge as a link                      |
 
 ## Examples
 

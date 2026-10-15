@@ -16,7 +16,7 @@ description: Displays the path to the current resource using a hierarchy of link
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/breadcrumb
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/breadcrumb.json
 ```
 
 </TabsPanel>
@@ -27,7 +27,7 @@ npx shadcn@latest add @coss/breadcrumb
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="breadcrumb" title="components/ui/breadcrumb.tsx" />
+<ComponentSource name="breadcrumb" title="components/ui/breadcrumb" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -39,19 +39,19 @@ npx shadcn@latest add @coss/breadcrumb
 
 ## Usage
 
-```tsx
-import {
-  Breadcrumb,
-  BreadcrumbEllipsis,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-```
+```svelte
+<script lang="ts">
+  import {
+    Breadcrumb,
+    BreadcrumbEllipsis,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator
+  } from '$lib/components/ui/breadcrumb';
+</script>
 
-```tsx
 <Breadcrumb>
   <BreadcrumbList>
     <BreadcrumbItem>
@@ -74,7 +74,7 @@ import {
 
 ## API Reference
 
-This is a custom component, not a Base UI wrapper.
+This is a custom component, not a ShardsUI wrapper.
 
 ### Breadcrumb
 
@@ -90,11 +90,7 @@ Individual breadcrumb item container.
 
 ### BreadcrumbLink
 
-Link element for navigable breadcrumb items. Supports the `render` prop to use custom link components (e.g., Next.js Link).
-
-| Prop     | Type                   | Default | Description                                      |
-| -------- | ---------------------- | ------- | ------------------------------------------------ |
-| `render` | `React.ReactElement`   | -       | Render as a different element (e.g., Next.js Link) |
+Anchor element for navigable breadcrumb items. Accepts all standard `<a>` attributes (`href`, etc.).
 
 ### BreadcrumbPage
 

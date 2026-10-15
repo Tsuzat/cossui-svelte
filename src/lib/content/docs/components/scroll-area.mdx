@@ -1,9 +1,6 @@
 ---
 title: Scroll Area
 description: A native scroll container with custom scrollbars.
-
-links:
-  doc: https://base-ui.com/react/components/scroll-area#api-reference
 ---
 
 <ComponentPreview name="p-scroll-area-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/scroll-area
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/scroll-area.json
 ```
 
 </TabsPanel>
@@ -31,12 +28,12 @@ npx shadcn@latest add @coss/scroll-area
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="scroll-area" title="components/ui/scroll-area.tsx" />
+<ComponentSource name="scroll-area" title="components/ui/scroll-area" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -48,21 +45,16 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import { ScrollArea } from "@/components/ui/scroll-area"
-```
+```svelte
+<script lang="ts">
+  import { ScrollArea } from '$lib/components/ui/scroll-area';
+</script>
 
-```tsx
-<ScrollArea className="h-64 rounded-md border">
-  <div className="p-4">
-    Just as suddenly as it had begun, the sensation stopped, leaving Alice
-    feeling slightly disoriented. She looked around and realized that the room
-    hadn't changed at all - it was she who had grown smaller, shrinking down to
-    a fraction of her previous size. Alice felt herself growing larger and
-    larger, filling up the entire room until she feared she might burst. The
-    sensation was both thrilling and terrifying, as if she were expanding beyond
-    the confines of her own body. She wondered if this was what it felt like to
-    be a balloon, swelling with air until it could hold no more.
+<ScrollArea class="h-64 rounded-md border">
+  <div class="p-4">
+    Just as suddenly as it had begun, the sensation stopped, leaving Alice feeling slightly
+    disoriented. She looked around and realized that the room hadn't changed at all - it was she
+    who had grown smaller, shrinking down to a fraction of her previous size.
   </div>
 </ScrollArea>
 ```
@@ -71,31 +63,22 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 
 ### ScrollArea
 
-Root component. Styled wrapper for `ScrollArea.Root` from Base UI with custom scrollbar styling.
+Root component. Styled wrapper for `ScrollArea.Root` from ShardsUI that renders the viewport, content wrapper, scrollbars and corner for you. `ref` and `viewportRef` are bindable.
 
-| Prop                    | Type      | Default | Description                                      |
-| ----------------------- | --------- | ------- | ------------------------------------------------ |
-| `scrollFade`            | `boolean` | `false` | Masks viewport edges so content fades in/out as you scroll |
-| `scrollbarGutter`       | `boolean` | `false` | Reserves space for the scrollbar to prevent layout shifts |
-| `fill`                  | `boolean` | `false` | Applies `size-full` to the scroll area content wrapper so flex layouts (e.g. `mt-auto` footers) can fill the viewport height |
-| `clampContentMinWidth`  | `boolean` | `true`  | Sets `minWidth: 0` on the content wrapper to avoid spurious horizontal scrollbars in vertical layouts |
-| `overscrollContain`     | `boolean` | `false` | Prevents scroll chaining into parent scrollers when the viewport overflows |
+| Prop                    | Type                                      | Default  | Description                                      |
+| ----------------------- | ----------------------------------------- | -------- | ------------------------------------------------ |
+| `orientation`           | `"vertical" \| "horizontal" \| "both"`    | `"both"` | Which scrollbars to render                       |
+| `scrollbarXClasses`     | `string`                                  | `''`     | Extra classes for the horizontal scrollbar       |
+| `scrollbarYClasses`     | `string`                                  | `''`     | Extra classes for the vertical scrollbar         |
+| `scrollFade`            | `boolean`                                 | `false`  | Masks viewport edges so content fades in/out as you scroll |
+| `scrollbarGutter`       | `boolean`                                 | `false`  | Reserves space for the scrollbar to prevent layout shifts |
+| `fill`                  | `boolean`                                 | `false`  | Applies `size-full` to the scroll area content wrapper so flex layouts (e.g. `mt-auto` footers) can fill the viewport height |
+| `clampContentMinWidth`  | `boolean`                                 | `true`   | Sets `min-width: 0` on the content wrapper to avoid spurious horizontal scrollbars in vertical layouts |
+| `overscrollContain`     | `boolean`                                 | `false`  | Prevents scroll chaining into parent scrollers when the viewport overflows |
 
-### ScrollAreaViewport
+### Scrollbar
 
-Scrollable viewport container. Styled wrapper for `ScrollArea.Viewport` from Base UI.
-
-### ScrollAreaScrollbar
-
-Scrollbar track. Styled wrapper for `ScrollArea.Scrollbar` from Base UI.
-
-### ScrollAreaThumb
-
-Scrollbar thumb. Styled wrapper for `ScrollArea.Thumb` from Base UI.
-
-### ScrollAreaCorner
-
-Corner element when both scrollbars are visible. Alias for `ScrollArea.Corner` from Base UI.
+Scrollbar track with a built-in thumb. Styled wrapper for `ScrollArea.Scrollbar` from ShardsUI. `ScrollArea` already renders one per `orientation`; use this export only for custom compositions.
 
 ## Examples
 
@@ -123,11 +106,11 @@ Enable `scrollbarGutter` to reserve space for the scrollbar when overflow appear
 
 Use `fill` when the scroll area wraps a flex column that should stretch to the full viewport height—for example, pinning a footer with `mt-auto` inside a sidebar. The built-in **`SidebarContent`** part already passes `fill`; opt in manually for custom layouts:
 
-```tsx
-<ScrollArea className="flex-1 min-h-0" fill>
-  <div className="flex h-full flex-col">
-    <nav>{/* main items */}</nav>
-    <footer className="mt-auto">{/* pinned footer */}</footer>
+```svelte
+<ScrollArea class="flex-1 min-h-0" fill>
+  <div class="flex h-full flex-col">
+    <nav><!-- main items --></nav>
+    <footer class="mt-auto"><!-- pinned footer --></footer>
   </div>
 </ScrollArea>
 ```
@@ -138,9 +121,9 @@ Leave `fill` at the default (`false`) for content-sized areas such as lists, com
 
 Use **`overscrollContain`** to stop wheel/touch scrolling from chaining into a parent scroller once the viewport hits its edge. Dialog, sheet, drawer, combobox, autocomplete, and sidebar already opt in; pass it yourself for custom nested scroll surfaces.
 
-```tsx
-<ScrollArea className="h-64" overscrollContain>
-  <div className="p-4">{/* Long content */}</div>
+```svelte
+<ScrollArea class="h-64" overscrollContain>
+  <div class="p-4"><!-- Long content --></div>
 </ScrollArea>
 ```
 
@@ -148,11 +131,6 @@ Leave it at the default (`false`) for standalone scroll areas where natural scro
 
 ### Content min-width
 
-Base UI sets `min-width: fit-content` on the content wrapper, which often causes unwanted horizontal scroll in vertical lists and panels (dialogs, comboboxes, sidebars). **`clampContentMinWidth`** defaults to **`true`** and applies `minWidth: 0` to prevent that.
+ShardsUI sets `min-width: fit-content` on the content wrapper, which often causes unwanted horizontal scroll in vertical lists and panels (dialogs, comboboxes, sidebars). **`clampContentMinWidth`** defaults to **`true`** and applies `minWidth: 0` to prevent that.
 
 Horizontal scroll still works when children define their own width (e.g. `w-max`, table min-width). Set **`clampContentMinWidth={false}`** only if horizontal scroll stops working and the child has no explicit width—rare cases like certain flex chains or long unbreakable inline text without overflow handling.
-
-## Changelog
-
-- [July 31, 2026](/ui/docs/changelog#scroll-area--overscroll-contain) — **`ScrollArea`** no longer applies overscroll contain by default; pass optional **`overscrollContain`** for nested surfaces. Dialog, sheet, drawer, combobox, autocomplete, and sidebar already opt in.
-- [May 29, 2026](/ui/docs/changelog#scroll-area) — **`ScrollArea`** adds optional **`fill`** (default **`false`**); pass **`fill`** for flex layouts that need the content wrapper to stretch (e.g. sidebar footers with **`mt-auto`**).

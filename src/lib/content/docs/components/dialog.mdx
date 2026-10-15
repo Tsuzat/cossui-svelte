@@ -1,9 +1,6 @@
 ---
 title: Dialog
 description: A popup that opens on top of the entire page.
-
-links:
-  doc: https://base-ui.com/react/components/dialog#api-reference
 ---
 
 <ComponentPreview name="p-dialog-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/dialog
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/dialog.json
 ```
 
 </TabsPanel>
@@ -31,12 +28,12 @@ npx shadcn@latest add @coss/dialog
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="dialog" title="components/ui/dialog.tsx" />
+<ComponentSource name="dialog" title="components/ui/dialog" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -48,23 +45,24 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import {
-  Dialog,
-  DialogClose,
-  DialogDescription,
-  DialogPanel,
-  DialogFooter,
-  DialogHeader,
-  DialogPopup,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-```
+```svelte
+<script lang="ts">
+  import { buttonVariants } from '$lib/components/ui/button';
+  import {
+    Dialog,
+    DialogClose,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogPanel,
+    DialogPopup,
+    DialogTitle,
+    DialogTrigger
+  } from '$lib/components/ui/dialog';
+</script>
 
-```tsx
 <Dialog>
-  <DialogTrigger>Open Dialog</DialogTrigger>
+  <DialogTrigger class={buttonVariants({ variant: 'outline' })}>Open Dialog</DialogTrigger>
   <DialogPopup>
     <DialogHeader>
       <DialogTitle>Dialog Title</DialogTitle>
@@ -72,7 +70,7 @@ import {
     </DialogHeader>
     <DialogPanel>Content</DialogPanel>
     <DialogFooter>
-      <DialogClose>Close</DialogClose>
+      <DialogClose class={buttonVariants({ variant: 'ghost' })}>Close</DialogClose>
     </DialogFooter>
   </DialogPopup>
 </Dialog>
@@ -82,66 +80,67 @@ import {
 
 ### Dialog
 
-Root component. Alias for `Dialog.Root` from Base UI.
+Root component. Wrapper for `Dialog.Root` from ShardsUI. `open` is bindable (`bind:open`).
 
 ### DialogTrigger
 
-Trigger button that opens the dialog. Alias for `Dialog.Trigger` from Base UI.
+Trigger button that opens the dialog. Wrapper for `Dialog.Trigger` from ShardsUI. Defaults to `type="button"`. Use the `child` snippet to render a custom element.
 
 ### DialogCreateHandle
 
-Creates a handle for detached dialog triggers. Use it when the trigger and popup need to be coordinated across different parts of the tree.
+Returns a new `Dialog.Handle` from ShardsUI for detached dialog triggers. Use it when the trigger and popup need to be coordinated across different parts of the tree.
 
 ### DialogPopup
 
-Popup container that displays the dialog content. Also exported as `DialogContent`.
+Popup container that displays the dialog content. Wraps the portal, backdrop and viewport. Also exported as `DialogContent`.
 
-| Prop                  | Type                        | Default | Description                                      |
-| --------------------- | --------------------------- | ------- | ------------------------------------------------ |
-| `showCloseButton`     | `boolean`                   | `true`  | When true, displays a close button in the top-right corner |
-| `bottomStickOnMobile` | `boolean`                   | `true`  | When true, sticks to the bottom of the screen on mobile devices |
-| `closeProps`          | `Dialog.Close.Props`        | -       | Props forwarded to the internal close button, useful for overriding `aria-label` |
-| `portalProps`         | `Dialog.Portal.Props`       | -       | Props forwarded to the internal portal (`keepMounted`, `container`, etc.); see Base UI Dialog portal API |
+| Prop                  | Type                                | Default | Description                                      |
+| --------------------- | ----------------------------------- | ------- | ------------------------------------------------ |
+| `showCloseButton`     | `boolean`                           | `true`  | When true, displays a close button in the top-right corner |
+| `bottomStickOnMobile` | `boolean`                           | `true`  | When true, sticks to the bottom of the screen on mobile devices |
+| `closeProps`          | props of `Dialog.Close`             | -       | Props forwarded to the internal close button, useful for overriding `aria-label` |
+| `portalProps`         | props of `DialogPortal`             | -       | Props forwarded to the internal portal (`keepMounted`, `container`, etc.); see the ShardsUI Dialog portal API |
 
 ### DialogHeader
 
-Container for the dialog title and description. Supports the `render` prop for polymorphic composition (e.g. `render={<Link href="/" />}`).
+Container for the dialog title and description.
 
 ### DialogFooter
 
-Footer section for action buttons. Supports the `render` prop for polymorphic composition.
+Footer section for action buttons.
 
-| Prop        | Type                     | Default     | Description                                      |
-| ----------- | ------------------------ | ----------- | ------------------------------------------------ |
-| `variant`   | `"default" \| "bare"`    | `"default"` | Controls the footer styling. `default` includes border and background, `bare` removes them |
+| Prop              | Type                     | Default     | Description                                      |
+| ----------------- | ------------------------ | ----------- | ------------------------------------------------ |
+| `variant`         | `"default" \| "bare"`    | `"default"` | Controls the footer styling. `default` includes border and background, `bare` removes them |
+| `showCloseButton` | `boolean`                | `false`     | When true, renders a built-in outline "Close" button |
 
 **Example:**
 
-```tsx
-// Default variant (with border and background)
+```svelte
+<!-- Default variant (with border and background) -->
 <DialogFooter>
-  <DialogClose>Cancel</DialogClose>
+  <DialogClose class={buttonVariants({ variant: 'ghost' })}>Cancel</DialogClose>
   <Button>Save</Button>
 </DialogFooter>
 
-// Bare variant (no border or background)
+<!-- Bare variant (no border or background) -->
 <DialogFooter variant="bare">
-  <DialogClose>Cancel</DialogClose>
+  <DialogClose class={buttonVariants({ variant: 'ghost' })}>Cancel</DialogClose>
   <Button>Save</Button>
 </DialogFooter>
 ```
 
 ### DialogTitle
 
-Title component. Alias for `Dialog.Title` from Base UI.
+Title component. Wrapper for `Dialog.Title` from ShardsUI.
 
 ### DialogDescription
 
-Description component. Alias for `Dialog.Description` from Base UI.
+Description component. Wrapper for `Dialog.Description` from ShardsUI.
 
 ### DialogPanel
 
-Scrollable content container. Automatically wraps content in a `ScrollArea` component. Supports the `render` prop for polymorphic composition.
+Scrollable content container. Automatically wraps content in a `ScrollArea` component.
 
 | Prop         | Type      | Default | Description                                      |
 | ------------ | --------- | ------- | ------------------------------------------------ |
@@ -149,28 +148,28 @@ Scrollable content container. Automatically wraps content in a `ScrollArea` comp
 
 **Example:**
 
-```tsx
+```svelte
 <DialogPanel>
-  {/* Long content that will scroll if it exceeds the dialog height */}
+  <!-- Long content that will scroll if it exceeds the dialog height -->
   <div>...</div>
 </DialogPanel>
 ```
 
 ### DialogClose
 
-Close button component. Alias for `Dialog.Close` from Base UI.
+Close button component. Wrapper for `Dialog.Close` from ShardsUI. Defaults to `type="button"`.
 
 ### DialogPortal
 
-Portal component for rendering outside the DOM hierarchy. Alias for `Dialog.Portal` from Base UI.
+Portal component for rendering outside the DOM hierarchy. Wrapper for `Dialog.Portal` from ShardsUI.
 
 ### DialogBackdrop
 
-Backdrop/overlay component. Also exported as `DialogOverlay`. Alias for `Dialog.Backdrop` from Base UI.
+Backdrop/overlay component. Also exported as `DialogOverlay`. Wrapper for `Dialog.Backdrop` from ShardsUI.
 
 ### DialogViewport
 
-Viewport component for positioning. Alias for `Dialog.Viewport` from Base UI.
+Viewport component for positioning. Wrapper for `Dialog.Viewport` from ShardsUI.
 
 ## Examples
 

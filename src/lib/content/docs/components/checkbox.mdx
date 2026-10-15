@@ -1,9 +1,6 @@
 ---
 title: Checkbox
 description: A control allowing the user to toggle between checked and not checked.
-
-links:
-  doc: https://base-ui.com/react/components/checkbox#api-reference
 ---
 
 <ComponentPreview name="p-checkbox-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/checkbox
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/checkbox.json
 ```
 
 </TabsPanel>
@@ -31,12 +28,12 @@ npx shadcn@latest add @coss/checkbox
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="checkbox" title="components/ui/checkbox.tsx" />
+<ComponentSource name="checkbox" title="components/ui/checkbox" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -48,23 +45,31 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import { Checkbox } from "@/components/ui/checkbox"
-```
+```svelte
+<script lang="ts">
+  import { Checkbox } from '$lib/components/ui/checkbox';
 
-```tsx
-<Checkbox />
+  let checked = $state(false);
+</script>
+
+<Checkbox bind:checked />
 ```
 
 ## API Reference
 
 ### Checkbox
 
-Styled wrapper for `Checkbox.Root` from Base UI. Includes a built-in indicator with checkmark and indeterminate icons.
+Styled wrapper for `Checkbox.Root` from ShardsUI. Includes a built-in indicator with checkmark and indeterminate icons.
+
+| Prop            | Type      | Default | Description                                         |
+| --------------- | --------- | ------- | --------------------------------------------------- |
+| `checked`       | `boolean` | `false` | Checked state. Bindable with `bind:checked`         |
+| `indeterminate` | `boolean` | `false` | Shows the indeterminate (mixed) state               |
+| `value`         | `string`  | -       | Value used inside a `CheckboxGroup` or form         |
 
 ## Examples
 
-For accessible labelling and validation, prefer using the `Field` component to wrap checkboxes. See the related example: [Checkbox field](/ui/docs/components/field#checkbox-field).
+For accessible labelling and validation, prefer using the `Field` component to wrap checkboxes. See the related example: [Checkbox field](/docs/field#checkbox-field).
 
 ### Disabled
 

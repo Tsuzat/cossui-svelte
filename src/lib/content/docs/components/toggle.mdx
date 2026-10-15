@@ -1,9 +1,6 @@
 ---
 title: Toggle
 description: A two-state button that can be toggled on or off.
-
-links:
-  doc: https://base-ui.com/react/components/toggle#api-reference
 ---
 
 <ComponentPreview name="p-toggle-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/toggle
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/toggle.json
 ```
 
 </TabsPanel>
@@ -31,12 +28,12 @@ npx shadcn@latest add @coss/toggle
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="toggle" title="components/ui/toggle.tsx" />
+<ComponentSource name="toggle" title="components/ui/toggle" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -48,24 +45,26 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import { Toggle } from "@/components/ui/toggle"
-```
+```svelte
+<script lang="ts">
+  import { Toggle } from '$lib/components/ui/toggle';
 
-```tsx
-<Toggle>Toggle</Toggle>
+  let pressed = $state(false);
+</script>
+
+<Toggle bind:pressed>Toggle</Toggle>
 ```
 
 ## API Reference
 
 ### Toggle
 
-Styled wrapper for `Toggle.Root` from Base UI with variant and size options.
+Styled wrapper for `Toggle` from ShardsUI with variant and size options. `pressed` is bindable. The `toggleVariants` helper is also exported for styling other elements as toggles.
 
-| Prop      | Type                          | Default     | Description                                      |
-| --------- | ----------------------------- | ----------- | ------------------------------------------------ |
-| `variant` | `"default" \| "outline"`      | `"default"` | Controls the toggle styling                      |
-| `size`    | `"default" \| "sm" \| "lg"`   | `"default"` | Controls the toggle size                         |
+| Prop      | Type                         | Default     | Description                 |
+| --------- | ---------------------------- | ----------- | --------------------------- |
+| `variant` | `"default" \| "outline"`     | `"default"` | Controls the toggle styling |
+| `size`    | `"default" \| "sm" \| "lg"`  | `"default"` | Controls the toggle size    |
 
 ## Examples
 

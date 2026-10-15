@@ -1,9 +1,6 @@
 ---
 title: Tabs
 description: A component for toggling between related panels on the same page.
-
-links:
-  doc: https://base-ui.com/react/components/tabs#api-reference
 ---
 
 <ComponentPreview name="p-tabs-1" />
@@ -19,10 +16,8 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/tabs
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/tabs.json
 ```
-
-The CLI installs the shared `@coss/segmented-control` registry dependency automatically.
 
 </TabsPanel>
 
@@ -33,16 +28,12 @@ The CLI installs the shared `@coss/segmented-control` registry dependency automa
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react class-variance-authority
+npm install @shardsui/svelte tailwind-variants
 ```
 
-<Step>Copy the shared segmented control styling into your project.</Step>
+<Step>Copy and paste the following code into your project. The shared segmented control styles (`segmented-control.ts`) are included.</Step>
 
-<ComponentSource name="segmented-control" title="lib/segmented-control.ts" />
-
-<Step>Copy and paste the Tabs component into your project.</Step>
-
-<ComponentSource name="tabs" title="components/ui/tabs.tsx" />
+<ComponentSource name="tabs" title="components/ui/tabs" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -54,12 +45,12 @@ npm install @base-ui/react class-variance-authority
 
 ## Usage
 
-```tsx
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs"
-```
+```svelte
+<script lang="ts">
+  import { Tabs, TabsList, TabsPanel, TabsTab } from '$lib/components/ui/tabs';
+</script>
 
-```tsx
-<Tabs defaultValue="tab-1">
+<Tabs value="tab-1">
   <TabsList>
     <TabsTab value="tab-1">Tab 1</TabsTab>
     <TabsTab value="tab-2">Tab 2</TabsTab>
@@ -75,11 +66,11 @@ import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs"
 
 ### Tabs
 
-Root component. Styled wrapper for `Tabs.Root` from Base UI.
+Root component. Styled wrapper for `Tabs.Root` from ShardsUI.
 
 ### TabsList
 
-Container for tab triggers. Styled wrapper for `Tabs.List` from Base UI.
+Container for tab triggers. Styled wrapper for `Tabs.List` from ShardsUI. Renders the active-tab indicator automatically.
 
 | Prop      | Type                       | Default     | Description                         |
 | --------- | -------------------------- | ----------- | ----------------------------------- |
@@ -88,19 +79,19 @@ Container for tab triggers. Styled wrapper for `Tabs.List` from Base UI.
 
 ### TabsTab
 
-Individual tab trigger. Styled wrapper for `Tabs.Tab` from Base UI.
+Individual tab trigger. Styled wrapper for `Tabs.Tab` from ShardsUI. Also exported as `TabsTrigger`.
 
 ### TabsPanel
 
-Content panel for each tab. Styled wrapper for `Tabs.Panel` from Base UI.
+Content panel for each tab. Styled wrapper for `Tabs.Panel` from ShardsUI. Also exported as `TabsContent`.
 
 ### TabsIndicator
 
-Visual indicator for the active tab. Styled wrapper for `Tabs.Indicator` from Base UI.
+Visual indicator for the active tab. Styled wrapper for `Tabs.Indicator` from ShardsUI.
 
 ## Examples
 
-For guidance on choosing between Tabs, Radio Group, Toggle Group, and navigation links, see the [Segmented Control](/ui/docs/components/segmented-control) pattern.
+For guidance on choosing between Tabs, Radio Group, Toggle Group, and navigation links, see the [Segmented Control](/docs/segmented-control) pattern.
 
 Tabs use the same optical sizing as segmented controls. The default surface is slightly taller than a Button of the same size so its inset active indicator remains visually balanced alongside adjacent controls.
 

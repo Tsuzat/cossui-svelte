@@ -1,9 +1,6 @@
 ---
 title: Number Field
 description: A numeric input element with increment and decrement buttons, and a scrub area.
-
-links:
-  doc: https://base-ui.com/react/components/number-field#api-reference
 ---
 
 <ComponentPreview name="p-number-field-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/number-field
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/number-field.json
 ```
 
 </TabsPanel>
@@ -31,15 +28,12 @@ npx shadcn@latest add @coss/number-field
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @lucide/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource
-  name="number-field"
-  title="components/ui/number-field.tsx"
-/>
+<ComponentSource name="number-field" title="components/ui/number-field" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -51,19 +45,21 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import {
-  NumberField,
-  NumberFieldDecrement,
-  NumberFieldGroup,
-  NumberFieldIncrement,
-  NumberFieldInput,
-  NumberFieldScrubArea,
-} from "@/components/ui/number-field"
-```
+```svelte
+<script lang="ts">
+  import {
+    NumberField,
+    NumberFieldDecrement,
+    NumberFieldGroup,
+    NumberFieldIncrement,
+    NumberFieldInput,
+    NumberFieldScrubArea
+  } from '$lib/components/ui/number-field';
 
-```tsx
-<NumberField defaultValue={0}>
+  let value = $state(0);
+</script>
+
+<NumberField bind:value>
   <NumberFieldScrubArea label="Quantity" />
   <NumberFieldGroup>
     <NumberFieldDecrement />
@@ -75,41 +71,58 @@ import {
 
 ## API Reference
 
+A custom Svelte component (not a ShardsUI wrapper). State is shared with the parts through context.
+
 ### NumberField
 
-Root component. Styled wrapper for `NumberField.Root` from Base UI.
+Root component.
 
-| Prop   | Type                        | Default     | Description                                      |
-| ------ | --------------------------- | ----------- | ------------------------------------------------ |
-| `size` | `"sm" \| "default" \| "lg"` | `"default"` | Controls the size of all child components via context |
+| Prop       | Type                        | Default     | Description                                      |
+| ---------- | --------------------------- | ----------- | ------------------------------------------------ |
+| `value`    | `number`                    | -           | Current value (bindable)                         |
+| `min`      | `number`                    | -           | Minimum value                                    |
+| `max`      | `number`                    | -           | Maximum value                                    |
+| `step`     | `number`                    | `1`         | Amount to change per increment, decrement or scrub unit |
+| `disabled` | `boolean`                   | `false`     | Disables the field                               |
+| `id`       | `string`                    | generated   | Id applied to the input                          |
+| `size`     | `"sm" \| "default" \| "lg"` | `"default"` | Controls the size of all child components        |
 
 ### NumberFieldGroup
 
-Container for the input and buttons. Styled wrapper for `NumberField.Group` from Base UI.
+Container for the input and buttons.
 
 ### NumberFieldInput
 
-Input element for the number value. Styled wrapper for `NumberField.Input` from Base UI.
+Input element for the number value. Supports ArrowUp/ArrowDown, PageUp/PageDown (10 steps), Home and End.
+
+| Prop     | Type                                   | Description                                      |
+| -------- | -------------------------------------- | ------------------------------------------------ |
+| `format` | `(value: number) => string`            | Formats the value for display while the input is not focused |
+| `parse`  | `(display: string) => number \| undefined` | Parses the edited text back to a number (defaults to `parseFloat`) |
 
 ### NumberFieldIncrement
 
-Button to increment the value. Styled wrapper for `NumberField.Increment` from Base UI with plus icon.
+Button to increment the value. Renders a plus icon by default; pass children to replace it. Press and hold to repeat.
 
 ### NumberFieldDecrement
 
-Button to decrement the value. Styled wrapper for `NumberField.Decrement` from Base UI with minus icon.
+Button to decrement the value. Renders a minus icon by default; pass children to replace it. Press and hold to repeat.
 
 ### NumberFieldScrubArea
 
-Draggable area for scrubbing the value. Styled wrapper for `NumberField.ScrubArea` from Base UI.
+Draggable area for scrubbing the value. Must be used inside `NumberField`.
 
 | Prop    | Type     | Default | Description                                      |
 | ------- | -------- | ------- | ------------------------------------------------ |
 | `label` | `string` | -       | Label text displayed in the scrub area           |
 
+### NumberFieldValue
+
+Displays the current value. Pass a `children` snippet, which receives `{ value }`, to customize rendering.
+
 ## Examples
 
-For accessible labelling and validation, prefer using the `Field` component to wrap number fields. See the related example: [Number field](/ui/docs/components/field#number-field).
+For accessible labelling and validation, prefer using the `Field` component to wrap number fields. See the related example: [Number field](/docs/field).
 
 ### Small Size
 

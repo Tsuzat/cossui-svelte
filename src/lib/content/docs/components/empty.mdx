@@ -16,7 +16,7 @@ description: A container for displaying empty state information.
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/empty
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/empty.json
 ```
 
 </TabsPanel>
@@ -27,7 +27,7 @@ npx shadcn@latest add @coss/empty
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="empty" title="components/ui/empty.tsx" />
+<ComponentSource name="empty" title="components/ui/empty" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -39,22 +39,24 @@ npx shadcn@latest add @coss/empty
 
 ## Usage
 
-```tsx
-import {
-  Empty,
-  EmptyContent,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from "@/components/ui/empty"
-```
+```svelte
+<script lang="ts">
+  import InboxIcon from '@lucide/svelte/icons/inbox';
+  import { Button } from '$lib/components/ui/button';
+  import {
+    Empty,
+    EmptyContent,
+    EmptyDescription,
+    EmptyHeader,
+    EmptyMedia,
+    EmptyTitle
+  } from '$lib/components/ui/empty';
+</script>
 
-```tsx
 <Empty>
   <EmptyHeader>
     <EmptyMedia variant="icon">
-      <Icon />
+      <InboxIcon />
     </EmptyMedia>
     <EmptyTitle>No data</EmptyTitle>
     <EmptyDescription>No data found</EmptyDescription>
@@ -73,11 +75,11 @@ The API design of this component is modeled after [shadcn/ui's empty component](
 
 The main component of the empty state. Wraps the `EmptyHeader` and `EmptyContent` components.
 
-| Prop        | Type     | Default |
-| ----------- | -------- | ------- |
-| `className` | `string` |         |
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` |         |
 
-```tsx
+```svelte
 <Empty>
   <EmptyHeader />
   <EmptyContent />
@@ -88,11 +90,11 @@ The main component of the empty state. Wraps the `EmptyHeader` and `EmptyContent
 
 The `EmptyHeader` component wraps the empty media, title, and description.
 
-| Prop        | Type     | Default |
-| ----------- | -------- | ------- |
-| `className` | `string` |         |
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` |         |
 
-```tsx
+```svelte
 <EmptyHeader>
   <EmptyMedia />
   <EmptyTitle />
@@ -107,15 +109,15 @@ Use the `EmptyMedia` component to display the media of the empty state such as a
 | Prop        | Type                  | Default   |
 | ----------- | --------------------- | --------- |
 | `variant`   | `"default" \| "icon"` | `default` |
-| `className` | `string`              |           |
+| `class`     | `string`              |           |
 
-```tsx
+```svelte
 <EmptyMedia variant="icon">
-  <Icon />
+  <InboxIcon />
 </EmptyMedia>
 ```
 
-```tsx
+```svelte
 <EmptyMedia>
   <Avatar>
     <AvatarImage src="..." />
@@ -128,11 +130,11 @@ Use the `EmptyMedia` component to display the media of the empty state such as a
 
 Use the `EmptyTitle` component to display the title of the empty state.
 
-| Prop        | Type     | Default |
-| ----------- | -------- | ------- |
-| `className` | `string` |         |
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` |         |
 
-```tsx
+```svelte
 <EmptyTitle>No data</EmptyTitle>
 ```
 
@@ -140,11 +142,11 @@ Use the `EmptyTitle` component to display the title of the empty state.
 
 Use the `EmptyDescription` component to display the description of the empty state.
 
-| Prop        | Type     | Default |
-| ----------- | -------- | ------- |
-| `className` | `string` |         |
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` |         |
 
-```tsx
+```svelte
 <EmptyDescription>You do not have any notifications.</EmptyDescription>
 ```
 
@@ -152,11 +154,11 @@ Use the `EmptyDescription` component to display the description of the empty sta
 
 Use the `EmptyContent` component to display the content of the empty state such as a button, input or a link.
 
-| Prop        | Type     | Default |
-| ----------- | -------- | ------- |
-| `className` | `string` |         |
+| Prop    | Type     | Default |
+| ------- | -------- | ------- |
+| `class` | `string` |         |
 
-```tsx
+```svelte
 <EmptyContent>
   <Button>Add Project</Button>
 </EmptyContent>

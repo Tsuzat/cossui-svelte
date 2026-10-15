@@ -1,9 +1,6 @@
 ---
 title: Fieldset
 description: A native fieldset element with a legend.
-
-links:
-  doc: https://base-ui.com/react/components/fieldset#api-reference
 ---
 
 <ComponentPreview name="p-fieldset-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/fieldset
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/fieldset.json
 ```
 
 </TabsPanel>
@@ -31,12 +28,12 @@ npx shadcn@latest add @coss/fieldset
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="fieldset" title="components/ui/fieldset.tsx" />
+<ComponentSource name="fieldset" title="components/ui/fieldset" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -48,11 +45,11 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import { Fieldset, FieldsetLegend } from "@/components/ui/fieldset"
-```
+```svelte
+<script lang="ts">
+  import { Fieldset, FieldsetLegend } from '$lib/components/ui/fieldset';
+</script>
 
-```tsx
 <Fieldset>
   <FieldsetLegend>Fieldset legend</FieldsetLegend>
 </Fieldset>
@@ -62,8 +59,8 @@ import { Fieldset, FieldsetLegend } from "@/components/ui/fieldset"
 
 ### Fieldset
 
-Root component. Styled wrapper for `Fieldset.Root` from Base UI with flex column layout.
+Root component. Wrapper for `Fieldset.Root` from ShardsUI.
 
 ### FieldsetLegend
 
-Legend for the fieldset. Styled wrapper for `Fieldset.Legend` from Base UI with semibold font weight.
+Legend for the fieldset. Styled wrapper for `Fieldset.Legend` from ShardsUI with semibold font weight.

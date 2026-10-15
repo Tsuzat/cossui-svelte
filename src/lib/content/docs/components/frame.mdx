@@ -16,7 +16,7 @@ description: A framed container for grouping related information.
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/frame
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/frame.json
 ```
 
 </TabsPanel>
@@ -27,7 +27,7 @@ npx shadcn@latest add @coss/frame
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="frame" title="components/ui/frame.tsx" />
+<ComponentSource name="frame" title="components/ui/frame" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -39,18 +39,18 @@ npx shadcn@latest add @coss/frame
 
 ## Usage
 
-```tsx
-import {
-  Frame,
-  FrameDescription,
-  FrameFooter,
-  FrameHeader,
-  FramePanel,
-  FrameTitle,
-} from "@/components/ui/frame"
-```
+```svelte
+<script lang="ts">
+  import {
+    Frame,
+    FrameDescription,
+    FrameFooter,
+    FrameHeader,
+    FramePanel,
+    FrameTitle
+  } from '$lib/components/ui/frame';
+</script>
 
-```tsx
 <Frame>
   <FrameHeader>
     <FrameTitle>Title</FrameTitle>
@@ -69,7 +69,7 @@ The main container component for grouping related information.
 
 | Prop        | Type     | Default |
 | ----------- | -------- | ------- |
-| `className` | `string` |         |
+| `class`     | `string` |         |
 
 ### FramePanel
 
@@ -77,9 +77,9 @@ A panel container for frame content.
 
 | Prop        | Type     | Default |
 | ----------- | -------- | ------- |
-| `className` | `string` |         |
+| `class`     | `string` |         |
 
-```tsx
+```svelte
 <FramePanel>Content</FramePanel>
 ```
 
@@ -89,9 +89,9 @@ Header section for the frame.
 
 | Prop        | Type     | Default |
 | ----------- | -------- | ------- |
-| `className` | `string` |         |
+| `class`     | `string` |         |
 
-```tsx
+```svelte
 <FrameHeader>
   <FrameTitle>Title</FrameTitle>
   <FrameDescription>Description</FrameDescription>
@@ -104,9 +104,9 @@ Title text for the frame header.
 
 | Prop        | Type     | Default |
 | ----------- | -------- | ------- |
-| `className` | `string` |         |
+| `class`     | `string` |         |
 
-```tsx
+```svelte
 <FrameTitle>Title</FrameTitle>
 ```
 
@@ -116,9 +116,9 @@ Description text for the frame header.
 
 | Prop        | Type     | Default |
 | ----------- | -------- | ------- |
-| `className` | `string` |         |
+| `class`     | `string` |         |
 
-```tsx
+```svelte
 <FrameDescription>Description</FrameDescription>
 ```
 
@@ -128,9 +128,9 @@ Footer section for the frame.
 
 | Prop        | Type     | Default |
 | ----------- | -------- | ------- |
-| `className` | `string` |         |
+| `class`     | `string` |         |
 
-```tsx
+```svelte
 <FrameFooter>Footer</FrameFooter>
 ```
 

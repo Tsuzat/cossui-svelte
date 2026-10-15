@@ -1,9 +1,6 @@
 ---
 title: Input
 description: A native input element.
-
-links:
-  doc: https://base-ui.com/react/components/input#api-reference
 ---
 
 <ComponentPreview name="p-input-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/input
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/input.json
 ```
 
 </TabsPanel>
@@ -31,12 +28,12 @@ npx shadcn@latest add @coss/input
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="input" title="components/ui/input.tsx" />
+<ComponentSource name="input" title="components/ui/input" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -48,19 +45,19 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import { Input } from "@/components/ui/input"
-```
+```svelte
+<script lang="ts">
+  import { Input } from '$lib/components/ui/input';
+</script>
 
-```tsx
-<Input />
+<Input placeholder="Email" />
 ```
 
 ## API Reference
 
 ### Input
 
-Styled wrapper for `Input` from Base UI with custom size options.
+Styled wrapper for `Input` from ShardsUI with custom size options. Supports `bind:value` and `bind:ref`, and forwards other props to the underlying input. The unstyled primitive is also exported as `InputPrimitive`.
 
 | Prop       | Type                                  | Default     | Description                                      |
 | ---------- | ------------------------------------- | ----------- | ------------------------------------------------ |
@@ -69,7 +66,7 @@ Styled wrapper for `Input` from Base UI with custom size options.
 
 ## Examples
 
-For accessible labelling and validation, prefer using the `Field` component to wrap inputs, or the `FieldControl` component. See some [related examples](/ui/docs/components/field).
+For accessible labelling and validation, prefer using the `Field` component to wrap inputs, or the `FieldControl` component. See some [related examples](/docs/field).
 
 ### Small Size
 

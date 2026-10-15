@@ -16,7 +16,7 @@ description: A native textarea element.
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/textarea
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/textarea.json
 ```
 
 </TabsPanel>
@@ -28,12 +28,12 @@ npx shadcn@latest add @coss/textarea
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="textarea" title="components/ui/textarea.tsx" />
+<ComponentSource name="textarea" title="components/ui/textarea" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -45,19 +45,21 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import { Textarea } from "@/components/ui/textarea"
-```
+```svelte
+<script lang="ts">
+  import { Textarea } from '$lib/components/ui/textarea';
 
-```tsx
-<Textarea />
+  let value = $state('');
+</script>
+
+<Textarea bind:value />
 ```
 
 ## Field Integration
 
-Unlike Base UI's built-in form controls, Base UI does not provide a native Textarea primitive. This component wraps the native `<textarea>` element in `Field.Control` internally, so it integrates with `Field` out of the box — no need to wrap it in a `FieldControl` manually.
+This component wraps the native `<textarea>` in `Field.Control` from ShardsUI internally, so it integrates with `Field` out of the box. There is no need to wrap it in a `FieldControl` manually.
 
-```tsx
+```svelte
 <Field>
   <FieldLabel>Bio</FieldLabel>
   <Textarea placeholder="Tell us about yourself…" />
@@ -70,7 +72,7 @@ Unlike Base UI's built-in form controls, Base UI does not provide a native Texta
 
 ### Textarea
 
-Styled native textarea element with custom size options.
+Styled native textarea element with custom size options. `value` and `ref` are bindable; other props are forwarded to `Field.Control`.
 
 | Prop       | Type                                  | Default     | Description                                      |
 | ---------- | ------------------------------------- | ----------- | ------------------------------------------------ |

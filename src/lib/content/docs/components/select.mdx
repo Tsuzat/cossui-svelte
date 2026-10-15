@@ -1,9 +1,6 @@
 ---
 title: Select
 description: A common form component for choosing a predefined value in a dropdown menu.
-
-links:
-  doc: https://base-ui.com/react/components/select#api-reference
 ---
 
 <ComponentPreview name="p-select-1" />
@@ -19,7 +16,7 @@ links:
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/select
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/select.json
 ```
 
 </TabsPanel>
@@ -31,12 +28,12 @@ npx shadcn@latest add @coss/select
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="select" title="components/ui/select.tsx" />
+<ComponentSource name="select" title="components/ui/select" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -48,109 +45,112 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import {
-  Select,
-  SelectItem,
-  SelectPopup,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-```
+```svelte
+<script lang="ts">
+  import {
+    Select,
+    SelectGroup,
+    SelectGroupLabel,
+    SelectItem,
+    SelectPopup,
+    SelectTrigger
+  } from '$lib/components/ui/select';
 
-```tsx
-const items = [
-  { label: "Select framework", value: null },
-  { label: "Next.js", value: "next" },
-  { label: "Vite", value: "vite" },
-  { label: "Astro", value: "astro" },
-]
+  const items = [
+    { label: 'Next.js', value: 'next' },
+    { label: 'Vite', value: 'vite' },
+    { label: 'Astro', value: 'astro' }
+  ];
 
-<Select items={items}>
-  <SelectTrigger>
-    <SelectValue />
+  let value = $state('next');
+  const selectedLabel = $derived(items.find((i) => i.value === value)?.label);
+</script>
+
+<Select bind:value {items}>
+  <SelectTrigger aria-label="Select framework">
+    <span class="flex-1 truncate">{selectedLabel}</span>
   </SelectTrigger>
   <SelectPopup>
-    <SelectLabel>Frameworks</SelectLabel>
-    {items.map((item) => (
-      <SelectItem key={item.value} value={item}>
-        {item.label}
-      </SelectItem>
-    ))}
+    {#each items as item (item.value)}
+      <SelectItem value={item.value}>{item.label}</SelectItem>
+    {/each}
   </SelectPopup>
-  </Select>
+</Select>
 ```
 
 ## API Reference
 
 ### Select
 
-Root component. Alias for `Select.Root` from Base UI.
+Root component. Wrapper for `Select.Root` from ShardsUI. `value` is bindable (`bind:value`, a string, or a string array with `multiple`); `items` and the remaining root props (`onValueChange`, `disabled`, `name`, etc.) are forwarded.
 
 ### SelectTrigger
 
-Trigger button that opens the select dropdown. Styled wrapper for `Select.Trigger` from Base UI.
+Trigger button that opens the select dropdown, with a built-in chevron icon. Styled wrapper for `Select.Trigger` from ShardsUI. Render the current label as its children.
 
 | Prop   | Type                        | Default     | Description                                      |
 | ------ | --------------------------- | ----------- | ------------------------------------------------ |
 | `size` | `"sm" \| "default" \| "lg"` | `"default"` | Controls the size of the trigger                 |
 
-### SelectValue
-
-Displays the selected value. Styled wrapper for `Select.Value` from Base UI.
-
 ### SelectPopup
 
 Popup container for select options. Also exported as `SelectContent`.
 
-| Prop                   | Type                    | Default | Description                                                                                         |
-| ---------------------- | ----------------------- | ------- | --------------------------------------------------------------------------------------------------- |
-| `alignItemWithTrigger` | `boolean`               | `true`  | Aligns the selected item with the trigger                                                           |
-| `sideOffset`           | `number`                | `4`     | Distance from the trigger in pixels                                                                   |
-| `portalProps`          | `Select.Portal.Props`   | -       | Props forwarded to the internal portal (`keepMounted`, `container`, etc.); see Base UI Select portal API |
+| Prop          | Type                                     | Default    | Description                                      |
+| ------------- | ---------------------------------------- | ---------- | ------------------------------------------------ |
+| `side`        | `"top" \| "bottom" \| "left" \| "right"` | `"bottom"` | Side of the trigger to position the popup        |
+| `align`       | `"start" \| "center" \| "end"`           | `"center"` | Alignment relative to the trigger                |
+| `sideOffset`  | `number`                                 | `4`        | Distance from the trigger in pixels              |
+| `alignOffset` | `number`                                 | `0`        | Offset along the alignment axis                  |
+| `anchor`      | `Element`                                | -          | Positions the popup against this element instead of the trigger |
+| `portalProps` | `Select.Portal` props                    | -          | Props forwarded to the internal portal (`keepMounted`, `container`, etc.) |
 
 ### SelectItem
 
-Individual select option. Styled wrapper for `Select.Item` from Base UI with built-in indicator.
+Individual select option with a built-in check indicator. Styled wrapper for `Select.Item` from ShardsUI. Takes a `value`; the visible text comes from the `label` prop, the children snippet (which receives `{ highlighted, selected }`), or falls back to `String(value)`.
 
 ### SelectGroup
 
-Groups related select items. Alias for `Select.Group` from Base UI.
+Groups related select items. Wrapper for `Select.Group` from ShardsUI.
 
 ### SelectLabel
 
-Label for all options in the popup. Styled wrapper for `Select.Label` from Base UI. Clicking it focuses the select trigger without opening the popup.
+Label for all options in the popup. Styled wrapper for `Select.Label` from ShardsUI. Clicking it focuses the select trigger without opening the popup.
 
 ### SelectGroupLabel
 
-Label for a select group. Styled wrapper for `Select.GroupLabel` from Base UI.
+Label for a select group. Styled wrapper for `Select.GroupLabel` from ShardsUI.
 
 ### SelectSeparator
 
-Visual separator between items. Styled wrapper for `Select.Separator` from Base UI.
+Visual separator between items. Styled wrapper for `Select.Separator` from ShardsUI.
+
+### SelectScrollUpButton / SelectScrollDownButton
+
+Scroll arrows rendered automatically by `SelectPopup`.
 
 ### SelectButton
 
-A standalone button styled like a `SelectTrigger`. Use it as a `render` prop on other trigger components (e.g., `ComboboxTrigger`, `MenuTrigger`) to give them select-like appearance.
+A standalone `<button>` styled like a `SelectTrigger`, with a chevron icon. Takes the same `size` prop (`"sm" | "default" | "lg"`, default `"default"`) and renders its children as the label.
 
-| Prop   | Type                        | Default     | Description                                      |
-| ------ | --------------------------- | ----------- | ------------------------------------------------ |
-| `size` | `"sm" \| "default" \| "lg"` | `"default"` | Controls the size of the button                 |
+### selectTriggerVariants
 
-```tsx
-import { SelectButton } from "@/components/ui/select"
-```
+The `tv` recipe behind `SelectTrigger` and `SelectButton`. Apply it as a `class` on other triggers (e.g. `ComboboxTrigger`) to give them select-like appearance.
 
-```tsx
-<ComboboxTrigger render={<SelectButton />}>
+```svelte
+<script lang="ts">
+  import { ComboboxTrigger, ComboboxValue } from '$lib/components/ui/combobox';
+  import { selectTriggerVariants } from '$lib/components/ui/select';
+</script>
+
+<ComboboxTrigger class={selectTriggerVariants()}>
   <ComboboxValue placeholder="Select a fruit" />
 </ComboboxTrigger>
 ```
 
 ## Examples
 
-For accessible labelling and validation, prefer using the `Field` component to wrap selects. See the related example: [Select field](/ui/docs/components/field#select-field).
+For accessible labelling and validation, prefer using the `Field` component to wrap selects. See the related example: [Select field](/docs/field#select-field).
 
 ### Small Size
 
@@ -192,9 +192,9 @@ For accessible labelling and validation, prefer using the `Field` component to w
 
 <ComponentPreview name="p-select-10" />
 
-### SelectButton with Combobox
+### Select-style Combobox
 
-Use `SelectButton` as a `render` prop on `ComboboxTrigger` to create a combobox that looks like a select.
+Pass `selectTriggerVariants()` as the `class` of `ComboboxTrigger` to create a combobox that looks like a select.
 
 <ComponentPreview name="p-combobox-18" />
 

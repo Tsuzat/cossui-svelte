@@ -7,16 +7,16 @@ description: A visual pattern for presenting related choices, navigation destina
 
 ## About
 
-A segmented control is a visual pattern, not a standalone behavior. COSS uses the same presentation across several components while preserving the semantics, keyboard interactions, and state model of each underlying primitive.
+A segmented control is a visual pattern, not a standalone behavior. Coss UI uses the same presentation across several components while preserving the semantics, keyboard interactions, and state model of each underlying primitive.
 
 ## Choose the right primitive
 
 | Intent | Use | Why |
 | ------ | --- | --- |
-| Choose one value in a form | [Radio Group](/ui/docs/components/radio-group) | Represents a mutually exclusive value and participates in form state. |
+| Choose one value in a form | [Radio Group](/docs/radio-group) | Represents a mutually exclusive value and participates in form state. |
 | Navigate to another URL or route | Navigation links | Preserves link behavior, browser history, and `aria-current`. |
-| Apply an exclusive filter or mode | [Toggle Group](/ui/docs/components/toggle-group) | Represents the pressed state of an action that may be cleared. |
-| Switch between related panels | [Tabs](/ui/docs/components/tabs) | Connects each tab to an associated content panel. |
+| Apply an exclusive filter or mode | [Toggle Group](/docs/toggle-group) | Represents the pressed state of an action that may be cleared. |
+| Switch between related panels | [Tabs](/docs/tabs) | Connects each tab to an associated content panel. |
 
 Choose the primitive from the interaction first, then apply the segmented-control styling. Visual similarity alone is not a reason to use Tabs or Toggle Group.
 
@@ -26,40 +26,34 @@ Segmented controls are provided as particles. Install the implementation and siz
 
 | Implementation | Small | Default | Large |
 | -------------- | ----- | ------- | ----- |
-| Radio Group | `@coss/p-radio-group-7` | `@coss/p-radio-group-8` | `@coss/p-radio-group-9` |
-| Navigation | `@coss/p-navigation-2` | `@coss/p-navigation-1` | `@coss/p-navigation-3` |
+| Radio Group | `p-radio-group-7` | `p-radio-group-8` | `p-radio-group-9` |
+| Navigation | `p-navigation-2` | `p-navigation-1` | `p-navigation-3` |
 
 For example, install the default Radio Group version with:
 
 ```bash
-npx shadcn@latest add @coss/p-radio-group-8
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/p-radio-group-8.json
 ```
 
-The CLI installs the shared `segmented-control` styling library and the required primitive automatically.
+The CLI installs the required primitive and the shared styling module automatically.
 
 ## Shared styling
 
-For a custom composition, install the styling library directly:
+The shared styling ships with the Tabs component (`components/ui/tabs/segmented-control.ts`), so installing `tabs` also gives you the module for custom compositions. It exports a root class, an item recipe, and a shared item layout class for icons:
 
-```bash
-npx shadcn@latest add @coss/segmented-control
-```
-
-The library exports a root class, an item recipe, and a shared item layout class for icons:
-
-```tsx
+```ts
 import {
   segmentedControlItemLayoutClassName,
   segmentedControlItemVariants,
-  segmentedControlRootClassName,
-} from "@/lib/segmented-control"
+  segmentedControlRootClassName
+} from '$lib/components/ui/tabs/segmented-control';
 ```
 
-```tsx
+```ts
 const itemClassName = segmentedControlItemVariants({
-  size: "default",
-  state: "checked",
-})
+  size: 'default',
+  state: 'checked'
+});
 ```
 
 | Option | Values | Description |
@@ -71,10 +65,7 @@ Use `checked` with Radio Group, `current` with navigation links, and `pressed` w
 
 At the outside edges, the item padding and the surface's `p-0.5` inset combine to match the horizontal padding of the corresponding Button size. The outer segmented surface is slightly taller than that Button to optically balance its inset selected item when the controls appear next to each other.
 
-<ComponentSource
-  name="segmented-control"
-  title="lib/segmented-control.ts"
-/>
+<ComponentSource name="tabs" title="components/ui/tabs" />
 
 ## Radio options
 

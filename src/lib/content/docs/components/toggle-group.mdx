@@ -16,7 +16,7 @@ description: Provides a shared state to a series of toggle buttons.
 <TabsPanel value="cli">
 
 ```bash
-npx shadcn@latest add @coss/toggle-group
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/toggle-group.json
 ```
 
 </TabsPanel>
@@ -28,12 +28,12 @@ npx shadcn@latest add @coss/toggle-group
 <Step>Install the following dependencies:</Step>
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="toggle-group" title="components/ui/toggle-group.tsx" />
+<ComponentSource name="toggle-group" title="components/ui/toggle-group" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -45,15 +45,17 @@ npm install @base-ui/react
 
 ## Usage
 
-```tsx
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
-```
+```svelte
+<script lang="ts">
+  import { ToggleGroup, ToggleGroupItem } from '$lib/components/ui/toggle-group';
 
-```tsx
-<ToggleGroup>
-  <ToggleGroupItem>Bold</ToggleGroupItem>
-  <ToggleGroupItem>Italic</ToggleGroupItem>
-  <ToggleGroupItem>Underline</ToggleGroupItem>
+  let value = $state(['bold']);
+</script>
+
+<ToggleGroup bind:value>
+  <ToggleGroupItem value="bold">Bold</ToggleGroupItem>
+  <ToggleGroupItem value="italic">Italic</ToggleGroupItem>
+  <ToggleGroupItem value="underline">Underline</ToggleGroupItem>
 </ToggleGroup>
 ```
 
@@ -61,16 +63,18 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 
 ### ToggleGroup
 
-Root component. Styled wrapper for `ToggleGroup.Root` from Base UI. Provides shared variant and size to child toggles via context.
+Root component. Styled wrapper for `ToggleGroup` from ShardsUI. `value` (an array of pressed item values) is bindable. Provides shared variant and size to child toggles via context.
 
-| Prop      | Type                          | Default     | Description                                      |
-| --------- | ----------------------------- | ----------- | ------------------------------------------------ |
-| `variant` | `"default" \| "outline"`      | `"default"` | Controls the styling of all child toggles        |
-| `size`    | `"default" \| "sm" \| "lg"`   | `"default"` | Controls the size of all child toggles           |
+| Prop          | Type                         | Default        | Description                                |
+| ------------- | ---------------------------- | -------------- | ------------------------------------------ |
+| `variant`     | `"default" \| "outline"`     | `"default"`    | Controls the styling of all child toggles  |
+| `size`        | `"default" \| "sm" \| "lg"`  | `"default"`    | Controls the size of all child toggles     |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction of the group              |
+| `multiple`    | `boolean`                    | `false`        | Allow more than one item to be pressed     |
 
 ### ToggleGroupItem
 
-Individual toggle button within the group. Styled wrapper for `Toggle` from Base UI. Inherits variant and size from parent ToggleGroup context.
+Individual toggle button within the group. Styled wrapper for `Toggle` from ShardsUI. Takes a `value` and inherits variant and size from the parent `ToggleGroup` context.
 
 ### ToggleGroupSeparator
 
@@ -109,7 +113,3 @@ Visual separator between toggle buttons.
 ### With Tooltips
 
 <ComponentPreview name="p-toggle-group-9" />
-
-## Changelog
-
-- [Mar 20, 2026](/ui/docs/changelog#toggle-group) — `Toggle` renamed to `ToggleGroupItem`
