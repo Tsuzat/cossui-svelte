@@ -568,6 +568,10 @@ export const custom_particle_metadata = {
   'p-tree-8': {
     description: 'Tree with filtering'
   },
+  'p-radio-group-100': {
+    description: 'Membership plan radio cards with price and free trial badge',
+    tags: ['radio-group', 'badge']
+  },
   'p-slider-16': {
     tags: ['starrating']
   }

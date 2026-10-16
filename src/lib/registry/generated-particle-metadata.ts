@@ -3731,6 +3731,12 @@ export const metadata: Record<string, ParticleMetaDefinition> = {
     npmDependencies: ['#lib'],
     meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
   },
+  'p-radio-group-100': {
+    description: 'Membership plan radio cards with price and free trial badge',
+    tags: ['radio-group', 'badge'],
+    npmDependencies: ['#lib'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
   'p-rich-editor-1': {
     description: 'Basic rich editor examples',
     tags: ['input', 'editor', 'rich-editor'],

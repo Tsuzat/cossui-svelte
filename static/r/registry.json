@@ -3881,7 +3881,7 @@
 				{
 					"type": "registry:lib",
 					"path": "types.ts",
-					"target": "$lib/icons/types.ts"
+					"target": "$lib/components/icons/types.ts"
 				}
 			]
 		},
@@ -3897,7 +3897,7 @@
 				{
 					"type": "registry:component",
 					"path": "ArrowLeftLineArrows.svelte",
-					"target": "$lib/icons/ArrowLeftLineArrows.svelte"
+					"target": "$lib/components/icons/ArrowLeftLineArrows.svelte"
 				}
 			]
 		},
@@ -3913,7 +3913,7 @@
 				{
 					"type": "registry:component",
 					"path": "FacebookFillLogos.svelte",
-					"target": "$lib/icons/FacebookFillLogos.svelte"
+					"target": "$lib/components/icons/FacebookFillLogos.svelte"
 				}
 			]
 		},
@@ -3929,7 +3929,7 @@
 				{
 					"type": "registry:component",
 					"path": "GithubFillLogos.svelte",
-					"target": "$lib/icons/GithubFillLogos.svelte"
+					"target": "$lib/components/icons/GithubFillLogos.svelte"
 				}
 			]
 		},
@@ -3945,7 +3945,7 @@
 				{
 					"type": "registry:component",
 					"path": "GoogleFillLogos.svelte",
-					"target": "$lib/icons/GoogleFillLogos.svelte"
+					"target": "$lib/components/icons/GoogleFillLogos.svelte"
 				}
 			]
 		},
@@ -3961,7 +3961,7 @@
 				{
 					"type": "registry:component",
 					"path": "TwitterXFillLogos.svelte",
-					"target": "$lib/icons/TwitterXFillLogos.svelte"
+					"target": "$lib/components/icons/TwitterXFillLogos.svelte"
 				}
 			]
 		},
@@ -6219,11 +6219,11 @@
 				"#lib"
 			],
 			"registryDependencies": [
-				"button",
 				"FacebookFillLogos",
 				"GithubFillLogos",
 				"GoogleFillLogos",
-				"TwitterXFillLogos"
+				"TwitterXFillLogos",
+				"button"
 			],
 			"files": [
 				{
@@ -6500,10 +6500,10 @@
 				"#lib"
 			],
 			"registryDependencies": [
-				"button",
 				"GithubFillLogos",
 				"GoogleFillLogos",
-				"TwitterXFillLogos"
+				"TwitterXFillLogos",
+				"button"
 			],
 			"files": [
 				{
@@ -13577,6 +13577,27 @@
 					"type": "registry:block",
 					"path": "p-radio-group-10.svelte",
 					"target": "$lib/components/particles/radio-group/p-radio-group-10.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-radio-group-100",
+			"title": "Radio group 100",
+			"description": "Membership plan radio cards with price and free trial badge",
+			"type": "registry:block",
+			"dependencies": [
+				"#lib"
+			],
+			"registryDependencies": [
+				"badge",
+				"label",
+				"radio-group"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-radio-group-100.svelte",
+					"target": "$lib/components/particles/radio-group/p-radio-group-100.svelte"
 				}
 			]
 		},

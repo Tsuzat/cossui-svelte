@@ -494,6 +494,7 @@ export const COMPONENT_DEPENDENCIES: Record<string, string[]> = {
   'p-progress-3': ['#lib'],
   'p-radio-group-1': ['#lib'],
   'p-radio-group-10': ['#lib'],
+  'p-radio-group-100': ['#lib'],
   'p-radio-group-2': ['#lib'],
   'p-radio-group-3': ['#lib'],
   'p-radio-group-4': ['#lib'],
