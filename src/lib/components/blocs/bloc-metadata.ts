@@ -2,7 +2,7 @@
 // Each bloc's entry point is `<name>/page.svelte`, rendered full-page at `/blocs/view/<name>`.
 // Ported from shadcn-svelte blocks (https://shadcn-svelte.com/blocks).
 
-export type BlocCategory = 'sidebar' | 'login' | 'signup' | 'otp' | 'calendar' | 'apps';
+export type BlocCategory = 'sidebar' | 'login' | 'signup' | 'otp' | 'calendar' | 'apps' | 'rating';
 
 export interface BlocMeta {
   category: BlocCategory;
@@ -21,7 +21,8 @@ export const blocCategories: { slug: BlocCategory; name: string }[] = [
   { slug: 'signup', name: 'Signup' },
   { slug: 'otp', name: 'OTP' },
   { slug: 'calendar', name: 'Calendar' },
-  { slug: 'apps', name: 'Apps' }
+  { slug: 'apps', name: 'Apps' },
+  { slug: 'rating', name: 'Rating' }
 ];
 
 export const FEATURED_BLOCS = ['app-calcom', 'app-dashboard'];
@@ -93,6 +94,22 @@ export const blocMetadata: Record<string, BlocMeta> = {
   'otp-03': { category: 'otp', description: 'An OTP page with a muted background color.' },
   'otp-04': { category: 'otp', description: 'An OTP page with form and image.' },
   'otp-05': { category: 'otp', description: 'A simple OTP form with social providers.' },
+
+  'rating-01': {
+    category: 'rating',
+    description: 'A quick survey card with a mood picker and a note.',
+    iframeHeight: '760px'
+  },
+  'rating-02': {
+    category: 'rating',
+    description: 'An emoji rating with selectable cards.',
+    iframeHeight: '450px'
+  },
+  'rating-03': {
+    category: 'rating',
+    description: 'An emoji feedback form with details and consent.',
+    iframeHeight: '700px'
+  },
 
   'calendar-02': calendar('Multiple months with single selection.'),
   'calendar-03': calendar('Multiple months with multiple selection.'),
