@@ -94,6 +94,11 @@ export const blocMetadata: Record<string, BlocMeta> = {
   'otp-03': { category: 'otp', description: 'An OTP page with a muted background color.' },
   'otp-04': { category: 'otp', description: 'An OTP page with form and image.' },
   'otp-05': { category: 'otp', description: 'A simple OTP form with social providers.' },
+  'otp-06': {
+    category: 'otp',
+    description: 'A verification code card with the destination email and resend link.',
+    iframeHeight: '650px'
+  },
 
   'rating-01': {
     category: 'rating',
