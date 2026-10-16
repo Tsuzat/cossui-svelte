@@ -2,6 +2,51 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.9.26](https://github.com/cossui-svelte/cossui-svelte/compare/v0.9.25...v0.9.26) (2026-10-16)
+
+### ✨ Features
+
+* add calcom app black demo ([c2ec05c](https://github.com/cossui-svelte/cossui-svelte/commit/c2ec05cf8fb78a8ac8705291a18124feaa1379f6))
+* add rating blocs ([cd40abb](https://github.com/cossui-svelte/cossui-svelte/commit/cd40abb866b9137fdc2843aa358499eaf337b589))
+* bring all changes from upstream up to a597c630 ([bac4c0d](https://github.com/cossui-svelte/cossui-svelte/commit/bac4c0d37ad51840716f8f811628eb0eba9b61db))
+* on more custom radio-group particule ([16ef502](https://github.com/cossui-svelte/cossui-svelte/commit/16ef5025414478c30ff8639e361982105d227eaf))
+* one new OTP bloc ([2efa90f](https://github.com/cossui-svelte/cossui-svelte/commit/2efa90f8b34f933b49c34b98ab687d4be22214ef))
+* rework the file-upload thumbnail ([15cc82f](https://github.com/cossui-svelte/cossui-svelte/commit/15cc82f0d160f05887bdd93628fd101376157bd5))
+* structdiff bloc app, restyle dashboard ([3ab6aca](https://github.com/cossui-svelte/cossui-svelte/commit/3ab6aca1d569833a3bebccd9881c8c94e3669239))
+
+### 🐛 Bug Fixes
+
+* button header should stay selected ([eae233e](https://github.com/cossui-svelte/cossui-svelte/commit/eae233e561245863143e488013bed1c369db6280))
+* font definition typo ([56e825d](https://github.com/cossui-svelte/cossui-svelte/commit/56e825dc5f596a3eee96dad94068ac4406ec21df))
+* font spacing in landing page ([8e8b4f1](https://github.com/cossui-svelte/cossui-svelte/commit/8e8b4f1b1b5d7f922aa76701ae76042f89b39b88))
+* footer gap ([9a9f3be](https://github.com/cossui-svelte/cossui-svelte/commit/9a9f3be7f20a917cf13790ea3ed9ede61f4ba9e3))
+* menu icon in header is now lucide equal ([edf6dc8](https://github.com/cossui-svelte/cossui-svelte/commit/edf6dc87efdef8c9d00de8bf63489daf7afe8b6a))
+* scrollpane scrolling issue in structdiff block ([58535ec](https://github.com/cossui-svelte/cossui-svelte/commit/58535ece840e2c2d704ce70133de5320b98550d9))
+* topbar is now hidding menu items on resize + bring back the search ([91d8c3b](https://github.com/cossui-svelte/cossui-svelte/commit/91d8c3b656eb0babc1deed387e04e1c2376fbda1))
+* **ui:** handle bottom drawer keyboards automatically ([80ef983](https://github.com/cossui-svelte/cossui-svelte/commit/80ef983bcb2d38206fc4a358f455a639f04e5dcb)), references [cosscom/coss#861](https://github.com/cossui-svelte/cossui-svelte/issues/861)
+* **ui:** prevent iOS Safari clipping after modal dismissal ([cc438e4](https://github.com/cossui-svelte/cossui-svelte/commit/cc438e4fac539969c50d252163439ea3597be9a7)), references [cosscom/coss#860](https://github.com/cossui-svelte/cossui-svelte/issues/860)
+* **upstream:** latest CalSans fonts ([b7de762](https://github.com/cossui-svelte/cossui-svelte/commit/b7de762d9da65c9b526d6ab1439b6c8516772f0c))
+
+### 📝 Documentation
+
+* add docs from upstream ([7aad5d7](https://github.com/cossui-svelte/cossui-svelte/commit/7aad5d725a5310ab8a7639d8e6bf735da5f1186e))
+* add missing component's pages ([bc542c2](https://github.com/cossui-svelte/cossui-svelte/commit/bc542c252f5cbe609250df5c2080a77fbcb7a544))
+* code cleanup ([1f0bb94](https://github.com/cossui-svelte/cossui-svelte/commit/1f0bb940e9b3a9143c8cd37d81735cf0421ccf75))
+* fix code preview and icon alignments ([bda6fdb](https://github.com/cossui-svelte/cossui-svelte/commit/bda6fdbba8c84748be2fc810f7d0a56a81972b49))
+* fix sidebar and search indexes ([089b9ea](https://github.com/cossui-svelte/cossui-svelte/commit/089b9ea64f5be64eaa68a995dabff8366507599f))
+* get the project to compile! ([b975850](https://github.com/cossui-svelte/cossui-svelte/commit/b9758504c51162932424f53c494cb17b1657b834))
+* root of docs/ picks up the wrong content ([0dbe158](https://github.com/cossui-svelte/cossui-svelte/commit/0dbe158d8d9d75a9279769c8b4a25ef5ffab5cab))
+* style the documentation ([b6479d0](https://github.com/cossui-svelte/cossui-svelte/commit/b6479d036d28db22fa31ddac98fb731a70793e20))
+* update docs to cossui-svelte ([5f7a848](https://github.com/cossui-svelte/cossui-svelte/commit/5f7a848bfb9d5173958bf21575d927f6bab64e35))
+* update todos ([f28d5ca](https://github.com/cossui-svelte/cossui-svelte/commit/f28d5cae490f3486b6296b74ccb2686301a079ab))
+
+### 🚚 Chores
+
+* adjust pnpm check scope ([b5494a7](https://github.com/cossui-svelte/cossui-svelte/commit/b5494a7ee22dc93c17728ab678b508fe1bde3da1))
+* deps ([30b1ae0](https://github.com/cossui-svelte/cossui-svelte/commit/30b1ae05e04a66635a4b4f3d3c7c81b2116aea69))
+* update changelog ([5c3c611](https://github.com/cossui-svelte/cossui-svelte/commit/5c3c6115fb2eeaf455fcb5ac11a7591969b50e8f))
+* update CLAUDE.md ([6bffb25](https://github.com/cossui-svelte/cossui-svelte/commit/6bffb253054cf5162e933fbf25ca60a0db8d7d44))
+
 ## [0.9.25](https://github.com/cossui-svelte/cossui-svelte/compare/v0.9.24...v0.9.25) (2026-10-08)
 
 ### ✨ Features
