@@ -40,11 +40,11 @@ function pathToSlug(path: string): string {
 const slugToPath = new Map(Object.keys(compiledPages).map((path) => [pathToSlug(path), path]));
 
 export function docEntries(): { slug: string }[] {
-  return [...slugToPath.keys()].map((slug) => ({ slug }));
+  return [...slugToPath.keys()].map((slug) => ({ slug: slug === 'index' ? '' : slug }));
 }
 
 export async function loadDocPage(slugParts: string[]): Promise<DocPage | undefined> {
-  const slug = slugParts.join('/');
+  const slug = slugParts.join('/') || 'index';
   // Nav links are `/docs/<component>`; the content lives under `components/`.
   const path = slugToPath.get(slug) ?? slugToPath.get(`components/${slug}`);
   if (!path) return undefined;
