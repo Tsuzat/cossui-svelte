@@ -3,7 +3,7 @@
   import { Radio, RadioGroup } from '#lib/components/ui/radio-group/index.js';
 </script>
 
-<RadioGroup value="next">
+<RadioGroup aria-label="Framework" value="next">
   <Label><Radio value="next" /> Next.js</Label>
   <Label><Radio value="vite" /> Vite</Label>
   <Label><Radio value="astro" /> Astro</Label>

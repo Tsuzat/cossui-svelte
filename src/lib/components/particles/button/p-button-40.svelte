@@ -57,11 +57,6 @@
         });
       });
     } catch (err) {
-      if (infoToastId) {
-        toastManager.close(infoToastId);
-        infoToastId = null;
-      }
-
       if (err instanceof DOMException && err.name === 'AbortError') {
         toastManager.add({
           description: 'Report generation was cancelled.',
@@ -76,6 +71,9 @@
         });
       }
     } finally {
+      if (infoToastId) {
+        toastManager.close(infoToastId);
+      }
       isDownloading = false;
       progress = 0;
       abortController = null;

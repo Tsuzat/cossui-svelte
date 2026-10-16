@@ -55,6 +55,8 @@
     return `${displayHours}:${minutes.toString().padStart(2, '0')} ${period}`;
   });
 
+  const startTimeOptions = timeOptions.slice(0, -1);
+
   const timeIndex = (time: string) => timeOptions.indexOf(time);
 
   let rangeId = 0;
@@ -214,7 +216,7 @@
                         </div>
                         <ComboboxEmpty>No times found.</ComboboxEmpty>
                         <ComboboxList>
-                          {#each timeOptions as time (time)}
+                          {#each startTimeOptions as time (time)}
                             <ComboboxItem value={time} label={time}>
                               <span class="tabular-nums">{time}</span>
                             </ComboboxItem>
@@ -307,7 +309,11 @@
                 >
                   <CopyIcon aria-hidden="true" />
                 </PopoverTrigger>
-                <PopoverPopup align="end" class="w-44">
+                <PopoverPopup
+                  align="end"
+                  aria-label={`Copy ${day} times to other days`}
+                  class="w-44"
+                >
                   <div class="flex flex-col gap-3">
                     <div class="font-medium text-foreground text-sm">Copy times to</div>
                     <CheckboxGroup

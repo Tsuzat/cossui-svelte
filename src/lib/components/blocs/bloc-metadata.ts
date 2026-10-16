@@ -2,7 +2,15 @@
 // Each bloc's entry point is `<name>/page.svelte`, rendered full-page at `/blocs/view/<name>`.
 // Ported from shadcn-svelte blocks (https://shadcn-svelte.com/blocks).
 
-export type BlocCategory = 'sidebar' | 'login' | 'signup' | 'otp' | 'calendar' | 'apps' | 'rating';
+export type BlocCategory =
+  | 'sidebar'
+  | 'login'
+  | 'signup'
+  | 'otp'
+  | 'calendar'
+  | 'apps'
+  | 'rating'
+  | 'chat';
 
 export interface BlocMeta {
   category: BlocCategory;
@@ -22,7 +30,8 @@ export const blocCategories: { slug: BlocCategory; name: string }[] = [
   { slug: 'otp', name: 'OTP' },
   { slug: 'calendar', name: 'Calendar' },
   { slug: 'apps', name: 'Apps' },
-  { slug: 'rating', name: 'Rating' }
+  { slug: 'rating', name: 'Rating' },
+  { slug: 'chat', name: 'Chat' }
 ];
 
 export const FEATURED_BLOCS = ['app-calcom', 'app-dashboard'];
@@ -113,6 +122,13 @@ export const blocMetadata: Record<string, BlocMeta> = {
   'rating-03': {
     category: 'rating',
     description: 'An emoji feedback form with details and consent.',
+    iframeHeight: '700px'
+  },
+
+  'chat-01': {
+    category: 'chat',
+    description:
+      'A full group chat in a drawer: replies, reactions, pinning, receipts, mentions and states.',
     iframeHeight: '700px'
   },
 

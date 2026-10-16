@@ -29,7 +29,7 @@
         </TooltipTrigger>
         <TooltipPopup>Record voice message</TooltipPopup>
       </Tooltip>
-      <InputGroupText class="ml-auto text-muted-foreground text-xs">
+      <InputGroupText class="ms-auto text-muted-foreground text-xs">
         Press Enter to send
       </InputGroupText>
       <Tooltip>

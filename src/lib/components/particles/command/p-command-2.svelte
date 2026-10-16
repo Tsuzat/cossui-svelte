@@ -6,12 +6,13 @@
   import CornerDownLeft from '@lucide/svelte/icons/corner-down-left';
   import Search from '@lucide/svelte/icons/search';
   import Sparkles from '@lucide/svelte/icons/sparkles';
-  import { Button } from '#lib/components/ui/button/index.js';
+  import { Button, buttonVariants } from '#lib/components/ui/button/index.js';
   import {
     Command,
     CommandCollection,
     CommandDialog,
     CommandDialogPopup,
+    CommandDialogTrigger,
     CommandEmpty,
     CommandFooter,
     CommandGroup,
@@ -239,15 +240,11 @@ You can customize project settings at any time by clicking the settings icon in 
   });
 </script>
 
-<Button
-  onclick={() => {
-    open = true;
-  }}
-  variant="outline">Cmdk with AI</Button
->
-
 <CommandDialog {open} onOpenChange={handleOpenChange}>
-  <CommandDialogPopup>
+  <CommandDialogTrigger class={buttonVariants({ variant: 'outline' })}>
+    Cmdk with AI
+  </CommandDialogTrigger>
+  <CommandDialogPopup aria-label="Command palette with AI">
     {#if !aiState.mode}
       {#key commandResetKey}
         <Command items={commandGroups} bind:value={searchQuery}>

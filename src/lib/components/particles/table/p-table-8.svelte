@@ -459,7 +459,10 @@
     <TableHeader>
       <TableRow class="hover:bg-transparent">
         {#each columns as col (col.id)}
-          <TableHead style={`width: ${col.size}px`}>
+          <TableHead
+            aria-sort={sort.id === col.id ? (sort.desc ? 'descending' : 'ascending') : undefined}
+            style={`width: ${col.size}px`}
+          >
             {#if col.id === 'select'}
               <Checkbox
                 aria-label="Select all rows"

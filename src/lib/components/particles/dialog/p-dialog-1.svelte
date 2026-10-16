@@ -25,7 +25,7 @@
         Make changes to your profile here. Click save when you're done.
       </DialogDescription>
     </DialogHeader>
-    <Form class="contents">
+    <Form class="contents" onsubmit={(event) => event.preventDefault()}>
       <DialogPanel>
         <Field>
           <FieldLabel>Name</FieldLabel>

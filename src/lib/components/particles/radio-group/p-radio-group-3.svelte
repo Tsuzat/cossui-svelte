@@ -3,7 +3,7 @@
   import { Radio, RadioGroup } from '#lib/components/ui/radio-group/index.js';
 </script>
 
-<RadioGroup value="r-1">
+<RadioGroup aria-label="Subscription plan" value="r-1">
   <div class="flex items-start gap-2">
     <Radio id="r-1" value="r-1" />
     <div class="flex flex-col gap-1">

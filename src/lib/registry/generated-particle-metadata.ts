@@ -3418,6 +3418,72 @@ export const metadata: Record<string, ParticleMetaDefinition> = {
     npmDependencies: ['#lib', '@hueycolor/core'],
     meta: { class: '**:data-[slot=card]:overflow-visible **:data-[slot=card]:[clip-path:none]!' }
   },
+  'p-composer-1': {
+    description: 'Composer with people, teams, and slash suggestions',
+    tags: ['composer'],
+    npmDependencies: ['#lib', '@lucide/svelte'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
+  'p-composer-10': {
+    description: 'Composer with leading buttons for mentions and slash actions',
+    tags: ['composer'],
+    npmDependencies: ['#lib', '@lucide/svelte'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
+  'p-composer-11': {
+    description: 'Compact rounded adaptive composer with a circular send button',
+    tags: ['composer'],
+    npmDependencies: ['#lib', '@lucide/svelte'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
+  'p-composer-2': {
+    description: 'Composer with asynchronous mention suggestions',
+    tags: ['spinner', 'composer'],
+    npmDependencies: ['#lib', '@lucide/svelte'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
+  'p-composer-3': {
+    description: 'Composer pinned below scrollable drawer content',
+    tags: ['drawer', 'composer'],
+    npmDependencies: ['#lib', '@lucide/svelte'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
+  'p-composer-4': {
+    description: 'Composer surface with a native textarea',
+    tags: ['textarea', 'composer'],
+    npmDependencies: ['#lib', '@lucide/svelte'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
+  'p-composer-5': {
+    description: 'Composer with a custom suggestion list',
+    tags: ['composer'],
+    npmDependencies: ['#lib', '@lucide/svelte'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
+  'p-composer-6': {
+    description: 'Composer with distinct person, team, and action chips',
+    tags: ['composer'],
+    npmDependencies: ['#lib', '@lucide/svelte'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
+  'p-composer-7': {
+    description: 'Contenteditable composer with Send beside a short draft',
+    tags: ['composer'],
+    npmDependencies: ['#lib', '@lucide/svelte'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
+  'p-composer-8': {
+    description: 'Textarea composer with Send beside a short draft',
+    tags: ['textarea', 'composer'],
+    npmDependencies: ['#lib', '@lucide/svelte'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
+  'p-composer-9': {
+    description: 'Rounded adaptive composer with circular actions',
+    tags: ['composer'],
+    npmDependencies: ['#lib', '@lucide/svelte'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
   'p-cropper-1': {
     description: 'Crops images to a specific aspect ratio and size',
     tags: ['cropper'],
@@ -3488,6 +3554,12 @@ export const metadata: Record<string, ParticleMetaDefinition> = {
     description: 'Cropper with custom zoom limits',
     tags: ['cropper'],
     npmDependencies: ['#lib'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
+  'p-drawer-15': {
+    description: 'Composer pinned below scrollable drawer content in a bottom drawer',
+    tags: ['composer', 'drawer'],
+    npmDependencies: ['#lib', '@lucide/svelte'],
     meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
   },
   'p-file-upload-1': {

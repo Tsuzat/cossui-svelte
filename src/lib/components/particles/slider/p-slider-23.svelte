@@ -26,7 +26,11 @@
         <FieldsetLegend>Volume</FieldsetLegend>
         <span class="tabular-nums text-sm">{displayValue}</span>
       </div>
-      <Slider name="volume" bind:value />
+      <Slider
+        getAriaLabel={(index) => (index === 0 ? 'Minimum volume' : 'Maximum volume')}
+        name="volume"
+        bind:value
+      />
       <FieldDescription>Choose a value between 0 and 100</FieldDescription>
     </Field>
   </Fieldset>

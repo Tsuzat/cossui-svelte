@@ -23,7 +23,6 @@
 
 <div class="flex items-center gap-2">
   <NumberField
-    aria-label="Minimum value"
     class="w-10"
     max={values[1]}
     {min}
@@ -31,12 +30,17 @@
     size="sm"
   >
     <NumberFieldGroup>
-      <NumberFieldInput />
+      <NumberFieldInput aria-label="Minimum value" />
     </NumberFieldGroup>
   </NumberField>
-  <Slider aria-label="Dual range slider" class="flex-1" {max} {min} bind:value={values} />
+  <Slider
+    getAriaLabel={(index) => (index === 0 ? 'Minimum value' : 'Maximum value')}
+    class="flex-1"
+    {max}
+    {min}
+    bind:value={values}
+  />
   <NumberField
-    aria-label="Maximum value"
     class="w-10"
     {max}
     min={values[0]}
@@ -44,7 +48,7 @@
     size="sm"
   >
     <NumberFieldGroup>
-      <NumberFieldInput />
+      <NumberFieldInput aria-label="Maximum value" />
     </NumberFieldGroup>
   </NumberField>
 </div>

@@ -64,7 +64,7 @@
     >
       <Ellipsis aria-hidden />
     </DrawerTrigger>
-    <DrawerPopup showBar>
+    <DrawerPopup aria-label="Actions" showBar>
       <DrawerPanel>
         <DrawerMenu>
           <DrawerMenuGroup>
@@ -105,7 +105,7 @@
               Add to Playlist
               <ChevronRight class="ms-auto -me-0.5 opacity-80" aria-hidden />
             </DrawerMenuTrigger>
-            <DrawerPopup showBar>
+            <DrawerPopup aria-label="Add to Playlist" showBar>
               <DrawerPanel>
                 <DrawerMenu>
                   <DrawerMenuGroup>
@@ -117,7 +117,7 @@
                       Rock
                       <ChevronRight class="ms-auto -me-0.5 opacity-80" aria-hidden />
                     </DrawerMenuTrigger>
-                    <DrawerPopup showBar>
+                    <DrawerPopup aria-label="Rock" showBar>
                       <DrawerPanel>
                         <DrawerMenu>
                           <DrawerMenuGroup>

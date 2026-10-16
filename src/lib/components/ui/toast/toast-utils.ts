@@ -20,7 +20,11 @@ export function upsertReplayClassName(toast: {
   if (k <= 0) return undefined;
   const isEven = k % 2 === 0;
   if (toast.type === 'error') {
-    return isEven ? 'animate-toast-error-even' : 'animate-toast-error-odd';
+    return isEven
+      ? 'animate-toast-error-even motion-reduce:animate-none'
+      : 'animate-toast-error-odd motion-reduce:animate-none';
   }
-  return isEven ? 'animate-toast-success-even' : 'animate-toast-success-odd';
+  return isEven
+    ? 'animate-toast-success-even motion-reduce:animate-none'
+    : 'animate-toast-success-odd motion-reduce:animate-none';
 }

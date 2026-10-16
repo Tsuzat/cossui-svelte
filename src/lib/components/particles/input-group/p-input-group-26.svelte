@@ -103,7 +103,7 @@
         {:else}
           <X aria-hidden="true" class="size-4 text-muted-foreground/80" />
         {/if}
-        <span class={`text-xs ${req.met ? 'text-emerald-600' : 'text-muted-foreground'}`}>
+        <span class={`text-xs ${req.met ? 'text-success-foreground' : 'text-muted-foreground'}`}>
           {req.text}
           <span class="sr-only">{req.met ? ' - Requirement met' : ' - Requirement not met'}</span>
         </span>

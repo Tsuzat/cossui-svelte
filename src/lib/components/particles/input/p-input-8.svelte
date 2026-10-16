@@ -25,7 +25,7 @@
       >
         <Info />
       </PopoverTrigger>
-      <PopoverPopup side="top" tooltipStyle>
+      <PopoverPopup aria-label="Website URL information" side="top" tooltipStyle>
         <p>The URL of your website</p>
       </PopoverPopup>
     </Popover>

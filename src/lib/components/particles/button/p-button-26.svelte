@@ -10,6 +10,6 @@
   <Star aria-hidden="true" class={isStarred ? 'fill-yellow-500 text-yellow-500' : ''} />
   <span class="flex items-baseline gap-2">
     {isStarred ? 'Starred' : 'Star'}
-    <span class="text-primary-foreground/60 text-xs">{count}</span>
+    <span class="text-primary-foreground/64 text-xs">{count}</span>
   </span>
 </Button>

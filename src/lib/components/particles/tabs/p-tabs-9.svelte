@@ -9,15 +9,15 @@
   <div class="border-b">
     <TabsList variant="underline">
       <TabsTab class="h-auto! flex-col gap-1.5 py-[calc(--spacing(2)-1px)]" value="tab-1">
-        <HouseIcon aria-hidden="true" class="opacity-60" size={16} />
+        <HouseIcon aria-hidden="true" class="opacity-64" />
         Overview
       </TabsTab>
       <TabsTab class="h-auto! flex-col gap-1.5 py-[calc(--spacing(2)-1px)]" value="tab-2">
-        <PanelsTopLeftIcon aria-hidden="true" class="opacity-60" size={16} />
+        <PanelsTopLeftIcon aria-hidden="true" class="opacity-64" />
         Projects
       </TabsTab>
       <TabsTab class="h-auto! flex-col gap-1.5 py-[calc(--spacing(2.5)-1px)]" value="tab-3">
-        <BoxIcon aria-hidden="true" class="opacity-60" size={16} />
+        <BoxIcon aria-hidden="true" class="opacity-64" />
         Packages
       </TabsTab>
     </TabsList>

@@ -5,7 +5,7 @@
 </script>
 
 <Slider
-  aria-label="Dual thumb slider with collision behavior none"
+  getAriaLabel={(index) => (index === 0 ? 'Minimum value' : 'Maximum value')}
   thumbCollisionBehavior="none"
   bind:value
 />

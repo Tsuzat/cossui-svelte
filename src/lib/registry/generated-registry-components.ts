@@ -143,6 +143,17 @@ const allComponents: RegistryUiData = {
     npmDependencies: ['#lib', 'layerchart'],
     registryDependencies: []
   },
+  chat: {
+    name: 'Chat',
+    category: 'ui',
+    description:
+      'Building blocks for chat UIs: messages, bubbles, reactions, replies, typing indicator and scroll handling.',
+    folder: 'chat',
+    isnew: true,
+    istodo: false,
+    npmDependencies: ['#lib', '@lucide/svelte', '@shardsui/svelte'],
+    registryDependencies: []
+  },
   checkbox: {
     name: 'Checkbox',
     category: 'ui',
@@ -202,6 +213,17 @@ const allComponents: RegistryUiData = {
     isnew: false,
     istodo: false,
     npmDependencies: ['#lib', '@lucide/svelte', '@shardsui/svelte'],
+    registryDependencies: []
+  },
+  composer: {
+    name: 'Composer',
+    category: 'ui',
+    description:
+      'A composable chat composer with @mentions, slash actions, token chips and adaptive layouts.',
+    folder: 'composer',
+    isnew: true,
+    istodo: false,
+    npmDependencies: ['#lib', '@shardsui/svelte'],
     registryDependencies: []
   },
   'context-menu': {

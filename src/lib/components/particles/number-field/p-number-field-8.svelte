@@ -11,7 +11,7 @@
 <NumberField value={0}>
   <NumberFieldGroup>
     <NumberFieldDecrement />
-    <NumberFieldInput />
+    <NumberFieldInput aria-label="Amount in USD" />
     <NumberFieldIncrement />
   </NumberFieldGroup>
 </NumberField>

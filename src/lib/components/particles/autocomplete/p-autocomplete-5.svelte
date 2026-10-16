@@ -27,7 +27,7 @@
 <Autocomplete {items}>
   <div class="flex flex-col items-start gap-2">
     <Label for="fruit-input">Fruits</Label>
-    <AutocompleteInput aria-label="Search items" id="fruit-input" placeholder="Search items…" />
+    <AutocompleteInput id="fruit-input" placeholder="Search items…" />
   </div>
   <AutocompletePopup>
     <AutocompleteEmpty>No items found.</AutocompleteEmpty>

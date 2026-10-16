@@ -22,7 +22,7 @@
   <Input aria-label="Domain name" placeholder="example" type="text" />
   <GroupSeparator />
   <Select bind:value={domain}>
-    <SelectTrigger class="w-fit min-w-none">
+    <SelectTrigger aria-label="Domain extension" class="w-fit min-w-none">
       <SelectValue />
     </SelectTrigger>
     <SelectPopup>

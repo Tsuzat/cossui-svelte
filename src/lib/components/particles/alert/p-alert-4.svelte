@@ -4,7 +4,7 @@
 </script>
 
 <Alert variant="info">
-  <Info />
+  <Info aria-label="Information" role="img" />
   <AlertTitle>Heads up!</AlertTitle>
   <AlertDescription>Describe what can be done about it here.</AlertDescription>
 </Alert>

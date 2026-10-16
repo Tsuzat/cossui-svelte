@@ -7,9 +7,9 @@
 </script>
 
 <Badge
-  class="relative outline-none has-focus-visible:border-ring has-data-unchecked:bg-muted has-data-unchecked:text-muted-foreground has-focus-visible:ring-[3px] has-focus-visible:ring-ring/50"
+  class="relative outline-none has-data-unchecked:bg-muted has-data-unchecked:text-muted-foreground has-focus-visible:ring-2 has-focus-visible:ring-ring has-focus-visible:ring-offset-1 has-focus-visible:ring-offset-background"
 >
-  <Checkbox class="peer hidden" checked {id} />
+  <Checkbox class="peer sr-only absolute" checked {id} />
   <CheckIcon aria-hidden="true" class="hidden peer-data-[state=checked]:block" />
   <label class="cursor-pointer select-none after:absolute after:inset-0" for={id}>
     Selectable

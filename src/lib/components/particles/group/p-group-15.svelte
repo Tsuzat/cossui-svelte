@@ -30,7 +30,7 @@
 
 <Group aria-label="URL search">
   <Select bind:value={protocol}>
-    <SelectTrigger class="w-fit min-w-none">
+    <SelectTrigger aria-label="Protocol" class="w-fit min-w-none">
       <SelectValue />
     </SelectTrigger>
     <SelectPopup>
@@ -43,7 +43,7 @@
   <Input aria-label="URL" class="flex-1" value="coss.com" type="text" />
   <GroupSeparator />
   <Select bind:value={subdomain}>
-    <SelectTrigger class="w-fit min-w-none">
+    <SelectTrigger aria-label="Subdomain" class="w-fit min-w-none">
       <SelectValue />
     </SelectTrigger>
     <SelectPopup>

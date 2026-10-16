@@ -116,6 +116,7 @@
       >
         <Tooltip bind:open={fontSelectTipOpen}>
           <SelectTrigger
+            aria-label="Font"
             bind:ref={fontSelectRef}
             onpointerenter={() => (fontSelectTipOpen = true)}
             onpointerleave={() => (fontSelectTipOpen = false)}

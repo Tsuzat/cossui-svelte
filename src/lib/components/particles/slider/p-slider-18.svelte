@@ -3,5 +3,9 @@
 </script>
 
 <div class="flex h-40 items-center justify-center">
-  <Slider value={[25, 75]} orientation="vertical" />
+  <Slider
+    getAriaLabel={(index) => (index === 0 ? 'Minimum value' : 'Maximum value')}
+    value={[25, 75]}
+    orientation="vertical"
+  />
 </div>

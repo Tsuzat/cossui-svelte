@@ -13,10 +13,10 @@
 </script>
 
 <div class="flex items-center gap-4">
-  <Slider aria-label="Slider with input" class="flex-1" {max} {min} bind:value />
-  <NumberField aria-label="Enter slider value" class="w-12" {max} {min} bind:value size="sm">
+  <Slider getAriaLabel={() => 'Slider value'} class="flex-1" {max} {min} bind:value />
+  <NumberField class="w-12" {max} {min} bind:value size="sm">
     <NumberFieldGroup>
-      <NumberFieldInput />
+      <NumberFieldInput aria-label="Enter slider value" />
     </NumberFieldGroup>
   </NumberField>
 </div>

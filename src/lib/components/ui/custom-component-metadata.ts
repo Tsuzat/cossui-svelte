@@ -49,6 +49,12 @@ export const custom_components_metadata: Record<string, Partial<RegistryUIEntry>
     description: 'A date picker component with range and multi-select support.',
     category: 'ui'
   },
+  chat: {
+    description:
+      'Building blocks for chat UIs: messages, bubbles, reactions, replies, typing indicator and scroll handling.',
+    category: 'ui',
+    isnew: true
+  },
   card: {
     description: 'A content container for grouping related information.',
     category: 'ui'
@@ -92,6 +98,12 @@ export const custom_components_metadata: Record<string, Partial<RegistryUIEntry>
   cropper: {
     description: 'A component for cropping images with a resizable and movable selection area.',
     category: 'origin-ui',
+    isnew: true
+  },
+  composer: {
+    description:
+      'A composable chat composer with @mentions, slash actions, token chips and adaptive layouts.',
+    category: 'ui',
     isnew: true
   },
   'date-picker': {

@@ -41,7 +41,11 @@
     <User aria-hidden="true" />
   </Button>
   <Popover bind:open>
-    <PopoverPopup class="min-w-none" customAnchor={anchor}>
+    <PopoverPopup
+      aria-label={activePanel === 'profile' ? 'Profile' : 'Notifications'}
+      class="min-w-none"
+      customAnchor={anchor}
+    >
       {#if activePanel === 'notifications'}
         <PopoverTitle class="text-base">Notifications</PopoverTitle>
         <PopoverDescription>You have no new notifications at this time.</PopoverDescription>

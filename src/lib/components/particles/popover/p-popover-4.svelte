@@ -1,6 +1,5 @@
 <script lang="ts">
   import ChevronDown from '@lucide/svelte/icons/chevron-down';
-  import { Badge } from '#lib/components/ui/badge/index.js';
   import { Button, buttonVariants } from '#lib/components/ui/button/index.js';
   import { CheckboxGroup } from '#lib/components/ui/checkbox-group/index.js';
   import { Checkbox } from '#lib/components/ui/checkbox/index.js';
@@ -67,7 +66,7 @@
           </PopoverClose>
           <PopoverClose class={buttonVariants({ size: 'xs' })} disabled={selected.length === 0}>
             Confirm selected
-            <Badge class="-me-1 text-primary-foreground/60">{selected.length}</Badge>
+            <span class="text-primary-foreground/64 text-xs">{selected.length}</span>
           </PopoverClose>
         </div>
       </PopoverPopup>

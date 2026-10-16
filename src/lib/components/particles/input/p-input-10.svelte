@@ -21,7 +21,10 @@
 <InputGroup class="[--radius-lg:9999px] [--radius:9999rem]">
   <Popover>
     <InputGroupAddon>
-      <PopoverTrigger class={buttonVariants({ size: 'icon-xs', variant: 'secondary' })}>
+      <PopoverTrigger
+        aria-label="Connection information"
+        class={buttonVariants({ size: 'icon-xs', variant: 'secondary' })}
+      >
         <Info />
       </PopoverTrigger>
     </InputGroupAddon>
@@ -36,6 +39,8 @@
   <InputGroupInput aria-label="Url" class="*:[input]:ps-1!" type="text" />
   <InputGroupAddon align="inline-end">
     <Button
+      aria-label="Favorite"
+      aria-pressed={isFavorite}
       onclick={() => {
         isFavorite = !isFavorite;
       }}

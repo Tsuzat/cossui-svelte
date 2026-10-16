@@ -55,7 +55,7 @@
     <Form class="contents">
       <DialogPanel>
         <Field>
-          <Textarea bind:value />
+          <Textarea aria-label="Message" bind:value />
         </Field>
       </DialogPanel>
       <DialogFooter>

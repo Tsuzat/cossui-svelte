@@ -574,5 +574,46 @@ export const custom_particle_metadata = {
   },
   'p-slider-16': {
     tags: ['starrating']
+  },
+  'p-drawer-15': {
+    description: 'Composer pinned below scrollable drawer content in a bottom drawer',
+    tags: ['composer']
+  },
+  'p-composer-1': {
+    description: 'Composer with people, teams, and slash suggestions'
+  },
+  'p-composer-2': {
+    description: 'Composer with asynchronous mention suggestions',
+    tags: ['spinner']
+  },
+  'p-composer-3': {
+    description: 'Composer pinned below scrollable drawer content',
+    tags: ['drawer']
+  },
+  'p-composer-4': {
+    description: 'Composer surface with a native textarea',
+    tags: ['textarea']
+  },
+  'p-composer-5': {
+    description: 'Composer with a custom suggestion list'
+  },
+  'p-composer-6': {
+    description: 'Composer with distinct person, team, and action chips'
+  },
+  'p-composer-7': {
+    description: 'Contenteditable composer with Send beside a short draft'
+  },
+  'p-composer-8': {
+    description: 'Textarea composer with Send beside a short draft',
+    tags: ['textarea']
+  },
+  'p-composer-9': {
+    description: 'Rounded adaptive composer with circular actions'
+  },
+  'p-composer-10': {
+    description: 'Composer with leading buttons for mentions and slash actions'
+  },
+  'p-composer-11': {
+    description: 'Compact rounded adaptive composer with a circular send button'
   }
 };

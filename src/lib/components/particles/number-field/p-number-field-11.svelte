@@ -11,7 +11,7 @@
 <NumberField value={0}>
   <NumberFieldGroup class="[--radius-lg:9999px] [--radius:9999px]">
     <NumberFieldDecrement />
-    <NumberFieldInput />
+    <NumberFieldInput aria-label="Quantity" />
     <NumberFieldIncrement />
   </NumberFieldGroup>
 </NumberField>

@@ -12,6 +12,12 @@
 
 <div class="flex h-48 justify-center gap-8">
   {#each bands as band (band.label)}
-    <Slider aria-label={band.label} value={band.value} max={5} min={-5} orientation="vertical" />
+    <Slider
+      getAriaLabel={() => band.label}
+      value={band.value}
+      max={5}
+      min={-5}
+      orientation="vertical"
+    />
   {/each}
 </div>

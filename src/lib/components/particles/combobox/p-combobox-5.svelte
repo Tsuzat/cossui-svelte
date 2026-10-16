@@ -29,7 +29,7 @@
 <Combobox {items}>
   <div class="flex flex-col items-start gap-2">
     <Label for={id}>Fruits</Label>
-    <ComboboxInput aria-label="Select an item" {id} placeholder="Select an item..." />
+    <ComboboxInput {id} placeholder="Select an item..." />
   </div>
   <ComboboxPopup>
     <ComboboxEmpty>No results found.</ComboboxEmpty>

@@ -2,4 +2,4 @@
   import { Meter } from '#lib/components/ui/meter/index.js';
 </script>
 
-<Meter value={50} />
+<Meter aria-label="Storage usage" value={50} />

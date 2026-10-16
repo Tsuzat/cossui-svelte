@@ -21,7 +21,7 @@
 
 <Group aria-label="URL input">
   <Select bind:value={protocol}>
-    <SelectTrigger class="w-fit min-w-none">
+    <SelectTrigger aria-label="Protocol" class="w-fit min-w-none">
       <SelectValue />
     </SelectTrigger>
     <SelectPopup>

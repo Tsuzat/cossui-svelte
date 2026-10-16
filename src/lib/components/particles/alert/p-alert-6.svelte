@@ -4,7 +4,7 @@
 </script>
 
 <Alert variant="warning">
-  <TriangleAlert />
+  <TriangleAlert aria-label="Warning" role="img" />
   <AlertTitle>Heads up!</AlertTitle>
   <AlertDescription>Describe what can be done about it here.</AlertDescription>
 </Alert>

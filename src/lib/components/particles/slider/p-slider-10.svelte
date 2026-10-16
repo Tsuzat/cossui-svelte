@@ -5,7 +5,7 @@
 </script>
 
 <Slider
-  aria-label="Dual thumb slider with collision behavior swap"
+  getAriaLabel={(index) => (index === 0 ? 'Minimum value' : 'Maximum value')}
   thumbCollisionBehavior="swap"
   bind:value
 />

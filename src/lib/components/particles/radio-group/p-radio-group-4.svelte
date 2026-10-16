@@ -3,7 +3,7 @@
   import { Radio, RadioGroup } from '#lib/components/ui/radio-group/index.js';
 </script>
 
-<RadioGroup value="r-1">
+<RadioGroup aria-label="Notification method" value="r-1">
   <Label
     class="flex items-start gap-2 rounded-lg border p-3 hover:bg-accent/50 has-data-checked:border-primary"
   >

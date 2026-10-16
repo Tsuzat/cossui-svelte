@@ -18,7 +18,7 @@ const ROOT = '/src/lib/components/blocs/';
 export const GET: RequestHandler = async ({ params }) => {
   const name = params.name;
 
-  if (!/^[a-z]+-[0-9]+$/.test(name)) {
+  if (!/^[a-z]+-[a-z0-9]+$/.test(name)) {
     error(400, 'Invalid bloc name');
   }
 

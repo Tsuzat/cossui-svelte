@@ -25,7 +25,7 @@
         Make changes to your profile here. Click save when you're done.
       </DialogDescription>
     </DialogHeader>
-    <Form class="contents">
+    <Form class="contents" onsubmit={(event) => event.preventDefault()}>
       <DialogPanel class="grid gap-4">
         <Field>
           <FieldLabel>Name</FieldLabel>

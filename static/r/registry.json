@@ -799,6 +799,199 @@
 			]
 		},
 		{
+			"name": "chat",
+			"title": "Chat",
+			"description": "Building blocks for chat UIs: messages, bubbles, reactions, replies, typing indicator and scroll handling.",
+			"type": "registry:ui",
+			"dependencies": [
+				"@shardsui/svelte@0.1.0-beta.2"
+			],
+			"registryDependencies": [
+				"utils",
+				"collapsible",
+				"scroll-area",
+				"empty",
+				"button",
+				"menu",
+				"toolbar",
+				"tooltip",
+				"popover",
+				"toggle"
+			],
+			"files": [
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-bubble-reactions.svelte",
+					"target": "$lib/components/ui/chat/chat-bubble-reactions.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-bubble.svelte",
+					"target": "$lib/components/ui/chat/chat-bubble.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-collapsible-message.svelte",
+					"target": "$lib/components/ui/chat/chat-collapsible-message.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-conversation.svelte",
+					"target": "$lib/components/ui/chat/chat-conversation.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-date-pill.svelte",
+					"target": "$lib/components/ui/chat/chat-date-pill.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-delivery-indicator.svelte",
+					"target": "$lib/components/ui/chat/chat-delivery-indicator.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-empty-state.svelte",
+					"target": "$lib/components/ui/chat/chat-empty-state.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-jump-to-latest-button.svelte",
+					"target": "$lib/components/ui/chat/chat-jump-to-latest-button.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-loading-state.svelte",
+					"target": "$lib/components/ui/chat/chat-loading-state.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-member-section.svelte",
+					"target": "$lib/components/ui/chat/chat-member-section.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-members.svelte",
+					"target": "$lib/components/ui/chat/chat-members.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-message-action-toolbar.svelte",
+					"target": "$lib/components/ui/chat/chat-message-action-toolbar.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-message-avatar.svelte",
+					"target": "$lib/components/ui/chat/chat-message-avatar.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-message-bubble.svelte",
+					"target": "$lib/components/ui/chat/chat-message-bubble.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-message-content.svelte",
+					"target": "$lib/components/ui/chat/chat-message-content.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-message-footer.svelte",
+					"target": "$lib/components/ui/chat/chat-message-footer.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-message-header.svelte",
+					"target": "$lib/components/ui/chat/chat-message-header.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-message-info.svelte",
+					"target": "$lib/components/ui/chat/chat-message-info.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-message-layout.svelte",
+					"target": "$lib/components/ui/chat/chat-message-layout.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-message-text.svelte",
+					"target": "$lib/components/ui/chat/chat-message-text.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-message.svelte",
+					"target": "$lib/components/ui/chat/chat-message.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-reaction-chip.svelte",
+					"target": "$lib/components/ui/chat/chat-reaction-chip.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-reaction-picker.svelte",
+					"target": "$lib/components/ui/chat/chat-reaction-picker.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-reply-preview.svelte",
+					"target": "$lib/components/ui/chat/chat-reply-preview.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-reply-reference.svelte",
+					"target": "$lib/components/ui/chat/chat-reply-reference.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-status-bar.svelte",
+					"target": "$lib/components/ui/chat/chat-status-bar.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-tip.svelte.ts",
+					"target": "$lib/components/ui/chat/chat-tip.svelte.ts"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-typing-indicator.svelte",
+					"target": "$lib/components/ui/chat/chat-typing-indicator.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/chat-unread-divider.svelte",
+					"target": "$lib/components/ui/chat/chat-unread-divider.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/index.ts",
+					"target": "$lib/components/ui/chat/index.ts"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/split-chat-message-preview.test.ts",
+					"target": "$lib/components/ui/chat/split-chat-message-preview.test.ts"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/split-chat-message-preview.ts",
+					"target": "$lib/components/ui/chat/split-chat-message-preview.ts"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/use-chat-popup-dismissal.svelte.ts",
+					"target": "$lib/components/ui/chat/use-chat-popup-dismissal.svelte.ts"
+				},
+				{
+					"type": "registry:ui",
+					"path": "chat/use-chat-scroll.svelte.ts",
+					"target": "$lib/components/ui/chat/use-chat-scroll.svelte.ts"
+				}
+			]
+		},
+		{
 			"name": "checkbox",
 			"title": "Checkbox",
 			"description": "A control allowing the user to toggle between checked and not checked.",
@@ -1123,6 +1316,102 @@
 					"type": "registry:ui",
 					"path": "command/index.ts",
 					"target": "$lib/components/ui/command/index.ts"
+				}
+			]
+		},
+		{
+			"name": "composer",
+			"title": "Composer",
+			"description": "A composable chat composer with @mentions, slash actions, token chips and adaptive layouts.",
+			"type": "registry:ui",
+			"dependencies": [
+				"@shardsui/svelte@0.1.0-beta.2"
+			],
+			"registryDependencies": [
+				"utils",
+				"scroll-area",
+				"button"
+			],
+			"files": [
+				{
+					"type": "registry:ui",
+					"path": "composer/composer-action-group.svelte",
+					"target": "$lib/components/ui/composer/composer-action-group.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "composer/composer-actions.svelte",
+					"target": "$lib/components/ui/composer/composer-actions.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "composer/composer-clipboard.ts",
+					"target": "$lib/components/ui/composer/composer-clipboard.ts"
+				},
+				{
+					"type": "registry:ui",
+					"path": "composer/composer-document.ts",
+					"target": "$lib/components/ui/composer/composer-document.ts"
+				},
+				{
+					"type": "registry:ui",
+					"path": "composer/composer-editor.svelte.ts",
+					"target": "$lib/components/ui/composer/composer-editor.svelte.ts"
+				},
+				{
+					"type": "registry:ui",
+					"path": "composer/composer-input.svelte",
+					"target": "$lib/components/ui/composer/composer-input.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "composer/composer-item.svelte",
+					"target": "$lib/components/ui/composer/composer-item.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "composer/composer-list.svelte",
+					"target": "$lib/components/ui/composer/composer-list.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "composer/composer-popup.svelte",
+					"target": "$lib/components/ui/composer/composer-popup.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "composer/composer-query.ts",
+					"target": "$lib/components/ui/composer/composer-query.ts"
+				},
+				{
+					"type": "registry:ui",
+					"path": "composer/composer-status.svelte",
+					"target": "$lib/components/ui/composer/composer-status.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "composer/composer-submit.svelte",
+					"target": "$lib/components/ui/composer/composer-submit.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "composer/composer-token-host.svelte",
+					"target": "$lib/components/ui/composer/composer-token-host.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "composer/composer-token.svelte",
+					"target": "$lib/components/ui/composer/composer-token.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "composer/composer.svelte",
+					"target": "$lib/components/ui/composer/composer.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "composer/index.ts",
+					"target": "$lib/components/ui/composer/index.ts"
 				}
 			]
 		},
@@ -8694,6 +8983,234 @@
 			]
 		},
 		{
+			"name": "p-composer-1",
+			"title": "Composer 1",
+			"description": "Composer with people, teams, and slash suggestions",
+			"type": "registry:block",
+			"dependencies": [
+				"#lib",
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"composer"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-composer-1.svelte",
+					"target": "$lib/components/particles/composer/p-composer-1.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-composer-10",
+			"title": "Composer 10",
+			"description": "Composer with leading buttons for mentions and slash actions",
+			"type": "registry:block",
+			"dependencies": [
+				"#lib",
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"button",
+				"composer"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-composer-10.svelte",
+					"target": "$lib/components/particles/composer/p-composer-10.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-composer-11",
+			"title": "Composer 11",
+			"description": "Compact rounded adaptive composer with a circular send button",
+			"type": "registry:block",
+			"dependencies": [
+				"#lib",
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"composer"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-composer-11.svelte",
+					"target": "$lib/components/particles/composer/p-composer-11.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-composer-2",
+			"title": "Composer 2",
+			"description": "Composer with asynchronous mention suggestions",
+			"type": "registry:block",
+			"dependencies": [
+				"#lib",
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"composer",
+				"spinner"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-composer-2.svelte",
+					"target": "$lib/components/particles/composer/p-composer-2.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-composer-3",
+			"title": "Composer 3",
+			"description": "Composer pinned below scrollable drawer content",
+			"type": "registry:block",
+			"dependencies": [
+				"#lib",
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"button",
+				"composer",
+				"drawer"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-composer-3.svelte",
+					"target": "$lib/components/particles/composer/p-composer-3.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-composer-4",
+			"title": "Composer 4",
+			"description": "Composer surface with a native textarea",
+			"type": "registry:block",
+			"dependencies": [
+				"#lib",
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"button",
+				"composer"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-composer-4.svelte",
+					"target": "$lib/components/particles/composer/p-composer-4.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-composer-5",
+			"title": "Composer 5",
+			"description": "Composer with a custom suggestion list",
+			"type": "registry:block",
+			"dependencies": [
+				"#lib",
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"composer"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-composer-5.svelte",
+					"target": "$lib/components/particles/composer/p-composer-5.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-composer-6",
+			"title": "Composer 6",
+			"description": "Composer with distinct person, team, and action chips",
+			"type": "registry:block",
+			"dependencies": [
+				"#lib",
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"composer"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-composer-6.svelte",
+					"target": "$lib/components/particles/composer/p-composer-6.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-composer-7",
+			"title": "Composer 7",
+			"description": "Contenteditable composer with Send beside a short draft",
+			"type": "registry:block",
+			"dependencies": [
+				"#lib",
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"button",
+				"composer"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-composer-7.svelte",
+					"target": "$lib/components/particles/composer/p-composer-7.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-composer-8",
+			"title": "Composer 8",
+			"description": "Textarea composer with Send beside a short draft",
+			"type": "registry:block",
+			"dependencies": [
+				"#lib",
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"button",
+				"composer"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-composer-8.svelte",
+					"target": "$lib/components/particles/composer/p-composer-8.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-composer-9",
+			"title": "Composer 9",
+			"description": "Rounded adaptive composer with circular actions",
+			"type": "registry:block",
+			"dependencies": [
+				"#lib",
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"button",
+				"composer"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-composer-9.svelte",
+					"target": "$lib/components/particles/composer/p-composer-9.svelte"
+				}
+			]
+		},
+		{
 			"name": "p-context-menu-1",
 			"title": "Context menu 1",
 			"description": "Basic context menu",
@@ -9568,6 +10085,28 @@
 					"type": "registry:block",
 					"path": "p-drawer-14.svelte",
 					"target": "$lib/components/particles/drawer/p-drawer-14.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-drawer-15",
+			"title": "Drawer 15",
+			"description": "Composer pinned below scrollable drawer content in a bottom drawer",
+			"type": "registry:block",
+			"dependencies": [
+				"#lib",
+				"@lucide/svelte"
+			],
+			"registryDependencies": [
+				"button",
+				"composer",
+				"drawer"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-drawer-15.svelte",
+					"target": "$lib/components/particles/drawer/p-drawer-15.svelte"
 				}
 			]
 		},
@@ -13444,7 +13983,6 @@
 				"@lucide/svelte"
 			],
 			"registryDependencies": [
-				"badge",
 				"button",
 				"checkbox-group",
 				"checkbox",

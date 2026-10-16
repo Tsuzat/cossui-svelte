@@ -2,4 +2,4 @@
   import { Slider } from '#lib/components/ui/slider/index.js';
 </script>
 
-<Slider value={50} />
+<Slider getAriaLabel={() => 'Value'} value={50} />

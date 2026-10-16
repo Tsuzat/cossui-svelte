@@ -33,7 +33,7 @@
   </FrameHeader>
   <Card>
     <CardPanel>
-      <Form class="flex w-full flex-col gap-4">
+      <Form class="flex w-full flex-col gap-4" onsubmit={(event) => event.preventDefault()}>
         <Field>
           <FieldLabel>Name</FieldLabel>
           <Input placeholder="Name of your project" type="text" />

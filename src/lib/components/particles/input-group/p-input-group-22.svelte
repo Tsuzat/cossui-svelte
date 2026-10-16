@@ -7,11 +7,13 @@
     InputGroupInput
   } from '#lib/components/ui/input-group/index.js';
 
+  let inputRef = $state<HTMLInputElement | null>(null);
   let value = $state('Clear me');
 </script>
 
 <InputGroup>
   <InputGroupInput
+    bind:ref={inputRef}
     aria-label="Text input with clear button"
     oninput={(e) => {
       value = (e.currentTarget as HTMLInputElement).value;
@@ -26,6 +28,7 @@
         aria-label="Clear input"
         onclick={() => {
           value = '';
+          inputRef?.focus();
         }}
         size="icon-xs"
         variant="ghost"

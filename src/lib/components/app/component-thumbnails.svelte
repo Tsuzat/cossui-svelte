@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ArrowUp from '@lucide/svelte/icons/arrow-up';
   import Bold from '@lucide/svelte/icons/bold';
   import Calendar from '@lucide/svelte/icons/calendar';
   import Check from '@lucide/svelte/icons/check';
@@ -1138,6 +1139,31 @@
         {@render textSnip('w-4')}
       </div>
     </div>
+  </div>
+{:else if slug === 'composer'}
+  <div class={cardCls('max-w-60 [--radius-2xl:14px]')}>
+    <div class={cpCls('flex flex-col gap-3 p-3')}>
+      <div class="flex items-center gap-1.5 px-1 pt-1">
+        <span class="rounded-sm bg-primary/12 px-1.5 py-px text-[0.5rem] font-medium text-primary"
+          >@Alex</span
+        >
+        {@render textSnip('w-[45%]')}
+      </div>
+      <div class="flex items-center justify-between">
+        {@render iconSnip(Plus, 'size-3')}
+        <div
+          class="flex size-5 items-center justify-center rounded-full bg-primary text-primary-foreground"
+        >
+          <ArrowUp class="size-3" />
+        </div>
+      </div>
+    </div>
+  </div>
+{:else if slug === 'chat'}
+  <div class="flex w-full max-w-52 flex-col gap-2">
+    <div class="h-6 w-[70%] rounded-xl rounded-ss-sm bg-foreground/4"></div>
+    <div class="h-6 w-[55%] self-end rounded-xl rounded-se-sm bg-foreground/12"></div>
+    <div class="h-6 w-[40%] rounded-xl rounded-ss-sm bg-foreground/4"></div>
   </div>
 {:else if slug === 'tooltip'}
   <div class="flex max-w-32 flex-1 flex-col items-center gap-2">

@@ -17,7 +17,7 @@
       <PopoverTitle class="text-base">Send us feedback</PopoverTitle>
       <PopoverDescription>Let us know how we can improve.</PopoverDescription>
     </div>
-    <form class="flex w-full flex-col gap-4">
+    <form class="flex w-full flex-col gap-4" onsubmit={(event) => event.preventDefault()}>
       <Textarea aria-label="Send feedback" id="feedback" placeholder="How can we improve?" />
       <Button type="submit">Send feedback</Button>
     </form>

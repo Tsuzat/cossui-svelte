@@ -55,7 +55,7 @@
       class="justify-between rounded-t-lg border-b bg-muted/72 p-2!"
     >
       <Select bind:value={lang} items={languages}>
-        <SelectTrigger class="w-fit" size="sm">
+        <SelectTrigger aria-label="Code language" class="w-fit" size="sm">
           <SelectValue />
         </SelectTrigger>
         <SelectPopup>
@@ -67,6 +67,7 @@
       <Tooltip>
         <TooltipTrigger
           aria-label={copied ? 'Copied' : 'Copy code'}
+          disabled={!code}
           class={buttonVariants({ size: 'icon-sm', variant: 'ghost' })}
           onclick={handleCopy}
         >

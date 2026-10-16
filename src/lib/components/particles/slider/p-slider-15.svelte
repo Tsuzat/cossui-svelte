@@ -16,7 +16,7 @@
     From {formatPrice(values[0] ?? min)} to {formatPrice(values[1] ?? max)}
   </legend>
   <Slider
-    aria-label="Price range"
+    getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
     class="flex-1"
     {max}
     {min}

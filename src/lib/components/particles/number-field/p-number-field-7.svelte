@@ -11,7 +11,7 @@
 <NumberField value={5} max={10} min={0}>
   <NumberFieldGroup>
     <NumberFieldDecrement />
-    <NumberFieldInput />
+    <NumberFieldInput aria-label="Quantity" />
     <NumberFieldIncrement />
   </NumberFieldGroup>
 </NumberField>

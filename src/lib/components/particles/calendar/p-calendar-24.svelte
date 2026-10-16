@@ -3,6 +3,7 @@
   import { Calendar, Day } from '#lib/components/ui/calendar/index.js';
   import { cn } from '#lib/utils.js';
 
+  const uid = $props.id();
   const GOOD_PRICE_THRESHOLD = 100;
 
   const todayValue = today(getLocalTimeZone());
@@ -30,16 +31,20 @@
   {#snippet day({ day: date })}
     {@const price = mockPriceData[date.toString()]}
     {@const isGoodPrice = price !== undefined && price < GOOD_PRICE_THRESHOLD}
-    <Day class="size-12">
+    <Day
+      aria-describedby={price !== undefined ? `${uid}-price-${date.toString()}` : undefined}
+      class="size-12"
+    >
       {#snippet children({ day: dayLabel })}
         <span class="flex flex-col">
           {dayLabel}
           {#if price}
             <span
+              id="{uid}-price-{date.toString()}"
               class={cn(
                 'font-normal text-xs',
                 isGoodPrice
-                  ? 'text-emerald-500'
+                  ? 'in-data-selected:text-primary-foreground text-success-foreground'
                   : 'in-data-selected:text-primary-foreground/70 text-muted-foreground'
               )}
             >

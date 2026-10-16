@@ -24,22 +24,15 @@
       <div class="flex items-center gap-2">
         <Label class="w-3 text-muted-foreground text-xs">{axis.toUpperCase()}</Label>
         <Slider
-          aria-label={`${axis.toUpperCase()} position`}
+          getAriaLabel={() => `${axis.toUpperCase()} position`}
           class="flex-1"
           {max}
           {min}
           bind:value={values[axis]}
         />
-        <NumberField
-          aria-label={`Enter ${axis.toUpperCase()} value`}
-          class="w-16"
-          {max}
-          {min}
-          bind:value={values[axis]}
-          size="sm"
-        >
+        <NumberField class="w-16" {max} {min} bind:value={values[axis]} size="sm">
           <NumberFieldGroup>
-            <NumberFieldInput />
+            <NumberFieldInput aria-label={`Enter ${axis.toUpperCase()} value`} />
           </NumberFieldGroup>
         </NumberField>
       </div>
@@ -52,7 +45,7 @@
     }}
     variant="outline"
   >
-    <RotateCcwIcon aria-hidden="true" class="-ms-1 opacity-60" />
+    <RotateCcwIcon aria-hidden="true" class="-ms-1 opacity-64" />
     Reset
   </Button>
 </fieldset>

@@ -88,7 +88,7 @@
               >
                 {@render themePreviews(item.value)}
               </span>
-              <span class="not-peer-data-checked:text-muted-foreground/70">
+              <span class="not-peer-data-checked:text-muted-foreground/72">
                 {item.label}
               </span>
             </FieldLabel>

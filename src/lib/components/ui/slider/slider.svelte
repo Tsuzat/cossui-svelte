@@ -6,6 +6,7 @@
 
   let {
     class: className,
+    getAriaLabel,
     orientation = 'horizontal',
     ref = $bindable(null),
     showTooltip = false,
@@ -15,6 +16,8 @@
     ...restProps
   }: {
     class?: string;
+    /** Accessible name for each thumb, by index. */
+    getAriaLabel?: (index: number) => string;
     orientation?: 'horizontal' | 'vertical';
     ref?: HTMLElement | null;
     showTooltip?: boolean;
@@ -59,6 +62,7 @@
 {#snippet thumb(index: number, extra?: Record<string, unknown>)}
   <SliderPrimitive.Thumb
     {index}
+    aria-label={getAriaLabel?.(index)}
     bind:ref={thumbRefs[index]}
     class="block size-5 shrink-0 select-none rounded-full border border-input bg-white not-dark:bg-clip-padding shadow-xs/5 outline-none transition-[box-shadow,scale] before:absolute before:inset-0 before:rounded-full before:shadow-[0_1px_--theme(--color-black/4%)] has-focus-visible:ring-[3px] has-focus-visible:ring-ring/24 data-dragging:scale-120 sm:size-4 dark:border-background dark:has-focus-visible:ring-ring/48 [:has(*:focus-visible),[data-dragging]]:shadow-none"
     data-slot="slider-thumb"

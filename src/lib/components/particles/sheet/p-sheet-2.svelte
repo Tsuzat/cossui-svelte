@@ -26,7 +26,7 @@
         Make changes to your profile here. Click save when you're done.
       </SheetDescription>
     </SheetHeader>
-    <Form class="contents">
+    <Form class="contents" onsubmit={(event) => event.preventDefault()}>
       <SheetPanel class="grid gap-4">
         <Field class="flex flex-col gap-1.5">
           <Label class="text-sm font-medium">Name</Label>

@@ -20,7 +20,7 @@
     </CardAction>
   </CardHeader>
   <CardPanel>
-    <Form class="flex w-full flex-col gap-4">
+    <Form class="flex w-full flex-col gap-4" onsubmit={(event) => event.preventDefault()}>
       <Field>
         <FieldLabel>Email</FieldLabel>
         <Input placeholder="Enter your email" type="email" />

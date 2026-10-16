@@ -15,7 +15,6 @@
     Drawer,
     DrawerClose,
     DrawerDescription,
-    DrawerFooter,
     DrawerHeader,
     DrawerPanel,
     DrawerPopup,
@@ -49,8 +48,8 @@
           Make changes to your profile here. Click save when you're done.
         </DrawerDescription>
       </DrawerHeader>
-      <Form class="contents">
-        <DrawerPanel class="grid gap-4" scrollable={false}>
+      <Form class="contents" onsubmit={(event) => event.preventDefault()}>
+        <DrawerPanel class="grid gap-4">
           <Field>
             <FieldLabel>Name</FieldLabel>
             <Input type="text" value="Margaret Welsh" />
@@ -59,11 +58,11 @@
             <FieldLabel>Username</FieldLabel>
             <Input type="text" value="@maggie.welsh" />
           </Field>
+          <div class="flex flex-col-reverse gap-2">
+            <DrawerClose class={buttonVariants({ variant: 'ghost' })}>Cancel</DrawerClose>
+            <Button type="submit">Save</Button>
+          </div>
         </DrawerPanel>
-        <DrawerFooter>
-          <DrawerClose class={buttonVariants({ variant: 'ghost' })}>Cancel</DrawerClose>
-          <Button type="submit">Save</Button>
-        </DrawerFooter>
       </Form>
     </DrawerPopup>
   </Drawer>
@@ -77,7 +76,7 @@
           Make changes to your profile here. Click save when you're done.
         </DialogDescription>
       </DialogHeader>
-      <Form class="contents">
+      <Form class="contents" onsubmit={(event) => event.preventDefault()}>
         <DialogPanel class="grid gap-4">
           <Field>
             <FieldLabel>Name</FieldLabel>

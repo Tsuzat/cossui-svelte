@@ -6,8 +6,8 @@
 </script>
 
 <Button
-  aria-expanded={open}
-  aria-label={open ? 'Close menu' : 'Open menu'}
+  aria-label="Toggle plus icon animation"
+  aria-pressed={open}
   class="rounded-full before:rounded-full"
   onclick={() => (open = !open)}
   size="icon"
@@ -15,6 +15,6 @@
 >
   <Plus
     aria-hidden="true"
-    class="in-[[aria-expanded=true]]:rotate-[135deg] transition-transform duration-500 ease-[cubic-bezier(0.68,-0.6,0.32,1.6)]"
+    class="in-[[aria-pressed=true]]:rotate-[135deg] transition-transform duration-500 ease-[cubic-bezier(0.68,-0.6,0.32,1.6)]"
   />
 </Button>

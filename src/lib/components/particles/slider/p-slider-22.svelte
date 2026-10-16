@@ -182,31 +182,27 @@
         </div>
       {/each}
     </div>
-    <Slider aria-label="Price range" class="*:min-w-0!" {max} {min} bind:value={values} />
+    <Slider
+      getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
+      class="*:min-w-0!"
+      {max}
+      {min}
+      bind:value={values}
+    />
   </div>
 
   <div class="flex items-center justify-between gap-4">
     <InputGroup>
-      <NumberField
-        aria-label="Minimum price"
-        max={values[1]}
-        {min}
-        bind:value={() => values[0], (v) => updateValue(0, v)}
-      >
-        <NumberFieldInput class="text-left" />
+      <NumberField max={values[1]} {min} bind:value={() => values[0], (v) => updateValue(0, v)}>
+        <NumberFieldInput aria-label="Minimum price" class="text-left" />
       </NumberField>
       <InputGroupAddon>
         <InputGroupText>$</InputGroupText>
       </InputGroupAddon>
     </InputGroup>
     <InputGroup>
-      <NumberField
-        aria-label="Maximum price"
-        {max}
-        min={values[0]}
-        bind:value={() => values[1], (v) => updateValue(1, v)}
-      >
-        <NumberFieldInput class="text-left" />
+      <NumberField {max} min={values[0]} bind:value={() => values[1], (v) => updateValue(1, v)}>
+        <NumberFieldInput aria-label="Maximum price" class="text-left" />
       </NumberField>
       <InputGroupAddon>
         <InputGroupText>$</InputGroupText>

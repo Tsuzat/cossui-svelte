@@ -11,4 +11,4 @@
   });
 </script>
 
-<Progress {value} />
+<Progress aria-label="Loading progress" {value} />
