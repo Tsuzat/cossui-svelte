@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.9.27](https://github.com/cossui-svelte/cossui-svelte/compare/v0.9.26...v0.9.27) (2026-10-17)
+
+### 📝 Documentation
+
+* updates ([1ebb648](https://github.com/cossui-svelte/cossui-svelte/commit/1ebb6487f6a59f127c3725ef5b02f7b4fe447788))
+
+### 🚚 Chores
+
+* deps ([798daa3](https://github.com/cossui-svelte/cossui-svelte/commit/798daa3332f260ecdbacfe8d6403d5462ca4d3a4))
+
 ## [0.9.26](https://github.com/cossui-svelte/cossui-svelte/compare/v0.9.25...v0.9.26) (2026-10-16)
 
 ### ✨ Features
