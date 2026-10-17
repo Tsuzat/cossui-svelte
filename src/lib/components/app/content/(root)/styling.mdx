@@ -13,9 +13,9 @@ While this color system is optional, it's designed to provide optimal visual res
 
 ## Installation
 
-See [Get Started](/docs/get-started) for installing with the CLI. If you prefer to add the theme manually, paste the following into your `globals.css`:
+See [Get Started](/docs/get-started) for adding components. To add the theme, paste the following into your global stylesheet:
 
-```css title="app/globals.css"
+```css title="src/app.css"
 @theme inline {
   --font-sans: var(--font-sans);
   --font-heading: var(--font-sans);
@@ -165,74 +165,66 @@ See [Get Started](/docs/get-started) for installing with the CLI. If you prefer 
 
 ## Font Variables
 
-Components like Dialog, AlertDialog, Sheet, and Empty use the `font-heading` class for titles. The coss style preset defines `--font-sans`, `--font-heading`, and `--font-mono` with system font fallbacks.
-
-When you install `@coss/style` via the CLI, Inter is used for `--font-sans` and `--font-heading`, with Geist Mono for `--font-mono`. coss.com uses **Cal Sans 2.0** variable from `@coss/ui/fonts` for both body and headings.
+Components like Dialog, AlertDialog, Sheet, and Empty use the `font-heading` class for titles. The theme defines `--font-sans`, `--font-heading`, and `--font-mono`; set them to the font families you want, with system fallbacks.
 
 By default, `--font-heading` is aliased to `--font-sans` in the theme. Pair `font-heading` with a weight utility such as `font-bold` or `font-semibold` where needed.
 
 ### Custom fonts
 
-To use your own fonts, define the variables in your layout with `next/font`:
+Load your fonts with `@font-face` or a package such as [Fontsource](https://fontsource.org), then point the variables at them in your global stylesheet:
 
-```tsx title="app/layout.tsx"
-import { fontMono, fontSans } from "@coss/ui/fonts";
+```css title="src/app.css"
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body className={`${fontSans.variable} ${fontMono.variable} font-sans`}>
-        {children}
-      </body>
-    </html>
-  );
+:root {
+  --font-sans: "Inter Variable", sans-serif;
+  --font-mono: "JetBrains Mono Variable", monospace;
 }
 ```
 
 When sans and heading share one family, only `--font-sans` needs to be set — the theme aliases `--font-heading` to it.
 
-For a separate heading font, wire `--font-heading` in your layout and point the theme token at it:
+For a separate heading font, set `--font-heading` as well:
 
-```tsx title="app/layout.tsx"
-import { fontHeading, fontMono, fontSans } from "@coss/ui/fonts";
+```css title="src/app.css"
+:root {
+  --font-heading: "Inter Variable", sans-serif;
+}
 
-<body className={`${fontSans.variable} ${fontHeading.variable} ${fontMono.variable} font-sans`}>
-```
-
-```css title="app/globals.css"
 @theme inline {
   --font-heading: var(--font-heading);
 }
 ```
 
-Apply the variables to `html` or `body` so they cascade. The `font-sans` class sets the default body font.
+The `font-sans` class sets the default body font; apply it to `body` (or `html`) so it cascades.
 
-## Base UI Setup
+## ShardsUI Setup
 
-Since this library is built on Base UI, you need to configure CSS isolation to ensure portaled components (Dialogs, Popovers, Selects, etc.) render correctly above page content.
+Since this library is built on ShardsUI (a Svelte port of Base UI), you need to configure CSS isolation to ensure portaled components (Dialogs, Popovers, Selects, etc.) render correctly above page content.
 
 ### Application Root Isolation
 
 Add `isolation: isolate` to your application's root wrapper div. This creates a separate stacking context so portaled components always appear above page contents without z-index conflicts.
 
-```tsx title="app/layout.tsx"
-<body>
-  <div className="isolate relative flex min-h-svh flex-col">
-    {children}
-  </div>
-</body>
+```svelte title="src/routes/+layout.svelte"
+<script lang="ts">
+  let { children } = $props();
+</script>
+
+<div class="isolate relative flex min-h-svh flex-col">
+  {@render children()}
+</div>
 ```
 
 ### iOS Safari Compatibility
 
 For iOS Safari 26+ compatibility, add `position: relative` to the body element. This ensures backdrops properly cover the visual viewport after page scrolling.
 
-```tsx title="app/layout.tsx"
-<body className="relative">
-  <div className="isolate relative flex min-h-svh flex-col">
-    {children}
-  </div>
+```html title="src/app.html"
+<body class="relative" data-sveltekit-preload-data="hover">
+  <div style="display: contents">%sveltekit.body%</div>
 </body>
 ```
 
-These styles ensure Base UI components maintain proper rendering hierarchy and visual layering throughout your application. Without isolation, you may experience z-index conflicts where page content appears above modal dialogs or popovers.
+These styles ensure ShardsUI components maintain proper rendering hierarchy and visual layering throughout your application. Without isolation, you may experience z-index conflicts where page content appears above modal dialogs or popovers.
