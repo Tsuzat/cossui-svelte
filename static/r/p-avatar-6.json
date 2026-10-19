@@ -16,7 +16,6 @@
 		"avatar"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

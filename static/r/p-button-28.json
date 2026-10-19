@@ -16,7 +16,5 @@
 		"avatar",
 		"button"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

@@ -19,7 +19,5 @@
 		"input",
 		"label"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

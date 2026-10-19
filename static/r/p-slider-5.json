@@ -16,7 +16,5 @@
 		"slider",
 		"utils"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

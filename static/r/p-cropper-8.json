@@ -16,7 +16,5 @@
 		"cropper",
 		"slider"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

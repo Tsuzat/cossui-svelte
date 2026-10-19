@@ -17,7 +17,5 @@
 		"dialog",
 		"scroll-area"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

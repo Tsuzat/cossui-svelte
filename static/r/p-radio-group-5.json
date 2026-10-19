@@ -17,7 +17,5 @@
 		"label",
 		"radio-group"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

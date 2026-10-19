@@ -47,7 +47,7 @@ async function getHookItems(cwd: string): Promise<RegistryItem[]> {
   for (const entry of entries) {
     if (!entry.isFile() || !entry.name.endsWith('.ts')) continue;
 
-    // e.g. use-file-upload.svelte.ts -> use-file-upload (imports use `$lib/hooks/use-file-upload.svelte`)
+    // e.g. use-file-upload.svelte.ts -> use-file-upload (imports use `#lib/hooks/use-file-upload.svelte`)
     const fileName = entry.name.replace(/\.ts$/, '');
     const name = fileName.replace(/\.svelte$/, '');
 

@@ -18,7 +18,6 @@
 		"toggle-group"
 	],
 	"dependencies": [
-		"#lib",
 		"@internationalized/date",
 		"@internationalized/date@^3.12.4"
 	]

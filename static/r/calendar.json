@@ -289,8 +289,8 @@
 		}
 	],
 	"registryDependencies": [
-		"utils",
 		"button",
+		"utils",
 		"range-calendar"
 	],
 	"dependencies": [

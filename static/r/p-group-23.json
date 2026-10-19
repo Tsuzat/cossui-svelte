@@ -21,7 +21,6 @@
 		"utils"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

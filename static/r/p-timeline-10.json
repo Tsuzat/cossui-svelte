@@ -17,8 +17,6 @@
 		"assets"
 	],
 	"dependencies": [
-		"#assets",
-		"#lib",
 		"@lucide/svelte"
 	]
 }

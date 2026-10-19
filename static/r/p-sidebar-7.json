@@ -17,7 +17,6 @@
 		"sidebar"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

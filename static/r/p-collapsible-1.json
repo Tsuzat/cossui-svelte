@@ -16,7 +16,6 @@
 		"collapsible"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

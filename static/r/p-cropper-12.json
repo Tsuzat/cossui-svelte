@@ -16,7 +16,5 @@
 		"button",
 		"cropper"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

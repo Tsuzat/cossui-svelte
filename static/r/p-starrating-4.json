@@ -18,7 +18,5 @@
 		"form",
 		"starrating"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

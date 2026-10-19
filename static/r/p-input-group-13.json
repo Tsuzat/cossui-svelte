@@ -16,7 +16,6 @@
 		"input-group"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

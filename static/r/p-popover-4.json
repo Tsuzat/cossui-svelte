@@ -14,14 +14,13 @@
 	],
 	"registryDependencies": [
 		"button",
-		"checkbox-group",
 		"checkbox",
+		"checkbox-group",
 		"group",
 		"label",
 		"popover"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

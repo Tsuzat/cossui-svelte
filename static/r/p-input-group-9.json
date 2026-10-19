@@ -16,7 +16,5 @@
 		"button",
 		"input-group"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

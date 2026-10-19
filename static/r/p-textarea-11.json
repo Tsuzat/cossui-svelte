@@ -16,7 +16,5 @@
 		"field",
 		"textarea"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

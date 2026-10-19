@@ -16,7 +16,6 @@
 		"toggle"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

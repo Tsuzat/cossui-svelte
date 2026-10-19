@@ -16,7 +16,5 @@
 		"button",
 		"map"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

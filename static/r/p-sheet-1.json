@@ -19,7 +19,5 @@
 		"input",
 		"sheet"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

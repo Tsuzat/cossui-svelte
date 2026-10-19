@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"colorpicker"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

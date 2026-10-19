@@ -16,7 +16,5 @@
 		"accordion",
 		"button"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

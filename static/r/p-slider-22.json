@@ -18,7 +18,5 @@
 		"number-field",
 		"slider"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

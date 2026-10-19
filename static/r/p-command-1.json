@@ -18,7 +18,6 @@
 		"kbd"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

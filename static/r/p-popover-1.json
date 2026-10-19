@@ -17,7 +17,5 @@
 		"popover",
 		"textarea"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

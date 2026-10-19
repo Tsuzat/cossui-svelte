@@ -16,7 +16,5 @@
 		"button",
 		"tooltip"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

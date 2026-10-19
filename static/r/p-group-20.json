@@ -17,7 +17,5 @@
 		"group",
 		"input"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

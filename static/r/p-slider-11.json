@@ -16,7 +16,6 @@
 		"slider"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

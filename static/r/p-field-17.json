@@ -18,7 +18,5 @@
 		"form",
 		"number-field"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

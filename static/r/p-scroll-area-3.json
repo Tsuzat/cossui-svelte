@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"scroll-area"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

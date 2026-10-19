@@ -16,7 +16,5 @@
 		"button",
 		"spinner"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

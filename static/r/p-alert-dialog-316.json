@@ -16,7 +16,5 @@
 		"button",
 		"dialog"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

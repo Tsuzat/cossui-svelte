@@ -16,7 +16,5 @@
 		"button",
 		"pagination"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

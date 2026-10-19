@@ -17,7 +17,5 @@
 		"card",
 		"table"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

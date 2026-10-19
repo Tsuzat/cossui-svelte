@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"accordion"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

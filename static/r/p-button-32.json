@@ -16,7 +16,5 @@
 		"badge",
 		"button"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

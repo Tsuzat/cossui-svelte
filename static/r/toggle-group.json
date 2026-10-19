@@ -31,9 +31,9 @@
 		}
 	],
 	"registryDependencies": [
-		"utils",
+		"separator",
 		"toggle",
-		"separator"
+		"utils"
 	],
 	"dependencies": [
 		"@shardsui/svelte@0.1.0-beta.2"

@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"otp-field"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

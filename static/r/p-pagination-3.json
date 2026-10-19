@@ -16,7 +16,5 @@
 		"pagination",
 		"select"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

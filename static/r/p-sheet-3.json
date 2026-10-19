@@ -16,7 +16,5 @@
 		"button",
 		"sheet"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

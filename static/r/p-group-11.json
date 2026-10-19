@@ -19,7 +19,6 @@
 		"popover"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

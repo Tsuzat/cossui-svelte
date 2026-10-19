@@ -16,7 +16,5 @@
 		"combobox",
 		"label"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

@@ -16,7 +16,5 @@
 		"checkbox",
 		"label"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

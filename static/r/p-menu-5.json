@@ -16,7 +16,5 @@
 		"button",
 		"menu"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

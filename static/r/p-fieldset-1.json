@@ -17,7 +17,5 @@
 		"fieldset",
 		"input"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

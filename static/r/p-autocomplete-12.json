@@ -16,7 +16,5 @@
 		"autocomplete",
 		"spinner"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

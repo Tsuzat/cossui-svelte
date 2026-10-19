@@ -16,7 +16,6 @@
 		"chart"
 	],
 	"dependencies": [
-		"#lib",
 		"d3-scale",
 		"layerchart",
 		"d3-scale@^4.0.2",

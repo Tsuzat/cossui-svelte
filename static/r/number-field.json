@@ -61,8 +61,8 @@
 		}
 	],
 	"registryDependencies": [
-		"utils",
-		"label"
+		"label",
+		"utils"
 	],
 	"dependencies": []
 }

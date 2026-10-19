@@ -17,7 +17,6 @@
 		"combobox"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

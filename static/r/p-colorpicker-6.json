@@ -16,7 +16,6 @@
 		"colorpicker"
 	],
 	"dependencies": [
-		"#lib",
 		"@hueycolor/core",
 		"@hueycolor/core@^1.0.1"
 	]

@@ -16,7 +16,5 @@
 		"frame",
 		"separator"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

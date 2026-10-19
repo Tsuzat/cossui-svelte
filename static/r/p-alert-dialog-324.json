@@ -17,7 +17,5 @@
 		"dialog",
 		"otp-field"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

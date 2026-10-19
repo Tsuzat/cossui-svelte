@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"avatar"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

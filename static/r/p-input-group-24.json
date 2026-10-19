@@ -16,7 +16,5 @@
 		"input-group",
 		"use-character-limit"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

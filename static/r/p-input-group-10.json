@@ -16,7 +16,5 @@
 		"badge",
 		"input-group"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

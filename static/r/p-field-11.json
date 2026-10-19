@@ -18,7 +18,5 @@
 		"form",
 		"select"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

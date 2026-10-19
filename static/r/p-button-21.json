@@ -16,7 +16,6 @@
 		"button"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

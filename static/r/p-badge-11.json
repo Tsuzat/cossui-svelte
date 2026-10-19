@@ -16,7 +16,6 @@
 		"badge"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

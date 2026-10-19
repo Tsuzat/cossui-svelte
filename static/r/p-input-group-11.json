@@ -16,7 +16,5 @@
 		"input-group",
 		"kbd"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

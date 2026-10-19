@@ -17,7 +17,6 @@
 		"group"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

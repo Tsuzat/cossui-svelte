@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"textarea"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

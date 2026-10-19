@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"kbd"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

@@ -17,7 +17,6 @@
 		"tabs"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

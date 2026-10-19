@@ -18,7 +18,6 @@
 		"use-file-upload"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

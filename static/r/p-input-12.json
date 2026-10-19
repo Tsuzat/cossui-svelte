@@ -16,7 +16,5 @@
 		"input-group",
 		"spinner"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

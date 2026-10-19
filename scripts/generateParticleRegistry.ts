@@ -75,10 +75,11 @@ async function findParticleFiles(dir: string): Promise<string[]> {
 }
 
 // Discovers real dependencies by scanning the particle's own import statements:
-// - `$lib/components/ui/<slug>` imports become registryDependencies
-// - `$lib/hooks/<slug>` imports become registryDependencies
-// - any other bare (non-relative, non-$lib) specifier becomes an npmDependency,
-//   except Svelte's own built-in modules (`svelte`, `svelte/*`)
+// - `#lib/components/ui/<slug>` imports become registryDependencies
+// - `#lib/hooks/<slug>` imports become registryDependencies
+//   (the `$lib/...` spelling of both is accepted too)
+// - any other bare specifier becomes an npmDependency, except relative imports,
+//   app aliases (`$app/*`, `#lib/*`, ...) and Svelte's built-in modules (`svelte`, `svelte/*`)
 async function discoverDeps(
   filePath: string
 ): Promise<Pick<MergedEntry, 'npmDependencies' | 'registryDependencies'>> {
@@ -92,14 +93,19 @@ async function discoverDeps(
   const registryDependencies = new Set<string>();
 
   for (const specifier of specifiers) {
-    if (specifier.startsWith('$lib/components/ui/')) {
-      const slug = specifier.slice('$lib/components/ui/'.length).split('/')[0];
+    const libPath = specifier.match(/^[#$]lib\/(.*)$/)?.[1];
+    if (libPath?.startsWith('components/ui/')) {
+      const slug = libPath.slice('components/ui/'.length).split('/')[0];
       if (slug) registryDependencies.add(slug);
-    } else if (specifier.startsWith('$lib/hooks/')) {
-      const slug = specifier.slice('$lib/hooks/'.length).split('/')[0].replace(/\.svelte$/, '');
+    } else if (libPath?.startsWith('hooks/')) {
+      const slug = libPath
+        .slice('hooks/'.length)
+        .split('/')[0]
+        .replace(/\.svelte\.(js|ts)$/, '')
+        .replace(/\.(svelte|js|ts)$/, '');
       if (slug) registryDependencies.add(slug);
-    } else if (specifier.startsWith('$') || specifier.startsWith('.')) {
-      continue; // app-internal alias or relative import
+    } else if (/^[$#.]/.test(specifier)) {
+      continue; // app-internal alias (`$app/*`, `#lib/utils`, ...) or relative import
     } else if (specifier === 'svelte' || specifier.startsWith('svelte/')) {
       continue; // framework builtin, always assumed present
     } else {

@@ -19,7 +19,6 @@
 		"tooltip"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

@@ -16,7 +16,5 @@
 		"button",
 		"drawer"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

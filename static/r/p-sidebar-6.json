@@ -17,7 +17,6 @@
 		"toast"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

@@ -16,7 +16,6 @@
 		"context-menu"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

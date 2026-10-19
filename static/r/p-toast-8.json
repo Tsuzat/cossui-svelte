@@ -17,7 +17,5 @@
 		"spinner",
 		"toast"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

@@ -103,9 +103,9 @@
 		}
 	],
 	"registryDependencies": [
-		"utils",
+		"button",
 		"scroll-area",
-		"button"
+		"utils"
 	],
 	"dependencies": [
 		"@shardsui/svelte@0.1.0-beta.2"

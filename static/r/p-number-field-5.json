@@ -16,7 +16,5 @@
 		"label",
 		"number-field"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

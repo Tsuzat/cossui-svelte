@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"input"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

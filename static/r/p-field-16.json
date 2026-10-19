@@ -18,7 +18,5 @@
 		"form",
 		"slider"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

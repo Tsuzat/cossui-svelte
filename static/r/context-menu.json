@@ -103,8 +103,8 @@
 		}
 	],
 	"registryDependencies": [
-		"utils",
-		"kbd"
+		"kbd",
+		"utils"
 	],
 	"dependencies": [
 		"@shardsui/svelte@0.1.0-beta.2"

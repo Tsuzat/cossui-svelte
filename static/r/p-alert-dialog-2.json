@@ -16,7 +16,5 @@
 		"alert-dialog",
 		"button"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

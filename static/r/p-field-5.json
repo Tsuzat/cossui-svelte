@@ -18,7 +18,5 @@
 		"form",
 		"input"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

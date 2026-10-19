@@ -17,7 +17,6 @@
 		"composer"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

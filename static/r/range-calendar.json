@@ -67,9 +67,9 @@
 		}
 	],
 	"registryDependencies": [
+		"button",
 		"calendar",
-		"utils",
-		"button"
+		"utils"
 	],
 	"dependencies": [
 		"svelte-toolbelt@^0.10.6",

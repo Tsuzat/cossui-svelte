@@ -16,7 +16,5 @@
 		"avatar",
 		"badge"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

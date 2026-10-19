@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"timeline"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

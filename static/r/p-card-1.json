@@ -21,7 +21,6 @@
 		"select"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

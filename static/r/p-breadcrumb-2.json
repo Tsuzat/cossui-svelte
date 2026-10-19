@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"breadcrumb"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

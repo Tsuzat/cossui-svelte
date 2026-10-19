@@ -16,7 +16,6 @@
 		"timeline"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

@@ -16,7 +16,6 @@
 		"chart"
 	],
 	"dependencies": [
-		"#lib",
 		"layerchart",
 		"layerchart@^2.8.1"
 	]

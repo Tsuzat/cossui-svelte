@@ -16,7 +16,5 @@
 		"places-autocomplete",
 		"toast"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

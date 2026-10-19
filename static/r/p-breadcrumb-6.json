@@ -16,7 +16,6 @@
 		"breadcrumb"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

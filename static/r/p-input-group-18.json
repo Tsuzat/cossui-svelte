@@ -19,7 +19,6 @@
 		"menu"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

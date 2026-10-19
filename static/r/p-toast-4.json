@@ -16,7 +16,5 @@
 		"button",
 		"toast"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

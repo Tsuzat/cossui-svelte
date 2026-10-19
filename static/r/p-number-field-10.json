@@ -16,7 +16,5 @@
 		"button",
 		"number-field"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

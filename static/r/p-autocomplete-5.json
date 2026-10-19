@@ -16,7 +16,5 @@
 		"autocomplete",
 		"label"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

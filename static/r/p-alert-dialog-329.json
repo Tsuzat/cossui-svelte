@@ -21,7 +21,6 @@
 		"radio-group"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte",
 		"cleave-zen",
 		"cleave-zen@^0.0.17"

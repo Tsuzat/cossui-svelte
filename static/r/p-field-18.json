@@ -20,7 +20,5 @@
 		"input",
 		"select"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

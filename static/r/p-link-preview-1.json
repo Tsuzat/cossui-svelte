@@ -16,7 +16,5 @@
 		"button",
 		"link-preview"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

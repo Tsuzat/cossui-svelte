@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"stepper"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

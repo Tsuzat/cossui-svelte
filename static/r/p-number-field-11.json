@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"number-field"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

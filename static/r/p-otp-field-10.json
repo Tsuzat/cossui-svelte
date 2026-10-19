@@ -16,7 +16,5 @@
 		"label",
 		"otp-field"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

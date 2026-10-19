@@ -16,7 +16,5 @@
 		"button",
 		"stepper"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

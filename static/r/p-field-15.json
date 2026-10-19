@@ -18,7 +18,5 @@
 		"form",
 		"switch"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

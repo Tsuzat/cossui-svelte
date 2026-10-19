@@ -18,7 +18,6 @@
 		"label"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

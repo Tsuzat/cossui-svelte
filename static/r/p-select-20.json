@@ -16,7 +16,5 @@
 		"avatar",
 		"select"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

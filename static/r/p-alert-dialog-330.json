@@ -19,7 +19,6 @@
 		"radio-group"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

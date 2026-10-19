@@ -17,7 +17,6 @@
 		"preview-card"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

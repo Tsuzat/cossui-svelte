@@ -109,9 +109,9 @@
 		}
 	],
 	"registryDependencies": [
-		"utils",
 		"autocomplete",
-		"scroll-area"
+		"scroll-area",
+		"utils"
 	],
 	"dependencies": [
 		"@shardsui/svelte@0.1.0-beta.2"

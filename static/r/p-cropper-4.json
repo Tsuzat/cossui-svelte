@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"cropper"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

@@ -19,7 +19,6 @@
 		"input"
 	],
 	"dependencies": [
-		"#lib",
 		"zod",
 		"zod@^4.6.7"
 	]

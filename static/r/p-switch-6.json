@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"switch"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

@@ -16,7 +16,6 @@
 		"autocomplete"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

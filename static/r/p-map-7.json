@@ -16,7 +16,6 @@
 		"map"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

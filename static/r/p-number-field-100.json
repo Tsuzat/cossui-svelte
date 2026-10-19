@@ -16,7 +16,6 @@
 		"number-field"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

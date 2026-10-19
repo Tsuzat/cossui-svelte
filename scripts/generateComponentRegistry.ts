@@ -62,10 +62,11 @@ async function findSourceFiles(dir: string): Promise<string[]> {
 
 // Discovers a component's real dependencies by scanning every source file in its
 // folder for import statements:
-// - `$lib/components/ui/<slug>` imports (other than the component's own) become registryDependencies
-// - `$lib/hooks/<slug>` imports become registryDependencies
-// - any other bare (non-relative, non-$lib, non-$app) specifier becomes an npmDependency,
-//   except Svelte's own built-in modules (`svelte`, `svelte/*`)
+// - `#lib/components/ui/<slug>` imports (other than the component's own) become registryDependencies
+// - `#lib/hooks/<slug>` imports become registryDependencies
+//   (the `$lib/...` spelling of both is accepted too)
+// - any other bare specifier becomes an npmDependency, except relative imports,
+//   app aliases (`$app/*`, `#lib/*`, ...) and Svelte's built-in modules (`svelte`, `svelte/*`)
 // Strips comments before scanning so text like `from "px"` inside a code comment
 // isn't picked up as a real import specifier. The negative lookbehind keeps `://`
 // (e.g. inside URLs in string literals) from being treated as a line comment.
@@ -91,18 +92,19 @@ async function discoverDeps(
     const registryDependencies = new Set<string>();
 
     for (const specifier of specifiers) {
-        if (specifier.startsWith('$lib/components/ui/')) {
-            const slug = specifier.slice('$lib/components/ui/'.length).split('/')[0];
+        const libPath = specifier.match(/^[#$]lib\/(.*)$/)?.[1];
+        if (libPath?.startsWith('components/ui/')) {
+            const slug = libPath.slice('components/ui/'.length).split('/')[0];
             if (slug && slug !== selfSlug) registryDependencies.add(slug);
-        } else if (specifier.startsWith('$lib/hooks/')) {
-            const slug = specifier
-                .slice('$lib/hooks/'.length)
+        } else if (libPath?.startsWith('hooks/')) {
+            const slug = libPath
+                .slice('hooks/'.length)
                 .split('/')[0]
                 .replace(/\.svelte\.(js|ts)$/, '')
                 .replace(/\.(js|ts)$/, '');
             if (slug) registryDependencies.add(slug);
-        } else if (specifier.startsWith('$') || specifier.startsWith('.')) {
-            continue; // app-internal alias (e.g. $lib/utils, $app/*) or relative import
+        } else if (/^[$#.]/.test(specifier)) {
+            continue; // app-internal alias (`$app/*`, `#lib/utils`, ...) or relative import
         } else if (specifier === 'svelte' || specifier.startsWith('svelte/')) {
             continue; // framework builtin, always assumed present
         } else {

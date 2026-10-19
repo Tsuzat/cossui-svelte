@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"checkbox"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

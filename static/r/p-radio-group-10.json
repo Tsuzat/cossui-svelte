@@ -18,7 +18,5 @@
 		"radio-group",
 		"tooltip"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

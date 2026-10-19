@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"frame"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

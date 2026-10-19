@@ -22,7 +22,6 @@
 		"spinner"
 	],
 	"dependencies": [
-		"#lib",
 		"@lucide/svelte"
 	]
 }

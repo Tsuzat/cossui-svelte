@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"separator"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

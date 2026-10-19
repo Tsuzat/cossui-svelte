@@ -16,7 +16,6 @@
 		"input-group"
 	],
 	"dependencies": [
-		"#lib",
 		"cleave-zen",
 		"cleave-zen@^0.0.17"
 	]

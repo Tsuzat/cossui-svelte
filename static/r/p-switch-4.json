@@ -16,7 +16,5 @@
 		"label",
 		"switch"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"starrating"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

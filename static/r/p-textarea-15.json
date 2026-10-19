@@ -16,7 +16,5 @@
 		"button",
 		"textarea"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

@@ -211,16 +211,16 @@
 		}
 	],
 	"registryDependencies": [
-		"utils",
-		"collapsible",
-		"scroll-area",
-		"empty",
 		"button",
+		"collapsible",
+		"empty",
 		"menu",
+		"popover",
+		"scroll-area",
+		"toggle",
 		"toolbar",
 		"tooltip",
-		"popover",
-		"toggle"
+		"utils"
 	],
 	"dependencies": [
 		"@shardsui/svelte@0.1.0-beta.2"

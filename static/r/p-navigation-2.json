@@ -15,7 +15,5 @@
 	"registryDependencies": [
 		"tabs"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

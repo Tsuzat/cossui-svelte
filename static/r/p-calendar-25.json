@@ -20,7 +20,6 @@
 		"form"
 	],
 	"dependencies": [
-		"#lib",
 		"@internationalized/date",
 		"@lucide/svelte",
 		"@internationalized/date@^3.12.4"

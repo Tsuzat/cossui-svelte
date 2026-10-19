@@ -13,11 +13,9 @@
 		}
 	],
 	"registryDependencies": [
-		"checkbox-group",
 		"checkbox",
+		"checkbox-group",
 		"label"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

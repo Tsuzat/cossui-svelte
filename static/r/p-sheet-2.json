@@ -20,7 +20,5 @@
 		"label",
 		"sheet"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

@@ -17,7 +17,5 @@
 		"frame",
 		"table"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

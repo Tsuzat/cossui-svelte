@@ -16,7 +16,5 @@
 		"radio-group",
 		"tabs"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }

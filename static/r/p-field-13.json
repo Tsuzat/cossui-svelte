@@ -14,13 +14,11 @@
 	],
 	"registryDependencies": [
 		"button",
-		"checkbox-group",
 		"checkbox",
+		"checkbox-group",
 		"field",
 		"fieldset",
 		"form"
 	],
-	"dependencies": [
-		"#lib"
-	]
+	"dependencies": []
 }
