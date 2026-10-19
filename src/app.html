@@ -12,6 +12,37 @@
 	<link rel="shortcut icon" href="%sveltekit.assets%/icons/favicon.ico">
 
 	<link rel="manifest" href="%sveltekit.assets%/site.webmanifest" />
+
+	<!--
+		Fonts are registered through the FontFace API rather than @font-face rules:
+		Chrome recreates CSS-defined font faces whenever a media query flips, so the
+		text briefly repaints in the fallback font at every breakpoint while resizing.
+		Faces added with document.fonts.add() aren't tied to a stylesheet and survive.
+	-->
+	<link rel="preload" href="%sveltekit.assets%/fonts/CalSansVF.woff2" as="font" type="font/woff2" crossorigin>
+	<script>
+		[
+			['CalSansHeading', 'CalSansVF.woff2', { weight: '700' }],
+			['CalSansUI', 'CalSansVF.woff2', { weight: '400 700' }],
+			['CalSansUI', 'CalSansVF-Italic.woff2', { weight: '400 700', style: 'italic' }],
+			['PaperMono', 'PaperMono-Regular.woff2', { weight: '400' }]
+		].forEach(([family, file, descriptors]) => {
+			document.fonts.add(
+				new FontFace(family, 'url(%sveltekit.assets%/fonts/' + file + ') format("woff2")', {
+					display: 'swap',
+					...descriptors
+				})
+			);
+		});
+	</script>
+	<noscript>
+		<style>
+			@font-face { font-display: swap; font-family: "CalSansHeading"; src: url("%sveltekit.assets%/fonts/CalSansVF.woff2") format("woff2"); font-weight: 700; }
+			@font-face { font-display: swap; font-family: "CalSansUI"; src: url("%sveltekit.assets%/fonts/CalSansVF.woff2") format("woff2"); font-weight: 400 700; }
+			@font-face { font-display: swap; font-family: "CalSansUI"; src: url("%sveltekit.assets%/fonts/CalSansVF-Italic.woff2") format("woff2"); font-weight: 400 700; font-style: italic; }
+			@font-face { font-display: swap; font-family: "PaperMono"; src: url("%sveltekit.assets%/fonts/PaperMono-Regular.woff2") format("woff2"); font-weight: 400; }
+		</style>
+	</noscript>
 	%sveltekit.head%
 </head>
 
