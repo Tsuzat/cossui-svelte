@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.9.29](https://github.com/cossui-svelte/cossui-svelte/compare/v0.9.28...v0.9.29) (2026-10-19)
+
+### 🐛 Bug Fixes
+
+* **registry:** recognize [#lib](https://github.com/cossui-svelte/cossui-svelte/issues/lib) imports when scanning dependencies ([3ea5c8e](https://github.com/cossui-svelte/cossui-svelte/commit/3ea5c8edc9dc33ef18b9c147c889ceb6e8c5730d))
+* serve /favicon.ico at the site root ([fe1d187](https://github.com/cossui-svelte/cossui-svelte/commit/fe1d187c9005ddcd980cc00af97b0385ce9ba45f))
+* stop font flicker when resizing across breakpoints ([d7b2c06](https://github.com/cossui-svelte/cossui-svelte/commit/d7b2c06dfcc99824c6a368dbda11f6206222d7af))
+
+### 📝 Documentation
+
+* align with upstream coss ui docs ([3f987f6](https://github.com/cossui-svelte/cossui-svelte/commit/3f987f63358c77ed9fe549ec9aed766aeea8e168))
+* **changelog:** add 0.9.28 and 0.9.29 entries ([d335f83](https://github.com/cossui-svelte/cossui-svelte/commit/d335f83e724f785fd9385b194817fec31201101b))
+* use [#lib](https://github.com/cossui-svelte/cossui-svelte/issues/lib) instead of $lib in docs and tooling ([70dbbda](https://github.com/cossui-svelte/cossui-svelte/commit/70dbbdac95e8338eee0c4ce678d5fbb9564fbfc3))
+
+### 🚚 Chores
+
+* drop New tag from Context Menu, Drawer, Menu and OTP Field ([8dc1a60](https://github.com/cossui-svelte/cossui-svelte/commit/8dc1a6001a7652a0535cffbb3351258c20798eb2))
+* keep favicons at the site root only ([0768a51](https://github.com/cossui-svelte/cossui-svelte/commit/0768a515cc96a5c425ba28ee2d0211886f5e283a))
+
 ## [0.9.28](https://github.com/cossui-svelte/cossui-svelte/compare/v0.9.27...v0.9.28) (2026-10-19)
 
 ### ✨ Features
