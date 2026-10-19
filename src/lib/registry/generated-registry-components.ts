@@ -231,7 +231,7 @@ const allComponents: RegistryUiData = {
     category: 'ui',
     description: 'A menu that opens on right-click, providing contextual actions.',
     folder: 'context-menu',
-    isnew: true,
+    isnew: false,
     istodo: false,
     npmDependencies: ['#lib', '@lucide/svelte', '@shardsui/svelte'],
     registryDependencies: []
@@ -272,7 +272,7 @@ const allComponents: RegistryUiData = {
     description:
       'A panel that slides in from the edge of the screen with swipe gestures, snap points, and nested drawer support.',
     folder: 'drawer',
-    isnew: true,
+    isnew: false,
     istodo: false,
     npmDependencies: ['#lib', '@lucide/svelte', '@shardsui/svelte'],
     registryDependencies: []
@@ -414,7 +414,7 @@ const allComponents: RegistryUiData = {
     category: 'ui',
     description: 'A list of actions in a dropdown, enhanced with keyboard navigation.',
     folder: 'menu',
-    isnew: true,
+    isnew: false,
     istodo: false,
     npmDependencies: ['#lib', '@lucide/svelte', '@shardsui/svelte'],
     registryDependencies: []
@@ -444,7 +444,7 @@ const allComponents: RegistryUiData = {
     category: 'ui',
     description: 'A segmented input for one-time passwords and verification codes.',
     folder: 'otp-field',
-    isnew: true,
+    isnew: false,
     istodo: false,
     npmDependencies: ['#lib', '@shardsui/svelte', 'runed', 'svelte-toolbelt'],
     registryDependencies: []

@@ -92,8 +92,7 @@ export const custom_components_metadata: Record<string, Partial<RegistryUIEntry>
   },
   'context-menu': {
     description: 'A menu that opens on right-click, providing contextual actions.',
-    category: 'ui',
-    isnew: true
+    category: 'ui'
   },
   cropper: {
     description: 'A component for cropping images with a resizable and movable selection area.',
@@ -117,8 +116,7 @@ export const custom_components_metadata: Record<string, Partial<RegistryUIEntry>
   drawer: {
     description:
       'A panel that slides in from the edge of the screen with swipe gestures, snap points, and nested drawer support.',
-    category: 'ui',
-    isnew: true
+    category: 'ui'
   },
   empty: {
     description: 'A container for displaying empty state information.',
@@ -178,8 +176,7 @@ export const custom_components_metadata: Record<string, Partial<RegistryUIEntry>
   },
   menu: {
     description: 'A list of actions in a dropdown, enhanced with keyboard navigation.',
-    category: 'ui',
-    isnew: true
+    category: 'ui'
   },
   meter: {
     description: 'A graphical display of a numeric value within a range.',
@@ -191,8 +188,7 @@ export const custom_components_metadata: Record<string, Partial<RegistryUIEntry>
   },
   'otp-field': {
     description: 'A segmented input for one-time passwords and verification codes.',
-    category: 'ui',
-    isnew: true
+    category: 'ui'
   },
   pagination: {
     description: 'A pagination with page navigation, next and previous links.',
