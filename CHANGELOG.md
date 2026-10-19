@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.9.28](https://github.com/cossui-svelte/cossui-svelte/compare/v0.9.27...v0.9.28) (2026-10-19)
+
+### ✨ Features
+
+* add segmented control card to landing page ([86d35cd](https://github.com/cossui-svelte/cossui-svelte/commit/86d35cde70a34202e89a7b84d8c8d676c7b3e541))
+* add skill from upstream ([3d4d5af](https://github.com/cossui-svelte/cossui-svelte/commit/3d4d5af61c6a9523a7edd75f3c98e9bedb41eaac))
+
+### 🐛 Bug Fixes
+
+* hide range-calendar card from landing page ([850b969](https://github.com/cossui-svelte/cossui-svelte/commit/850b96986532a20b6d4d69f48dcd2643e885dc92))
+
+### 📝 Documentation
+
+* refresh README and introduction wording ([3aaa592](https://github.com/cossui-svelte/cossui-svelte/commit/3aaa592fac7e484b97d9eae68fad5fe8a638dbc9))
+
+### 🚚 Chores
+
+* cleanup build system and deps ([895b267](https://github.com/cossui-svelte/cossui-svelte/commit/895b26770dc6c1cb49e55f80807f581b6ec2da7e))
+* regenerate registry, mark segmented control done ([4b3c282](https://github.com/cossui-svelte/cossui-svelte/commit/4b3c282d768b3697dd116d4af6a5dc6588b06402))
+* **upstream:** update registry.json snapshot (composer, chat) ([0c171ab](https://github.com/cossui-svelte/cossui-svelte/commit/0c171ab9ec50b75cb55d558d4c0c783e90bf4944))
+
 ## [0.9.27](https://github.com/cossui-svelte/cossui-svelte/compare/v0.9.26...v0.9.27) (2026-10-17)
 
 ### 📝 Documentation
