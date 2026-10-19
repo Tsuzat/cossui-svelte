@@ -18,6 +18,6 @@
 	"dependencies": [
 		"#lib",
 		"layerchart",
-		"layerchart@^2.8.0"
+		"layerchart@^2.8.1"
 	]
 }

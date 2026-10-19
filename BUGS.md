@@ -3,7 +3,6 @@ TODO:
 * Firefox - p-map-* don't show round corners
 * range-calendar should not exist as a category
 * Build the cossui-svelte skill, deploy similar to https://www.skills.sh/cosscom/coss/coss
-* Segmented control is missing - https://coss.com/ui/particles?tags=segmented%20control
 * Publish cossui-svelte on r/sideprojects, https://www.myvibebook.com/, echojs, hacker news, linkedin, https://svelter.me/
 * add pointer to design/component library from the readme
 * file-upload: it's a hook (useFileUpload) plus particles, not a component, because ui/
@@ -11,6 +10,7 @@ TODO:
 * review navigation category: it's a particle-only category with no component behind it.
 
 * DONE: Docs
+* DONE: Segmented control is missing - https://coss.com/ui/particles?tags=segmented%20control
 * DONE: Topbar should bringback the search documentation
 * DONE: Mobile layout needs a rework
 * DONE: I don't like the file-upload visuals

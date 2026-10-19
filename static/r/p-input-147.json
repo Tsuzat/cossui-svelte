@@ -21,6 +21,6 @@
 		"#lib",
 		"@lucide/svelte",
 		"svelte-tel-input",
-		"svelte-tel-input@^4.3.3"
+		"svelte-tel-input@^4.3.4"
 	]
 }
