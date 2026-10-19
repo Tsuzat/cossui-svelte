@@ -25,10 +25,10 @@
   let { navItems = [], currentProduct = 'ui', products = [], tree = docsNavTree }: Props = $props();
 
   const links = [
-    { href: '/', label: 'Components' },
-    { href: '/particles', label: 'Particles' },
-    { href: '/blocs', label: 'Blocs' },
-    { href: '/docs', label: 'Docs' }
+    { path: '/', href: resolve('/'), label: 'Components' },
+    { path: '/particles', href: resolve('/particles'), label: 'Particles' },
+    { path: '/blocs', href: resolve('/blocs'), label: 'Blocs' },
+    { path: '/docs', href: resolve('/docs/[...slug]', { slug: '' }), label: 'Docs' }
   ] as const;
 
   const isActive = (href: string) =>
@@ -41,11 +41,11 @@
   {/snippet}
 
   <div class="hidden gap-2 lg:flex">
-    {#each links as link (link.href)}
+    {#each links as link (link.path)}
       <Button
-        variant={isActive(link.href) ? 'secondary' : 'ghost'}
-        href={resolve(link.href)}
-        data-pressed={isActive(link.href) || undefined}
+        variant={isActive(link.path) ? 'secondary' : 'ghost'}
+        href={link.href}
+        data-pressed={isActive(link.path) || undefined}
       >
         {link.label}
       </Button>

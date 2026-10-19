@@ -8,7 +8,6 @@
   },
   "type": "module",
   "imports": {
-    "#lib": "./src/lib/index.js",
     "#lib/*": "./src/lib/*",
     "#assets/*": "./src/lib/assets/*",
     "#data/*": "./src/lib/data/*"
@@ -29,12 +28,12 @@
     "lint": "oxlint && pnpm lint:svelte",
     "lint:audit": "pnpx knip --max-show-issues 20",
     "lint:svelte": "oxvelte lint src/routes src/lib/components/app src/lib/components/ui src/lib/hooks src/lib/components/icons && oxvelte lint --config oxvelte.demos.json src/lib/components/particles src/lib/components/blocs",
-    "lint:typecheck": "tsc --noEmit",
     "migrate": "wrangler types src/worker-configuration.d.ts && tsx ./scripts/transformLucideImports.ts",
     "mrproper": "rm -rf node_modules dist build .svelte-kit",
-    "prepare": "pnpx -y skills@latest experimental_install 2>&1 && husky && svelte-kit sync || echo ''",
+    "prepare": "husky && svelte-kit sync || echo ''",
     "release": "commit-and-tag-version",
-    "release:dry": "commit-and-tag-version --dry-run"
+    "release:dry": "commit-and-tag-version --dry-run",
+    "skills:install": "pnpx -y skills@1.7.2 experimental_install"
   },
   "dependencies": {
     "@aejkatappaja/phantom-ui": "^1.6.1",
@@ -58,7 +57,7 @@
     "jsrepo": "^3.8.1",
     "layerchart": "^2.8.1",
     "little-date": "^1.2.1",
-    "maplibre-gl": "^6.14.0",
+    "maplibre-gl": "^6.15.0",
     "marked": "^18.1.1",
     "mode-watcher": "^1.1.0",
     "runed": "0.37.1",
@@ -70,8 +69,8 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@commitlint/cli": "^21.2.3",
-    "@commitlint/config-conventional": "^21.2.3",
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
     "@jsrepo/shadcn": "^8.0.1",
     "@lucide/svelte": "^1.59.0",
     "@sveltejs/adapter-cloudflare": "^8.0.1",

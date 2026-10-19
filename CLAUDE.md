@@ -8,12 +8,11 @@ An unofficial Svelte 5 / SvelteKit port of [Coss UI](https://cossui.com/) (origi
 
 ## Commands
 
-Package manager is **pnpm** (not npm/yarn) — `packageManager: pnpm@12.10.1`.
+Package manager is **pnpm** (not npm/yarn) — `packageManager: pnpm@12.14.0`.
 
 - `pnpm dev` — start dev server (`vite dev --host`; opens browser)
 - `pnpm build` — production build (vite build)
-- `pnpm check` — svelte-kit sync + svelte-check across the workspace (type/template errors)
-- `pnpm lint:typecheck` — `tsc --noEmit`
+- `pnpm check` — svelte-kit sync + svelte-check across the workspace (type/template errors). This is the typecheck — plain `tsc` can't see types exported from `.svelte` files
 - `pnpm lint:audit` — knip unused-code/dependency audit (`knip.ts`)
 - `pnpm format` — `oxlint --fix` then `oxfmt`, in that order
 - `pnpm lint` — oxlint, then oxvelte (`pnpm lint:svelte`; needs the `oxvelte` binary, see below)
@@ -21,6 +20,7 @@ Package manager is **pnpm** (not npm/yarn) — `packageManager: pnpm@12.10.1`.
 - `pnpm cf:deploy` — build then `wrangler deploy`
 - `pnpm cf:typegen` — regenerate `src/worker-configuration.d.ts` from `wrangler.jsonc`
 - `pnpm migrate` — wrangler typegen + Lucide import transform (one-off maintenance script)
+- `pnpm skills:install` — install the agent skills pinned in `skills-lock.json` (pinned `skills` CLI; not run on `pnpm install`)
 - Tests: `vitest` is a dependency but there is no `test` script wired up in `package.json`; run `pnpm vitest` / `pnpm vitest run <path>` directly if you add or run tests.
 
 ### Formatting/linting split (Oxc toolchain, three tools)
@@ -54,7 +54,7 @@ See `scripts/upstream/README.md` for the step-by-step for updating from upstream
 
 ### Routes
 
-SvelteKit routes under `src/routes/`: `docs/[...slug]` (component docs), `particle/[id]` and `particles` (particle showcase/search), `blocs`, `credits`, `ai`, `api` (`api/source`, `api/component-source`, `api/bloc-source`), `sitemap.xml`. SvelteKit config lives inline in the `sveltekit({...})` call in `vite.config.ts` (there is no `svelte.config.js`). The only path alias in use is the built-in `$lib` → `src/lib`.
+SvelteKit routes under `src/routes/`: `docs/[...slug]` (component docs), `particle/[id]` and `particles` (particle showcase/search), `blocs`, `credits`, `ai`, `api` (`api/source`, `api/component-source`, `api/bloc-source`), `sitemap.xml`. SvelteKit config lives inline in the `sveltekit({...})` call in `vite.config.ts` (there is no `svelte.config.js`). Code imports via the Node subpath imports in `package.json` (`#lib/*` → `src/lib/*`, plus `#assets/*` and `#data/*`); the built-in `$lib` alias also works.
 
 ### Adding a new Component
 
