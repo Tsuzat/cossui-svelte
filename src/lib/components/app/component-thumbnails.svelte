@@ -880,6 +880,23 @@
       <div class="absolute top-2 right-1 h-8 w-1 rounded-full bg-muted-foreground/40"></div>
     </div>
   </div>
+{:else if slug === 'segmented-control'}
+  <div class="flex rounded-lg bg-muted-foreground/12 p-0.5">
+    <div class="rounded-[calc(var(--radius-lg)-1px)] p-3">
+      {@render textSnip('w-6', 'secondary')}
+    </div>
+    <div
+      class="rounded-[calc(var(--radius-lg)-1px)] bg-linear-to-b from-card to-card/90 p-3 shadow-xs/5 dark:from-background/90 dark:to-background"
+    >
+      <div class="h-1.5 w-6 rounded-full bg-primary"></div>
+    </div>
+    <div class="rounded-[calc(var(--radius-lg)-1px)] p-3">
+      {@render textSnip('w-6', 'secondary')}
+    </div>
+    <div class="rounded-[calc(var(--radius-lg)-1px)] p-3">
+      {@render textSnip('w-6', 'secondary')}
+    </div>
+  </div>
 {:else if slug === 'select'}
   <div class={cardCls('[--radius-2xl:14px]', false)}>
     <div class={cpCls('flex gap-2 p-0')}>

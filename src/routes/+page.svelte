@@ -26,6 +26,26 @@
   const description = $derived(data.SEO.description);
 
   const particleCount = Object.keys(allParticles).length;
+
+  // Visual patterns with docs and particles but no standalone ui/ folder,
+  // so they aren't in the generated component registry.
+  const patterns: Record<string, RegistryUIEntry> = {
+    'segmented-control': {
+      name: 'Segmented Control',
+      description:
+        'A visual pattern for presenting related choices, navigation destinations, filters, or content views.',
+      folder: 'tabs',
+      category: 'ui',
+      isnew: true,
+      istodo: false,
+      npmDependencies: [],
+      registryDependencies: []
+    }
+  };
+
+  const landingEntries = Object.entries({ ...allComponents, ...patterns }).sort(([a], [b]) =>
+    a.localeCompare(b)
+  );
 </script>
 
 {#snippet categoryCard(slug: string, meta: RegistryUIEntry)}
@@ -84,7 +104,7 @@
   ></div>
   <div class="container w-full">
     <div class="grid gap-6 pt-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4">
-      {#each Object.entries(allComponents) as [id, meta] (id)}
+      {#each landingEntries as [id, meta] (id)}
         {@render categoryCard(id, meta)}
       {/each}
     </div>
