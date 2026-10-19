@@ -11,14 +11,14 @@ Our components are built with [Svelte 5](https://svelte.dev), [ShardsUI](https:/
 
 ## Adding Components
 
-You can add components **automatically with the shadcn-svelte CLI** or **manually by copying the files**. Both methods work for primitives, particles, and blocs.
+You can add components **automatically with the CLI** or **manually by copying the files**. Both methods work for primitives, particles, and blocs.
 
 ### With the CLI
 
 Each component page provides a command to add it to your project automatically. The CLI will create the necessary files and install any dependencies for you.
 
 ```bash
-npx shadcn-svelte@latest add https://cossui-svelte.com/r/button.json
+pnpm dlx shadcn-svelte@latest add https://cossui-svelte.com/r/p-button-1.json
 ```
 
 Replace `button` with the name of any component, particle (e.g. `p-button-1`), or hook listed on the site. The registry JSON files are served from `https://cossui-svelte.com/r/`.
@@ -35,7 +35,7 @@ See the [Styling](/docs/styling) guide for the theme tokens used by the componen
 
 ```svelte
 <script lang="ts">
-  import { Button } from "$lib/components/ui/button";
+  import { Button } from "$lib/components/ui/button/index.ts";
 </script>
 
 <Button>Click me</Button>
