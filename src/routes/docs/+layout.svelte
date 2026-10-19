@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import DocsSidebar from '#lib/components/app/docs/docs-sidebar.svelte';
   import SidebarProvider from '#lib/components/ui/sidebar/sidebar-provider.svelte';
+  import DocsSidebar from '#lib/components/app/docs/docs-sidebar.svelte';
   import { docsNavTree } from '#lib/docs.js';
 
   let { children }: { children: Snippet } = $props();

@@ -9,6 +9,20 @@ This guide provides the essentials for adding **coss ui** components to your Sve
 
 Our components are built with [Svelte 5](https://svelte.dev), [ShardsUI](https://shardsui.com/) (a Svelte port of Base UI) and [Tailwind CSS v4](https://tailwindcss.com). Before you begin, make sure you have a Svelte or SvelteKit project set up with Tailwind CSS and [shadcn-svelte](https://www.shadcn-svelte.com/docs/installation).
 
+### The `#lib` import alias
+
+Components import each other through `#lib/…`, a [Node.js subpath import](https://nodejs.org/api/packages.html#subpath-imports) for `src/lib`. Add it to your `package.json` once:
+
+```json
+{
+  "imports": {
+    "#lib/*": "./src/lib/*"
+  }
+}
+```
+
+SvelteKit's built-in `$lib` alias points at the same folder, so existing `$lib` imports keep working.
+
 ## Adding Components
 
 You can add components **automatically with the CLI** or **manually by copying the files**. Both methods work for primitives, particles, and blocs.
@@ -29,13 +43,13 @@ See the [Styling](/docs/styling) guide for the theme tokens used by the componen
 
 1.  **Find a component** on the [Components](/docs), [Particles](/particles) or [Blocs](/blocs) pages.
 2.  **Copy the code** from the **Code** tab.
-3.  **Create a new file** in your project (e.g., `$lib/components/ui/button/button.svelte`) and paste the code.
+3.  **Create a new file** in your project (e.g., `#lib/components/ui/button/button.svelte`) and paste the code.
 4.  **Install any dependencies** listed on the component's page.
 5.  **Import and use** the component in your app.
 
 ```svelte
 <script lang="ts">
-  import { Button } from "$lib/components/ui/button/index.ts";
+  import { Button } from "#lib/components/ui/button/index.ts";
 </script>
 
 <Button>Click me</Button>
@@ -94,7 +108,7 @@ Components that wrap ShardsUI (Base UI) primitives expose the underlying primiti
 
 ```svelte
 <script lang="ts">
-  import * as Slider from "$lib/components/ui/slider";
+  import * as Slider from "#lib/components/ui/slider";
 </script>
 ```
 

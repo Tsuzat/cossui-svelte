@@ -23,7 +23,7 @@ Then add the `ToastProvider` and `AnchoredToastProvider` to your root layout.
 
 ```svelte title="src/routes/+layout.svelte"
 <script lang="ts">
-  import { AnchoredToastProvider, ToastProvider } from '$lib/components/ui/toast';
+  import { AnchoredToastProvider, ToastProvider } from '#lib/components/ui/toast';
 
   let { children } = $props();
 </script>
@@ -57,7 +57,7 @@ npm install @shardsui/svelte
 
 ```svelte title="src/routes/+layout.svelte"
 <script lang="ts">
-  import { AnchoredToastProvider, ToastProvider } from '$lib/components/ui/toast';
+  import { AnchoredToastProvider, ToastProvider } from '#lib/components/ui/toast';
 
   let { children } = $props();
 </script>
@@ -80,7 +80,7 @@ npm install @shardsui/svelte
 ### Stacked Toasts
 
 ```ts
-import { toastManager } from '$lib/components/ui/toast';
+import { toastManager } from '#lib/components/ui/toast';
 ```
 
 ```ts

@@ -1,9 +1,5 @@
 <script lang="ts">
   import { resolve } from '$app/paths';
-  import CategoryThumbnail from '#lib/components/app/component-thumbnails.svelte';
-  import PageHeaderDescription from '#lib/components/app/page-header-description.svelte';
-  import PageHeaderHeading from '#lib/components/app/page-header-heading.svelte';
-  import PageHeader from '#lib/components/app/page-header.svelte';
   import { Badge } from '#lib/components/ui/badge/index.js';
   import { Button } from '#lib/components/ui/button/index.js';
   import {
@@ -14,6 +10,10 @@
     CardFrameTitle,
     CardPanel
   } from '#lib/components/ui/card/index.js';
+  import CategoryThumbnail from '#lib/components/app/component-thumbnails.svelte';
+  import PageHeaderDescription from '#lib/components/app/page-header-description.svelte';
+  import PageHeaderHeading from '#lib/components/app/page-header-heading.svelte';
+  import PageHeader from '#lib/components/app/page-header.svelte';
   import {
     allComponents,
     type RegistryUIEntry

@@ -72,7 +72,7 @@ Both use the same composition and draft API. `Composer` manages an empty draft b
     ComposerActions,
     ComposerInput,
     ComposerSubmit
-  } from '$lib/components/ui/composer';
+  } from '#lib/components/ui/composer';
 </script>
 
 <Composer onSubmit={handleSend}>
@@ -103,7 +103,7 @@ Both use the same composition and draft API. `Composer` manages an empty draft b
     ComposerSubmit,
     type ComposerValue,
     getComposerText
-  } from '$lib/components/ui/composer';
+  } from '#lib/components/ui/composer';
 
   let { onSend }: { onSend: (message: string) => void } = $props();
 
@@ -303,7 +303,7 @@ A presentational token for `renderToken` or read-only previews. Pass the selecte
 <script lang="ts">
   import UserRound from '@lucide/svelte/icons/user-round';
   import UsersRound from '@lucide/svelte/icons/users-round';
-  import { ComposerInput, ComposerToken } from '$lib/components/ui/composer';
+  import { ComposerInput, ComposerToken } from '#lib/components/ui/composer';
 </script>
 
 <ComposerInput aria-label="Message">
@@ -477,8 +477,8 @@ Import this function from the same Composer module and call it during initializa
 
 ```svelte
 <script lang="ts">
-  import { Button } from '$lib/components/ui/button';
-  import { useComposerContext } from '$lib/components/ui/composer';
+  import { Button } from '#lib/components/ui/button';
+  import { useComposerContext } from '#lib/components/ui/composer';
 
   const composer = useComposerContext();
 </script>

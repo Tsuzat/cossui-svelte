@@ -41,8 +41,8 @@ npx shadcn-svelte@latest add https://cossui-svelte.com/r/use-file-upload.json
 
 ```svelte
 <script lang="ts">
-  import { Button } from '$lib/components/ui/button';
-  import { useFileUpload } from '$lib/hooks/use-file-upload.svelte';
+  import { Button } from '#lib/components/ui/button';
+  import { useFileUpload } from '#lib/hooks/use-file-upload.svelte';
 
   const fileUpload = useFileUpload({ accept: 'image/*', multiple: true, maxFiles: 5 });
 </script>
@@ -57,7 +57,7 @@ npx shadcn-svelte@latest add https://cossui-svelte.com/r/use-file-upload.json
 
 ## API Reference
 
-File upload is not a single component: it is a headless `useFileUpload` hook (`$lib/hooks/use-file-upload.svelte`) plus the particles that compose it with other UI components.
+File upload is not a single component: it is a headless `useFileUpload` hook (`#lib/hooks/use-file-upload.svelte`) plus the particles that compose it with other UI components.
 
 ### useFileUpload(options)
 

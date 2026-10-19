@@ -53,10 +53,10 @@ See the [Calendar](/docs/calendar), [Popover](/docs/popover), and [Button](/docs
 <script lang="ts">
   import { DateFormatter, type DateValue, getLocalTimeZone } from '@internationalized/date';
   import CalendarIcon from '@lucide/svelte/icons/calendar';
-  import { buttonVariants } from '$lib/components/ui/button';
-  import { Calendar } from '$lib/components/ui/calendar';
-  import { Popover, PopoverPopup, PopoverTrigger } from '$lib/components/ui/popover';
-  import { cn } from '$lib/utils';
+  import { buttonVariants } from '#lib/components/ui/button';
+  import { Calendar } from '#lib/components/ui/calendar';
+  import { Popover, PopoverPopup, PopoverTrigger } from '#lib/components/ui/popover';
+  import { cn } from '#lib/utils';
 
   const df = new DateFormatter('en-US', { dateStyle: 'long' });
 

@@ -1,6 +1,5 @@
 <script lang="ts">
   import Shuffle from '@lucide/svelte/icons/shuffle';
-  import avatar from '#assets/avatar-40-05.jpg';
   import {
     Stepper,
     StepperIndicator,
@@ -8,6 +7,7 @@
     StepperSeparator,
     StepperTrigger
   } from '#lib/components/ui/stepper/index.js';
+  import avatar from '#assets/avatar-40-05.jpg';
 </script>
 
 <div class="mx-auto max-w-xl space-y-8 text-center w-full">

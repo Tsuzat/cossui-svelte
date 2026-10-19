@@ -48,7 +48,7 @@ npm install @internationalized/date svelte-toolbelt runed
 ```svelte
 <script lang="ts">
   import { getLocalTimeZone, today } from '@internationalized/date';
-  import { Calendar } from '$lib/components/ui/calendar';
+  import { Calendar } from '#lib/components/ui/calendar';
 
   let value = $state(today(getLocalTimeZone()));
 </script>
@@ -56,7 +56,7 @@ npm install @internationalized/date svelte-toolbelt runed
 <Calendar mode="single" bind:value />
 ```
 
-Dates are [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/) `DateValue` objects (e.g. `CalendarDate`), not JavaScript `Date`s. For range selection, use `RangeCalendar` (`$lib/components/ui/range-calendar`) or `mode="range"`.
+Dates are [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/) `DateValue` objects (e.g. `CalendarDate`), not JavaScript `Date`s. For range selection, use `RangeCalendar` (`#lib/components/ui/range-calendar`) or `mode="range"`.
 
 ## API Reference
 

@@ -25,7 +25,7 @@ Package manager is **pnpm** (not npm/yarn) — `packageManager: pnpm@12.14.0`.
 
 ### Formatting/linting split (Oxc toolchain, three tools)
 
-- **oxfmt** (`.oxfmtrc.json`) formats `.ts`/`.js`/`.json`, `.svelte` and `.svelte.ts`/`.svelte.js`. Svelte markup is formatted through oxfmt's bundled Prettier engine; `<script>` blocks by oxfmt natively. It also sorts imports (packages incl. `$app`/`$env` → `$lib/components/ui/**` → `$lib/**` → relative, no blank lines between groups). `ignorePatterns` deliberately keeps it off `.md`/`.mdx` (mdsvex content — Prettier's MDX parser would mangle Svelte syntax), `.css`, `.html`, `static/`, `scripts/` and a few root configs.
+- **oxfmt** (`.oxfmtrc.json`) formats `.ts`/`.js`/`.json`, `.svelte` and `.svelte.ts`/`.svelte.js`. Svelte markup is formatted through oxfmt's bundled Prettier engine; `<script>` blocks by oxfmt natively. It also sorts imports (packages incl. `$app`/`$env` → `#lib/components/ui/**` → `#lib/**` → relative, no blank lines between groups). `ignorePatterns` deliberately keeps it off `.md`/`.mdx` (mdsvex content — Prettier's MDX parser would mangle Svelte syntax), `.css`, `.html`, `static/`, `scripts/` and a few root configs.
 - **oxlint** (`.oxlintrc.json`) lints all JS/TS, including the `<script>` blocks of `.svelte` files (but **not** their template markup). It carries the core/typescript rules (`no-unused-vars` with the `^_` convention) and the rules ported from the old Biome config. The `oxlint-tailwindcss` JS plugin (entry point `src/app.css`) checks Tailwind classes — but only in JS/TS and `<script>` blocks (`cn()`, `tv()`, …); classes written directly in Svelte markup are not linted. That gap was accepted when moving off `eslint-plugin-better-tailwindcss`.
 - **oxvelte** (`oxvelte.config.json`) is a Rust port of `eslint-plugin-svelte` that lints Svelte templates and Svelte-specific semantics. It isn't on npm — install it with `cargo install --git https://github.com/tolgaouz/oxvelte.git`. Several svelte rules are deliberately downgraded to `warn` (SvelteKit `resolve()` migration, `SvelteSet`/`SvelteMap`, `$state`+`$effect` → `$derived`, each-block keys, `{@html}` review) and `svelte/no-dom-manipulating` is off (the map components must hand MapLibre real DOM nodes) — these need behavior changes or judgment calls, not mechanical fixes. oxvelte has no per-path overrides, so `pnpm lint:svelte` runs it twice: app/ui code with `oxvelte.config.json`, and particles/blocs with `oxvelte.demos.json` (same rules plus `svelte/no-navigation-without-resolve` off, because demo links are placeholder `#` fragments). Keep the two configs in sync, and add any new top-level `src/lib` folder containing Svelte code to the path list in `lint:svelte`.
 
@@ -50,11 +50,11 @@ Both trees have a hand-maintained metadata file (`custom-component-metadata.ts` 
 3. clears `static/r/*.json`, then `jsrepo build` regenerates the static registry JSON consumed by the CLI/docs
 4. `pnpm format`
 
-See `scripts/upstream/README.md` for the step-by-step for updating from upstream Coss UI (`registry.json`). Any new UI component also needs a thumbnail entry in `$lib/components/app/component-thumbnails.svelte`.
+See `scripts/upstream/README.md` for the step-by-step for updating from upstream Coss UI (`registry.json`). Any new UI component also needs a thumbnail entry in `#lib/components/app/component-thumbnails.svelte`.
 
 ### Routes
 
-SvelteKit routes under `src/routes/`: `docs/[...slug]` (component docs), `particle/[id]` and `particles` (particle showcase/search), `blocs`, `credits`, `ai`, `api` (`api/source`, `api/component-source`, `api/bloc-source`), `sitemap.xml`. SvelteKit config lives inline in the `sveltekit({...})` call in `vite.config.ts` (there is no `svelte.config.js`). Code imports via the Node subpath imports in `package.json` (`#lib/*` → `src/lib/*`, plus `#assets/*` and `#data/*`); the built-in `$lib` alias also works.
+SvelteKit routes under `src/routes/`: `docs/[...slug]` (component docs), `particle/[id]` and `particles` (particle showcase/search), `blocs`, `credits`, `ai`, `api` (`api/source`, `api/component-source`, `api/bloc-source`), `sitemap.xml`. SvelteKit config lives inline in the `sveltekit({...})` call in `vite.config.ts` (there is no `svelte.config.js`). Code imports via the Node subpath imports in `package.json` (`#lib/*` → `src/lib/*`, plus `#assets/*` and `#data/*`) — use `#lib`, not `$lib`, in code and docs samples. The registry `target` paths in `scripts/jsrepo-registry-items.ts` / `jsrepo.config.ts` stay `$lib/...`: they are install locations the consumer's CLI resolves, not imports.
 
 ### Adding a new Component
 
@@ -65,7 +65,7 @@ SvelteKit routes under `src/routes/`: `docs/[...slug]` (component docs), `partic
 
 ### Adding a new Particle
 
-1. create the particle in `$lib/components/particles/<COMPONENT>/p-<PARTICLE>-<INDEX>.svelte`
+1. create the particle in `#lib/components/particles/<COMPONENT>/p-<PARTICLE>-<INDEX>.svelte`
 2. If the particle is not in `scripts/upstream/registry.json` add it to `src/lib/components/particles/custom-particle-metadata.ts` with the proper metadata (tags, description). `registry.json` must stay untouched, any incremental change should be made to `custom-particle-metadata.ts`
 3. run `pnpm gen:registry`
 

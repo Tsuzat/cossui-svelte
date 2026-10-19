@@ -39,8 +39,8 @@ This complete component demonstrates plain-text sending with local state. A conv
 <script lang="ts">
   import ArrowUp from '@lucide/svelte/icons/arrow-up';
   import { MediaQuery } from 'svelte/reactivity';
-  import { Avatar, AvatarFallback } from '$lib/components/ui/avatar';
-  import { ChatConversation, ChatMessage, ChatScroll } from '$lib/components/ui/chat';
+  import { Avatar, AvatarFallback } from '#lib/components/ui/avatar';
+  import { ChatConversation, ChatMessage, ChatScroll } from '#lib/components/ui/chat';
   import {
     Composer,
     ComposerActionGroup,
@@ -49,7 +49,7 @@ This complete component demonstrates plain-text sending with local state. A conv
     ComposerSubmit,
     type ComposerValue,
     getComposerText
-  } from '$lib/components/ui/composer';
+  } from '#lib/components/ui/composer';
 
   const hintId = $props.id();
   const touchInput = new MediaQuery('(pointer: coarse)');

@@ -1,8 +1,8 @@
 <script lang="ts">
+  import { Button } from '#lib/components/ui/button/index.js';
   import RiGithubFill from '#lib/components/icons/GithubFillLogos.svelte';
   import RiGoogleFill from '#lib/components/icons/GoogleFillLogos.svelte';
   import RiTwitterXFill from '#lib/components/icons/TwitterXFillLogos.svelte';
-  import { Button } from '#lib/components/ui/button/index.js';
 </script>
 
 <div class="flex flex-col gap-2">

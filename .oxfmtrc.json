@@ -22,9 +22,9 @@
       { "groupName": "sveltekit", "elementNamePattern": ["$app/**", "$env/**"] },
       {
         "groupName": "lib-ui",
-        "elementNamePattern": ["$lib/components/ui", "$lib/components/ui/**"]
+        "elementNamePattern": ["#lib/components/ui", "#lib/components/ui/**"]
       },
-      { "groupName": "lib", "elementNamePattern": ["$lib", "$lib/**", "$assets/**", "$data/**"] }
+      { "groupName": "lib", "elementNamePattern": ["#lib/**", "#assets/**", "#data/**"] }
     ],
     "groups": [
       ["builtin", "external", "sveltekit"],

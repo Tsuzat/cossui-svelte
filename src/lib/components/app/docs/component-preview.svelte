@@ -1,7 +1,7 @@
 <script lang="ts">
-  import ParticleSource from '#lib/components/app/particle-source.svelte';
   import { Spinner } from '#lib/components/ui/spinner/index.js';
   import { Tabs, TabsList, TabsPanel, TabsTab } from '#lib/components/ui/tabs/index.js';
+  import ParticleSource from '#lib/components/app/particle-source.svelte';
   import { allParticles } from '#lib/registry/registry-particles.js';
   import { cn } from '#lib/utils.js';
 

@@ -63,7 +63,7 @@ npm install @shardsui/svelte
 
 ```svelte
 <script lang="ts">
-  import { Button } from '$lib/components/ui/button';
+  import { Button } from '#lib/components/ui/button';
 </script>
 
 <Button>Button</Button>
@@ -75,7 +75,7 @@ Pass an `href` to render an anchor (`<a>`) with button styling. Here's an exampl
 
 ```svelte
 <script lang="ts">
-  import { Button } from '$lib/components/ui/button';
+  import { Button } from '#lib/components/ui/button';
 </script>
 
 <Button href="/login">Login</Button>
@@ -85,7 +85,7 @@ To apply button styles to another element or component, use `buttonVariants`:
 
 ```svelte
 <script lang="ts">
-  import { buttonVariants } from '$lib/components/ui/button';
+  import { buttonVariants } from '#lib/components/ui/button';
 </script>
 
 <a href="/login" class={buttonVariants({ variant: 'outline' })}>Login</a>

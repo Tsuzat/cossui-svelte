@@ -54,7 +54,7 @@ npm install @shardsui/svelte
     SelectItem,
     SelectPopup,
     SelectTrigger
-  } from '$lib/components/ui/select';
+  } from '#lib/components/ui/select';
 
   const items = [
     { label: 'Next.js', value: 'next' },
@@ -139,8 +139,8 @@ The `tv` recipe behind `SelectTrigger` and `SelectButton`. Apply it as a `class`
 
 ```svelte
 <script lang="ts">
-  import { ComboboxTrigger, ComboboxValue } from '$lib/components/ui/combobox';
-  import { selectTriggerVariants } from '$lib/components/ui/select';
+  import { ComboboxTrigger, ComboboxValue } from '#lib/components/ui/combobox';
+  import { selectTriggerVariants } from '#lib/components/ui/select';
 </script>
 
 <ComboboxTrigger class={selectTriggerVariants()}>
