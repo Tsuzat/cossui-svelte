@@ -52,7 +52,7 @@ npm install @shardsui/svelte
   let value = $state(50);
 </script>
 
-<Slider bind:value aria-label="Volume" />
+<Slider bind:value getAriaLabel={() => 'Volume'} />
 ```
 
 ## API Reference
@@ -67,6 +67,7 @@ Root component. Styled wrapper for `Slider.Root` from ShardsUI that renders the 
 | `thumbCollisionBehavior` | `"push" \| "swap" \| "none"`      | `"push"`       | How adjacent thumbs behave when dragged into each other |
 | `showTooltip`            | `boolean`                         | `false`        | Shows a tooltip with the value above each thumb while dragging |
 | `tooltipContent`         | `(value: number) => number \| string` | -         | Formats the tooltip text                         |
+| `getAriaLabel`           | `(index: number) => string`       | -              | Accessible name for each generated thumb         |
 
 Note: The component sets `thumbAlignment="edge"`, which aligns thumbs to the edge of the track rather than centering them.
 
@@ -76,7 +77,18 @@ Displays the current value. Styled wrapper for `Slider.Value` from ShardsUI.
 
 ## Examples
 
-For accessible labelling and validation, prefer using the `Field` component to wrap sliders. See the related example: [Slider field](/docs/field#slider-field).
+For accessible labelling and validation, prefer using the `Field` component with an associated `FieldLabel`. See the related example: [Slider field](/docs/field#slider-field).
+
+Use `getAriaLabel` when there is no associated label. Name each range endpoint separately:
+
+```svelte
+<Slider
+  value={[20, 80]}
+  getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
+/>
+```
+
+An associated `FieldLabel` continues to work without this prop. Setting `aria-label` on the root alone does not name its thumbs.
 
 ### With Label and Value
 
