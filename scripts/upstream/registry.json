@@ -18,6 +18,7 @@
         "@coss/checkbox-group",
         "@coss/collapsible",
         "@coss/combobox",
+        "@coss/composer",
         "@coss/command",
         "@coss/context-menu",
         "@coss/dialog",
@@ -297,6 +298,23 @@
       "name": "combobox",
       "registryDependencies": [
         "@coss/input",
+        "@coss/scroll-area"
+      ],
+      "type": "registry:ui"
+    },
+    {
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "files": [
+        {
+          "path": "registry/default/ui/composer.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "name": "composer",
+      "registryDependencies": [
+        "@coss/composer-editor",
         "@coss/scroll-area"
       ],
       "type": "registry:ui"
@@ -971,6 +989,210 @@
       ],
       "name": "tooltip",
       "type": "registry:ui"
+    },
+    {
+      "name": "chat",
+      "type": "registry:ui",
+      "description": "Composable chat components with messages, reactions, replies, and delivery states.",
+      "dependencies": [
+        "motion@14.0.0",
+        "lucide-react",
+        "@base-ui/react@1.8.0"
+      ],
+      "registryDependencies": [
+        "@coss/button",
+        "@coss/collapsible",
+        "@coss/empty",
+        "@coss/menu",
+        "@coss/popover",
+        "@coss/scroll-area",
+        "@coss/skeleton",
+        "@coss/toggle",
+        "@coss/toolbar",
+        "@coss/tooltip",
+        "@coss/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/default/chat/chat-bubble.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-bubble.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-collapsible-message.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-collapsible-message.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-conversation.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-conversation.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-date-pill.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-date-pill.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-delivery-indicator.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-delivery-indicator.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-jump-to-latest-button.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-jump-to-latest-button.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-members.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-members.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-message-actions.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-message-actions.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-message-bubble.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-message-bubble.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-message-info.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-message-info.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-message-layout.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-message-layout.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-message-text.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-message-text.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-message.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-message.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-reaction-chip.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-reaction-chip.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-reaction-picker.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-reaction-picker.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-reply-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-reply-preview.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-reply-reference.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-reply-reference.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-states.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-states.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-typing-indicator.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-typing-indicator.tsx"
+        },
+        {
+          "path": "registry/default/chat/chat-unread-divider.tsx",
+          "type": "registry:component",
+          "target": "@components/chat/chat-unread-divider.tsx"
+        },
+        {
+          "path": "registry/default/chat/hooks/use-chat-popup-dismissal.ts",
+          "type": "registry:component",
+          "target": "@components/chat/hooks/use-chat-popup-dismissal.ts"
+        },
+        {
+          "path": "registry/default/chat/hooks/use-chat-scroll.ts",
+          "type": "registry:component",
+          "target": "@components/chat/hooks/use-chat-scroll.ts"
+        },
+        {
+          "path": "registry/default/chat/lib/split-chat-message-preview.ts",
+          "type": "registry:component",
+          "target": "@components/chat/lib/split-chat-message-preview.ts"
+        }
+      ]
+    },
+    {
+      "name": "chat-demo",
+      "type": "registry:block",
+      "description": "An interactive group chat with a responsive drawer and conversation states.",
+      "dependencies": [
+        "motion@14.0.0",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@coss/alert-dialog",
+        "@coss/avatar",
+        "@coss/badge",
+        "@coss/button",
+        "@coss/composer",
+        "@coss/drawer",
+        "@coss/menu",
+        "@coss/tooltip",
+        "@coss/use-media-query",
+        "@coss/utils",
+        "@coss/chat"
+      ],
+      "files": [
+        {
+          "path": "registry/default/chat-demo/chat-demo-composer.tsx",
+          "type": "registry:component",
+          "target": "@components/chat-demo/chat-demo-composer.tsx"
+        },
+        {
+          "path": "registry/default/chat-demo/chat-demo-message-info.tsx",
+          "type": "registry:component",
+          "target": "@components/chat-demo/chat-demo-message-info.tsx"
+        },
+        {
+          "path": "registry/default/chat-demo/chat-demo-message.tsx",
+          "type": "registry:component",
+          "target": "@components/chat-demo/chat-demo-message.tsx"
+        },
+        {
+          "path": "registry/default/chat-demo/chat-demo-receipts.ts",
+          "type": "registry:component",
+          "target": "@components/chat-demo/chat-demo-receipts.ts"
+        },
+        {
+          "path": "registry/default/chat-demo/chat-demo-reply-focus.tsx",
+          "type": "registry:component",
+          "target": "@components/chat-demo/chat-demo-reply-focus.tsx"
+        },
+        {
+          "path": "registry/default/chat-demo/chat-demo-scenarios.tsx",
+          "type": "registry:component",
+          "target": "@components/chat-demo/chat-demo-scenarios.tsx"
+        },
+        {
+          "path": "registry/default/chat-demo/chat-demo-state.ts",
+          "type": "registry:component",
+          "target": "@components/chat-demo/chat-demo-state.ts"
+        },
+        {
+          "path": "registry/default/chat-demo/chat-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/chat-demo/chat-demo.tsx"
+        }
+      ]
     },
     {
       "categories": [
@@ -2998,6 +3220,7 @@
       ],
       "name": "p-button-35",
       "registryDependencies": [
+        "@coss/use-copy-to-clipboard",
         "@coss/button"
       ],
       "type": "registry:block"
@@ -3018,6 +3241,7 @@
       ],
       "name": "p-button-36",
       "registryDependencies": [
+        "@coss/use-copy-to-clipboard",
         "@coss/button"
       ],
       "type": "registry:block"
@@ -4885,6 +5109,281 @@
     },
     {
       "categories": [
+        "composer",
+        "text editor"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "description": "Composer with people, teams, and slash suggestions",
+      "files": [
+        {
+          "path": "registry/default/particles/p-composer-1.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "meta": {
+        "className": "**:data-[slot=preview]:w-full **:data-[slot=preview]:max-w-xl"
+      },
+      "name": "p-composer-1",
+      "registryDependencies": [
+        "@coss/button",
+        "@coss/composer"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "categories": [
+        "composer",
+        "async",
+        "loading"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "description": "Composer with asynchronous mention suggestions",
+      "files": [
+        {
+          "path": "registry/default/particles/p-composer-2.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "meta": {
+        "className": "**:data-[slot=preview]:w-full **:data-[slot=preview]:max-w-xl"
+      },
+      "name": "p-composer-2",
+      "registryDependencies": [
+        "@coss/button",
+        "@coss/composer",
+        "@coss/spinner"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "categories": [
+        "composer",
+        "drawer"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "description": "Composer pinned below scrollable drawer content",
+      "files": [
+        {
+          "path": "registry/default/particles/p-composer-3.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "name": "p-composer-3",
+      "registryDependencies": [
+        "@coss/button",
+        "@coss/composer",
+        "@coss/drawer"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "categories": [
+        "composer",
+        "textarea"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "description": "Composer surface with a native textarea",
+      "files": [
+        {
+          "path": "registry/default/particles/p-composer-4.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "meta": {
+        "className": "**:data-[slot=preview]:w-full **:data-[slot=preview]:max-w-xl"
+      },
+      "name": "p-composer-4",
+      "registryDependencies": [
+        "@coss/button",
+        "@coss/composer"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "categories": [
+        "composer",
+        "text editor"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "description": "Composer with a custom suggestion list",
+      "files": [
+        {
+          "path": "registry/default/particles/p-composer-5.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "meta": {
+        "className": "**:data-[slot=preview]:w-full **:data-[slot=preview]:max-w-xl"
+      },
+      "name": "p-composer-5",
+      "registryDependencies": [
+        "@coss/button",
+        "@coss/composer"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "categories": [
+        "composer",
+        "text editor"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "description": "Composer with distinct person, team, and action chips",
+      "files": [
+        {
+          "path": "registry/default/particles/p-composer-6.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "meta": {
+        "className": "**:data-[slot=preview]:w-full **:data-[slot=preview]:max-w-xl"
+      },
+      "name": "p-composer-6",
+      "registryDependencies": [
+        "@coss/button",
+        "@coss/composer"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "categories": [
+        "composer",
+        "text editor"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "description": "Contenteditable composer with Send beside a short draft",
+      "files": [
+        {
+          "path": "registry/default/particles/p-composer-7.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "meta": {
+        "className": "**:data-[slot=preview]:w-full **:data-[slot=preview]:max-w-xl"
+      },
+      "name": "p-composer-7",
+      "registryDependencies": [
+        "@coss/button",
+        "@coss/composer"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "categories": [
+        "composer",
+        "textarea"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "description": "Textarea composer with Send beside a short draft",
+      "files": [
+        {
+          "path": "registry/default/particles/p-composer-8.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "meta": {
+        "className": "**:data-[slot=preview]:w-full **:data-[slot=preview]:max-w-xl"
+      },
+      "name": "p-composer-8",
+      "registryDependencies": [
+        "@coss/button",
+        "@coss/composer"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "categories": [
+        "composer",
+        "text editor"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "description": "Rounded adaptive composer with circular actions",
+      "files": [
+        {
+          "path": "registry/default/particles/p-composer-9.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "meta": {
+        "className": "**:data-[slot=preview]:w-full **:data-[slot=preview]:max-w-xl"
+      },
+      "name": "p-composer-9",
+      "registryDependencies": [
+        "@coss/button",
+        "@coss/composer"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "categories": [
+        "composer",
+        "text editor"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "description": "Composer with leading buttons for mentions and slash actions",
+      "files": [
+        {
+          "path": "registry/default/particles/p-composer-10.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "meta": {
+        "className": "**:data-[slot=preview]:w-full **:data-[slot=preview]:max-w-xl"
+      },
+      "name": "p-composer-10",
+      "registryDependencies": [
+        "@coss/button",
+        "@coss/composer"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "categories": [
+        "composer",
+        "text editor"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "description": "Compact rounded adaptive composer with a circular send button",
+      "files": [
+        {
+          "path": "registry/default/particles/p-composer-11.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "meta": {
+        "className": "**:data-[slot=preview]:w-full **:data-[slot=preview]:max-w-xl"
+      },
+      "name": "p-composer-11",
+      "registryDependencies": [
+        "@coss/button",
+        "@coss/composer"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "categories": [
         "command",
         "dialog"
       ],
@@ -5327,6 +5826,29 @@
       "name": "p-drawer-14",
       "registryDependencies": [
         "@coss/button",
+        "@coss/drawer"
+      ],
+      "type": "registry:block"
+    },
+    {
+      "categories": [
+        "drawer",
+        "composer"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "description": "Chat composer pinned above the mobile keyboard",
+      "files": [
+        {
+          "path": "registry/default/particles/p-drawer-15.tsx",
+          "type": "registry:block"
+        }
+      ],
+      "name": "p-drawer-15",
+      "registryDependencies": [
+        "@coss/button",
+        "@coss/composer",
         "@coss/drawer"
       ],
       "type": "registry:block"
@@ -6807,7 +7329,8 @@
       ],
       "name": "p-otp-field-1",
       "registryDependencies": [
-        "@coss/otp-field"
+        "@coss/otp-field",
+        "@coss/field"
       ],
       "type": "registry:block"
     },
@@ -6825,7 +7348,8 @@
       ],
       "name": "p-otp-field-2",
       "registryDependencies": [
-        "@coss/otp-field"
+        "@coss/otp-field",
+        "@coss/field"
       ],
       "type": "registry:block"
     },
@@ -6843,7 +7367,8 @@
       ],
       "name": "p-otp-field-3",
       "registryDependencies": [
-        "@coss/otp-field"
+        "@coss/otp-field",
+        "@coss/field"
       ],
       "type": "registry:block"
     },
@@ -7622,6 +8147,7 @@
       },
       "name": "p-input-group-27",
       "registryDependencies": [
+        "@coss/use-copy-to-clipboard",
         "@coss/button",
         "@coss/input-group",
         "@coss/select",
@@ -8556,7 +9082,6 @@
       ],
       "name": "p-popover-4",
       "registryDependencies": [
-        "@coss/badge",
         "@coss/button",
         "@coss/checkbox",
         "@coss/checkbox-group",
@@ -12004,6 +12529,58 @@
       }
     },
     {
+      "files": [
+        {
+          "path": "registry/default/lib/composer-clipboard.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "name": "composer-clipboard",
+      "registryDependencies": [
+        "@coss/composer-document"
+      ],
+      "type": "registry:lib"
+    },
+    {
+      "files": [
+        {
+          "path": "registry/default/lib/composer-document.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "name": "composer-document",
+      "registryDependencies": [
+        "@coss/composer-query"
+      ],
+      "type": "registry:lib"
+    },
+    {
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "files": [
+        {
+          "path": "registry/default/lib/composer-editor.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "name": "composer-editor",
+      "registryDependencies": [
+        "@coss/use-composer-editor"
+      ],
+      "type": "registry:lib"
+    },
+    {
+      "files": [
+        {
+          "path": "registry/default/lib/composer-query.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "name": "composer-query",
+      "type": "registry:lib"
+    },
+    {
       "dependencies": [
         "class-variance-authority"
       ],
@@ -12081,6 +12658,23 @@
       ],
       "name": "direction-provider",
       "type": "registry:lib"
+    },
+    {
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "files": [
+        {
+          "path": "registry/default/hooks/use-composer-editor.ts",
+          "type": "registry:hook"
+        }
+      ],
+      "name": "use-composer-editor",
+      "registryDependencies": [
+        "@coss/composer-document",
+        "@coss/composer-clipboard"
+      ],
+      "type": "registry:hook"
     },
     {
       "files": [
