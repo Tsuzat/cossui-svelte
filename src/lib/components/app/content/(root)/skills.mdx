@@ -15,7 +15,7 @@ For example, you can ask your assistant to:
 ## Install
 
 ```bash
-npx skills add cosscom/ui
+npx skills add cossui-svelte/cossui-svelte
 ```
 
 This installs the coss skill into your project. Once installed, your AI assistant automatically loads it when working with coss ui components.
@@ -36,7 +36,7 @@ Tailwind v4 token usage, semantic color system, icon sizing rules, `data-slot` s
 
 ### Migration Patterns
 
-Rules for migrating from shadcn/Radix to coss/Base UI — `asChild` to `render`, `onSelect` to `onClick`, Select items-first pattern, ToggleGroup `type` to `multiple`, and Slider scalar values.
+Rules for migrating from shadcn/bitsui to cossui-svelte
 
 ### CLI and Registry
 
@@ -50,7 +50,7 @@ The skill references the particle catalog — real-world composition examples fo
 
 1. **Skill activation** — Your AI agent detects the installed skill files in your project.
 2. **Progressive loading** — The root `SKILL.md` provides core rules and a component registry index. Detailed per-component guides and rule references are loaded on demand when the task requires them.
-3. **Pattern enforcement** — The assistant follows coss composition rules: `render` prop for trigger composition, `DialogHeader`/`DialogPanel`/`DialogFooter` section structure, `variant="ghost"` for cancel buttons, and correct Base UI APIs.
+3. **Pattern enforcement** — The assistant follows coss composition rules: trigger composition, `DialogHeader`/`DialogPanel`/`DialogFooter` section structure, `variant="ghost"` for cancel buttons, and correct Base UI APIs.
 4. **Example-driven output** — Before generating code, the assistant consults particle examples to match real coss patterns.
 
 ## Supported Agents
