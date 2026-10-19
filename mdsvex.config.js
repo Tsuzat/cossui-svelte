@@ -16,6 +16,7 @@ function remarkInjectDocsComponents() {
   const script = `<script>
   import { Alert, AlertDescription, AlertTitle } from '#lib/components/ui/alert/index.js';
   import { TabsList, TabsPanel, TabsTab } from '#lib/components/ui/tabs/index.js';
+  import CodeBlockCommand from '#lib/components/app/code-block-command.svelte';
   import CodeTabs from '#lib/components/app/docs/code-tabs.svelte';
   import ComponentPreview from '#lib/components/app/docs/component-preview.svelte';
   import ComponentSource from '#lib/components/app/docs/component-source.svelte';
@@ -31,6 +32,67 @@ function remarkInjectDocsComponents() {
     );
     if (hasOwnScript) return;
     tree.children.unshift({ type: 'html', value: script });
+  };
+}
+
+const SHELL_LANGS = new Set(['bash', 'sh', 'shell']);
+
+/**
+ * Expands one npm-family command into its npm/pnpm/yarn/bun equivalents, or
+ * returns undefined when the command isn't an install or package-runner call.
+ *
+ * @param {string} command
+ * @returns {{ npm: string, pnpm: string, yarn: string, bun: string } | undefined}
+ */
+function toPackageManagerCommands(command) {
+  const install = command.match(/^npm (?:install|i)\b(.*)$/);
+  if (install) {
+    const args = install[1].replace(/(^|\s)--save-dev(?=\s|$)/, '$1-D');
+    if (!args.trim()) {
+      return { bun: 'bun install', npm: command, pnpm: 'pnpm install', yarn: 'yarn install' };
+    }
+    return { bun: `bun add${args}`, npm: command, pnpm: `pnpm add${args}`, yarn: `yarn add${args}` };
+  }
+
+  const run = command.match(/^(?:npx|pnpm dlx|pnpx|yarn dlx|bunx(?: --bun)?) (.+)$/);
+  if (run) {
+    const args = run[1];
+    return {
+      bun: `bunx --bun ${args}`,
+      npm: `npx ${args}`,
+      pnpm: `pnpm dlx ${args}`,
+      yarn: `yarn dlx ${args}`
+    };
+  }
+
+  return undefined;
+}
+
+/**
+ * Renders single-line shell fences holding an install or package-runner
+ * command (`npm install …`, `npx …`, `pnpm dlx …`) as `CodeBlockCommand`, so
+ * readers get npm/pnpm/yarn/bun tabs that follow their saved package manager.
+ * Runs before mdsvex's highlighter, which only sees the fences left untouched.
+ */
+function remarkPackageManagerCommands() {
+  return (tree) => {
+    visit(tree, 'code', (node, index, parent) => {
+      if (!parent || index === undefined || !SHELL_LANGS.has(node.lang ?? '')) return;
+
+      const command = node.value.trim();
+      if (command.includes('\n')) return;
+
+      const commands = toPackageManagerCommands(command);
+      if (!commands) return;
+
+      const props = Object.entries(commands)
+        .map(([manager, value]) => `__${manager}__={${JSON.stringify(value)}}`)
+        .join(' ');
+      parent.children[index] = {
+        type: 'html',
+        value: `<figure data-rehype-pretty-code-figure><CodeBlockCommand ${props} /></figure>`
+      };
+    });
   };
 }
 
@@ -103,5 +165,5 @@ export const mdsvexOptions = {
   extensions: ['.mdx'],
   layout: fileURLToPath(new URL('./src/lib/components/app/docs/mdx-layout.svelte', import.meta.url)),
   highlight: { highlighter },
-  remarkPlugins: [remarkGfm, remarkInjectDocsComponents, remarkToc]
+  remarkPlugins: [remarkGfm, remarkInjectDocsComponents, remarkPackageManagerCommands, remarkToc]
 };

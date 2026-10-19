@@ -1,89 +1,71 @@
-# coss CLI Reference (Focused)
+# cossui-svelte CLI Reference (Focused)
 
-Use this guide when installing, previewing, or discovering coss components via the shadcn CLI.
+Use this guide when installing or discovering cossui-svelte components via the shadcn-svelte CLI.
 
 ## CLI Safety Rules
 
 - Always use the project's package runner:
-  - `npx shadcn@latest ...`
-  - `pnpm dlx shadcn@latest ...`
-  - `bunx --bun shadcn@latest ...`
-- Do not invent flags. Use only documented CLI flags.
+  - `npx shadcn-svelte@latest ...`
+  - `pnpm dlx shadcn-svelte@latest ...`
+  - `bunx --bun shadcn-svelte@latest ...`
+- Do not invent flags. Use only the flags listed below.
+- There is no `@coss/` registry namespace. Install by URL.
 
-## Core Commands for coss Usage
+## Prerequisites
 
-### Recommended bootstrap paths
+- A Svelte 5 / SvelteKit project with Tailwind CSS v4, initialized with `npx shadcn-svelte@latest init`.
+- The `#lib` subpath import in `package.json` (components import each other through it):
 
-```bash
-# New projects (recommended — includes Inter + Geist Mono fonts + full theme)
-npx shadcn@latest init @coss/style
-
-# Existing projects - all primitives
-npx shadcn@latest add @coss/ui
-
-# Existing projects - full theme setup
-npx shadcn@latest add @coss/style
-
-# Existing projects - primitives + color tokens
-npx shadcn@latest add @coss/ui @coss/colors-neutral
+```json
+{
+  "imports": {
+    "#lib/*": "./src/lib/*"
+  }
+}
 ```
 
-`@coss/style` automatically installs `@coss/fonts` (Inter for `--font-sans` and `--font-heading`, Geist Mono for `--font-mono`), which configures all three font variables in `layout.tsx`. No manual font wiring needed.
+## `add` (primary)
 
-### `add` (primary)
+Every component, particle, bloc, hook, and util has a registry item at `https://cossui-svelte.com/r/<name>.json`:
 
 ```bash
-shadcn add @coss/<component>
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/<name>.json
 ```
 
 Examples:
 
 ```bash
-npx shadcn@latest add @coss/dialog
-npx shadcn@latest add @coss/select
-npx shadcn@latest add @coss/toast
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/dialog.json
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/p-select-3.json
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/use-is-mobile.json
 ```
 
-### `add` preview mode (recommended)
+Installing a particle or bloc also installs the UI components it depends on.
 
-```bash
-npx shadcn@latest add @coss/dialog --dry-run
-npx shadcn@latest add @coss/dialog --diff
-npx shadcn@latest add @coss/dialog --view
-```
+Options:
 
-Use preview mode when:
+- `-c, --cwd <path>` — working directory
+- `--no-deps-install` — add dependencies to `package.json` without running install
+- `--skip-preflight` — ignore preflight checks
+- `-y, --yes` — skip the confirmation prompt
+- `-o, --overwrite` — overwrite existing files
+- `--proxy <proxy>` — fetch from the registry through a proxy
 
-- user asks what will change
-- component might already exist locally
-- you need to inspect output before writing files
+There is no dry-run or diff mode. To see what an item will write before installing, fetch its JSON: it lists the files, their target paths, and dependencies.
 
-### Optional discovery helpers (use when available)
+## Discovery
 
-```bash
-npx shadcn@latest search @coss -q "dialog"
-npx shadcn@latest view @coss/dialog
-npx shadcn@latest docs dialog
-npx shadcn@latest info --json
-```
+- docs map for agents: `https://cossui-svelte.com/llms.txt`
+- registry index (every installable item): `https://cossui-svelte.com/r/registry.json`
+- component docs: `https://cossui-svelte.com/docs/components/<name>`
+- particles catalog: `https://cossui-svelte.com/particles`
+- blocs catalog: `https://cossui-svelte.com/blocs`
 
-If these are unsupported in the environment, use fallback sources below.
+Inside the cossui-svelte repo:
 
-## Discovery Fallback Matrix
-
-### Inside the coss repo (preferred)
-
-- `apps/ui/registry/registry-particles.ts`
-  - `https://github.com/cosscom/ui/blob/main/apps/ui/registry/registry-particles.ts`
-- `apps/ui/registry.json`
-  - `https://github.com/cosscom/ui/blob/main/apps/ui/registry.json`
-- `apps/ui/content/docs/components/*.mdx`
-  - `https://github.com/cosscom/ui/tree/main/apps/ui/content/docs/components`
-
-### Outside the coss repo
-
-- coss particles catalog: `https://coss.com/ui/particles`
-- coss docs catalog: `https://coss.com/ui/`
+- `src/lib/components/ui/<name>/` — component source
+- `src/lib/components/particles/<name>/p-<name>-<N>.svelte` — particle source
+- `src/lib/components/app/content/components/*.mdx` — component docs
 
 ## Manual Install Path
 
@@ -91,20 +73,19 @@ When users explicitly request manual setup:
 
 1. Read the target component docs.
 2. Install exactly the listed dependencies.
-3. Copy all required files (including transitive local imports).
-4. Adjust imports for target app aliases.
+3. Copy all required files (including transitive local `#lib/...` imports).
+4. Add the `#lib` subpath import if the project doesn't have it.
 5. Validate the snippet against docs/particles patterns.
 
 Important:
 
-- CLI setup usually wires required theme tokens automatically.
-- Manual setup must include required additional tokens (`destructive-foreground`, `info`, `success`, `warning` families) from coss styling docs when relevant.
+- Manual setup must include the additional theme tokens (`destructive-foreground`, `info`, `success`, `warning` families) from the [Styling](https://cossui-svelte.com/docs/styling) docs when relevant.
 
 ## Quick Output Checklist
 
 Before returning CLI guidance:
 
 1. runner and command are valid for the user's package manager
-2. flags are documented and intentional
-3. fallback source is provided if CLI discovery commands are unavailable
-4. resulting usage guidance matches coss docs and particles patterns
+2. the item URL points at `https://cossui-svelte.com/r/`
+3. flags are from the list above
+4. resulting usage guidance matches cossui-svelte docs and particle patterns

@@ -8,24 +8,22 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/kbd
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/kbd.json
 ```
 
-Manual deps from docs:
-
-```bash
-# No extra runtime dependency required for this primitive.
-```
+Manual deps from docs: none (custom components).
 
 ## Canonical imports
 
-```tsx
-import { Kbd, KbdGroup } from "@/components/ui/kbd"
+```svelte
+<script lang="ts">
+  import { Kbd, KbdGroup } from '#lib/components/ui/kbd/index.js';
+</script>
 ```
 
 ## Minimal pattern
 
-```tsx
+```svelte
 <Kbd>K</Kbd>
 ```
 
@@ -35,7 +33,7 @@ import { Kbd, KbdGroup } from "@/components/ui/kbd"
 
 Multi-key shortcut with `KbdGroup` (each key gets its own `Kbd`):
 
-```tsx
+```svelte
 <KbdGroup>
   <Kbd>⌘</Kbd>
   <Kbd>K</Kbd>
@@ -44,28 +42,18 @@ Multi-key shortcut with `KbdGroup` (each key gets its own `Kbd`):
 
 Button with keyboard shortcut:
 
-```tsx
+```svelte
 <Button variant="outline">
+  <PrinterIcon aria-hidden="true" />
   Print
-  <KbdGroup className="-me-1">
+  <KbdGroup class="-me-1">
     <Kbd>⌘</Kbd>
     <Kbd>P</Kbd>
   </KbdGroup>
 </Button>
 ```
 
-Single key shortcut in a button:
-
-```tsx
-<Button variant="outline">
-  Save
-  <Kbd className="-me-1">⌘S</Kbd>
-</Button>
-```
-
-### More examples
-
-- input group integration: `p-input-group-11`
+Icons work inside `Kbd` (e.g. `<Kbd><ArrowUpIcon /></Kbd>` for navigation hints in a `CommandFooter`). For platform-aware modifiers, the `use-is-mac` hook (`#lib/hooks/use-is-mac.svelte.js`) helps choose `⌘` vs `Ctrl`.
 
 ## Common pitfalls
 
@@ -75,4 +63,7 @@ Single key shortcut in a button:
 
 ## Useful particle references
 
-- input group: `p-input-group-11`
+- keyboard shortcuts display: `p-kbd-1`
+- button with shortcut: `p-button-31`
+- input group with shortcut: `p-input-group-11`
+- command palette footer hints: `p-command-2`

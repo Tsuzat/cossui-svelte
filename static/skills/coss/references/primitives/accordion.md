@@ -8,35 +8,37 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/accordion
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/accordion.json
 ```
 
 Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import {
-  Accordion,
-  AccordionItem,
-  AccordionPanel,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
+```svelte
+<script lang="ts">
+  import {
+    Accordion,
+    AccordionItem,
+    AccordionPanel,
+    AccordionTrigger
+  } from '#lib/components/ui/accordion/index.js';
+</script>
 ```
+
+`AccordionContent` is an alias of `AccordionPanel`. `AccordionPrimitive` and `AccordionHeader` are re-exported for custom composition.
 
 ## Minimal pattern
 
-```tsx
-<Accordion defaultValue={["item-1"]}>
+```svelte
+<Accordion value="item-1">
   <AccordionItem value="item-1">
-    <AccordionTrigger>What is Base UI?</AccordionTrigger>
-    <AccordionPanel>
-      Base UI is a library of high-quality unstyled React components.
-    </AccordionPanel>
+    <AccordionTrigger>What is ShardsUI?</AccordionTrigger>
+    <AccordionPanel>A Svelte port of Base UI's unstyled, accessible primitives.</AccordionPanel>
   </AccordionItem>
 </Accordion>
 ```
@@ -45,10 +47,10 @@ import {
 
 ### Key patterns
 
-Multiple panels open simultaneously:
+Single mode (default): `value` is a `string`. Multiple mode: add `multiple`, and `value` is a `string[]`.
 
-```tsx
-<Accordion multiple defaultValue={["item-1", "item-2"]}>
+```svelte
+<Accordion multiple value={['item-1', 'item-2']}>
   <AccordionItem value="item-1">
     <AccordionTrigger>Section 1</AccordionTrigger>
     <AccordionPanel>Content 1</AccordionPanel>
@@ -60,33 +62,32 @@ Multiple panels open simultaneously:
 </Accordion>
 ```
 
-Controlled mode with external state:
+Controlled mode — `value` is bindable:
 
-```tsx
-const [value, setValue] = useState<string[]>(["item-1"])
+```svelte
+<script lang="ts">
+  let value = $state<string[]>(['item-1']);
+</script>
 
-<Accordion value={value} onValueChange={setValue}>
+<Accordion multiple bind:value>
   ...
 </Accordion>
+<button type="button" onclick={() => (value = ['item-1', 'item-2'])}>Open first two</button>
 ```
 
-Each `AccordionItem` needs a stable `value`; trigger and panel must be children of the same item.
-
-### More examples
-
-See `p-accordion-1` through `p-accordion-4` for mapped items, single-open, multiple-open, and controlled patterns.
+Each `AccordionItem` needs a stable `value`; trigger and panel must be children of the same item. Disable everything with `disabled` on `Accordion`.
 
 ## Common pitfalls
 
 - Placing `AccordionTrigger`/`AccordionPanel` outside `AccordionItem`.
 - Omitting `value` on `AccordionItem`, which breaks item identity and controlled behavior.
-- Applying Radix mental models like `type="single" | "multiple"` instead of coss `multiple` + array values.
-- Treating controlled `value` as scalar instead of `string[]`.
+- Applying Radix/Bits UI mental models like `type="single" | "multiple"` instead of the `multiple` boolean.
+- Passing an array to a single-mode accordion or a string to a `multiple` one when binding — keep the bound type consistent with `multiple`.
+- Looking for a `defaultValue` prop: there is none; seed the initial state through `value`.
 
 ## Useful particle references
 
-- baseline mapped-items accordion: `p-accordion-1`
-- single-open static sections: `p-accordion-2`
-- multiple-open behavior: `p-accordion-3`
-- controlled value + external actions: `p-accordion-4`
-
+- basic accordion: `p-accordion-1`
+- one panel open: `p-accordion-2`
+- multiple panels open: `p-accordion-3`
+- controlled with `bind:value` + external actions: `p-accordion-4`

@@ -8,64 +8,64 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/textarea
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/textarea.json
 ```
 
 Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import { Textarea } from "@/components/ui/textarea"
+```svelte
+<script lang="ts">
+  import { Textarea } from '#lib/components/ui/textarea/index.js';
+</script>
 ```
 
 ## Minimal pattern
 
-```tsx
-<Textarea aria-label="Message" placeholder="Write your message" />
+```svelte
+<script lang="ts">
+  let value = $state('');
+</script>
+
+<Textarea aria-label="Message" placeholder="Write your message" bind:value />
 ```
 
-For form fields, prefer wrapping `Textarea` with `Field` + `FieldLabel` + `FieldError` so labels, validation, and errors stay semantically linked.
-`Textarea` already wraps Base UI `Field.Control` internally, so it works as a form control directly inside `Field` (no need to manually use `FieldControl` + `render` just to mount a textarea).
+Props: `size` (`sm | default | lg`, or a number passed to `rows`), `unstyled`, bindable `value` and `ref`; other props go to the native `<textarea>` via ShardsUI `Field.Control`.
 
 ## Patterns from coss particles
 
 ### Key patterns
 
-Textarea in a field with label:
+`Textarea` wraps `Field.Control` internally, so it works directly inside `Field` — no `FieldControl` needed:
 
-```tsx
+```svelte
 <Field name="bio">
   <FieldLabel>Bio</FieldLabel>
-  <Textarea placeholder="Tell us about yourself..." />
+  <Textarea placeholder="Tell us about yourself…" />
   <FieldDescription>Max 500 characters.</FieldDescription>
   <FieldError />
 </Field>
 ```
 
-Sizes: `sm`, `default`, `lg` on `Textarea`.
-
-`Textarea` wraps Base UI `Field.Control` internally, so it works as a form control directly inside `Field`.
-
-### More examples
-
-See `p-textarea-1` through `p-textarea-6` for sizes, disabled, label, and form integration patterns.
+Character counter: bind `value`, set `maxlength`, and render `maxlength - value.length` (`p-textarea-11`, or the `use-character-limit` hook). For a textarea with attached toolbar buttons use `InputGroupTextarea` + `InputGroupAddon align="block-end"` ([input-group.md](input-group.md)).
 
 ## Common pitfalls
 
 - Using textarea when a constrained single-line input is expected.
+- Using plain `Textarea` inside `InputGroup` — use `InputGroupTextarea`.
 - Missing labels/descriptions for required long-form fields.
-- Forgetting explicit submit button type handling in textarea forms.
-- Using `FieldControl render={<textarea .../>}` for basic textarea fields when `Textarea` already provides the correct control integration.
+- Forgetting `type="submit"` on the submit button in textarea forms.
 
 ## Useful particle references
 
-- small size: `p-textarea-2`
-- large size: `p-textarea-3`
-- disabled: `p-textarea-4`
-- with label: `p-textarea-5`
+- basic / small / large / disabled / read-only: `p-textarea-1`, `p-textarea-2`, `p-textarea-3`, `p-textarea-4`, `p-textarea-10`
+- label / required / optional: `p-textarea-5`, `p-textarea-7`, `p-textarea-8`, `p-textarea-12`
 - form integration: `p-textarea-6`
+- custom border / fixed height: `p-textarea-9`, `p-textarea-13`
+- characters remaining: `p-textarea-11`
+- with button right / left: `p-textarea-14`, `p-textarea-15`

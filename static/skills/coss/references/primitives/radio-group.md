@@ -15,90 +15,98 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/radio-group
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/radio-group.json
 ```
 
 Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import { Label } from "@/components/ui/label"
-import { Radio, RadioGroup } from "@/components/ui/radio-group"
+```svelte
+<script lang="ts">
+  import { Label } from '#lib/components/ui/label/index.js';
+  import { Radio, RadioGroup } from '#lib/components/ui/radio-group/index.js';
+</script>
 ```
+
+`Radio` is also exported as `RadioGroupItem`; `RadioPrimitive` and `RadioGroupPrimitive` are re-exported for custom compositions.
 
 ## Minimal pattern
 
-```tsx
-<RadioGroup defaultValue="next">
-  <Label>
-    <Radio value="next" /> Next.js
-  </Label>
-  <Label>
-    <Radio value="vite" /> Vite
-  </Label>
-  <Label>
-    <Radio value="astro" /> Astro
-  </Label>
+```svelte
+<script lang="ts">
+  let value = $state('next');
+</script>
+
+<RadioGroup bind:value>
+  <Label><Radio value="next" /> Next.js</Label>
+  <Label><Radio value="vite" /> Vite</Label>
+  <Label><Radio value="astro" /> Astro</Label>
 </RadioGroup>
 ```
 
-For form-bound single-choice groups, prefer `Field` + `Fieldset` composition to keep legend and validation semantics consistent.
+`RadioGroup` forwards `value` (bindable), `defaultValue`, `onValueChange`, `disabled`, `name`.
 
 ## Patterns from coss particles
 
 ### Key patterns
 
-Radio group with descriptions:
+Options with descriptions (associate with `id` + `for`):
 
-```tsx
-<RadioGroup defaultValue="comfortable" aria-label="Spacing preference">
-  <Label className="flex items-start gap-3">
-    <Radio value="default" />
-    <div>
-      <span className="font-medium">Default</span>
-      <p className="text-muted-foreground text-xs">Standard spacing for most layouts.</p>
+```svelte
+<RadioGroup aria-label="Subscription plan" value="free">
+  <div class="flex items-start gap-2">
+    <Radio id="plan-free" value="free" />
+    <div class="flex flex-col gap-1">
+      <Label for="plan-free">Free</Label>
+      <p class="text-muted-foreground text-xs">Basic features for personal use.</p>
     </div>
-  </Label>
-  <Label className="flex items-start gap-3">
-    <Radio value="comfortable" />
-    <div>
-      <span className="font-medium">Comfortable</span>
-      <p className="text-muted-foreground text-xs">Extra padding for readability.</p>
+  </div>
+  <div class="flex items-start gap-2">
+    <Radio id="plan-pro" value="pro" />
+    <div class="flex flex-col gap-1">
+      <Label for="plan-pro">Pro</Label>
+      <p class="text-muted-foreground text-xs">Advanced tools for professionals.</p>
     </div>
-  </Label>
+  </div>
 </RadioGroup>
 ```
 
-Controlled radio group:
+Segmented presentation — use `RadioPrimitive.Root` (no native indicator) with the shared segmented-control classes; read [segmented-control.md](../segmented-control.md) first:
 
-```tsx
-const [value, setValue] = useState("default")
+```svelte
+<script lang="ts">
+  import { RadioGroup, RadioPrimitive } from '#lib/components/ui/radio-group/index.js';
+  import {
+    segmentedControlItemVariants,
+    segmentedControlRootClassName
+  } from '#lib/components/ui/tabs/segmented-control.js';
 
-<RadioGroup value={value} onValueChange={setValue}>
-  ...
+  const itemClass = segmentedControlItemVariants({ state: 'checked' });
+</script>
+
+<RadioGroup aria-label="Billing period" class={segmentedControlRootClassName} value="monthly">
+  <RadioPrimitive.Root class={itemClass} value="monthly">Monthly</RadioPrimitive.Root>
+  <RadioPrimitive.Root class={itemClass} value="yearly">Yearly</RadioPrimitive.Root>
 </RadioGroup>
 ```
 
-### More examples
-
-See `p-radio-group-1` through `p-radio-group-5` for disabled, description, card-style, and form integration patterns. For a segmented presentation, use `p-radio-group-7`, `p-radio-group-8`, or `p-radio-group-9`; read `../segmented-control.md` before choosing the underlying primitive.
+For form-bound groups, use `Field` + `Fieldset` + `FieldItem` (see [field.md](field.md)).
 
 ## Common pitfalls
 
+- React habits: `defaultValue` + `onValueChange={setValue}`, `htmlFor`. Use `bind:value` and `for`.
 - Using radios for multi-select behavior that requires checkbox group.
 - Missing label association for each radio option.
-- Handling selected value as array when radio group returns single value.
+- Handling the selected value as an array — it is a single value.
 
 ## Useful particle references
 
-- disabled: `p-radio-group-2`
-- with description: `p-radio-group-3`
-- card style: `p-radio-group-4`
+- basic / disabled / with description: `p-radio-group-1`, `p-radio-group-2`, `p-radio-group-3`
+- card style: `p-radio-group-4`; theme image cards: `p-radio-group-6`; color palette grid: `p-radio-group-10`; membership plans: `p-radio-group-100`
 - form integration: `p-radio-group-5`
-- segmented, small/default/large: `p-radio-group-7`, `p-radio-group-8`, `p-radio-group-9`
-- form composition references: `p-form-1`, `p-form-2`, `p-input-group-24`
+- segmented small/default/large: `p-radio-group-7`, `p-radio-group-8`, `p-radio-group-9`

@@ -5,36 +5,42 @@
 - Progressive disclosure of optional content.
 - Expandable help/settings sections without leaving the page.
 
+## When NOT to use
+
+- For several related sections -> use Accordion instead.
+
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/collapsible
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/collapsible.json
 ```
 
 Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import {
-  Collapsible,
-  CollapsiblePanel,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+```svelte
+<script lang="ts">
+  import {
+    Collapsible,
+    CollapsiblePanel,
+    CollapsibleTrigger
+  } from '#lib/components/ui/collapsible/index.js';
+</script>
 ```
+
+`CollapsibleContent` is an alias of `CollapsiblePanel`; `CollapsiblePrimitive` is re-exported.
 
 ## Minimal pattern
 
-```tsx
+```svelte
 <Collapsible>
   <CollapsibleTrigger>Can I access the file in the cloud?</CollapsibleTrigger>
-  <CollapsiblePanel>
-    Yes, you can access the file in the cloud.
-  </CollapsiblePanel>
+  <CollapsiblePanel>Yes, you can access the file in the cloud.</CollapsiblePanel>
 </Collapsible>
 ```
 
@@ -42,29 +48,39 @@ import {
 
 ### Key patterns
 
-Controlled collapsible:
+Rotating chevron via the trigger's `data-panel-open` attribute:
 
-```tsx
-const [open, setOpen] = useState(false)
-
-<Collapsible open={open} onOpenChange={setOpen}>
-  <CollapsibleTrigger>
-    {open ? "Hide details" : "Show details"}
+```svelte
+<Collapsible>
+  <CollapsibleTrigger
+    class="inline-flex items-center gap-2 font-medium text-sm data-panel-open:[&_svg]:rotate-180"
+  >
+    Show recovery keys
+    <ChevronDownIcon class="size-4 transition-transform" />
   </CollapsibleTrigger>
-  <CollapsiblePanel>Hidden content here.</CollapsiblePanel>
+  <CollapsiblePanel>…</CollapsiblePanel>
 </Collapsible>
 ```
 
-### More examples
+Controlled — `open` is bindable:
 
-See `p-collapsible-1` for the core pattern.
+```svelte
+<script lang="ts">
+  let open = $state(false);
+</script>
+
+<Collapsible bind:open>
+  <CollapsibleTrigger>{open ? 'Hide details' : 'Show details'}</CollapsibleTrigger>
+  <CollapsiblePanel>Hidden content here.</CollapsiblePanel>
+</Collapsible>
+```
 
 ## Common pitfalls
 
 - Placing trigger/panel outside the same collapsible root.
 - Assuming panel content is always visible/mounted for dependent logic.
-- Using modal-like interactions where collapsible disclosure is more appropriate.
+- React habits: `open` + `onOpenChange={setOpen}` with `useState` — use `bind:open`.
 
 ## Useful particle references
 
-- core patterns: `p-collapsible-1`
+- core pattern: `p-collapsible-1`

@@ -8,59 +8,66 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/sidebar
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/sidebar.json
 ```
 
-Manual deps from docs:
-
-```bash
-npm install @base-ui/react
-```
+Manual deps: `svelte-toolbelt` plus the registry dependencies the item pulls in (button, input, separator, skeleton, tooltip, drawer for mobile).
 
 ## Canonical imports
 
-```tsx
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupAction,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarInset,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarProvider,
-  SidebarRail,
-  SidebarSeparator,
-  SidebarTrigger,
-  useSidebar,
-} from "@/components/ui/sidebar"
+```svelte
+<script lang="ts">
+  import {
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarGroup,
+    SidebarGroupAction,
+    SidebarGroupContent,
+    SidebarGroupLabel,
+    SidebarHeader,
+    SidebarInset,
+    SidebarMenu,
+    SidebarMenuAction,
+    SidebarMenuBadge,
+    SidebarMenuButton,
+    SidebarMenuItem,
+    SidebarMenuSub,
+    SidebarMenuSubButton,
+    SidebarMenuSubItem,
+    SidebarProvider,
+    SidebarRail,
+    SidebarSeparator,
+    SidebarTrigger,
+    useSidebar
+  } from '#lib/components/ui/sidebar/index.js';
+</script>
 ```
+
+Also exported: `SidebarInput`, `SidebarMenuSkeleton`.
 
 ## Minimal pattern
 
-```tsx
+```svelte
 <SidebarProvider>
   <Sidebar>
-    <SidebarHeader>Workspace</SidebarHeader>
     <SidebarContent>
       <SidebarGroup>
-        <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+        <SidebarGroupLabel>Application</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton>Dashboard</SidebarMenuButton>
+              <SidebarMenuButton isActive>Home</SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroupContent>
       </SidebarGroup>
     </SidebarContent>
   </Sidebar>
-  <SidebarInset>{/* Main page content */}</SidebarInset>
+  <SidebarInset>
+    <SidebarTrigger />
+    <!-- page content -->
+  </SidebarInset>
 </SidebarProvider>
 ```
 
@@ -68,68 +75,90 @@ import {
 
 ### Key patterns
 
-Sidebar with grouped navigation and footer:
+Unlike ShardsUI parts, the sidebar parts (`SidebarMenuButton`, `SidebarMenuSubButton`, `SidebarMenuAction`, `SidebarGroupLabel`, `SidebarGroupAction`) **do** take a `child` snippet that receives `{ props }` — spread them onto your own element. Use it for links and for turning a sidebar row into another primitive's trigger:
 
-```tsx
-<SidebarProvider>
-  <Sidebar>
-    <SidebarHeader>
-      <h2 className="text-lg font-semibold">App Name</h2>
-    </SidebarHeader>
-    <SidebarContent>
-      <SidebarGroup>
-        <SidebarGroupLabel>Main</SidebarGroupLabel>
-        <SidebarGroupContent>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton render={<a href="/dashboard" />}>
-                Dashboard
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton render={<a href="/projects" />}>
-                Projects
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroupContent>
-      </SidebarGroup>
-    </SidebarContent>
-    <SidebarFooter>
-      <SidebarMenu>
-        <SidebarMenuItem>
-          <SidebarMenuButton>Settings</SidebarMenuButton>
-        </SidebarMenuItem>
-      </SidebarMenu>
-    </SidebarFooter>
-    <SidebarRail />
-  </Sidebar>
-  <SidebarInset>{/* Page content */}</SidebarInset>
-</SidebarProvider>
+```svelte
+<SidebarMenuItem>
+  <SidebarMenuButton isActive={page.url.pathname === '/projects'}>
+    {#snippet child({ props })}
+      <a href="/projects" {...props}>
+        <FolderIcon />
+        <span>Projects</span>
+      </a>
+    {/snippet}
+  </SidebarMenuButton>
+</SidebarMenuItem>
 ```
 
-Key composition rules:
-- Wrap app with `SidebarProvider` at the layout level.
-- Use `SidebarContent` (not "SidebarPanel") as the scrollable body between header/footer. It uses `ScrollArea` with `fill` so flex children (e.g. `mt-auto` footers) can pin to the bottom.
-- Navigation items use `SidebarMenu` > `SidebarMenuItem` > `SidebarMenuButton`.
-- For link items, use `render` composition: `<SidebarMenuButton render={<a href="..." />}>`. Do not use `asChild` -- sidebar follows the same `render` pattern as all other coss primitives.
-- Use `SidebarTrigger` for the collapse/expand toggle.
-- Use `SidebarInset` for the main content area next to the sidebar.
-- `SidebarRail` adds a slim hover-to-expand rail in collapsed state.
+Workspace switcher (row becomes a `MenuTrigger`):
 
-### More examples
+```svelte
+<SidebarHeader>
+  <SidebarMenu>
+    <SidebarMenuItem>
+      <Menu>
+        <SidebarMenuButton>
+          {#snippet child({ props })}
+            <MenuTrigger {...props}>
+              Select Workspace
+              <ChevronDownIcon class="ms-auto" />
+            </MenuTrigger>
+          {/snippet}
+        </SidebarMenuButton>
+        <MenuPopup align="start">…</MenuPopup>
+      </Menu>
+    </SidebarMenuItem>
+  </SidebarMenu>
+</SidebarHeader>
+```
 
-See `p-toolbar-1`, `p-breadcrumb-1`, `p-tabs-1`, `p-menu-1` for related app-shell patterns.
+Collapsible group toggled from its label:
+
+```svelte
+<Collapsible open class="group/collapsible">
+  <SidebarGroup>
+    <SidebarGroupLabel>
+      {#snippet child({ props })}
+        <CollapsibleTrigger {...props}>
+          Help
+          <ChevronDownIcon class="ms-auto transition-transform group-data-open/collapsible:rotate-180" />
+        </CollapsibleTrigger>
+      {/snippet}
+    </SidebarGroupLabel>
+    <CollapsiblePanel>
+      <SidebarGroupContent>…</SidebarGroupContent>
+    </CollapsiblePanel>
+  </SidebarGroup>
+</Collapsible>
+```
+
+Composition rules:
+
+- Wrap the layout with `SidebarProvider` (holds `open`, bindable, persisted in a cookie; `onOpenChange` available).
+- `Sidebar` props: `side` (`left | right`), `variant` (`sidebar | floating | inset`), `collapsible` (`offcanvas | icon | none`).
+- `SidebarContent` is the scrollable body between header/footer (a `ScrollArea` with `fill`, so `mt-auto` footers pin to the bottom).
+- Navigation items: `SidebarMenu` > `SidebarMenuItem` > `SidebarMenuButton` (`isActive`, `variant`, `size`, `tooltipContent` shown in icon-collapsed mode). Nested: `SidebarMenuSub` > `SidebarMenuSubItem` > `SidebarMenuSubButton`.
+- Per-row extras: `SidebarMenuAction` (e.g. a row menu trigger), `SidebarMenuBadge` (counts).
+- `SidebarTrigger` toggles; `SidebarRail` is the slim hover/click rail; `SidebarInset` holds main content.
+- `useSidebar()` returns `open`, `isMobile`, `state` and helpers like `toggle()` / `setOpen()`.
+- Demos inside a bounded box add `transform-gpu` to the container so the `fixed` panel stays inside it.
 
 ## Common pitfalls
 
-- Using non-existent parts like "SidebarPanel" or "SidebarItem" -- the correct names are `SidebarContent` and `SidebarMenuItem`.
-- Forgetting `SidebarProvider` wrapper, which manages collapse state and mobile responsiveness.
-- Skipping the `SidebarMenu` > `SidebarMenuItem` > `SidebarMenuButton` hierarchy for nav items.
-- Missing responsive collapse strategy for narrow/mobile layouts.
-- Replacing `SidebarContent`'s scroll area with a raw `ScrollArea` without `fill` when the body uses `mt-auto` to pin footers—use `fill` (see scroll-area primitive docs).
+- React habits: `render={<a href="…" />}` / `asChild` on `SidebarMenuButton`. Use the `child` snippet and spread `props`.
+- Using non-existent parts like `SidebarPanel` or `SidebarItem` — use `SidebarContent` and `SidebarMenuItem`.
+- Forgetting `SidebarProvider`, which manages collapse state and mobile behavior.
+- Skipping the `SidebarMenu` > `SidebarMenuItem` > `SidebarMenuButton` hierarchy.
+- Replacing `SidebarContent`'s scroll area with a raw `ScrollArea` without `fill` when the body pins footers with `mt-auto`.
 
 ## Useful particle references
 
-- sidebar-specific particles: no dedicated `p-sidebar-*` family currently.
-- app-shell references: `p-toolbar-1`, `p-breadcrumb-1`, `p-tabs-1`, `p-menu-1`
+- basic sidebar: `p-sidebar-1`
+- docs sidebar with version switcher + search: `p-sidebar-2`
+- workspace switcher in header: `p-sidebar-3`
+- user menu in footer (opens upward): `p-sidebar-4`
+- labelled group / group action / collapsible group: `p-sidebar-5`, `p-sidebar-6`, `p-sidebar-7`
+- links with icons: `p-sidebar-8`
+- per-row action menu / count badges: `p-sidebar-9`, `p-sidebar-10`
+- nested sub-menus (static / collapsible): `p-sidebar-11`, `p-sidebar-12`
+- controlled open state: `p-sidebar-13`

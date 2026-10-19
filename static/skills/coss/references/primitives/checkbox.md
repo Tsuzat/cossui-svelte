@@ -14,82 +14,85 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/checkbox
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/checkbox.json
 ```
 
 Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import { Checkbox } from "@/components/ui/checkbox"
+```svelte
+<script lang="ts">
+  import { Checkbox } from '#lib/components/ui/checkbox/index.js';
+  import { Label } from '#lib/components/ui/label/index.js';
+</script>
 ```
+
+`CheckboxPrimitive` (ShardsUI `Checkbox`) is re-exported for custom composition.
 
 ## Minimal pattern
 
-```tsx
+```svelte
+<script lang="ts">
+  let checked = $state(false);
+</script>
+
 <Label>
-  <Checkbox value="terms" />
+  <Checkbox bind:checked />
   Accept terms and conditions
 </Label>
 ```
+
+Props: `checked` (bindable), `indeterminate`, `value` (used inside `CheckboxGroup` / forms), `disabled`, `name`, and `onCheckedChange`.
 
 ## Patterns from coss particles
 
 ### Key patterns
 
-CheckboxGroup with label-wrapped options:
+Checkbox with description text (associate with `id` + `for`):
 
-```tsx
-<CheckboxGroup aria-label="Select frameworks" defaultValue={["next"]}>
-  <Label>
-    <Checkbox value="next" />
-    Next.js
-  </Label>
-  <Label>
-    <Checkbox value="vite" />
-    Vite
-  </Label>
-  <Label>
-    <Checkbox value="astro" />
-    Astro
-  </Label>
-</CheckboxGroup>
-```
+```svelte
+<script lang="ts">
+  const id = $props.id();
+</script>
 
-Checkbox with description text (use `id`/`htmlFor`):
-
-```tsx
-const id = useId()
-
-<div className="flex items-start gap-2">
-  <Checkbox id={id} />
-  <div className="flex flex-col gap-1">
-    <Label htmlFor={id}>Accept terms and conditions</Label>
-    <p className="text-muted-foreground text-xs">
-      By clicking this checkbox, you agree to the terms.
-    </p>
+<div class="flex items-start gap-2">
+  <Checkbox {id} />
+  <div class="flex flex-col gap-1">
+    <Label for={id}>Accept terms and conditions</Label>
+    <p class="text-muted-foreground text-xs">By clicking this checkbox, you agree to the terms.</p>
   </div>
 </div>
 ```
 
-### More examples
+Indeterminate parent state is derived from children — see [checkbox-group.md](checkbox-group.md):
 
-- disabled: `p-checkbox-2`
-- with description: `p-checkbox-3`
-- card style: `p-checkbox-4`
-- form integration: `p-checkbox-5`
+```svelte
+<Checkbox checked={allChecked} indeterminate={someChecked} onCheckedChange={toggleAll} />
+```
+
+Reveal extra content when checked: bind `checked` and wrap the dependent field in `{#if checked}` (see `p-checkbox-142`).
+
+For accessible labelling and validation, wrap form checkboxes in `Field` (see [field.md](field.md)).
 
 ## Common pitfalls
 
 - Using checkbox for exclusive single-choice options that should be radios.
 - Missing visible label association (`Label` or `FieldLabel`) for each checkbox.
-- Treating `onCheckedChange` values as plain boolean without handling indeterminate where relevant.
+- React habits: `defaultChecked`, `htmlFor`, `useId()` — use `checked`/`bind:checked`, `for`, and `$props.id()`.
+- Ignoring indeterminate state where a parent checkbox summarizes children.
 
 ## Useful particle references
 
-See `p-checkbox-1` through `p-checkbox-5` for label wrapping, disabled, description, card, and form patterns.
+- basic / disabled / with description: `p-checkbox-1`, `p-checkbox-2`, `p-checkbox-3`
+- card style: `p-checkbox-4`, `p-checkbox-144`, icon card grid: `p-checkbox-147`
+- form integration: `p-checkbox-5`
+- custom accent color: `p-checkbox-134`
+- horizontal / right-aligned: `p-checkbox-139`, `p-checkbox-140`
+- reveal field when checked: `p-checkbox-142`
+- days-of-the-week group: `p-checkbox-149`
+- dark-mode toggle styled as checkbox: `p-checkbox-150`

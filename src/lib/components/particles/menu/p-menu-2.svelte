@@ -4,7 +4,7 @@
 </script>
 
 <Menu>
-  <MenuTrigger class={buttonVariants({ variant: 'outline' })}>Hover me</MenuTrigger>
+  <MenuTrigger class={buttonVariants({ variant: 'outline' })} openOnHover>Hover me</MenuTrigger>
   <MenuPopup>
     <MenuItem>Item one</MenuItem>
     <MenuItem>Item two</MenuItem>

@@ -9,7 +9,7 @@
 			"type": "registry:block",
 			"path": "p-menu-8.svelte",
 			"target": "$lib/components/particles/menu/p-menu-8.svelte",
-			"content": "<script lang=\"ts\">\n  import { buttonVariants } from '#lib/components/ui/button/index.js';\n  import { Menu, MenuItem, MenuPopup, MenuTrigger } from '#lib/components/ui/menu/index.js';\n</script>\n\n<Menu>\n  <MenuTrigger class={buttonVariants({ variant: 'outline' })}>Open menu</MenuTrigger>\n  <MenuPopup>\n    <MenuItem>Profile</MenuItem>\n    <MenuItem>Settings</MenuItem>\n    <MenuItem>Log out</MenuItem>\n  </MenuPopup>\n</Menu>\n"
+			"content": "<script lang=\"ts\">\n  import { buttonVariants } from '#lib/components/ui/button/index.js';\n  import { Menu, MenuCheckboxItem, MenuPopup, MenuTrigger } from '#lib/components/ui/menu/index.js';\n\n  let autoSave = $state(true);\n  let notifications = $state(false);\n</script>\n\n<Menu>\n  <MenuTrigger class={buttonVariants({ variant: 'outline' })}>Open menu</MenuTrigger>\n  <MenuPopup>\n    <MenuCheckboxItem bind:checked={autoSave} closeOnClick>Auto save</MenuCheckboxItem>\n    <MenuCheckboxItem bind:checked={notifications} closeOnClick>Notifications</MenuCheckboxItem>\n  </MenuPopup>\n</Menu>\n"
 		}
 	],
 	"registryDependencies": [

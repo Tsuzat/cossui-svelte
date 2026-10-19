@@ -50,16 +50,6 @@ function toDescriptiveEntry(item: RegistryItem): MergedEntry {
   return entry;
 }
 
-// registry.json's own dependency data, used only as a fallback when a
-// registry.json particle has no matching source file on disk to scan.
-function fallbackDeps(item: RegistryItem): Pick<MergedEntry, 'npmDependencies' | 'registryDependencies'> {
-  const deps: Pick<MergedEntry, 'npmDependencies' | 'registryDependencies'> = {};
-  if (item.dependencies?.length) deps.npmDependencies = item.dependencies;
-  if (item.registryDependencies?.length)
-    deps.registryDependencies = item.registryDependencies.map((d) => d.replace(/^@coss\//, ''));
-  return deps;
-}
-
 async function findParticleFiles(dir: string): Promise<string[]> {
   const entries = await fs.readdir(dir, { withFileTypes: true });
   const files: string[] = [];
@@ -155,17 +145,26 @@ function mergeList(base: string[] | undefined, custom: string[] | undefined): st
   return result.length ? result : undefined;
 }
 
+const particleFiles = await findParticleFiles(PARTICLES_DIR);
+const fileById = new Map(particleFiles.map((filePath) => [path.basename(filePath, '.svelte'), filePath]));
+
 const orderedNames: string[] = [];
 const entriesByName = new Map<string, MergedEntry>();
 
+// registry.json mirrors the upstream React registry, so it can list particles that
+// haven't been ported yet. Those have nothing to render or install, so skip them.
+const unported: string[] = [];
 for (const item of cossuiRegistry.items as RegistryItem[]) {
   if (!item.name?.startsWith('p-')) continue;
+  if (!fileById.has(item.name)) {
+    unported.push(item.name);
+    continue;
+  }
   orderedNames.push(item.name);
   entriesByName.set(item.name, toDescriptiveEntry(item));
 }
-
-const particleFiles = await findParticleFiles(PARTICLES_DIR);
-const fileById = new Map(particleFiles.map((filePath) => [path.basename(filePath, '.svelte'), filePath]));
+if (unported.length)
+  console.warn(`! skipped ${unported.length} unported registry.json particle(s): ${unported.join(', ')}`);
 
 // Any particle that exists on disk but isn't in registry.json yet still needs an entry.
 for (const id of fileById.keys()) {
@@ -183,12 +182,8 @@ function getEntry(name: string): MergedEntry {
 
 for (const name of orderedNames) {
   const filePath = fileById.get(name);
-  const entry = getEntry(name);
-  const deps = filePath
-    ? await discoverDeps(filePath)
-    : fallbackDeps((cossuiRegistry.items as RegistryItem[]).find((i) => i.name === name) ?? { name });
-  if (!filePath) console.warn(`! ${name}: no source file found, falling back to registry.json dependencies`);
-  entriesByName.set(name, { ...entry, ...deps });
+  if (!filePath) throw new Error(`No source file for particle ${name}`);
+  entriesByName.set(name, { ...getEntry(name), ...(await discoverDeps(filePath)) });
 }
 
 // custom_particle_metadata is an increment on top of the discovered/registry-derived

@@ -2,41 +2,36 @@
 
 ## When to use
 
-- Constrained-height scroll containers with styled viewport.
+- Constrained-height scroll containers with styled scrollbars.
 - Scrollable lists/logs/panels embedded in fixed layouts.
 
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/scroll-area
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/scroll-area.json
 ```
 
 Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import { ScrollArea } from "@/components/ui/scroll-area"
+```svelte
+<script lang="ts">
+  import { ScrollArea } from '#lib/components/ui/scroll-area/index.js';
+</script>
 ```
+
+`Scrollbar` is also exported for custom compositions (ScrollArea already renders its scrollbars).
 
 ## Minimal pattern
 
-```tsx
-<ScrollArea className="h-64 rounded-md border">
-  <div className="p-4">
-    Just as suddenly as it had begun, the sensation stopped, leaving Alice
-    feeling slightly disoriented. She looked around and realized that the room
-    hadn't changed at all - it was she who had grown smaller, shrinking down to
-    a fraction of her previous size. Alice felt herself growing larger and
-    larger, filling up the entire room until she feared she might burst. The
-    sensation was both thrilling and terrifying, as if she were expanding beyond
-    the confines of her own body. She wondered if this was what it felt like to
-    be a balloon, swelling with air until it could hold no more.
-  </div>
+```svelte
+<ScrollArea class="h-64 rounded-md border">
+  <div class="p-4">Long content…</div>
 </ScrollArea>
 ```
 
@@ -44,69 +39,55 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 
 ### Key patterns
 
-Horizontal scrolling (use wide inner content, not an `orientation` prop):
+Props: `orientation` (`vertical | horizontal | both`, default `both` — which scrollbars to render), `scrollFade`, `scrollbarGutter`, `fill`, `clampContentMinWidth` (default `true`), `overscrollContain`, `scrollbarXClasses`/`scrollbarYClasses`; `ref` and `viewportRef` are bindable.
 
-```tsx
-<ScrollArea className="max-w-96 rounded-lg border">
-  <div className="flex w-max gap-4 p-4">
-    {items.map((item) => (
-      <div key={item} className="w-32 shrink-0">{item}</div>
-    ))}
+Horizontal scrolling — horizontal overflow comes from wide inner content:
+
+```svelte
+<ScrollArea class="max-w-96 rounded-lg border">
+  <div class="flex w-max gap-4 p-4">
+    {#each items as item (item)}
+      <div class="w-32 shrink-0">{item}</div>
+    {/each}
   </div>
 </ScrollArea>
 ```
 
 Scroll fade edges:
 
-```tsx
-<ScrollArea className="h-64" scrollFade>
-  <div className="p-4">{/* Long content */}</div>
+```svelte
+<ScrollArea class="h-64" scrollFade>
+  <div class="p-4">…</div>
 </ScrollArea>
 ```
 
-Fill viewport for flex layouts (e.g. sidebar footers with `mt-auto`):
+Fill viewport for flex layouts (e.g. footers pinned with `mt-auto`):
 
-```tsx
-<ScrollArea className="flex-1 min-h-0" fill>
-  <div className="flex h-full flex-col">
-    <nav>{/* main items */}</nav>
-    <footer className="mt-auto">{/* pinned footer */}</footer>
+```svelte
+<ScrollArea class="min-h-0 flex-1" fill>
+  <div class="flex h-full flex-col">
+    <nav>…</nav>
+    <footer class="mt-auto">…</footer>
   </div>
 </ScrollArea>
 ```
 
-`fill` defaults to `false`. Use it only when the content wrapper must stretch to the viewport height—not for lists, comboboxes, or other content-sized scroll areas.
-
-Prevent scroll chaining into parent scrollers:
-
-```tsx
-<ScrollArea className="h-64" overscrollContain>
-  <div className="p-4">{/* Long content */}</div>
-</ScrollArea>
-```
-
-`overscrollContain` defaults to `false`. Opt in for nested surfaces (dialogs, sheets, drawers, popups, sidebars) where wheel/touch should not propagate past the scroll area.
-
-`ScrollArea` always renders both scrollbars internally -- horizontal scroll is driven by inner content width exceeding the container, not by a prop. Also supports `scrollbarGutter` for reserving scrollbar space.
-
-`clampContentMinWidth` defaults to `true` and sets `minWidth: 0` on the content wrapper to avoid spurious horizontal scroll in vertical layouts (Base UI uses `min-width: fit-content`). Wide children (`w-max`, table min-width) still scroll horizontally. Set `clampContentMinWidth={false}` only if horizontal scroll breaks and the child has no explicit width.
-
-### More examples
-
-See `p-scroll-area-1` through `p-scroll-area-5` for vertical, horizontal, both axes, fade, and gutter patterns.
+- `fill` (default `false`): only when the content wrapper must stretch to the viewport height. `SidebarContent` already passes it.
+- `overscrollContain` (default `false`): stop scroll chaining in nested surfaces. Dialog, drawer, combobox, autocomplete and sidebar already opt in.
+- `clampContentMinWidth` (default `true`): sets `min-width: 0` on the content wrapper to avoid spurious horizontal bars; disable only if horizontal scroll breaks and the child has no explicit width.
+- `scrollbarGutter`: reserve space to avoid layout shift when the bar appears.
 
 ## Common pitfalls
 
-- Forgetting explicit height/constraint, resulting in non-scrollable container.
+- Forgetting an explicit height/constraint, resulting in a non-scrollable container.
 - Nesting multiple scroll areas that compete for wheel/touch events.
-- Using scroll area where native page scrolling is simpler and clearer.
-- Using `fill` on every scroll area—default is `false`; opt in only for flex layouts that need full viewport height (e.g. `mt-auto` footers). Pair with `flex-1 min-h-0` on the root and `h-full flex-col` on the inner wrapper.
-- Forgetting `overscrollContain` on nested scroll surfaces (dialogs, popups, sidebars) when scroll should not chain to the page—default is `false`.
-- Disabling `clampContentMinWidth` unless horizontal scroll actually regresses—default `true` fixes spurious horizontal bars in vertical-first layouts.
+- Using scroll area where native page scrolling is simpler.
+- Using `fill` on every scroll area, or forgetting `min-h-0 flex-1` on the root and `h-full flex-col` on the inner wrapper when you do.
 
 ## Useful particle references
 
-- scroll fade: `p-scroll-area-4`
-- horizontal scroll: `p-scroll-area-2`
+- basic: `p-scroll-area-1`
+- horizontal: `p-scroll-area-2`
+- both directions: `p-scroll-area-3`
+- fading edges: `p-scroll-area-4`
 - scrollbar gutter: `p-scroll-area-5`
-- both scrollbars: `p-scroll-area-3`

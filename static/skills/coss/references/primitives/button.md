@@ -8,103 +8,115 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/button
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/button.json
 ```
 
 Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte tailwind-variants
 ```
 
 ## Canonical imports
 
-```tsx
-import { Button } from "@/components/ui/button"
+```svelte
+<script lang="ts">
+  import { Button, buttonVariants } from '#lib/components/ui/button/index.js';
+</script>
 ```
 
 ## Minimal pattern
 
-```tsx
-<Button type="button">Button</Button>
+```svelte
+<Button>Button</Button>
 ```
 
-`Button` defaults to `type="button"` when rendered as the native button part. In form flows, set `type` explicitly (`button` / `submit` / `reset`) to match intent, especially when using `render` composition.
+The native button part defaults to `type="button"`. In form flows, set `type="submit"` / `type="reset"` explicitly to match intent.
+
+Pass `href` to render an `<a>` with button styling: `<Button href="/login">Login</Button>`.
 
 ## Patterns from coss particles
 
 ### Key patterns
 
-Variants are set via the `variant` prop:
+Variants via `variant`:
 
-```tsx
+```svelte
 <Button>Default</Button>
 <Button variant="outline">Outline</Button>
 <Button variant="secondary">Secondary</Button>
 <Button variant="destructive">Destructive</Button>
+<Button variant="destructive-outline">Destructive outline</Button>
 <Button variant="ghost">Ghost</Button>
 <Button variant="link">Link</Button>
 ```
 
+Sizes: `xs`, `sm`, `default`, `lg`, `xl`, `icon-xs`, `icon-sm`, `icon`, `icon-lg`, `icon-xl`.
+
 Icon-only button (always needs `aria-label`):
 
-```tsx
+```svelte
+<script lang="ts">
+  import XIcon from '@lucide/svelte/icons/x';
+</script>
+
 <Button aria-label="Close" size="icon" variant="ghost">
   <XIcon aria-hidden="true" />
 </Button>
 ```
 
-Button with icon and text (no opacity on the icon):
+Button with icon and text (icons are auto-sized by the variant classes):
 
-```tsx
+```svelte
 <Button>
   <PlusIcon aria-hidden="true" />
   Add Item
 </Button>
 ```
 
-Sizes: `xs`, `sm`, `default`, `lg`, `icon-xs`, `icon-sm`, `icon`, `icon-lg`.
+Button styling on another element or on a trigger part — use `buttonVariants`:
+
+```svelte
+<a class={buttonVariants({ variant: 'outline' })} href="/login">Login</a>
+<DialogTrigger class={buttonVariants({ variant: 'outline' })}>Open</DialogTrigger>
+```
 
 ### Loading state
 
-Built-in `loading` prop (disables and shows spinner automatically):
+Built-in `loading` prop (forces `disabled`, sets `aria-disabled` and `data-loading`, shows a spinner while preserving width):
 
-```tsx
-<Button loading={isLoading} onClick={handleClick}>Submit</Button>
+```svelte
+<Button loading={isLoading} onclick={handleClick}>Submit</Button>
 ```
 
-Composite approach (manual `Spinner` + `disabled`):
+Composite approach (manual `Spinner` + `disabled`) for custom spinner placement or label:
 
-```tsx
+```svelte
 <Button disabled>
   <Spinner />
   Loading...
 </Button>
 ```
 
-Prefer the `loading` prop for typical async actions. Use the composite approach when you need custom spinner placement or label.
-
-### More examples
-
-- default: `p-button-1`
-- outline: `p-button-2`
-- secondary: `p-button-3`
-- destructive: `p-button-4`
-- destructive outline: `p-button-5`
-- ghost: `p-button-6`
-- link: `p-button-7`
-- extra-small size: `p-button-8`
-
 ## Common pitfalls
 
-- Omitting explicit `type` inside forms/dialogs and triggering unintended submit behavior.
+- Nesting `<Button>` inside a trigger/close part (`DialogTrigger`, `MenuTrigger`, `PopoverTrigger`, …) — those already render a `<button>`; put `class={buttonVariants(...)}` on the part instead.
+- React habits: `onClick`, `className`, `render={<a />}`, `asChild`. Use `onclick`, `class`, and `href`.
+- Omitting explicit `type="submit"` inside forms.
 - Using icon-only buttons without `aria-label` on the button.
-- Expecting a disabled button to show a tooltip: `disabled` sets the native attribute plus `pointer-events-none`, so the button gets no hover or focus. Wrap it in a focusable `span` rendered as the `TooltipTrigger` (see [tooltip.md](./tooltip.md)).
+- Expecting a disabled button to show a tooltip: `disabled` sets `pointer-events-none`, so the button gets no hover or focus. Wrap it in a focusable element used as the `TooltipTrigger` (see [tooltip.md](./tooltip.md)).
 - Rebuilding button state styling with ad-hoc classes instead of variants/sizes.
-- Using `SelectButton` as if it were a general-purpose `Button`; `SelectButton` is a select-flavored trigger helper and should be treated as a `select`/`combobox` pattern.
+- Using `SelectButton` as if it were a general-purpose `Button`; it is a select-flavored trigger helper for `select`/`combobox` patterns.
 
 ## Useful particle references
 
-- variants/sizes: `p-button-1` through `p-button-8`
-- composite loading (Spinner + disabled): `p-button-18`
-- built-in loading prop: `p-button-41`
+- variants: `p-button-1` – `p-button-7`
+- sizes: `p-button-8` – `p-button-11`, icon sizes: `p-button-13` – `p-button-15`
+- disabled / with icon / link: `p-button-12`, `p-button-16`, `p-button-17`
+- built-in loading prop: `p-button-41`; composite loading: `p-button-18`
+- keyboard shortcut (`Kbd`): `p-button-31`
+- copy with feedback: `p-button-35`, `p-button-36`
+- social login: `p-button-24`, `p-button-38`
+- badge/count/avatar combos: `p-button-23`, `p-button-26`, `p-button-28`, `p-button-32`
+- animated (arrow, status dot, rotating FAB, hamburger): `p-button-30`, `p-button-34`, `p-button-37`, `p-button-39`
+- download with progress + cancel: `p-button-40`

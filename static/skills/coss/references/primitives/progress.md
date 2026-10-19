@@ -13,43 +13,49 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/progress
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/progress.json
 ```
 
 Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import {
-  Progress,
-  ProgressIndicator,
-  ProgressLabel,
-  ProgressTrack,
-  ProgressValue,
-} from "@/components/ui/progress"
+```svelte
+<script lang="ts">
+  import {
+    Progress,
+    ProgressIndicator,
+    ProgressLabel,
+    ProgressTrack,
+    ProgressValue
+  } from '#lib/components/ui/progress/index.js';
+</script>
 ```
+
+`ProgressPrimitive` is re-exported.
 
 ## Minimal pattern
 
-```tsx
+```svelte
 <Progress aria-label="Upload progress" value={40} />
 ```
+
+`Progress` takes `value` (default `0`; `null` = indeterminate), `min` (default `0`), `max` (default `100`), and ShardsUI `format` (`Intl.NumberFormatOptions`).
 
 ## Patterns from coss particles
 
 ### Key patterns
 
-Progress with label and value display:
+Label and value display:
 
-```tsx
+```svelte
 <Progress value={60}>
-  <div className="flex justify-between text-sm">
-    <ProgressLabel>Uploading...</ProgressLabel>
+  <div class="flex items-center justify-between gap-2">
+    <ProgressLabel>Uploading…</ProgressLabel>
     <ProgressValue />
   </div>
   <ProgressTrack>
@@ -58,22 +64,36 @@ Progress with label and value display:
 </Progress>
 ```
 
-When supplying children (including only a label or value), include `ProgressTrack` and `ProgressIndicator` to retain the bar. The root renders its default track and indicator only when no children are supplied.
+When you pass children (even just a label or value), include `ProgressTrack` + `ProgressIndicator` — the default bar renders only when there are no children.
 
-Determinate progress: bind a numeric `value` (0-100) for known completion states.
-Indeterminate loading: omit `value` or pass `null` when progress cannot be measured.
+Custom value text with a custom `max`:
 
-### More examples
+```svelte
+<Progress max={12} value={done}>
+  <div class="flex items-center justify-between gap-2">
+    <ProgressLabel>Upload</ProgressLabel>
+    <span class="text-sm tabular-nums">{done} / 12</span>
+  </div>
+  <ProgressTrack>
+    <ProgressIndicator />
+  </ProgressTrack>
+</Progress>
+```
 
-- with label and value: `p-progress-2`
-- with formatted value: `p-progress-3`
+Animated value: drive `value` from `$state` (e.g. updated in an `$effect` interval with cleanup), as in `p-progress-1`.
+
+Indeterminate: pass `value={null}` when progress cannot be measured; `ProgressValue` shows an em dash.
 
 ## Common pitfalls
 
+- Passing a label/value as children and losing the bar (forgot `ProgressTrack` + `ProgressIndicator`).
 - Using progress without text/context for what operation is progressing.
 - Using determinate values when state is actually unknown/indeterminate.
 - Using progress for static score displays that should use `Meter`.
 
 ## Useful particle references
 
-See `p-progress-1` through `p-progress-3` for animated, labeled, and formatted value patterns.
+- animated basic bar: `p-progress-1`
+- label and value: `p-progress-2`
+- formatted value: `p-progress-3`
+- download button with progress: `p-button-40`

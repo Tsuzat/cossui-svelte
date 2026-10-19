@@ -47,7 +47,7 @@ npx shadcn-svelte@latest add https://cossui-svelte.com/r/use-file-upload.json
   const fileUpload = useFileUpload({ accept: 'image/*', multiple: true, maxFiles: 5 });
 </script>
 
-<input {...fileUpload.inputProps} class="sr-only" />
+<input bind:this={fileUpload.fileInput} {...fileUpload.inputProps} class="sr-only" />
 <Button onclick={() => fileUpload.openFileDialog()}>Choose files</Button>
 
 {#each fileUpload.files as { id, file } (id)}
@@ -71,4 +71,4 @@ File upload is not a single component: it is a headless `useFileUpload` hook (`#
 | `onFilesChange` | `(files: FileWithPreview[]) => void` |  |
 | `onFilesAdded` | `(files: FileWithPreview[]) => void` |  |
 
-Returns reactive `files`, `isDragging`, `errors`, `fileInput` and `inputProps` values, along with methods to open the file dialog, add and remove files, and drag-and-drop handlers. Each file is a `FileWithPreview`: `{ id, file, preview? }`.
+Returns reactive `files`, `isDragging`, `errors`, `fileInput` and `inputProps` values (bind the hidden input to `fileInput` with `bind:this` — `openFileDialog()` clicks it), along with methods to open the file dialog, add and remove files, and drag-and-drop handlers. Each file is a `FileWithPreview`: `{ id, file, preview? }`.

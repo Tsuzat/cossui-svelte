@@ -2,7 +2,7 @@
 	"$schema": "https://ui.shadcn.com/schema/registry-item.json",
 	"name": "p-select-5",
 	"title": "Select 5",
-	"description": "Select without item alignment",
+	"description": "Select with a placeholder",
 	"type": "registry:block",
 	"files": [
 		{

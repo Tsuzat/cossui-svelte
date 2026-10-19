@@ -3,36 +3,34 @@
 ## When to use
 
 - Bordered app surfaces around content blocks.
-- Container wrapper for data components like table, cards, and panes.
+- Container wrapper for data components like tables, lists, and panes.
 
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/frame
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/frame.json
 ```
 
-Manual deps from docs:
-
-```bash
-# No extra runtime dependency required for this primitive.
-```
+Manual deps from docs: none (custom components).
 
 ## Canonical imports
 
-```tsx
-import {
-  Frame,
-  FrameDescription,
-  FrameFooter,
-  FrameHeader,
-  FramePanel,
-  FrameTitle,
-} from "@/components/ui/frame"
+```svelte
+<script lang="ts">
+  import {
+    Frame,
+    FrameDescription,
+    FrameFooter,
+    FrameHeader,
+    FramePanel,
+    FrameTitle
+  } from '#lib/components/ui/frame/index.js';
+</script>
 ```
 
 ## Minimal pattern
 
-```tsx
+```svelte
 <Frame>
   <FrameHeader>
     <FrameTitle>Title</FrameTitle>
@@ -49,27 +47,23 @@ import {
 
 Frame with header actions:
 
-```tsx
+```svelte
 <Frame>
-  <FrameHeader className="flex items-center justify-between">
+  <FrameHeader class="flex items-center justify-between">
     <div>
       <FrameTitle>Users</FrameTitle>
       <FrameDescription>Manage team members.</FrameDescription>
     </div>
     <Button size="sm">Add User</Button>
   </FrameHeader>
-  <FramePanel>{/* Table or list content */}</FramePanel>
+  <FramePanel><!-- table or list --></FramePanel>
   <FrameFooter>
-    <p className="text-muted-foreground text-sm">Showing 1-10 of 100</p>
+    <p class="text-muted-foreground text-sm">Showing 1-10 of 100</p>
   </FrameFooter>
 </Frame>
 ```
 
-Use `Frame` to normalize border/radius around heterogeneous inner content (tables, lists, cards).
-
-### More examples
-
-See `p-frame-1` through `p-frame-3` for basic and separated panel patterns.
+Multiple `FramePanel`s are separated with spacing by default; see `p-frame-4` for stacked panels. Use `Frame` to normalize border/radius around heterogeneous inner content (tables, lists, cards). For a framed card layout with a header action, also consider `CardFrame` ([card.md](card.md)).
 
 ## Common pitfalls
 
@@ -79,4 +73,7 @@ See `p-frame-1` through `p-frame-3` for basic and separated panel patterns.
 
 ## Useful particle references
 
+- basic: `p-frame-1`
+- collapsible content with delete button: `p-frame-2`
 - separated panels: `p-frame-3`
+- stacked panels: `p-frame-4`

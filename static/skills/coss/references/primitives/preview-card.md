@@ -3,78 +3,81 @@
 ## When to use
 
 - Hover/focus-triggered rich preview content.
-- Contextual details for users/entities without full navigation.
+- Contextual details for users/entities/links without full navigation.
 
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/preview-card
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/preview-card.json
 ```
 
 Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import { Button } from "@/components/ui/button"
-import {
-  PreviewCard,
-  PreviewCardPopup,
-  PreviewCardTrigger,
-} from "@/components/ui/preview-card"
+```svelte
+<script lang="ts">
+  import {
+    PreviewCard,
+    PreviewCardPopup,
+    PreviewCardTrigger
+  } from '#lib/components/ui/preview-card/index.js';
+</script>
 ```
+
+Also exported under shadcn names: `HoverCard`, `HoverCardTrigger`, `HoverCardContent`; plus `PreviewCardPrimitive`.
 
 ## Minimal pattern
 
-```tsx
+```svelte
 <PreviewCard>
-  <PreviewCardTrigger>Open Preview Card</PreviewCardTrigger>
+  <PreviewCardTrigger href="/user/johndoe">@johndoe</PreviewCardTrigger>
   <PreviewCardPopup>Preview Card Content</PreviewCardPopup>
 </PreviewCard>
 ```
 
+`PreviewCardTrigger` renders an `<a>` by default — pass `href` directly (or style it with `class={buttonVariants({ variant: 'ghost' })}`).
+
 ## Patterns from coss particles
 
-- **Portal forwarding**: optional `portalProps` on `PreviewCardPopup` → Base UI `PreviewCard.Portal` (`keepMounted`, `container`, …). See [portal-props.md](../portal-props.md).
+- **Portal forwarding**: optional `portalProps` on `PreviewCardPopup` → ShardsUI `PreviewCard.Portal` (`keepMounted`, `container`, …). See [portal-props.md](../portal-props.md).
+- **Popup options**: `side`, `align`, `sideOffset` (default `4`), `alignOffset`, `showArrow`, `customAnchor`.
 
 ### Key patterns
 
 Preview card with rich content:
 
-```tsx
+```svelte
 <PreviewCard>
-  <PreviewCardTrigger render={<a href="/user/johndoe" />}>
-    @johndoe
-  </PreviewCardTrigger>
-  <PreviewCardPopup className="w-80">
-    <div className="flex items-center gap-3">
+  <PreviewCardTrigger href="/user/johndoe">@johndoe</PreviewCardTrigger>
+  <PreviewCardPopup class="w-80">
+    <div class="flex items-center gap-3">
       <Avatar>
         <AvatarImage src="/avatar.png" alt="John Doe" />
         <AvatarFallback>JD</AvatarFallback>
       </Avatar>
       <div>
-        <p className="text-sm font-semibold">John Doe</p>
-        <p className="text-muted-foreground text-xs">Software Engineer</p>
+        <p class="font-semibold text-sm">John Doe</p>
+        <p class="text-muted-foreground text-xs">Software Engineer</p>
       </div>
     </div>
   </PreviewCardPopup>
 </PreviewCard>
 ```
 
-### More examples
-
-See `p-preview-card-1` for the core pattern.
+For URL previews with fetched metadata, see Link Preview ([link-preview.md](link-preview.md)).
 
 ## Common pitfalls
 
+- React habits: `render={<a href="…" />}` on the trigger. The trigger already is an `<a>`; pass `href`.
 - Using preview card for critical workflows requiring explicit modal interaction.
 - Missing accessible trigger labels when using icon-only triggers.
-- Rendering heavy async content on every hover without throttling/caching strategy.
+- Rendering heavy async content on every hover without caching.
 
 ## Useful particle references
 
-- core patterns: `p-preview-card-1`
+- link preview popup: `p-preview-card-1`

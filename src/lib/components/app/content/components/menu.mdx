@@ -178,17 +178,7 @@ Link menu item for navigation. Renders a native `<a>` when you pass `href`. Styl
 | `variant`      | `"default" \| "destructive"`  | `"default"` | Controls the item styling                        |
 | `closeOnClick` | `boolean`                     | `true`      | Whether the menu closes when the link is clicked |
 
-For router-aware navigation, pass the `child` snippet to render your own link element:
-
-```svelte
-<MenuLinkItem>
-  {#snippet child({ props })}
-    <a {...props} href="/docs">Docs</a>
-  {/snippet}
-</MenuLinkItem>
-```
-
-Use `href` for plain anchor links:
+Pass `href` for navigation. SvelteKit routes plain anchors on the client, so no link wrapper is needed (use `resolve()` from `$app/paths` for app routes):
 
 ```svelte
 <MenuLinkItem href="/docs">Docs</MenuLinkItem>

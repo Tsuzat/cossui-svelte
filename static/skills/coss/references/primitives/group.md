@@ -3,82 +3,97 @@
 ## When to use
 
 - Connected controls with shared visual boundary.
-- Composed action clusters using buttons, toggles, and menu triggers.
+- Composed action clusters using buttons, inputs, selects, and menu triggers.
+
+## When NOT to use
+
+- If the controls toggle state -> use ToggleGroup instead.
 
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/group
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/group.json
 ```
 
-Manual deps from docs:
-
-```bash
-npm install @base-ui/react
-```
+Manual deps from docs: none beyond `tailwind-variants`.
 
 ## Canonical imports
 
-```tsx
-import { Button } from "@/components/ui/button"
-import { Group, GroupSeparator } from "@/components/ui/group"
+```svelte
+<script lang="ts">
+  import { Button } from '#lib/components/ui/button/index.js';
+  import { Group, GroupSeparator, GroupText } from '#lib/components/ui/group/index.js';
+</script>
 ```
+
+Also exported as `ButtonGroup`, `ButtonGroupSeparator`, `ButtonGroupText`, plus `groupVariants`.
 
 ## Minimal pattern
 
-```tsx
-<Group>
-  <Button>Button</Button>
+```svelte
+<Group aria-label="Clipboard">
+  <Button variant="outline">Copy</Button>
   <GroupSeparator />
-  <Button>Button</Button>
+  <Button variant="outline">Paste</Button>
 </Group>
 ```
+
+`Group` renders `role="group"`; label it with `aria-label`/`aria-labelledby`.
 
 ## Patterns from coss particles
 
 ### Key patterns
 
-Button group with separator:
+`GroupSeparator` is required between **all** adjacent controls (unlike shadcn's ButtonGroup), including outline buttons.
 
-```tsx
+Input + button / prefix text:
+
+```svelte
 <Group>
-  <Button variant="outline">Copy</Button>
+  <GroupText>https://</GroupText>
   <GroupSeparator />
-  <Button variant="outline">Paste</Button>
-  <GroupSeparator />
-  <Button variant="outline">Cut</Button>
-</Group>
-```
-
-Group with input and button:
-
-```tsx
-<Group>
-  <Input type="text" placeholder="Enter URL..." />
+  <Input placeholder="example.com" />
   <GroupSeparator />
   <Button>Go</Button>
 </Group>
 ```
 
-Sizes: `sm`, `default`, `lg`. Orientation: vertical via `orientation="vertical"`. In a vertical group, set each `GroupSeparator` to `orientation="horizontal"`.
+Split button with a menu — style the `MenuTrigger` with `buttonVariants`:
 
-### More examples
+```svelte
+<Group aria-label="Subscription actions">
+  <Button>Subscribe</Button>
+  <GroupSeparator class="bg-primary/72" />
+  <Menu>
+    <MenuTrigger aria-label="More options" class={buttonVariants({ size: 'icon' })}>
+      <ChevronDownIcon aria-hidden="true" />
+    </MenuTrigger>
+    <MenuPopup align="end">…</MenuPopup>
+  </Menu>
+</Group>
+```
 
-See `p-group-1` through `p-group-9` for input, sizes, disabled, vertical, and labeled text patterns.
+- **Size**: `Group` has no `size` prop — set the same `size` on every child control (`size="sm"` buttons with `icon-sm` triggers, etc.).
+- **Orientation**: `orientation="vertical"` on `Group`, and `orientation="horizontal"` on each `GroupSeparator` inside it.
+- **Nesting**: nested `Group`s inside a `Group` get spacing between them.
+- **Label as text**: `<GroupText><Label for="domain">https://</Label></GroupText>`.
 
 ## Common pitfalls
 
-- Forgetting `GroupSeparator` between adjacent controls in connected groups or leaving it vertical inside a vertical group.
-- Mixing control sizes/variants that break shared group silhouette.
-- Using standalone controls where a grouped action model is expected.
+- Forgetting `GroupSeparator` between adjacent controls, or leaving it vertical inside a vertical group.
+- Looking for a `size` prop on `Group`.
+- Mixing control sizes/variants that break the shared group silhouette.
+- Nesting a `<Button>` inside a `MenuTrigger`/`PopoverTrigger` instead of styling the trigger with `buttonVariants`.
 
 ## Useful particle references
 
-- with input: `p-group-2`
-- small size: `p-group-3`
-- large size: `p-group-4`
-- with disabled button: `p-group-5`
-- with default buttons: `p-group-6`
-- with start labeled text: `p-group-7`
-- with end text: `p-group-8`
-- vertical: `p-group-9`
+- basic / with input: `p-group-1`, `p-group-2`
+- small / large: `p-group-3`, `p-group-4`
+- disabled / default buttons: `p-group-5`, `p-group-6`
+- start / end text: `p-group-7`, `p-group-8`
+- vertical / nested: `p-group-9`, `p-group-10`
+- with popup / input group / menu / select: `p-group-11`, `p-group-12`, `p-group-13`, `p-group-14`
+- search / add button + input / currency text: `p-group-15`, `p-group-16`, `p-group-17`
+- select + input combos: `p-group-18`, `p-group-19`; input + text button: `p-group-20`
+- number range: `p-group-22`
+- filter label + combobox multi-select + remove: `p-group-23`

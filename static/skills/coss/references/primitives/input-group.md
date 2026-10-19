@@ -3,34 +3,38 @@
 ## When to use
 
 - Inputs/textareas that need inline or block addons.
-- Input composition with icons, buttons, labels, badges, and shortcuts.
+- Input composition with icons, buttons, labels, badges, menus, and shortcuts.
 
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/input-group
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/input-group.json
 ```
 
-Manual deps:
-
-```bash
-npm install @base-ui/react
-```
+Manual deps: `@shardsui/svelte` (through `input`/`textarea`).
 
 ## Canonical imports
 
-```tsx
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-  InputGroupText,
-} from "@/components/ui/input-group"
+```svelte
+<script lang="ts">
+  import {
+    InputGroup,
+    InputGroupAddon,
+    InputGroupButton,
+    InputGroupInput,
+    InputGroupText,
+    InputGroupTextarea
+  } from '#lib/components/ui/input-group/index.js';
+</script>
 ```
 
 ## Minimal pattern
 
-```tsx
+```svelte
+<script lang="ts">
+  import MailIcon from '@lucide/svelte/icons/mail';
+</script>
+
 <InputGroup>
   <InputGroupInput type="email" placeholder="Email" />
   <InputGroupAddon>
@@ -41,26 +45,15 @@ import {
 
 ## DOM order convention
 
-Keep `InputGroupInput` or `InputGroupTextarea` before `InputGroupAddon` in the DOM as the conventional composition order. The addon's focus handler searches the entire parent group with `querySelector`, so DOM order does not determine whether it finds the control. The `align` prop controls visual placement, including block-start and block-end addons.
+Keep `InputGroupInput` / `InputGroupTextarea` before `InputGroupAddon` in the DOM. The addon's mousedown handler focuses the group's input with `querySelector('input, textarea')` on the whole group, so order doesn't break focus, but input-first keeps tab order natural. Visual placement comes from `align`: `inline-start` (default), `inline-end`, `block-start`, `block-end` (block positions are for textareas).
 
 ## Patterns from coss particles
 
 ### Key patterns
 
-Search input with icon:
+Text prefix:
 
-```tsx
-<InputGroup>
-  <InputGroupInput aria-label="Search" placeholder="Search..." type="search" />
-  <InputGroupAddon>
-    <SearchIcon aria-hidden="true" />
-  </InputGroupAddon>
-</InputGroup>
-```
-
-URL prefix with text addon:
-
-```tsx
+```svelte
 <InputGroup>
   <InputGroupInput placeholder="example.com" />
   <InputGroupAddon>
@@ -69,34 +62,68 @@ URL prefix with text addon:
 </InputGroup>
 ```
 
-Input with interactive button addon:
+Interactive addon — `InputGroupButton` (a `Button`, `type="button"` by default, supports `loading`), or a trigger part styled with `buttonVariants`:
 
-```tsx
+```svelte
 <InputGroup>
-  <InputGroupInput placeholder="Enter value..." />
-  <InputGroupAddon>
-    <Button size="icon" variant="ghost" aria-label="Clear">
+  <InputGroupInput aria-label="Url" bind:value type="text" />
+  <InputGroupAddon align="inline-end">
+    <InputGroupButton aria-label="Clear" size="icon-xs" variant="ghost" onclick={() => (value = '')}>
       <XIcon aria-hidden="true" />
-    </Button>
+    </InputGroupButton>
   </InputGroupAddon>
 </InputGroup>
 ```
 
-### More examples
+Icon button with tooltip (wrap the tree in `TooltipProvider`):
 
-See `p-input-group-1` through `p-input-group-29` for icons, text prefixes, interactive addons, textarea layouts, and stateful patterns.
+```svelte
+<InputGroupAddon align="inline-end">
+  <Tooltip>
+    <TooltipTrigger aria-label="Copy" class={buttonVariants({ size: 'icon-xs', variant: 'ghost' })} onclick={copy}>
+      <CopyIcon />
+    </TooltipTrigger>
+    <TooltipPopup>Copy to clipboard</TooltipPopup>
+  </Tooltip>
+</InputGroupAddon>
+```
+
+Textarea composer with a block-end toolbar:
+
+```svelte
+<InputGroup>
+  <InputGroupTextarea placeholder="Ask, Search or Chat…" />
+  <InputGroupAddon align="block-end">
+    <Menu>
+      <MenuTrigger aria-label="Add files" class={buttonVariants({ size: 'icon-sm', variant: 'ghost' })}>
+        <PlusIcon />
+      </MenuTrigger>
+      <MenuPopup align="start">…</MenuPopup>
+    </Menu>
+    <InputGroupText class="ml-auto">78% used</InputGroupText>
+    <InputGroupButton aria-label="Send" size="icon-sm"><ArrowUpIcon /></InputGroupButton>
+  </InputGroupAddon>
+</InputGroup>
+```
+
+Sizes come from the control: `<InputGroupInput size="sm" />` / `size="lg"`.
 
 ## Common pitfalls
 
 - Using `Input`/`Textarea` directly instead of `InputGroupInput`/`InputGroupTextarea`.
-- Reversing the conventional input-first DOM order; the addon focus lookup searches the full group, and `align` controls visual placement.
-- Missing explicit input types.
+- Nesting a `<Button>` inside a trigger part in an addon — style the trigger with `buttonVariants`.
+- Using `block-*` alignment with a single-line input.
+- Missing explicit input types and labels on icon-only buttons.
 
 ## Useful particle references
 
-- icon addon + search baseline: `p-input-group-1`, `p-input-group-2`, `p-input-group-13`, `p-input-group-14`, `p-input-group-20`
-- prefix/suffix text addons (url/domain/currency): `p-input-group-3`, `p-input-group-4`, `p-input-group-5`, `p-input-group-6`
-- interactive addons (buttons/badge/kbd/menu/clear/voice): `p-input-group-7`, `p-input-group-8`, `p-input-group-9`, `p-input-group-10`, `p-input-group-11`, `p-input-group-12`, `p-input-group-18`, `p-input-group-21`, `p-input-group-22`, `p-input-group-23`
-- textarea/editor-style layouts with block-end/start addons: `p-input-group-17`, `p-input-group-19`, `p-input-group-27`, `p-input-group-28`, `p-input-group-29`
-- stateful/validation patterns (disabled/loading/password strength): `p-input-group-15`, `p-input-group-16`, `p-input-group-24`, `p-input-group-26`
-
+- icon addon / search: `p-input-group-1`, `p-input-group-2`, `p-input-group-20`
+- text prefix/suffix: `p-input-group-3`, `p-input-group-4`, `p-input-group-5`
+- number field: `p-input-group-6`
+- tooltip / icon button / button / badge / shortcut / inner label: `p-input-group-7` – `p-input-group-12`, `p-input-group-21`
+- sizes: `p-input-group-13`, `p-input-group-14`
+- disabled / loading: `p-input-group-15`, `p-input-group-16`
+- textarea + block addons: `p-input-group-17`, mini editor `p-input-group-19`, code snippet `p-input-group-27`, composer `p-input-group-28`, chat input `p-input-group-29`
+- badge + menu: `p-input-group-18`
+- clear button / search with loader + voice: `p-input-group-22`, `p-input-group-23`
+- character counter / password strength: `p-input-group-24`, `p-input-group-26`

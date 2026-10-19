@@ -9,7 +9,7 @@
     AlertDialogTitle,
     AlertDialogTrigger
   } from '#lib/components/ui/alert-dialog/index.js';
-  import { Button, buttonVariants } from '#lib/components/ui/button/index.js';
+  import { buttonVariants } from '#lib/components/ui/button/index.js';
 </script>
 
 <AlertDialog>
@@ -25,11 +25,9 @@
       </AlertDialogDescription>
     </AlertDialogHeader>
     <AlertDialogFooter>
-      <AlertDialogClose>
-        <Button variant="ghost">Cancel</Button>
-      </AlertDialogClose>
-      <AlertDialogClose>
-        <Button variant="destructive">Delete Account</Button>
+      <AlertDialogClose class={buttonVariants({ variant: 'ghost' })}>Cancel</AlertDialogClose>
+      <AlertDialogClose class={buttonVariants({ variant: 'destructive' })}>
+        Delete Account
       </AlertDialogClose>
     </AlertDialogFooter>
   </AlertDialogPopup>

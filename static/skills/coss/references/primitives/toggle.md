@@ -2,7 +2,7 @@
 
 ## When to use
 
-- Pressable two-state commands (formatting/tool modes).
+- Pressable two-state commands (formatting/tool modes, bookmark).
 - Single-command active/inactive interactions without group state.
 
 ## When NOT to use
@@ -13,71 +13,67 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/toggle
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/toggle.json
 ```
 
 Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import { Toggle } from "@/components/ui/toggle"
+```svelte
+<script lang="ts">
+  import { Toggle } from '#lib/components/ui/toggle/index.js';
+</script>
 ```
+
+Also exported: `toggleVariants` (style other elements as toggles), `TogglePrimitive`, and the `ToggleSize` / `ToggleVariant` / `ToggleVariants` types.
 
 ## Minimal pattern
 
-```tsx
-<Toggle>Toggle</Toggle>
+```svelte
+<script lang="ts">
+  let pressed = $state(false);
+</script>
+
+<Toggle bind:pressed>Toggle</Toggle>
 ```
+
+Variants: `default`, `outline`. Sizes: `sm`, `default`, `lg`. `pressed` is bindable; `onPressedChange` and `disabled` are forwarded.
 
 ## Patterns from coss particles
 
 ### Key patterns
 
-Icon toggle with `aria-label` (always required for icon-only):
+Icon toggle (`aria-label` always required for icon-only):
 
-```tsx
-<Toggle aria-label="Toggle bold" value="bold">
+```svelte
+<script lang="ts">
+  import BoldIcon from '@lucide/svelte/icons/bold';
+</script>
+
+<Toggle aria-label="Toggle bold" variant="outline">
   <BoldIcon />
 </Toggle>
 ```
 
-ToggleGroup with icon toggles:
+Several independent toggles side by side are just a flex row (`p-toggle-7`); when they share state, use `ToggleGroup` with `ToggleGroupItem` ([toggle-group.md](toggle-group.md)).
 
-```tsx
-<ToggleGroup defaultValue={["bold"]}>
-  <Toggle aria-label="Toggle bold" value="bold">
-    <BoldIcon />
-  </Toggle>
-  <Toggle aria-label="Toggle italic" value="italic">
-    <ItalicIcon />
-  </Toggle>
-  <Toggle aria-label="Toggle underline" value="underline">
-    <UnderlineIcon />
-  </Toggle>
-</ToggleGroup>
-```
-
-Variants: `default`, `outline`. Sizes: `sm`, `default`, `lg`.
-
-### More examples
-
-- outline: `p-toggle-2`
-- with icon: `p-toggle-3`
-- small / large size: `p-toggle-4`, `p-toggle-5`
-- disabled: `p-toggle-6`
-- icon group: `p-toggle-7`
+Feedback on press: pair with an anchored toast (`anchoredToastManager`, `p-toggle-8`).
 
 ## Common pitfalls
 
+- React habits: `defaultPressed`, `onPressedChange={setPressed}`. Use `pressed` / `bind:pressed`.
+- Using `Toggle` inside `ToggleGroup` — use `ToggleGroupItem` there.
 - Using toggle for destructive/submit actions better represented by `Button`.
-- Missing pressed-state semantics in controlled toggle flows.
-- Using standalone toggles when mutually exclusive behavior needs `ToggleGroup`.
 
 ## Useful particle references
 
-See `p-toggle-1` through `p-toggle-7` for variants, sizes, and icon group patterns.
+- basic / outline / icon: `p-toggle-1`, `p-toggle-2`, `p-toggle-3`
+- small / large: `p-toggle-4`, `p-toggle-5`
+- disabled: `p-toggle-6`
+- icon row: `p-toggle-7`
+- bookmark toggle with tooltip + success toast: `p-toggle-8`

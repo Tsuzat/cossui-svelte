@@ -14,74 +14,78 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/switch
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/switch.json
 ```
 
 Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import { Switch } from "@/components/ui/switch"
+```svelte
+<script lang="ts">
+  import { Label } from '#lib/components/ui/label/index.js';
+  import { Switch } from '#lib/components/ui/switch/index.js';
+</script>
 ```
 
 ## Minimal pattern
 
-```tsx
+```svelte
+<script lang="ts">
+  let checked = $state(false);
+</script>
+
 <Label>
-  <Switch />
+  <Switch bind:checked />
   Enable notifications
 </Label>
 ```
+
+`checked` is bindable; `disabled`, `name`, `onCheckedChange` are forwarded.
 
 ## Patterns from coss particles
 
 ### Key patterns
 
-Switch with description text (use `id`/`htmlFor` when additional content exists):
+Switch with description (associate with `id` + `for`):
 
-```tsx
-const id = useId()
+```svelte
+<script lang="ts">
+  const id = $props.id();
+</script>
 
-<div className="flex items-center justify-between gap-4">
-  <div className="flex flex-col gap-1">
-    <Label htmlFor={id}>Marketing emails</Label>
-    <p className="text-muted-foreground text-xs">
-      Receive updates about new products and features.
-    </p>
+<div class="flex items-center justify-between gap-4">
+  <div class="flex flex-col gap-1">
+    <Label for={id}>Marketing emails</Label>
+    <p class="text-muted-foreground text-xs">Receive updates about new products and features.</p>
   </div>
-  <Switch id={id} />
+  <Switch {id} />
 </div>
 ```
 
-Disabled switch:
+Custom size via the `--thumb-size` CSS variable (default `[--thumb-size:--spacing(5)] sm:[--thumb-size:--spacing(4)]`):
 
-```tsx
-<Label>
-  <Switch disabled />
-  Marketing emails
-</Label>
+```svelte
+<Switch class="[--thumb-size:--spacing(6)]" />
 ```
 
-### More examples
-
-- disabled: `p-switch-2`
-- with description: `p-switch-3`
-- customizing size: `p-switch-6`
-- card style: `p-switch-4`
-- form integration: `p-switch-5`
-- weekly availability editors with searchable time ranges: `p-switch-7`, `p-switch-8`, `p-switch-9`
+In forms, wrap with `Field name="…"` and put the switch inside `FieldLabel`.
 
 ## Common pitfalls
 
+- React habits: `defaultChecked`, `htmlFor`, `useId()`. Use `checked`/`bind:checked`, `for`, `$props.id()`.
 - Using switch for multi-option selection that should use radio/toggle-group.
-- Omitting visible label or explicit `aria-label` for icon-only switch controls.
-- Treating switch as form value without verifying checked-state wiring.
+- Omitting a visible label or explicit `aria-label`.
+- Sizing with `h-*`/`w-*` classes instead of `--thumb-size`.
 
 ## Useful particle references
 
-See `p-switch-1` through `p-switch-6` for label, disabled, description, card, form, and size patterns. See `p-switch-7` through `p-switch-9` for complete weekly availability editors using Switch, Combobox, Popover, and grouped controls.
+- basic / disabled / with description: `p-switch-1`, `p-switch-2`, `p-switch-3`
+- card style: `p-switch-4`
+- form integration: `p-switch-5`
+- custom size: `p-switch-6`
+- weekly availability editors: `p-switch-7`, `p-switch-8`, `p-switch-9`

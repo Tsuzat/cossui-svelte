@@ -3,71 +3,74 @@
 ## When to use
 
 - Indeterminate loading indicator for ongoing work.
-- Inline pending state in buttons, forms, and async panels.
+- Inline pending state in buttons, inputs, and async panels.
 
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/spinner
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/spinner.json
 ```
 
 Manual deps from docs:
 
 ```bash
-# No extra runtime dependency required for this primitive.
+npm install @lucide/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import { Spinner } from "@/components/ui/spinner"
+```svelte
+<script lang="ts">
+  import { Spinner } from '#lib/components/ui/spinner/index.js';
+</script>
 ```
 
 ## Minimal pattern
 
-```tsx
-<div className="flex items-center gap-2">
-  <Spinner aria-label="Loading" />
-  <span className="text-sm text-muted-foreground">Loading data…</span>
+```svelte
+<div class="flex items-center gap-2">
+  <Spinner />
+  <span class="text-muted-foreground text-sm">Loading data…</span>
 </div>
 ```
+
+`Spinner` is an animated Lucide `LoaderCircle` with `role="status"` and `aria-label="Loading"` by default; it accepts Lucide icon props (`size`, `class`, …). Override `aria-label` for context, or pass `aria-hidden="true"` when adjacent text already announces the state.
 
 ## Patterns from coss particles
 
 ### Key patterns
 
-Spinner inside a button:
+Prefer `Button`'s built-in `loading` prop; compose manually only for custom placement:
 
-```tsx
+```svelte
+<Button loading={saving} type="submit">Save</Button>
+
 <Button disabled>
   <Spinner aria-hidden="true" />
   Loading...
 </Button>
 ```
 
-Standalone spinner with label:
+In an input group:
 
-```tsx
-<div className="flex items-center gap-2">
-  <Spinner aria-label="Loading" />
-  <span className="text-muted-foreground text-sm">Fetching data...</span>
-</div>
+```svelte
+<InputGroup>
+  <InputGroupInput aria-label="Search" type="search" />
+  <InputGroupAddon>
+    <Spinner />
+  </InputGroupAddon>
+</InputGroup>
 ```
-
-Prefer button built-in loading UI where available over ad-hoc spinner wrappers.
-
-### More examples
-
-See `p-button-18` and `p-input-12` for spinner-in-button and spinner-in-input-group patterns.
 
 ## Common pitfalls
 
-- Using spinner without accessible label/context for screen readers.
+- Using spinner without accessible label/context for screen readers (or announcing twice next to visible text).
 - Showing spinner with no cancel/retry pathway in long-running operations.
-- Using spinner when determinate progress value is available.
+- Using spinner when a determinate progress value is available (use Progress).
 
 ## Useful particle references
 
-- input group: `p-input-12`
-- button: `p-button-18`
-- cross-primitive pending states: `p-button-25`, `p-autocomplete-12`, `p-toast-3`
+- basic: `p-spinner-1`
+- input group start/end: `p-input-12`, `p-input-16`
+- button: `p-button-18`, `p-button-41`
+- async autocomplete status: `p-autocomplete-12`

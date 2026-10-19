@@ -2,7 +2,7 @@
 
 ## When to use
 
-- Single-choice selection from a predefined list.
+- Single- or multi-choice selection from a predefined list.
 - Select-style triggers with popup options.
 
 ## When NOT to use
@@ -14,88 +14,123 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/select
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/select.json
 ```
 
-Manual deps:
+Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import {
-  Select,
-  SelectGroup,
-  SelectGroupLabel,
-  SelectItem,
-  SelectLabel,
-  SelectPopup,
-  SelectSeparator,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+```svelte
+<script lang="ts">
+  import {
+    Select,
+    SelectGroup,
+    SelectGroupLabel,
+    SelectItem,
+    SelectLabel,
+    SelectPopup,
+    SelectSeparator,
+    SelectTrigger,
+    SelectValue
+  } from '#lib/components/ui/select/index.js';
+</script>
 ```
+
+Also exported: `SelectContent` (alias of `SelectPopup`), `SelectButton`, `selectTriggerVariants`, `SelectScrollUpButton`/`SelectScrollDownButton` (rendered automatically), `SelectPrimitive`.
 
 ## Minimal pattern
 
-```tsx
-const items = [
-  { label: "Next.js", value: "next" },
-  { label: "Vite", value: "vite" },
-]
+```svelte
+<script lang="ts">
+  const items = [
+    { label: 'Next.js', value: 'next' },
+    { label: 'Vite', value: 'vite' },
+    { label: 'Astro', value: 'astro' }
+  ];
+  let value = $state<string>();
+</script>
 
-<Select items={items}>
-  <SelectTrigger>
+<Select bind:value {items}>
+  <SelectTrigger aria-label="Select framework">
     <SelectValue placeholder="Select framework" />
   </SelectTrigger>
   <SelectPopup>
-    <SelectLabel>Frameworks</SelectLabel>
-    {items.map((item) => (
-      <SelectItem key={item.value} value={item}>
-        {item.label}
-      </SelectItem>
-    ))}
+    {#each items as item (item.value)}
+      <SelectItem value={item.value}>{item.label}</SelectItem>
+    {/each}
   </SelectPopup>
 </Select>
 ```
 
-Prefer this `items`-first pattern for migration work to keep options known before hydration and avoid SSR mismatch edge cases.
+Values are **strings** (`string[]` with `multiple`); `value` is bindable. Pass `items` (`{ label, value }[]`) so `SelectValue` can show the label for the selected value — keep options known up front, which also avoids SSR mismatches. Alternatively render your own label inside `SelectTrigger`:
 
-For form-bound selects, prefer wrapping with `Field` + `FieldLabel` + `FieldError` so value, label, and validation stay semantically linked.
+```svelte
+<SelectTrigger aria-label="Select framework">
+  <span class="flex-1 truncate">{items.find((i) => i.value === value)?.label}</span>
+</SelectTrigger>
+```
+
+For form-bound selects, wrap with `Field` + `FieldLabel` + `FieldError` and give the `Select` a `name`.
 
 ## Patterns from coss particles
 
-- **Field composition**: in forms, place `Select` inside `Field` wrappers (see `p-select-23`, `p-form-1`, `p-form-2`).
-- **Trigger composition**: keep `SelectTrigger` as the interaction entry point and avoid Radix `asChild` assumptions from other primitives; where composition is needed, prefer documented coss/Base UI `render` patterns for supported parts.
-- **Multiple selection**: use `multiple` with array values (for example `defaultValue={["javascript", "typescript"]}`) and a custom `SelectValue` render function for compact summaries.
-- **Object values**: use full objects in `SelectItem value={item}` with `itemToStringValue` for stable form value serialization.
-- **Grouped options**: use `SelectGroup` + `SelectGroupLabel`; combine with `SelectSeparator` between groups when needed.
-- **Disabled options**: pass `disabled` on individual `SelectItem` rows (for unavailable choices).
-- **Rich row/trigger rendering**: render custom content (icons, avatars, secondary text) in both `SelectValue` and `SelectItem`; adjust row density via `className` where needed.
-- **Alignment tuning**: use `alignItemWithTrigger={false}` only when the default selected-item alignment causes layout issues.
+- **Portal forwarding**: optional `portalProps` on `SelectPopup` → ShardsUI `Select.Portal` (`keepMounted`, `container`, …). See [portal-props.md](../portal-props.md).
+- **Trigger size**: `size="sm" | "default" | "lg"` on `SelectTrigger`.
+- **Grouped options**: `SelectGroup` + `SelectGroupLabel`, `SelectSeparator` between groups. `SelectLabel` labels the whole list.
+- **Disabled options**: `disabled` on individual `SelectItem`s; `disabled` on `Select` for the whole control.
+- **Item text**: `SelectItem` shows its children, else its `label` prop, else `String(value)`. Its `children` snippet receives `{ highlighted, selected }`.
+- **Rich rows/trigger**: render icons, avatars, flags or secondary text in both `SelectItem` children and the trigger content.
+- **Multiple selection**: add `multiple` and bind a `string[]`; summarize the selection in the trigger yourself.
+- **Select look-alikes**: `SelectButton` (standalone button) or `class={selectTriggerVariants()}` on another trigger, e.g. `ComboboxTrigger` (`p-combobox-18`).
 
-## Portal forwarding
+### Key patterns
 
-- **Portal forwarding**: optional `portalProps` on `SelectPopup` → Base UI `Select.Portal` (`keepMounted`, `container`, …). See [portal-props.md](../portal-props.md).
+Multiple selection:
+
+```svelte
+<script lang="ts">
+  let selected = $state<string[]>(['javascript']);
+  const summary = $derived(
+    selected.length === 0 ? 'Select languages…' : selected.map((v) => labels[v]).join(', ')
+  );
+</script>
+
+<Select multiple bind:value={selected} {items}>
+  <SelectTrigger aria-label="Select languages">
+    <span class="flex-1 truncate">{summary}</span>
+  </SelectTrigger>
+  <SelectPopup>
+    {#each items as item (item.value)}
+      <SelectItem value={item.value}>{item.label}</SelectItem>
+    {/each}
+  </SelectPopup>
+</Select>
+```
 
 ## Common pitfalls
 
-- Keeping children-only Radix select patterns without adding `items`.
-- Forgetting to render `SelectValue` inside `SelectTrigger`.
-- Placing placeholder on the wrong part; use `placeholder` on `SelectValue` when needed.
-- Using object item values without `itemToStringValue` when stable string value serialization is required.
-- Treating `multiple` select values as scalars instead of arrays.
+- React coss habits: object values (`SelectItem value={item}` + `itemToStringValue`), `defaultValue={[…]}`, render-function `SelectValue`, `alignItemWithTrigger`. The coss wrapper types values as strings and `items` as `{ label, value }[]` (ShardsUI's `itemToStringValue` object mode isn't part of its contract), use `bind:value`, and `SelectValue` only takes `placeholder`; `alignItemWithTrigger` is not supported.
+- Forgetting `items` on `Select` while using `SelectValue` (the trigger then can't resolve a label).
+- Treating `multiple` values as scalars instead of arrays.
 - Mixing select and combobox APIs without validating docs.
 
 ## Useful particle references
 
-- basic select + sizing: `p-select-1`, `p-select-2`, `p-select-3`
-- grouped/labeled/select field patterns: `p-select-6`, `p-select-11`, `p-select-23`
-- multiple selection summary rendering: `p-select-7`
-- object values + rich option content: `p-select-10`, `p-select-17`, `p-select-20`
-- disabled options: `p-select-12`
-- related pattern: `p-combobox-18` (`SelectButton` with combobox trigger)
-
+- basic / small / large / disabled: `p-select-1`, `p-select-2`, `p-select-3`, `p-select-4`
+- `SelectValue` placeholder: `p-select-5`
+- groups: `p-select-6`
+- languages select (single value summary): `p-select-7`
+- icon trigger / options with icons: `p-select-8`, `p-select-9`
+- rich rows with description: `p-select-10`, `p-select-18`
+- form integration / with label: `p-select-11`, `p-select-23`
+- disabled items: `p-select-12`
+- timezone / status dot / pill / left text label: `p-select-13`, `p-select-14`, `p-select-15`, `p-select-16`
+- country flags / avatars / avatars + usernames: `p-select-17`, `p-select-19`, `p-select-20`
+- auto width / custom border: `p-select-21`, `p-select-22`
+- color palette swatches: `p-select-24`
+- select-style combobox: `p-combobox-18`

@@ -8,40 +8,44 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/avatar
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/avatar.json
 ```
 
 Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+```svelte
+<script lang="ts">
+  import { Avatar, AvatarFallback, AvatarImage } from '#lib/components/ui/avatar/index.js';
+</script>
 ```
+
+`AvatarPrimitive` (ShardsUI `Avatar`) is re-exported for custom composition.
 
 ## Minimal pattern
 
-```tsx
+```svelte
 <Avatar>
   <AvatarImage src="/avatars/01.png" alt="User avatar" />
   <AvatarFallback>JD</AvatarFallback>
 </Avatar>
 ```
 
-Use `keepMounted` on `AvatarImage` when the image relies on native lazy loading or an optimized image component. The image and fallback are layered so the fallback remains visible while the image loads or if it fails.
+The fallback shows while the image loads and when it fails. Default size is `size-8`, `rounded-full`.
 
 ## Patterns from coss particles
 
 ### Key patterns
 
-Custom size via Tailwind class:
+Custom size/radius via Tailwind class:
 
-```tsx
-<Avatar className="size-16">
+```svelte
+<Avatar class="size-16 rounded-lg">
   <AvatarImage src="/avatar.png" alt="User avatar" />
   <AvatarFallback>JD</AvatarFallback>
 </Avatar>
@@ -49,32 +53,34 @@ Custom size via Tailwind class:
 
 Stacked avatar group:
 
-```tsx
-<div className="flex -space-x-3">
-  <Avatar className="ring-2 ring-background">
+```svelte
+<div class="flex -space-x-[0.6rem]">
+  <Avatar class="ring-2 ring-background">
     <AvatarImage src="/user-1.png" alt="User 1" />
     <AvatarFallback>U1</AvatarFallback>
   </Avatar>
-  <Avatar className="ring-2 ring-background">
+  <Avatar class="ring-2 ring-background">
     <AvatarImage src="/user-2.png" alt="User 2" />
     <AvatarFallback>U2</AvatarFallback>
   </Avatar>
 </div>
 ```
 
-### More examples
-
-See `p-avatar-1` through `p-avatar-5` for sizes, radii, fallback-only, and group patterns.
+Status dots and notification/verified badges are plain absolutely-positioned elements in a `relative` wrapper around the `Avatar` (see `p-avatar-7` – `p-avatar-12`).
 
 ## Common pitfalls
 
 - Omitting `AvatarFallback`, causing broken image states with no identity fallback.
 - Using non-descriptive `alt` text on `AvatarImage` in accessible contexts.
-- Relying on oversized custom wrappers instead of built-in size variants/classes.
+- Using `className` (React) instead of `class`.
+- Putting status badges inside `Avatar` — it clips with `overflow-hidden`; wrap it instead.
 
 ## Useful particle references
 
-- fallback only: `p-avatar-2`
-- different sizes: `p-avatar-3`
-- different radius: `p-avatar-4`
-- group avatars: `p-avatar-5`
+- image + fallback: `p-avatar-1`
+- fallback only: `p-avatar-2`, icon fallback: `p-avatar-6`
+- different sizes / radius: `p-avatar-3`, `p-avatar-4`
+- group avatars: `p-avatar-5`, `p-avatar-13`, `p-avatar-14`
+- status dots: `p-avatar-7`, `p-avatar-8`, `p-avatar-9`
+- notification / verified badges: `p-avatar-10`, `p-avatar-11`, `p-avatar-12`
+- avatar menu button with chevron: `p-avatar-95`

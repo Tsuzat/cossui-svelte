@@ -3,69 +3,65 @@
 ## When to use
 
 - Visible accessible labels for inputs and controls.
-- Simple `htmlFor`/`id` associations in forms and settings UIs.
+- Simple `for`/`id` associations in forms and settings UIs.
 
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/label
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/label.json
 ```
 
-Manual deps from docs:
-
-```bash
-# No extra runtime dependency required for this primitive.
-```
+Manual deps from docs: none (a plain styled `<label>`).
 
 ## Canonical imports
 
-```tsx
-import { Label } from "@/components/ui/label"
+```svelte
+<script lang="ts">
+  import { Label } from '#lib/components/ui/label/index.js';
+</script>
 ```
 
 ## Minimal pattern
 
-```tsx
-<Label htmlFor="email">Email</Label>
+```svelte
+<Label for="email">Email</Label>
 ```
 
 ## Patterns from coss particles
 
 ### Key patterns
 
-Label paired with input:
+Label paired with input (generate the id with `$props.id()`):
 
-```tsx
-const id = useId()
+```svelte
+<script lang="ts">
+  const id = $props.id();
+</script>
 
-<div className="flex flex-col gap-2">
-  <Label htmlFor={id}>Email</Label>
-  <Input id={id} type="email" placeholder="name@example.com" />
+<div class="flex flex-col gap-2">
+  <Label for={id}>Email</Label>
+  <Input {id} type="email" placeholder="name@example.com" />
 </div>
 ```
 
-Label wrapping a checkbox:
+Label wrapping a checkbox / radio / switch:
 
-```tsx
+```svelte
 <Label>
   <Checkbox />
   Accept terms and conditions
 </Label>
 ```
 
-Prefer `FieldLabel` within `Field` for validation-aware forms.
-
-### More examples
-
-See `p-field-1`, `p-input-1`, `p-checkbox-1` for label-in-form patterns.
+Prefer `FieldLabel` within `Field` for validation-aware forms ([field.md](field.md)).
 
 ## Common pitfalls
 
+- React habits: `htmlFor`, `useId()`. Use `for` and `$props.id()`.
 - Using `aria-label` when visible `Label` text exists and can be associated.
-- Mismatching `htmlFor`/`id` between label and control.
-- Using label component as generic typography instead of form labeling.
+- Mismatching `for`/`id` between label and control.
+- Using the label component as generic typography instead of form labeling.
 
 ## Useful particle references
 
-- with checkbox: `checkbox-demo`
-- label-specific particles: no dedicated `p-label-*` family; use form references `p-field-1`, `p-input-1`, `p-checkbox-1`.
+- no dedicated `p-label-*` family; see `p-input-6`, `p-checkbox-1`, `p-checkbox-3`, `p-field-1`

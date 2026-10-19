@@ -1,4 +1,9 @@
 export const custom_particle_metadata = {
+  // upstream describes this as 'Select without item alignment', but ShardsUI has no
+  // alignItemWithTrigger option; the particle demonstrates the SelectValue placeholder.
+  'p-select-5': {
+    description: 'Select with a placeholder'
+  },
   'p-alert-dialog-313': {
     description: 'Basic confirmation alert dialog'
   },

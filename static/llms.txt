@@ -1,78 +1,117 @@
-# coss ui
+# coss ui for Svelte
 
-**coss ui** is a collection of beautifully designed, accessible, and composable components for your React apps. Built on top of [Base UI](https://base-ui.com/) and styled with [Tailwind CSS](https://tailwindcss.com/), it’s designed for you to copy, paste, and own.
+> An unofficial Svelte 5 / SvelteKit port of [coss ui](https://coss.com/ui): accessible, composable components built on [ShardsUI](https://shardsui.com/) (a Svelte port of Base UI) and styled with [Tailwind CSS v4](https://tailwindcss.com/). Components are distributed as source through a shadcn-svelte compatible registry, so you copy, paste, and own them.
 
-## Overview
+Key facts for agents:
 
-- [Introduction](https://coss.com/ui/docs/index.md)
-- [Get Started](https://coss.com/ui/docs/get-started.md)
-- [Roadmap](https://coss.com/ui/docs/roadmap.md)
-- [Radix / shadcn Migration](https://coss.com/ui/docs/radix-shadcn-migration.md): A comprehensive guide for migrating from shadcn/ui and Radix UI to coss ui components.
+- This is Svelte, not React. Write Svelte 5 components (runes: `$props`, `$state`, `$derived`), not JSX. Upstream coss.com docs and examples are React and do not apply verbatim.
+- Primitives come from ShardsUI, not Bits UI or Radix. Component APIs follow Base UI conventions.
+- Components import each other through the `#lib/*` Node subpath import (mapped to `./src/lib/*` in `package.json`). SvelteKit's `$lib` points at the same folder.
+- Add a component, particle, bloc, or hook with the CLI: `pnpm dlx shadcn-svelte@latest add https://cossui-svelte.com/r/<name>.json` (e.g. `button`, `p-button-1`, `use-is-mobile`).
+- Import components from their barrel: `import { Button } from "#lib/components/ui/button/index.ts";`
+- Theme tokens extend shadcn's CSS variables with `--info`, `--success`, `--warning` (each with `-foreground`) and `--destructive-foreground`. Typography uses `--font-sans`, `--font-mono`, `--font-heading`.
 
-## Chat UI
+## Docs
 
-- [Chat UI showcase](https://coss.com/ui/chat): Interactive conversation and state examples.
-- [Chat UI integration](https://coss.com/ui/docs/chat.md): Installation, copyable example, source map, composition contracts, and application responsibilities.
+- [Introduction](https://cossui-svelte.com/docs): What the library is and how it is built.
+- [Get Started](https://cossui-svelte.com/docs/get-started): Prerequisites, the `#lib` alias, adding components with the CLI or manually, fonts, and primitive exports.
+- [Styling](https://cossui-svelte.com/docs/styling): Color tokens, theming, and font variables.
+- [Skills](https://cossui-svelte.com/docs/skills): Agent skills that teach coding assistants coss ui APIs and conventions.
+- [Chat UI](https://cossui-svelte.com/docs/chat): Installing and composing the Chat UI family, with integration guidance and application responsibilities.
+- [Changelog](https://cossui-svelte.com/docs/changelog): Breaking changes, migration guides, and notable updates.
+- [Roadmap](https://cossui-svelte.com/docs/roadmap): Current state of the port and what comes next.
 
 ## Components
 
-- [Accordion](https://coss.com/ui/docs/components/accordion.md): A set of collapsible panels with headings.
-- [Alert](https://coss.com/ui/docs/components/alert.md): A callout for displaying important information.
-- [Alert Dialog](https://coss.com/ui/docs/components/alert-dialog.md): A modal dialog that interrupts the user workflow for critical confirmations.
-- [Autocomplete](https://coss.com/ui/docs/components/autocomplete.md): An input that suggests options as you type.
-- [Avatar](https://coss.com/ui/docs/components/avatar.md): A visual representation of a user or entity.
-- [Badge](https://coss.com/ui/docs/components/badge.md): A small status indicator or label component.
-- [Breadcrumb](https://coss.com/ui/docs/components/breadcrumb.md): Displays the path to the current resource using a hierarchy of links.
-- [Button](https://coss.com/ui/docs/components/button.md): A button or a component that looks like a button.
-- [Calendar](https://coss.com/ui/docs/components/calendar.md): A date picker for selecting single dates, ranges, or multiple dates.
-- [Card](https://coss.com/ui/docs/components/card.md): A content container for grouping related information.
-- [Checkbox](https://coss.com/ui/docs/components/checkbox.md): A binary toggle input for selecting one or multiple options.
-- [Checkbox Group](https://coss.com/ui/docs/components/checkbox-group.md): A collection of related checkboxes with group-level control.
-- [Collapsible](https://coss.com/ui/docs/components/collapsible.md): A component that toggles visibility of content sections.
-- [Combobox](https://coss.com/ui/docs/components/combobox.md): An input combined with a list of predefined items to select.
-- [Command](https://coss.com/ui/docs/components/command.md): A command palette component built with Dialog and Autocomplete for searching and executing commands.
-- [Context Menu](https://coss.com/ui/docs/components/context-menu.md): A menu that appears at the pointer on right click or long press.
-- [Date Picker](https://coss.com/ui/docs/components/date-picker.md): A date selection component, often combined with a calendar in a popover or input.
-- [Dialog](https://coss.com/ui/docs/components/dialog.md): A modal overlay for displaying content that requires user interaction.
-- [Drawer](https://coss.com/ui/docs/components/drawer.md): A panel that slides in from the edge of the screen with swipe gestures, snap points, and nested drawer support.
-- [Empty](https://coss.com/ui/docs/components/empty.md): A container for displaying empty state information.
-- [Field](https://coss.com/ui/docs/components/field.md): A wrapper component for form inputs with labels and validation.
-- [Fieldset](https://coss.com/ui/docs/components/fieldset.md): A group of related form fields with a common label.
-- [Form](https://coss.com/ui/docs/components/form.md): A complete form implementation with validation and submission handling.
-- [Frame](https://coss.com/ui/docs/components/frame.md): A container component for displaying content in a frame.
-- [Group](https://coss.com/ui/docs/components/group.md): A container component for grouping related content with consistent styling.
-- [Input](https://coss.com/ui/docs/components/input.md): A native input element.
-- [Input Group](https://coss.com/ui/docs/components/input-group.md): A flexible component for grouping inputs with addons, buttons, and other elements.
-- [Kbd](https://coss.com/ui/docs/components/kbd.md): A component for displaying keyboard keys and shortcuts.
-- [Label](https://coss.com/ui/docs/components/label.md): Renders an accessible label associated with controls.
-- [Menu](https://coss.com/ui/docs/components/menu.md): A list of actions or options revealed on demand.
-- [Meter](https://coss.com/ui/docs/components/meter.md): A visual representation of a value within a known range.
-- [Number Field](https://coss.com/ui/docs/components/number-field.md): A specialized input for numeric values with increment/decrement controls.
-- [OTP Field](https://coss.com/ui/docs/components/otp-field.md): A segmented input for one-time passwords and verification codes.
-- [Pagination](https://coss.com/ui/docs/components/pagination.md): A pagination with page navigation, next and previous links.
-- [Popover](https://coss.com/ui/docs/components/popover.md): A floating container that appears near a trigger element.
-- [Preview Card](https://coss.com/ui/docs/components/preview-card.md): A rich preview component for displaying linked content.
-- [Progress](https://coss.com/ui/docs/components/progress.md): A visual indicator showing the completion status of a task.
-- [Radio Group](https://coss.com/ui/docs/components/radio-group.md): A set of mutually exclusive options presented as radio buttons.
-- [Scroll Area](https://coss.com/ui/docs/components/scroll-area.md): A container with custom scrollbars for overflow content.
-- [Select](https://coss.com/ui/docs/components/select.md): A common form component for choosing a predefined value in a dropdown menu.
-- [Separator](https://coss.com/ui/docs/components/separator.md): A visual divider for separating content sections.
-- [Sheet](https://coss.com/ui/docs/components/sheet.md): A flyout that opens from the side of the screen, based on the dialog component.
-- [Sidebar](https://coss.com/ui/docs/components/sidebar.md): A collapsible side panel for navigation and secondary content.
-- [Skeleton](https://coss.com/ui/docs/components/skeleton.md): A placeholder for loading content.
-- [Slider](https://coss.com/ui/docs/components/slider.md): A draggable control for selecting values from a continuous range.
-- [Spinner](https://coss.com/ui/docs/components/spinner.md): An indicator that can be used to show a loading state.
-- [Switch](https://coss.com/ui/docs/components/switch.md): A toggle control for binary on/off states.
-- [Table](https://coss.com/ui/docs/components/table.md): A structured data display component with rows and columns.
-- [Tabs](https://coss.com/ui/docs/components/tabs.md): A navigation component for switching between different views or content panels.
-- [Textarea](https://coss.com/ui/docs/components/textarea.md): A multi-line text input for longer content.
-- [Toast](https://coss.com/ui/docs/components/toast.md): A temporary notification message that appears and disappears automatically.
-- [Toggle](https://coss.com/ui/docs/components/toggle.md): A button that switches between two states.
-- [Toggle Group](https://coss.com/ui/docs/components/toggle-group.md): A group of toggle buttons where one or multiple can be selected.
-- [Toolbar](https://coss.com/ui/docs/components/toolbar.md): A container for grouping related actions or controls.
-- [Tooltip](https://coss.com/ui/docs/components/tooltip.md): A small overlay that provides contextual information on hover or focus.
+- [Accordion](https://cossui-svelte.com/docs/components/accordion): A set of collapsible panels with headings and content.
+- [Alert](https://cossui-svelte.com/docs/components/alert): A callout for displaying important information.
+- [Alert Dialog](https://cossui-svelte.com/docs/components/alert-dialog): A dialog that requires user response to proceed.
+- [Aspect Ratio](https://cossui-svelte.com/docs/components/aspect-ratio): Displays content within a desired ratio.
+- [Autocomplete](https://cossui-svelte.com/docs/components/autocomplete): An input that suggests options as you type.
+- [Avatar](https://cossui-svelte.com/docs/components/avatar): An image element with a fallback for representing the user.
+- [Badge](https://cossui-svelte.com/docs/components/badge): A badge or a component that looks like a badge.
+- [Breadcrumb](https://cossui-svelte.com/docs/components/breadcrumb): Displays the path to the current resource using a hierarchy of links.
+- [Button](https://cossui-svelte.com/docs/components/button): A button or a component that looks like a button.
+- [Calendar](https://cossui-svelte.com/docs/components/calendar): A date picker component with range and multi-select support.
+- [Card](https://cossui-svelte.com/docs/components/card): A content container for grouping related information.
+- [Chart](https://cossui-svelte.com/docs/components/chart): Charts built on LayerChart, themed through a shared config.
+- [Checkbox](https://cossui-svelte.com/docs/components/checkbox): A control allowing the user to toggle between checked and not checked.
+- [Checkbox Group](https://cossui-svelte.com/docs/components/checkbox-group): Provides shared state to a series of checkboxes.
+- [Collapsible](https://cossui-svelte.com/docs/components/collapsible): A collapsible panel controlled by a button trigger.
+- [Color Picker](https://cossui-svelte.com/docs/components/colorpicker): A specialized dropdown for selecting colors.
+- [Combobox](https://cossui-svelte.com/docs/components/combobox): An input combined with a list of predefined items to select.
+- [Command](https://cossui-svelte.com/docs/components/command): A command palette built with Dialog and Autocomplete for searching and executing commands.
+- [Composer](https://cossui-svelte.com/docs/components/composer): A composer for chat and AI assistant interfaces, with a growing input, persistent actions, and optional mentions or slash commands.
+- [Context Menu](https://cossui-svelte.com/docs/components/context-menu): A menu that appears at the pointer on right click or long press.
+- [Cropper](https://cossui-svelte.com/docs/components/cropper): An image cropper with zoom, drag and keyboard support.
+- [Date Picker](https://cossui-svelte.com/docs/components/date-picker): A date picker built with Calendar and Popover.
+- [Dialog](https://cossui-svelte.com/docs/components/dialog): A popup that opens on top of the entire page.
+- [Drawer](https://cossui-svelte.com/docs/components/drawer): A panel that slides in from the edge of the screen with swipe gestures, snap points, and nested drawer support.
+- [Empty](https://cossui-svelte.com/docs/components/empty): A container for displaying empty state information.
+- [Field](https://cossui-svelte.com/docs/components/field): Provides labelling and validation for form controls.
+- [Fieldset](https://cossui-svelte.com/docs/components/fieldset): A native fieldset element with a legend.
+- [File Upload](https://cossui-svelte.com/docs/components/file-upload): Drag-and-drop file upload built on the useFileUpload hook.
+- [Form](https://cossui-svelte.com/docs/components/form): A form wrapper that simplifies validation and submission.
+- [Frame](https://cossui-svelte.com/docs/components/frame): A framed container for grouping related information.
+- [Group](https://cossui-svelte.com/docs/components/group): Visually groups a series of controls.
+- [Input](https://cossui-svelte.com/docs/components/input): A native input element.
+- [Input Group](https://cossui-svelte.com/docs/components/input-group): Groups inputs with addons, buttons, and other elements.
+- [Kbd](https://cossui-svelte.com/docs/components/kbd): Displays keyboard keys and shortcuts.
+- [Label](https://cossui-svelte.com/docs/components/label): Renders an accessible label associated with controls.
+- [Link Preview](https://cossui-svelte.com/docs/components/link-preview): A popup that previews the content behind a link on hover.
+- [Map](https://cossui-svelte.com/docs/components/map): Interactive maps built on MapLibre GL, with markers, popups, routes and clusters.
+- [Menu](https://cossui-svelte.com/docs/components/menu): A list of actions in a dropdown, with keyboard navigation.
+- [Meter](https://cossui-svelte.com/docs/components/meter): A graphical display of a numeric value within a range.
+- [Number Field](https://cossui-svelte.com/docs/components/number-field): A numeric input with increment and decrement buttons, and a scrub area.
+- [OTP Field](https://cossui-svelte.com/docs/components/otp-field): A segmented input for one-time passwords and verification codes.
+- [Pagination](https://cossui-svelte.com/docs/components/pagination): Page navigation with next and previous links.
+- [Places Autocomplete](https://cossui-svelte.com/docs/components/places-autocomplete): An address autocomplete input powered by Google Places.
+- [Popover](https://cossui-svelte.com/docs/components/popover): An accessible popup anchored to a button.
+- [Preview Card](https://cossui-svelte.com/docs/components/preview-card): A popup that shows a preview when a link is hovered.
+- [Progress](https://cossui-svelte.com/docs/components/progress): Displays the status of a task that takes a long time.
+- [Radio Group](https://cossui-svelte.com/docs/components/radio-group): A set of checkable buttons where at most one can be checked at a time.
+- [Scroll Area](https://cossui-svelte.com/docs/components/scroll-area): A native scroll container with custom scrollbars.
+- [Segmented Control](https://cossui-svelte.com/docs/components/segmented-control): Presents related choices, navigation destinations, filters, or content views.
+- [Select](https://cossui-svelte.com/docs/components/select): Choose a predefined value from a dropdown menu.
+- [Separator](https://cossui-svelte.com/docs/components/separator): A separator element accessible to screen readers.
+- [Sheet](https://cossui-svelte.com/docs/components/sheet): A flyout that opens from the side of the screen, based on Dialog.
+- [Sidebar](https://cossui-svelte.com/docs/components/sidebar): A composable, collapsible sidebar with mobile support.
+- [Skeleton](https://cossui-svelte.com/docs/components/skeleton): A loading state placeholder.
+- [Slider](https://cossui-svelte.com/docs/components/slider): Select a value from within a given range.
+- [Spinner](https://cossui-svelte.com/docs/components/spinner): An indicator for a loading state.
+- [Star Rating](https://cossui-svelte.com/docs/components/starrating): An accessible star rating input with optional half-star support.
+- [Stepper](https://cossui-svelte.com/docs/components/stepper): Displays a series of steps in a process.
+- [Switch](https://cossui-svelte.com/docs/components/switch): A control that indicates whether a setting is on or off.
+- [Table](https://cossui-svelte.com/docs/components/table): Displays tabular data.
+- [Tabs](https://cossui-svelte.com/docs/components/tabs): Toggles between related panels on the same page.
+- [Textarea](https://cossui-svelte.com/docs/components/textarea): A native textarea element.
+- [Timeline](https://cossui-svelte.com/docs/components/timeline): Displays a series of events in chronological order.
+- [Toast](https://cossui-svelte.com/docs/components/toast): A temporary notification that informs users.
+- [Toggle](https://cossui-svelte.com/docs/components/toggle): A two-state button that can be toggled on or off.
+- [Toggle Group](https://cossui-svelte.com/docs/components/toggle-group): Provides shared state to a series of toggle buttons.
+- [Toolbar](https://cossui-svelte.com/docs/components/toolbar): A container for grouping buttons and controls.
+- [Tooltip](https://cossui-svelte.com/docs/components/tooltip): A popup that shows a hint when an element is hovered or focused.
+- [Tree](https://cossui-svelte.com/docs/components/tree): A hierarchical tree view with keyboard navigation and drag and drop, built on Headless Tree.
 
 ## Hooks
 
-- [useMediaQuery](https://coss.com/ui/docs/hooks/use-media-query.md): Reactive media query hook with Tailwind-like syntax for conditional rendering based on breakpoints, pointer type, or any CSS media query.
-- [useCopyToClipboard](https://coss.com/ui/docs/hooks/use-copy-to-clipboard.md): Copy text to clipboard with a temporary "copied" state and optional callback.
+- [IsMobile](https://cossui-svelte.com/docs/hooks/use-is-mobile): Reactive flag that is true when the viewport is narrower than the mobile breakpoint.
+
+Other hooks are available from the registry without a docs page: `use-uid`, `use-is-mac`, `use-character-limit`, `use-currency-input`, `use-file-upload`, `use-pkgmgr-config`.
+
+## Examples
+
+- [Particles](https://cossui-svelte.com/particles): Searchable catalog of ready-to-use component variants (`p-<component>-<n>`). Each one is at `https://cossui-svelte.com/particle/<id>`.
+- [Blocs](https://cossui-svelte.com/blocs): Full page sections and app examples (login, signup, OTP, sidebar, calendar, chat, dashboards). Each one is at `https://cossui-svelte.com/blocs/view/<name>`.
+
+## Registry
+
+- [Registry index](https://cossui-svelte.com/r/registry.json): Every installable item (components, particles, blocs, hooks, utils) with its type, files, and dependencies.
+- Item JSON: `https://cossui-svelte.com/r/<name>.json`, consumable by `shadcn-svelte add` or jsrepo.
+- [AI & Registry](https://cossui-svelte.com/ai): Installation commands for each package manager.
+
+## Optional
+
+- [Source code](https://github.com/cossui-svelte/cossui-svelte): The library and documentation site.
+- [Upstream coss ui](https://coss.com/ui): The original React + Base UI library this port follows.
+- [ShardsUI](https://shardsui.com/): The headless Svelte primitives underneath the components.

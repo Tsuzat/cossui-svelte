@@ -3,40 +3,38 @@
 ## When to use
 
 - Structured tabular datasets.
-- Sortable/filterable row and column displays.
+- Sortable/filterable/selectable row and column displays.
 
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/table
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/table.json
 ```
 
-Manual deps from docs:
-
-```bash
-# No extra runtime dependency required for basic table usage.
-# For interactive data tables, add TanStack Table:
-npm install @tanstack/react-table
-```
+Manual deps: none for basic tables (styled native table elements). For headless data-grid logic you may add `@tanstack/svelte-table`, but the particles implement sorting/pagination/selection with plain runes.
 
 ## Canonical imports
 
-```tsx
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+```svelte
+<script lang="ts">
+  import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableFooter,
+    TableHead,
+    TableHeader,
+    TableRow
+  } from '#lib/components/ui/table/index.js';
+</script>
 ```
+
+The `TableVariant` type is also exported.
 
 ## Minimal pattern
 
-```tsx
+```svelte
 <Table>
   <TableHeader>
     <TableRow>
@@ -44,38 +42,56 @@ import {
     </TableRow>
   </TableHeader>
   <TableBody>
-    <TableRow>
-      <TableCell>Ada Lovelace</TableCell>
-    </TableRow>
+    {#each people as person (person.id)}
+      <TableRow>
+        <TableCell>{person.name}</TableCell>
+      </TableRow>
+    {/each}
   </TableBody>
 </Table>
 ```
 
 ## Patterns from coss particles
 
-- **Semantic baseline**: start with `TableHeader`/`TableBody`/`TableRow`/`TableHead`/`TableCell`, then add `TableCaption` and `TableFooter` as needed.
-- **Card variant**: set `variant="card"` on `Table` for rounded, card-like rows and separated borders (`p-table-5`). Combine with `Frame` for app-surface framing (`p-table-2`), with `CardFrame` for static tables in a card shell (`p-table-7`), or with TanStack inside `CardFrame` for selection (`p-table-6`) or sorting and pagination (`p-table-8`).
-- **Status-rich rows**: combine `Badge` and decorative dots/icons for state columns while keeping text primary.
-- **Interactive data grids**: pair coss table parts with TanStack Table (`flexRender`, row models, selection state) for sorting/pagination/selection.
-- **No-results state**: always render an explicit empty-state row with `colSpan` matching visible columns.
-- **Fixed layout control**: use `className="table-fixed"` and column width styles when predictable column sizing is required.
+- **Semantic baseline**: `TableHeader`/`TableBody`/`TableRow`/`TableHead`/`TableCell`, then `TableCaption` and `TableFooter` as needed.
+- **Card variant**: `variant="card"` on `Table` for rounded, card-like rows (`p-table-5`). Combine with `Frame` for app-surface framing (`p-table-2`), or render it as a direct child of `CardFrame` for a card shell (`p-table-7`, `p-table-6`, `p-table-8`).
+- **Status-rich rows**: `Badge` plus decorative dots/icons for state columns, text stays primary.
+- **Interactive grids**: keep sort/page/selection in `$state` and derive the visible rows with `$derived` (or use `@tanstack/svelte-table`):
+
+```svelte
+<script lang="ts">
+  let sort = $state<{ id: keyof Flight; desc: boolean }>({ id: 'destination', desc: false });
+  let pageIndex = $state(0);
+  const pageSize = 5;
+  const sorted = $derived(
+    [...flights].sort((a, b) => (a[sort.id] > b[sort.id] ? 1 : -1) * (sort.desc ? -1 : 1))
+  );
+  const rows = $derived(sorted.slice(pageIndex * pageSize, (pageIndex + 1) * pageSize));
+</script>
+```
+
+- **Row selection**: a header `Checkbox` with `checked`/`indeterminate` derived from the selected set, and one `Checkbox aria-label="Select row"` per row.
+- **No-results state**: render an explicit empty row with `colspan` matching visible columns.
+- **Fixed layout**: `class="table-fixed"` plus column widths for predictable sizing.
+- **Sticky header / vertical (key-value) table**: `p-table-10`, `p-table-9`.
 
 ## Common pitfalls
 
-- Assuming `Table` itself provides sorting/filter/pagination state; these come from your data layer (for example TanStack Table).
+- Assuming `Table` provides sorting/filter/pagination state — that comes from your data layer.
 - Mixing header/body cell semantics (`TableHead` in body rows or `TableCell` in headers).
-- Forgetting to align `colSpan` with actual visible columns in footer/empty rows.
-- Using table patterns where card/list layouts are more suitable on small screens without responsive handling.
-- Omitting `aria-label` for row-selection checkboxes in interactive tables.
+- Forgetting to align `colspan` with actual visible columns in footer/empty rows.
+- React habits: `className`, `colSpan`, `@tanstack/react-table` + `flexRender`. Use `class`, `colspan`, and runes or `@tanstack/svelte-table`.
+- Omitting `aria-label` for row-selection checkboxes.
 
 ## Useful particle references
 
-- basic semantic table with caption/footer: `p-table-1`
+- basic semantic table: `p-table-1`
 - `Frame` + card variant: `p-table-2`
-- TanStack + checkboxes + `Frame`: `p-table-3`
-- TanStack sorting + pagination + `Frame`: `p-table-4`
-- card variant only (no shell): `p-table-5`
+- checkboxes + `Frame`: `p-table-3`
+- sorting + pagination + `Frame`: `p-table-4`
+- card variant only: `p-table-5`
+- `CardFrame` + checkboxes: `p-table-6`
 - `CardFrame` + static table: `p-table-7`
-- `CardFrame` + TanStack + checkboxes: `p-table-6`
-- `CardFrame` + TanStack + sort + pagination: `p-table-8`
-
+- `CardFrame` + sort + pagination: `p-table-8`
+- vertical table: `p-table-9`
+- sticky header: `p-table-10`

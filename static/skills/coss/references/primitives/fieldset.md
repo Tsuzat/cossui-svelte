@@ -8,24 +8,28 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/fieldset
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/fieldset.json
 ```
 
 Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import { Fieldset, FieldsetLegend } from "@/components/ui/fieldset"
+```svelte
+<script lang="ts">
+  import { Fieldset, FieldsetLegend } from '#lib/components/ui/fieldset/index.js';
+</script>
 ```
+
+`FieldsetPrimitive` is re-exported.
 
 ## Minimal pattern
 
-```tsx
+```svelte
 <Fieldset>
   <FieldsetLegend>Fieldset legend</FieldsetLegend>
 </Fieldset>
@@ -37,25 +41,24 @@ import { Fieldset, FieldsetLegend } from "@/components/ui/fieldset"
 
 Fieldset grouping related fields:
 
-```tsx
-<Fieldset>
-  <FieldsetLegend>Personal Information</FieldsetLegend>
-  <Field name="firstName">
-    <FieldLabel>First name</FieldLabel>
+```svelte
+<Fieldset class="flex w-full flex-col gap-6">
+  <FieldsetLegend>Billing Details</FieldsetLegend>
+  <Field name="company">
+    <FieldLabel>Company</FieldLabel>
     <Input type="text" />
+    <FieldDescription>The name that will appear on invoices.</FieldDescription>
   </Field>
-  <Field name="lastName">
-    <FieldLabel>Last name</FieldLabel>
+  <Field name="taxId">
+    <FieldLabel>Tax ID</FieldLabel>
     <Input type="text" />
   </Field>
 </Fieldset>
 ```
 
+For a radio/checkbox group field, nest the `Fieldset` inside `Field name="…"` and wrap each option in `FieldItem` (see [field.md](field.md)).
+
 Always include `FieldsetLegend` as the accessible group heading.
-
-### More examples
-
-See `p-fieldset-1` for the core pattern.
 
 ## Common pitfalls
 
@@ -65,5 +68,5 @@ See `p-fieldset-1` for the core pattern.
 
 ## Useful particle references
 
-- core patterns: `p-fieldset-1`
-- form composition references: `p-form-1`, `p-form-2`, `p-input-group-24`
+- multiple fields: `p-fieldset-1`
+- group fields: `p-field-13` (checkbox group), `p-field-14` (radio group)

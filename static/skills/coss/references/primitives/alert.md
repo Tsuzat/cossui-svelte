@@ -14,24 +14,22 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/alert
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/alert.json
 ```
 
-Manual deps from docs:
-
-```bash
-# No extra runtime dependency required for this primitive.
-```
+Manual deps from docs: none (custom component, not a ShardsUI wrapper). Icons in the examples come from `@lucide/svelte`.
 
 ## Canonical imports
 
-```tsx
-import { Alert, AlertAction, AlertDescription, AlertTitle } from "@/components/ui/alert"
+```svelte
+<script lang="ts">
+  import { Alert, AlertAction, AlertDescription, AlertTitle } from '#lib/components/ui/alert/index.js';
+</script>
 ```
 
 ## Minimal pattern
 
-```tsx
+```svelte
 <Alert>
   <AlertTitle>Heads up!</AlertTitle>
   <AlertDescription>
@@ -44,9 +42,16 @@ import { Alert, AlertAction, AlertDescription, AlertTitle } from "@/components/u
 
 ### Key patterns
 
-When an icon uniquely conveys alert status, explicitly name it with `role="img"` and `aria-label`. Lucide icons are hidden by default; omitting `aria-hidden` alone does not expose their meaning. Keep icons decorative with `aria-hidden="true"` when visible text already conveys the same meaning:
+Variants: `default`, `info`, `success`, `warning`, `error`. Place the icon as the first child of `Alert`.
 
-```tsx
+When an icon uniquely conveys alert status, name it with `role="img"` and `aria-label`. Keep it decorative with `aria-hidden="true"` when visible text already conveys the same meaning:
+
+```svelte
+<script lang="ts">
+  import InfoIcon from '@lucide/svelte/icons/info';
+  import { Alert, AlertDescription, AlertTitle } from '#lib/components/ui/alert/index.js';
+</script>
+
 <Alert variant="info">
   <InfoIcon aria-label="Information" role="img" />
   <AlertTitle>Heads up!</AlertTitle>
@@ -54,13 +59,11 @@ When an icon uniquely conveys alert status, explicitly name it with `role="img"`
 </Alert>
 ```
 
-Variants: `default`, `info`, `success`, `warning`, `error`.
+Alert with action buttons (use `AlertAction`, which moves to the right on larger screens):
 
-Alert with action buttons (use `AlertAction`):
-
-```tsx
+```svelte
 <Alert>
-  <InfoIcon aria-label="Information" role="img" />
+  <InfoIcon aria-hidden="true" />
   <AlertTitle>Heads up!</AlertTitle>
   <AlertDescription>Describe what can be done about it here.</AlertDescription>
   <AlertAction>
@@ -70,18 +73,16 @@ Alert with action buttons (use `AlertAction`):
 </Alert>
 ```
 
-### More examples
-
-See `p-alert-1` through `p-alert-7` for all variants and action patterns.
-
 ## Common pitfalls
 
 - Using alert variants for passive decoration instead of meaningful semantic status.
+- Using `variant="destructive"` (shadcn) — the error variant is `error`.
 - Missing title/description structure in complex alerts, reducing scannability.
 - Leaving a uniquely meaningful icon unnamed, or repeating status already provided by visible text.
 
 ## Useful particle references
 
+- basic: `p-alert-1`
 - with icon: `p-alert-2`
 - with icon and action buttons: `p-alert-3`
 - info alert: `p-alert-4`

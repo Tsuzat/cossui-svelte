@@ -14,108 +14,148 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/command
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/command.json
 ```
 
 Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import {
-  Command,
-  CommandCollection,
-  CommandDialog,
-  CommandDialogPopup,
-  CommandDialogTrigger,
-  CommandEmpty,
-  CommandFooter,
-  CommandGroup,
-  CommandGroupLabel,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandPanel,
-  CommandSeparator,
-  CommandShortcut,
-} from "@/components/ui/command"
-import { Button } from "@/components/ui/button"
+```svelte
+<script lang="ts">
+  import { buttonVariants } from '#lib/components/ui/button/index.js';
+  import {
+    Command,
+    CommandCollection,
+    CommandDialog,
+    CommandDialogPopup,
+    CommandDialogTrigger,
+    CommandEmpty,
+    CommandFooter,
+    CommandGroup,
+    CommandGroupLabel,
+    CommandInput,
+    CommandItem,
+    CommandList,
+    CommandPanel,
+    CommandSeparator,
+    CommandShortcut
+  } from '#lib/components/ui/command/index.js';
+</script>
 ```
+
+Also exported: `CommandDialogBackdrop`, `CommandDialogViewport`, `CommandDialogPortal`, `CommandDialogPrimitive`, and `CommandCreateHandle()` for detached triggers.
 
 ## Minimal pattern
 
-```tsx
-const items = [
-  { value: "linear", label: "Linear" },
-  { value: "figma", label: "Figma" },
-  { value: "slack", label: "Slack" },
-]
+```svelte
+<script lang="ts">
+  const items = [
+    { value: 'linear', label: 'Linear' },
+    { value: 'figma', label: 'Figma' },
+    { value: 'slack', label: 'Slack' }
+  ];
+  let open = $state(false);
+</script>
 
-<CommandDialog>
-  <CommandDialogTrigger render={<Button variant="outline" />}>
+<CommandDialog bind:open>
+  <CommandDialogTrigger class={buttonVariants({ variant: 'outline' })}>
     Open Command Palette
   </CommandDialogTrigger>
-
   <CommandDialogPopup>
-    <Command items={items}>
+    <Command {items}>
       <CommandInput placeholder="Search..." />
-      <CommandEmpty>No results found.</CommandEmpty>
-      <CommandList>
-        {(item) => (
-          <CommandItem key={item.value} value={item.value}>
-            {item.label}
-          </CommandItem>
-        )}
-      </CommandList>
+      <CommandPanel>
+        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandList>
+          <CommandCollection>
+            {#snippet children(item: { value: string; label: string })}
+              <CommandItem value={item} onclick={() => (open = false)}>{item.label}</CommandItem>
+            {/snippet}
+          </CommandCollection>
+        </CommandList>
+      </CommandPanel>
     </Command>
   </CommandDialogPopup>
 </CommandDialog>
 ```
 
+`Command` wraps ShardsUI `Autocomplete.Root` with palette defaults (`autoHighlight="always"`, `keepHighlight`, always-open inline list). `CommandItem value` is the **item object**; `Command`'s `value` (bindable) is the search text. `CommandInput` includes a search icon and is `lg` by default.
+
 ## Patterns from coss particles
 
-- **Portal forwarding**: optional `portalProps` on `CommandDialogPopup` → Base UI `Dialog.Portal` (`keepMounted`, `container`, …). See [portal-props.md](../portal-props.md).
+- **Portal forwarding**: optional `portalProps` on `CommandDialogPopup` → ShardsUI `Dialog.Portal` (`keepMounted`, `container`, …). See [portal-props.md](../portal-props.md).
 
 ### Key patterns
 
-Command with grouped sections:
+Grouped sections — `items` is `{ value, items }[]`; nest a `CommandCollection` in each `CommandGroup items={group.items}`:
 
-```tsx
-<Command items={items}>
+```svelte
+<Command items={groupedItems}>
   <CommandInput placeholder="Type a command..." />
-  <CommandEmpty>No results found.</CommandEmpty>
-  <CommandList>
-    <CommandGroup>
-      <CommandGroupLabel>Suggestions</CommandGroupLabel>
+  <CommandPanel>
+    <CommandEmpty>No results found.</CommandEmpty>
+    <CommandList>
       <CommandCollection>
-        {(item) => (
-          <CommandItem key={item.value} value={item.value}>
-            {item.label}
-          </CommandItem>
-        )}
+        {#snippet children(group: Group)}
+          <CommandGroup items={group.items}>
+            <CommandGroupLabel>{group.value}</CommandGroupLabel>
+            <CommandCollection>
+              {#snippet children(item: Item)}
+                <CommandItem value={item}>
+                  <span class="flex-1">{item.label}</span>
+                  {#if item.shortcut}<CommandShortcut>{item.shortcut}</CommandShortcut>{/if}
+                </CommandItem>
+              {/snippet}
+            </CommandCollection>
+          </CommandGroup>
+          <CommandSeparator />
+        {/snippet}
       </CommandCollection>
-    </CommandGroup>
-  </CommandList>
+    </CommandList>
+  </CommandPanel>
+  <CommandFooter>…keyboard hints with Kbd…</CommandFooter>
 </Command>
 ```
 
-Use `CommandDialog` + `CommandDialogTrigger` + `CommandDialogPopup` to wrap `Command` in a dialog overlay. Use controlled `open`/`onOpenChange` state for keyboard-shortcut activation.
+Keyboard shortcut to open (⌘K / Ctrl+K):
 
-### More examples
+```svelte
+<script lang="ts">
+  let open = $state(false);
+  $effect(() => {
+    function down(e: KeyboardEvent) {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        open = !open;
+      }
+    }
+    document.addEventListener('keydown', down);
+    return () => document.removeEventListener('keydown', down);
+  });
+</script>
 
-See `p-command-1` and `p-command-2` for dialog palette and grouped action patterns.
+<CommandDialog bind:open>…</CommandDialog>
+```
+
+Reset search on close: use `open` + `onOpenChange` and clear the bound search text when `open` becomes false (see `p-command-2`).
+
+Standalone (no dialog): render `Command` directly, optionally inside `CommandPanel` for the bordered, elevated surface.
 
 ## Common pitfalls
 
-- Using command list without clear grouping and action labels.
-- Binding critical destructive actions without confirmation pathway.
-- Missing keyboard accessibility checks for arrow/select/escape interactions.
+- Expecting cmdk/shadcn APIs (`CommandInput` + `CommandItem onSelect`, `value` strings for filtering) — use `items` + `CommandCollection` + `CommandItem value={item}` and `onclick`.
+- React habits: function-as-child in `CommandList`, `render={<Button />}` on the trigger. Use snippets and `class={buttonVariants(...)}`.
+- Forgetting to close the dialog when an item runs (`onclick={() => (open = false)}`).
+- Binding critical destructive actions without a confirmation pathway.
+- Missing keyboard accessibility checks for arrow/enter/escape interactions.
 
 ## Useful particle references
 
-- core patterns: `p-command-1`, `p-command-2`
-- related search/selection references: `p-autocomplete-1`, `p-select-1`, `p-input-group-1`
+- command palette in a dialog: `p-command-1`
+- palette with AI assistant mode, shortcuts and footer: `p-command-2`
+- related search/selection references: `p-autocomplete-1`, `p-combobox-1`

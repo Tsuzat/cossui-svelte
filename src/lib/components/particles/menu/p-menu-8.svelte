@@ -1,13 +1,15 @@
 <script lang="ts">
   import { buttonVariants } from '#lib/components/ui/button/index.js';
-  import { Menu, MenuItem, MenuPopup, MenuTrigger } from '#lib/components/ui/menu/index.js';
+  import { Menu, MenuCheckboxItem, MenuPopup, MenuTrigger } from '#lib/components/ui/menu/index.js';
+
+  let autoSave = $state(true);
+  let notifications = $state(false);
 </script>
 
 <Menu>
   <MenuTrigger class={buttonVariants({ variant: 'outline' })}>Open menu</MenuTrigger>
   <MenuPopup>
-    <MenuItem>Profile</MenuItem>
-    <MenuItem>Settings</MenuItem>
-    <MenuItem>Log out</MenuItem>
+    <MenuCheckboxItem bind:checked={autoSave} closeOnClick>Auto save</MenuCheckboxItem>
+    <MenuCheckboxItem bind:checked={notifications} closeOnClick>Notifications</MenuCheckboxItem>
   </MenuPopup>
 </Menu>

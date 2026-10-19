@@ -13,52 +13,66 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/meter
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/meter.json
 ```
 
 Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import {
-  Meter,
-  MeterIndicator,
-  MeterLabel,
-  MeterTrack,
-  MeterValue,
-} from "@/components/ui/meter"
+```svelte
+<script lang="ts">
+  import {
+    Meter,
+    MeterIndicator,
+    MeterLabel,
+    MeterTrack,
+    MeterValue
+  } from '#lib/components/ui/meter/index.js';
+</script>
 ```
+
+`MeterPrimitive` is re-exported.
 
 ## Minimal pattern
 
-```tsx
+```svelte
 <Meter value={40}>
-  <MeterLabel>Storage usage</MeterLabel>
-  <MeterValue />
+  <div class="flex items-center justify-between gap-2">
+    <MeterLabel>Storage usage</MeterLabel>
+    <MeterValue />
+  </div>
   <MeterTrack>
     <MeterIndicator />
   </MeterTrack>
 </Meter>
 ```
 
-When supplying children (including only a label or value), include `MeterTrack` and `MeterIndicator` to retain the bar. The root renders its default track and indicator only when no children are supplied.
+`Meter` takes `value`, `min` (default `0`), `max` (default `100`), and ShardsUI `format` (`Intl.NumberFormatOptions`) / `locale`. When you pass children, include `MeterTrack` + `MeterIndicator` yourself — the default bar renders only when there are no children.
 
 ## Patterns from coss particles
 
 ### Key patterns
 
-Meter with formatted value and range:
+Custom value text — `MeterValue`'s `children` snippet receives `(formattedValue, value)`:
 
-```tsx
-<Meter value={75} min={0} max={100}>
-  <div className="flex justify-between text-sm">
-    <MeterLabel>Storage</MeterLabel>
-    <MeterValue>{({ formattedValue }) => `${formattedValue} used`}</MeterValue>
+```svelte
+<MeterValue>
+  {#snippet children(formattedValue)}{formattedValue} used{/snippet}
+</MeterValue>
+```
+
+Range display (e.g. `3 / 5`) with a custom `max`:
+
+```svelte
+<Meter max={5} value={3}>
+  <div class="flex items-center justify-between gap-2">
+    <MeterLabel>Rating</MeterLabel>
+    <span class="text-sm tabular-nums">3 / 5</span>
   </div>
   <MeterTrack>
     <MeterIndicator />
@@ -68,22 +82,20 @@ Meter with formatted value and range:
 
 Minimal meter without a visible label:
 
-```tsx
+```svelte
 <Meter value={40} aria-label="Storage usage" />
 ```
-
-### More examples
-
-See `p-meter-1` through `p-meter-4` for label, formatted value, and range patterns.
 
 ## Common pitfalls
 
 - Using meter to represent completion tasks better suited for `Progress`.
-- Missing min/max context when values are not obvious to the user.
-- Treating meter as interactive control rather than read-only indicator.
+- Passing a label/value as children and losing the bar (forgot `MeterTrack` + `MeterIndicator`).
+- React habits: function-as-child for `MeterValue`. Use a `children` snippet.
+- Treating meter as an interactive control rather than a read-only indicator.
 
 ## Useful particle references
 
+- label + value: `p-meter-1`
 - without label and value: `p-meter-2`
-- with formatted value: `p-meter-3`
-- with range: `p-meter-4`
+- formatted value: `p-meter-3`
+- range: `p-meter-4`

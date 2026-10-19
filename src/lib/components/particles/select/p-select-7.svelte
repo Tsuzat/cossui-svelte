@@ -20,18 +20,20 @@
   };
 
   const values = Object.keys(languages);
+  const items = values.map((value) => ({ label: languages[value], value }));
 
-  let selected = $state('javascript');
+  let selected = $state<string[]>(['javascript', 'typescript']);
+
+  const summary = $derived.by(() => {
+    if (selected.length === 0) return 'Select languages…';
+    const first = languages[selected[0]];
+    return selected.length === 1 ? first : `${first} (+${selected.length - 1} more)`;
+  });
 </script>
 
-<Select
-  value={selected}
-  onValueChange={(v) => {
-    selected = v;
-  }}
->
+<Select bind:value={selected} {items} multiple>
   <SelectTrigger aria-label="Select languages">
-    <span class="flex-1 truncate">{languages[selected] ?? 'Select languages…'}</span>
+    <span class="flex-1 truncate">{summary}</span>
   </SelectTrigger>
   <SelectPopup>
     {#each values as value (value)}

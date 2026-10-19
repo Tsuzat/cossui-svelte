@@ -1,167 +1,169 @@
-# coss vs shadcn/Radix assumptions
+# cossui-svelte vs shadcn-svelte / Bits UI (and React coss) assumptions
 
-Use this guide when adapting snippets that were originally written with shadcn/Radix mental models.
+Use this guide when adapting snippets written for shadcn-svelte (Bits UI), shadcn/Radix (React), or upstream React coss.
 
 ## Core idea
 
-coss is close to shadcn ergonomically, but its primitives and composition model are aligned to Base UI patterns.
+cossui-svelte is close to shadcn-svelte ergonomically, but its primitives come from ShardsUI (a Svelte port of Base UI), so composition, prop names and value shapes follow Base UI — not Bits UI or Radix.
 
 ## High-impact differences
 
-- Do not assume every shadcn pattern translates 1:1.
-- Verify trigger and popup composition from coss docs before coding.
-- Apply `asChild` -> `render` only on coss parts that explicitly support `render`.
-- Prefer coss component names and exports as documented (`DialogPopup`, `MenuPopup`, `SelectPopup`, etc.).
-- Some legacy aliases may exist, but primary coss names should be preferred in new examples.
-- Prefer styled coss exports by default (for example `Slider`, `SliderValue`) and use `*Primitive` only for advanced/custom composition.
-- When only Base UI helpers are needed (`useRender`, `mergeProps`, `CSPProvider`, `DirectionProvider`), prefer `@coss/ui/base-ui/*` re-exports over direct `@base-ui/react` dependency.
-- For Select migration, replace children-only option derivation with an `items`-first pattern where possible, then map options consistently in `SelectPopup`.
-- For OTP fields, migrate off the `input-otp` package to coss `@coss/otp-field`: rename components (`OTPField`, `OTPFieldInput`, `OTPFieldSeparator`), use `length` and `onValueChange`, and drop `InputOTPGroup` / slot `index` (see example below).
+- Do not assume any shadcn-svelte or React snippet translates 1:1. Verify parts and props in the component docs / guides first.
+- **No `child` snippet / `asChild` / `render` on ShardsUI parts.** Style triggers with `class={buttonVariants(...)}`, change the tag with `as`, and see [composition.md](composition.md). (Sidebar and Tree parts are the exception: they do take a `child` snippet.)
+- Prefer coss names (`DialogPopup`, `MenuPopup`, `SelectPopup`, `PreviewCard`, `Toast` managers). shadcn aliases exist for many parts (`DialogContent`, `DropdownMenu*`, `HoverCard*`, `TabsTrigger`, `TabsContent`, `AccordionContent`, `ButtonGroup`) but use the primary names in new code.
+- Prefer styled coss exports; use `*Primitive` re-exports only for custom composition.
+- Imports go through the `#lib` subpath import: `#lib/components/ui/<name>/index.js` — not `$lib/components/ui/...` and not `@/components/ui/...`.
+- State uses runes and bindings: `bind:value`, `bind:checked`, `bind:open`, `bind:pressed`. There is generally no `defaultValue` in the coss wrappers — seed state through the bound value.
+- Dates in Calendar are `@internationalized/date` `DateValue`s (Bits UI users will recognize this; React users coming from react-day-picker `Date`s will not).
+- Toasts use `toastManager` / `anchoredToastManager`, not `svelte-sonner`'s `toast()` + `<Toaster />`.
+- Skeleton wraps real content (`<phantom-ui>`), it is not a gray box.
+- OTP Field is a custom component: `maxlength` + `children` snippet `cells`, not Bits UI `PinInput` cells-with-`Cell` nor React `length`.
 
 ## Practical migration examples
 
-Use these snippets as fast conversion templates when migrating shadcn/Radix code.
+### Composition: Bits UI `child` snippet → `class` / `as`
 
-### Composition: `asChild` -> `render`
+```svelte
+<!-- shadcn-svelte / Bits UI -->
+<Dialog.Trigger>
+  {#snippet child({ props })}
+    <Button {...props} variant="outline">Open</Button>
+  {/snippet}
+</Dialog.Trigger>
 
-```tsx
-// shadcn/Radix
-<DialogTrigger asChild>
-  <Button variant="outline">Open</Button>
-</DialogTrigger>
+<!-- cossui-svelte -->
+<DialogTrigger class={buttonVariants({ variant: 'outline' })}>Open</DialogTrigger>
 ```
 
-```tsx
-// coss/Base UI
-<DialogTrigger render={<Button variant="outline" />}>Open</DialogTrigger>
+React `render={<Button variant="outline" />}` maps to the same `class={buttonVariants(...)}` form.
+
+### Menu actions: `onSelect` → `onclick`
+
+```svelte
+<!-- Bits UI -->
+<DropdownMenu.Item onSelect={handleOpen}>Open</DropdownMenu.Item>
+
+<!-- cossui-svelte -->
+<MenuItem onclick={handleOpen}>Open</MenuItem>
 ```
 
-### Menu actions: `onSelect` -> `onClick`
+Links: `<MenuLinkItem href="/docs">Docs</MenuLinkItem>` (SvelteKit routes plain anchors client-side).
 
-```tsx
-// shadcn/Radix
-<DropdownMenuItem onSelect={handleOpen}>Open</DropdownMenuItem>
-```
+### Select: `items` + `SelectValue`
 
-```tsx
-// coss/Base UI
-<MenuItem onClick={handleOpen}>Open</MenuItem>
-```
+```svelte
+<!-- shadcn-svelte -->
+<Select.Root type="single" bind:value>
+  <Select.Trigger>{label ?? 'Select a framework'}</Select.Trigger>
+  <Select.Content>
+    <Select.Item value="next" label="Next.js" />
+  </Select.Content>
+</Select.Root>
 
-### Select: `items`-first + placeholder on `SelectValue`
+<!-- cossui-svelte -->
+<script lang="ts">
+  const items = [
+    { label: 'Next.js', value: 'next' },
+    { label: 'Vite', value: 'vite' }
+  ];
+  let value = $state<string>();
+</script>
 
-```tsx
-// shadcn/Radix
-<Select>
-  <SelectTrigger>
+<Select bind:value {items}>
+  <SelectTrigger aria-label="Framework">
     <SelectValue placeholder="Select a framework" />
   </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="next">Next.js</SelectItem>
-    <SelectItem value="vite">Vite</SelectItem>
-  </SelectContent>
-</Select>
-```
-
-```tsx
-// coss/Base UI
-const items = [
-  { label: "Next.js", value: "next" },
-  { label: "Vite", value: "vite" },
-];
-
-<Select items={items}>
-  <SelectTrigger>
-    <SelectValue placeholder="Select a framework" />
-  </SelectTrigger>
-  <SelectPopup alignItemWithTrigger={false}>
-    {items.map((item) => (
-      <SelectItem key={item.value} value={item.value}>
-        {item.label}
-      </SelectItem>
-    ))}
+  <SelectPopup>
+    {#each items as item (item.value)}
+      <SelectItem value={item.value}>{item.label}</SelectItem>
+    {/each}
   </SelectPopup>
 </Select>
 ```
 
-### Toggle Group: `type` -> `multiple`
+No `type="single" | "multiple"` — add `multiple` for multi-select.
 
-```tsx
-// shadcn/Radix
-<ToggleGroup type="single" defaultValue="daily">
+### Toggle Group: `type` → `multiple`, array value
+
+```svelte
+<!-- Bits UI -->
+<ToggleGroup.Root type="single" bind:value={period}>…</ToggleGroup.Root>
+
+<!-- cossui-svelte: value is always string[] -->
+<ToggleGroup bind:value={periods}>
   <ToggleGroupItem value="daily">Daily</ToggleGroupItem>
   <ToggleGroupItem value="weekly">Weekly</ToggleGroupItem>
 </ToggleGroup>
 ```
 
-```tsx
-// coss/Base UI
-<ToggleGroup defaultValue={["daily"]}>
-  <ToggleGroupItem value="daily">Daily</ToggleGroupItem>
-  <ToggleGroupItem value="weekly">Weekly</ToggleGroupItem>
-</ToggleGroup>
+### Slider: scalar single value
+
+React shadcn's `defaultValue={[50]}` (array for one thumb) becomes a plain number.
+
+```svelte
+<!-- Bits UI -->
+<Slider type="single" bind:value={volume} max={100} />
+
+<!-- cossui-svelte: number for one thumb, number[] for a range -->
+<Slider bind:value={volume} max={100} getAriaLabel={() => 'Volume'} />
 ```
 
-### Slider: scalar single-value usage in coss
+### Accordion: `type` → `multiple`
 
-```tsx
-// shadcn/Radix
-<Slider defaultValue={[50]} max={100} step={1} />
-```
+```svelte
+<!-- Bits UI -->
+<Accordion.Root type="single" value="item-1">…</Accordion.Root>
 
-```tsx
-// coss/Base UI
-<Slider defaultValue={50} max={100} step={1} />
-```
-
-### Accordion: `type/collapsible` -> coss defaults
-
-```tsx
-// shadcn/Radix
-<Accordion type="single" collapsible defaultValue="item-1">
-  <AccordionItem value="item-1">...</AccordionItem>
+<!-- cossui-svelte: string value by default, string[] with `multiple` -->
+<Accordion value="item-1">
+  <AccordionItem value="item-1">…</AccordionItem>
 </Accordion>
 ```
 
-```tsx
-// coss/Base UI
-<Accordion defaultValue={["item-1"]}>
-  <AccordionItem value="item-1">...</AccordionItem>
-</Accordion>
+### Checkbox / Radio / Switch
+
+React's `defaultChecked` + `onCheckedChange={setChecked}` and `htmlFor` become bindings and `for`:
+
+```svelte
+<Checkbox bind:checked {id} />
+<Label for={id}>Accept</Label>
+<RadioGroup bind:value><Label><Radio value="a" /> A</Label></RadioGroup>
 ```
 
-### OTP Field: `input-otp` package → `@coss/otp-field`
+### OTP: Bits UI `PinInput` / `input-otp` → `OTPField`
 
-coss wraps [Base UI OTP Field](https://base-ui.com/react/components/otp-field) (`OTPField`). Remove the `input-otp` dependency and align with the new names and root props.
-
-```tsx
-// shadcn / input-otp
-<InputOTP maxLength={6} value={value} onChange={setValue}>
-  <InputOTPGroup>
-    <InputOTPSlot index={0} />
-    <InputOTPSlot index={1} />
-  </InputOTPGroup>
-</InputOTP>
-```
-
-```tsx
-// coss
-<OTPField aria-label="Verification code" length={6} value={value} onValueChange={setValue}>
-  <OTPFieldInput />
-  <OTPFieldInput aria-label="Character 2 of 6" />
+```svelte
+<!-- cossui-svelte -->
+<OTPField aria-label="Verification code" maxlength={6} bind:value onComplete={verify}>
+  {#snippet children({ cells })}
+    {#each cells as cell, i (i)}
+      <OTPFieldInput aria-label={`Character ${i + 1} of 6`} {cell} />
+    {/each}
+  {/snippet}
 </OTPField>
 ```
 
-- `InputOTPGroup` is not used; optional `size="lg"` lives on `OTPField`.
-- Render one `OTPFieldInput` per character in order; do not pass `index`.
-- Label the OTP root with `aria-label` or a `<label>`/`FieldLabel`; keep the first input unlabeled and add `aria-label` to slots 2..N when you need slot-position announcements.
+### Toast: `svelte-sonner` → `toastManager`
+
+```ts
+// svelte-sonner
+// toast.success('Saved', { description: 'Draft updated' });
+
+// cossui-svelte (providers in +layout.svelte)
+toastManager.add({ type: 'success', title: 'Saved', description: 'Draft updated' });
+```
+
+### Sheet → Drawer
+
+Sheet still ships for existing code, but new edge panels use `Drawer` with `position` on the root ([sheet.md](../primitives/sheet.md)).
 
 ## Migration checklist
 
-1. Confirm the exact coss imports from docs.
-2. Confirm child structure requirements (trigger/header/panel/footer/items/groups).
-3. Confirm prop names and semantics from the coss docs page.
-4. Validate with at least one coss particle example.
+1. Confirm the exact coss imports (`#lib/components/ui/<name>/index.js`).
+2. Confirm child structure requirements (trigger/header/panel/footer, list/collection, track/indicator).
+3. Confirm prop names, value shapes and bindings from the component guide or docs page.
+4. Replace every `child`/`asChild`/`render` composition on ShardsUI parts.
+5. Validate against at least one particle example.
 
 ## Per-component migration notes
 
@@ -169,6 +171,6 @@ For the full component registry, see `../component-registry.md`.
 
 ## Anti-patterns
 
-- Copy/paste shadcn examples and only change import path.
-- Using undocumented props because they exist in other ecosystems.
+- Copy/pasting shadcn-svelte or React examples and only changing the import path.
+- Using undocumented props because they exist in Bits UI, Radix, or React coss (`type="single"`, `defaultValue`, `onSelect`, `alignItemWithTrigger`, `render`).
 - Omitting required subcomponents in overlays/forms because the source snippet did.

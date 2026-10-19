@@ -1,7 +1,7 @@
 ---
 name: coss
-description: Helps implement coss UI components correctly. Use when building UIs with coss primitives and patterns (buttons, dialogs, selects, forms, menus, tabs, segmented controls, inputs, toasts, etc.), migrating from shadcn/Radix to coss/Base UI, composing trigger-based overlays, or troubleshooting coss component behavior. Covers imports, accessibility, Tailwind styling, and common pitfalls.
-compatibility: Requires Tailwind CSS v4 and @base-ui/react. Designed for React projects using the coss component registry.
+description: Helps implement coss UI components correctly in Svelte 5 / SvelteKit (cossui-svelte, built on ShardsUI). Use when building UIs with coss primitives and patterns (buttons, dialogs, selects, forms, menus, tabs, segmented controls, inputs, toasts, etc.), migrating from shadcn-svelte/Bits UI or React (shadcn/Radix, coss) to cossui-svelte/ShardsUI, composing trigger-based overlays, or troubleshooting coss component behavior. Covers imports, accessibility, Tailwind styling, and common pitfalls.
+compatibility: Requires Svelte 5, Tailwind CSS v4 and ShardsUI. Designed for Svelte/SvelteKit projects using the cossui-svelte component registry.
 license: MIT
 metadata:
   author: cosscom
@@ -9,7 +9,7 @@ metadata:
 
 # coss ui
 
-coss ui is a component library built on Base UI with a shadcn-like developer experience plus a large particle catalog.
+coss ui is a component library built on Base UI with a shadcn-like developer experience plus a large particle catalog. This skill targets **cossui-svelte**, the Svelte 5 port built on [ShardsUI](https://shardsui.com/) (a Svelte port of Base UI).
 
 ## What this skill is for
 
@@ -17,17 +17,20 @@ Use this skill to:
 
 - pick the right coss primitive(s) for a UI task
 - write correct coss usage code (imports, composition, props)
-- avoid common migration mistakes from shadcn/Radix assumptions
+- avoid common migration mistakes from shadcn-svelte/Bits UI, shadcn/Radix and React coss assumptions
 - reference particle examples to produce practical, production-like patterns
 
 ## Source of truth
 
-- coss components docs: `apps/ui/content/docs/components/*.mdx`
-  - `https://github.com/cosscom/ui/tree/main/apps/ui/content/docs/components`
-- coss particle examples: `apps/ui/registry/default/particles/p-*.tsx`
-  - `https://github.com/cosscom/ui/tree/main/apps/ui/registry/default/particles`
-- coss particles catalog: `https://coss.com/ui/particles`
-- docs map for agents: `https://coss.com/ui/llms.txt`
+- docs map for agents: `https://cossui-svelte.com/llms.txt`
+- component docs: `https://cossui-svelte.com/docs/components/<name>`
+  - source: `src/lib/components/app/content/components/*.mdx` in `https://github.com/cossui-svelte/cossui-svelte`
+- component source: `src/lib/components/ui/<name>/` (each with an `index.ts` barrel)
+- underlying primitive APIs (props, `as`, `children` snippet state, handles): ShardsUI docs at `https://github.com/abdrizik/shardsui-svelte/tree/main/docs/src/content` (`<primitive>.md`, plus `composition.md`, `forms.md`, `props-and-attributes.md`)
+- particle examples: `src/lib/components/particles/<name>/p-<name>-<N>.svelte`
+  - `https://github.com/cossui-svelte/cossui-svelte/tree/main/src/lib/components/particles`
+- particles catalog: `https://cossui-svelte.com/particles` (one particle: `https://cossui-svelte.com/particle/<id>`)
+- registry index: `https://cossui-svelte.com/r/registry.json`
 
 ## Out of scope
 
@@ -49,6 +52,8 @@ Always apply before returning coss code:
 
 - Do not invent coss APIs. Verify against component docs first.
 - For trigger-based primitives (Dialog, Menu, Select, Popover, Tooltip), follow each primitive's documented trigger/content hierarchy and composition API; do not mix patterns across components.
+- ShardsUI parts have no `render` / `asChild` / `child` composition: style trigger and close parts with `class={buttonVariants(...)}` (never nest a `<Button>` inside them) and change the tag with `as`. Only Sidebar and Tree parts take a `child` snippet.
+- Write Svelte 5: runes (`$state`, `$derived`, `$effect`, `$props`), `bind:value` / `bind:checked` / `bind:open`, snippets instead of render props, `class` / `for` / `onclick`.
 - Use Drawer for edge panels on desktop and mobile. Sheet has been replaced by Drawer; do not introduce Sheet usage.
 - Preserve accessibility labels and error semantics.
 - Consult primitive-specific guides for component invariants and edge cases.
@@ -60,13 +65,13 @@ Rule references (read on demand when the task touches these areas):
 - `./references/rules/styling.md` — Tailwind tokens, icon conventions, data-slot selectors
 - `./references/rules/forms.md` — Field composition, validation, input patterns
 - `./references/rules/composition.md` — Trigger/popup hierarchies, grouped controls
-- `./references/rules/migration.md` — shadcn/Radix to coss/Base UI migration patterns
+- `./references/rules/migration.md` — shadcn-svelte/Bits UI and React (shadcn/Radix, coss) to cossui-svelte migration patterns
 - `./references/segmented-control.md` — choose Radio Group, links, Toggle Group, or Tabs before applying segmented-control styling
 - `./references/portal-props.md` — optional `portalProps` on composed popups and toast providers (`keepMounted`, `container`, which surfaces support it)
 
 ## Component discovery
 
-All 54 primitives have dedicated reference guides at `./references/primitives/<name>.md`. To find the right one for a task, consult the component registry index:
+All 69 components (54 upstream primitives plus port-only ones such as Chart, Map, Tree, Cropper, Stepper, Timeline, Composer and Chat UI) have dedicated reference guides at `./references/primitives/<name>.md`. To find the right one for a task, consult the component registry index:
 
 - `./references/component-registry.md`
 
@@ -75,7 +80,7 @@ All 54 primitives have dedicated reference guides at `./references/primitives/<n
 1. Identify user intent (single primitive, composed flow, form flow, overlay flow, feedback flow).
 2. Consult `references/component-registry.md` to identify candidate primitives.
 3. Select primitives from coss docs first; avoid custom fallback unless needed.
-4. Check at least one particle example for practical composition patterns. Particle files live at `apps/ui/registry/default/particles/p-<name>-<N>.tsx` (e.g. `p-dialog-1.tsx`).
+4. Check at least one particle example for practical composition patterns. Particle files live at `src/lib/components/particles/<name>/p-<name>-<N>.svelte` (e.g. `p-dialog-1.svelte`), or fetch `https://cossui-svelte.com/r/p-<name>-<N>.json`.
 5. Write minimal code using documented imports/props.
 6. Self-check accessibility and composition invariants.
 
@@ -86,14 +91,14 @@ See `./references/cli.md` for full install/discovery workflow.
 Quick CLI pattern:
 
 ```bash
-npx shadcn@latest add @coss/<component>
+pnpm dlx shadcn-svelte@latest add https://cossui-svelte.com/r/<component>.json
 ```
 
 Quick manual pattern:
 
 - install dependencies listed in the component docs page
 - copy required component file(s)
-- update imports to match the target app alias setup
+- add the `#lib/*` subpath import (`"imports": { "#lib/*": "./src/lib/*" }` in `package.json`); components import each other through it
 
 ## Primitive Guidance
 

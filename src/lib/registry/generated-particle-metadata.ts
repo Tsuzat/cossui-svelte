@@ -177,13 +177,6 @@ export const metadata: Record<string, ParticleMetaDefinition> = {
     registryDependencies: ['autocomplete'],
     meta: { class: '**:data-[slot=preview]:w-full **:data-[slot=preview]:max-w-64' }
   },
-  'p-autocomplete-16': {
-    description: 'Address autocomplete with Google Maps Places API',
-    tags: ['autocomplete', 'input', 'async', 'search'],
-    npmDependencies: ['lucide-react'],
-    registryDependencies: ['autocomplete', 'spinner'],
-    meta: { class: '**:data-[slot=preview]:w-full **:data-[slot=preview]:max-w-64' }
-  },
   'p-avatar-1': {
     description: 'Avatar with image and fallback',
     tags: ['avatar'],
@@ -2532,7 +2525,7 @@ export const metadata: Record<string, ParticleMetaDefinition> = {
     meta: { class: '**:data-[slot=preview]:w-full **:data-[slot=preview]:max-w-64' }
   },
   'p-select-5': {
-    description: 'Select without item alignment',
+    description: 'Select with a placeholder',
     tags: ['select'],
     registryDependencies: ['select'],
     meta: { class: '**:data-[slot=preview]:w-full **:data-[slot=preview]:max-w-64' }

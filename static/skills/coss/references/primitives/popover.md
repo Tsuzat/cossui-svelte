@@ -14,63 +14,77 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/popover
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/popover.json
 ```
 
 Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import {
-  Popover,
-  PopoverClose,
-  PopoverCreateHandle,
-  PopoverDescription,
-  PopoverPopup,
-  PopoverTitle,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+```svelte
+<script lang="ts">
+  import { buttonVariants } from '#lib/components/ui/button/index.js';
+  import {
+    Popover,
+    PopoverClose,
+    PopoverDescription,
+    PopoverPopup,
+    PopoverTitle,
+    PopoverTrigger
+  } from '#lib/components/ui/popover/index.js';
+</script>
 ```
+
+Also exported: `PopoverContent` (alias of `PopoverPopup`), `PopoverHandle` (ShardsUI `Popover.Handle` class), `PopoverPrimitive`. There is no `PopoverCreateHandle` here — use `new PopoverHandle()`.
 
 ## Minimal pattern
 
-```tsx
+```svelte
 <Popover>
-  <PopoverTrigger render={<Button variant="outline" />}>Open Popover</PopoverTrigger>
+  <PopoverTrigger class={buttonVariants({ variant: 'outline' })}>Open Popover</PopoverTrigger>
   <PopoverPopup>
     <PopoverTitle>Popover Title</PopoverTitle>
     <PopoverDescription>Popover Description</PopoverDescription>
-    <PopoverClose render={<Button variant="outline" />}>Close</PopoverClose>
+    <PopoverClose class={buttonVariants({ variant: 'outline' })}>Close</PopoverClose>
   </PopoverPopup>
 </Popover>
 ```
 
 ## Patterns from coss particles
 
-- **Portal forwarding**: optional `portalProps` on `PopoverPopup` → Base UI `Popover.Portal` (`keepMounted`, `container`, …). See [portal-props.md](../portal-props.md).
-- **Form-in-popover**: use `PopoverPopup` as a lightweight form container (for example feedback forms with `Form` + `Field` + `Textarea`).
-- **Dismiss controls**: use `PopoverClose` both for footer actions and icon close buttons (`aria-label` + `render={<Button size="icon" .../>}`).
-- **Tooltip-like popovers**: use `tooltipStyle` for info-icon helper content where tooltip density is preferred.
-- **Detached triggers**: use `PopoverCreateHandle` + shared `handle`/`payload` on multiple `PopoverTrigger`s to animate one popup across triggers.
-- **Position tuning**: only add `side`, `align`, `sideOffset`, `alignOffset` when default anchoring is not sufficient.
+- **Portal forwarding**: optional `portalProps` on `PopoverPopup` → ShardsUI `Popover.Portal` (`keepMounted`, `container`, …). See [portal-props.md](../portal-props.md).
+- **Popup options**: `tooltipStyle` (tooltip-like density for info-icon helpers), `showArrow`, `side`, `align`, `sideOffset` (default `4`), `alignOffset`, `customAnchor`.
+- **Form-in-popover**: use `PopoverPopup` as a lightweight form container (`Form` + `Field` + `Textarea`).
+- **Dismiss controls**: `PopoverClose` for footer actions and icon close buttons:
+
+```svelte
+<PopoverClose
+  aria-label="Close"
+  class={cn(buttonVariants({ size: 'icon', variant: 'ghost' }), 'absolute inset-e-2 top-2')}
+>
+  <XIcon />
+</PopoverClose>
+```
+
+- **Controlled**: `bind:open` on `Popover`.
+- **Hover**: `openOnHover` on `PopoverTrigger`.
+- **One popup, many triggers**: either keep one `Popover` with `bind:open`, set the active content on click and pass the clicked element as `customAnchor` (`p-popover-3`); or share `const handle = new PopoverHandle()` via `handle` on `Popover` and on several `PopoverTrigger`s (each with a `payload`).
 
 ## Common pitfalls
 
-- Treating Popover as a modal replacement when the flow needs full modal behavior (use Dialog/AlertDialog instead).
-- Forgetting `render` composition on trigger/close when using coss buttons.
+- Treating Popover as a modal replacement when the flow needs full modal behavior (use Dialog/AlertDialog).
+- React habits: `render={<Button />}` on trigger/close. Use `class={buttonVariants(...)}` — and don't nest a `<Button>` inside the trigger.
 - Missing accessible names on icon-only triggers or close controls.
-- Using detached trigger handles without stable payload/content mapping.
 - Copying Tooltip patterns directly without checking `tooltipStyle` and popover semantics.
 
 ## Useful particle references
 
-- baseline popover with form content: `p-popover-1`
+- popover with form: `p-popover-1`
 - close controls (icon + action button): `p-popover-2`
-- detached trigger handle pattern: `p-popover-3`
-- split-button confirmation flow with selectable occurrences: `p-popover-4`
-- tooltip-style popover usage example: `p-input-group-7`
+- one popover re-anchored across triggers: `p-popover-3`
+- split-button confirmation with selectable occurrences: `p-popover-4`
+- tooltip-style popover: `p-input-group-7`

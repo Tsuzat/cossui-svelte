@@ -15,44 +15,48 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/context-menu
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/context-menu.json
 ```
 
-Manual deps and theme var from docs:
+Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
-Also include the destructive foreground CSS variable snippet from the coss context menu docs when doing manual setup.
+For manual setup, also include the `destructive-foreground` theme token from the [Styling](https://cossui-svelte.com/docs/styling) docs (used by destructive items).
 
 ## Canonical imports
 
-```tsx
-import {
-  ContextMenu,
-  ContextMenuCheckboxItem,
-  ContextMenuGroup,
-  ContextMenuGroupLabel,
-  ContextMenuItem,
-  ContextMenuLinkItem,
-  ContextMenuPopup,
-  ContextMenuRadioGroup,
-  ContextMenuRadioItem,
-  ContextMenuSeparator,
-  ContextMenuShortcut,
-  ContextMenuSub,
-  ContextMenuSubPopup,
-  ContextMenuSubTrigger,
-  ContextMenuTrigger,
-} from "@/components/ui/context-menu"
+```svelte
+<script lang="ts">
+  import {
+    ContextMenu,
+    ContextMenuCheckboxItem,
+    ContextMenuGroup,
+    ContextMenuGroupLabel,
+    ContextMenuItem,
+    ContextMenuLinkItem,
+    ContextMenuPopup,
+    ContextMenuRadioGroup,
+    ContextMenuRadioItem,
+    ContextMenuSeparator,
+    ContextMenuShortcut,
+    ContextMenuSub,
+    ContextMenuSubPopup,
+    ContextMenuSubTrigger,
+    ContextMenuTrigger
+  } from '#lib/components/ui/context-menu/index.js';
+</script>
 ```
+
+Also exported: `ContextMenuPortal`, `ContextMenuPrimitive`.
 
 ## Minimal pattern
 
-```tsx
+```svelte
 <ContextMenu>
-  <ContextMenuTrigger className="flex h-32 items-center justify-center rounded-lg border border-dashed">
+  <ContextMenuTrigger class="flex h-32 items-center justify-center rounded-lg border border-dashed">
     Right click here
   </ContextMenuTrigger>
   <ContextMenuPopup>
@@ -63,36 +67,57 @@ import {
 </ContextMenu>
 ```
 
-Wrap the trigger around the surface that should accept right click or long press. The popup opens at the pointer automatically.
+`ContextMenuTrigger` renders a `<div>` around the surface that should accept right click or long press. The popup opens at the pointer automatically. `open` on `ContextMenu` is bindable.
 
 ## Patterns from coss particles
 
-- **Portal forwarding**: optional `portalProps` on `ContextMenuPopup` -> Base UI `ContextMenu.Portal` (`keepMounted`, `container`, ...). See [portal-props.md](../portal-props.md).
-- Use `ContextMenuTrigger` on a non-interactive wrapper (`div`) around the target surface.
-- Use `ContextMenuLinkItem` for navigation links.
-- If you were on `ContextMenuItem render={<Link href="..." />}`, switch to `ContextMenuLinkItem` but **keep `render={<Link … />}`** — do not use `href` alone with a router Link.
-- Use `href` on `ContextMenuLinkItem` only for plain `<a>` navigation.
-- Use `ContextMenuItem closeOnClick` for action items that should dismiss the menu.
-- Use `ContextMenuCheckboxItem variant="switch"` for toggle-style preferences.
-- Use `ContextMenuRadioGroup` + `ContextMenuRadioItem` for single-choice options.
-- Use `variant="destructive"` on dangerous actions.
-- Use `ContextMenuSub` + `ContextMenuSubTrigger` + `ContextMenuSubPopup` for nested menus.
+- **Portal forwarding**: optional `portalProps` on `ContextMenuPopup` → ShardsUI `ContextMenu.Portal` (`keepMounted`, `container`, …). See [portal-props.md](../portal-props.md).
+- **Navigation**: `ContextMenuLinkItem href={…}` renders a native `<a>` (closes on click by default, `closeOnClick={false}` to keep open). In SvelteKit pass `resolve('/docs')` from `$app/paths`.
+- **Icons + shortcuts**: put the icon first (`aria-hidden="true"`), then the label, then `<ContextMenuShortcut>⌘E</ContextMenuShortcut>`. Use `inset` on icon-less items to keep labels aligned.
+- **Destructive**: `variant="destructive"` on dangerous items.
+- **Checkbox items**: `ContextMenuCheckboxItem bind:checked`; `variant="switch"` shows a decorative switch indicator.
+- **Radio items**: `ContextMenuRadioGroup bind:value` + `ContextMenuRadioItem value="…"`.
+- **Groups**: `ContextMenuGroup` + `ContextMenuGroupLabel`.
+- **Nested menus**: `ContextMenuSub` + `ContextMenuSubTrigger` + `ContextMenuSubPopup`.
+- **Positioning**: `ContextMenuPopup` accepts `side`, `align`, `sideOffset` (default `4`), `alignOffset`, `anchor`.
+
+```svelte
+<ContextMenuPopup>
+  <ContextMenuItem>
+    <PencilIcon aria-hidden="true" />
+    Edit
+    <ContextMenuShortcut>⌘E</ContextMenuShortcut>
+  </ContextMenuItem>
+  <ContextMenuSub>
+    <ContextMenuSubTrigger>More tools</ContextMenuSubTrigger>
+    <ContextMenuSubPopup>
+      <ContextMenuItem>Inspect</ContextMenuItem>
+    </ContextMenuSubPopup>
+  </ContextMenuSub>
+  <ContextMenuSeparator />
+  <ContextMenuItem variant="destructive">
+    <TrashIcon aria-hidden="true" />
+    Delete
+  </ContextMenuItem>
+</ContextMenuPopup>
+```
 
 ## Common pitfalls
 
 - Putting interactive controls inside `ContextMenuTrigger` without careful event handling.
 - Forgetting `ContextMenuSubPopup` for nested menus.
+- React habits: `ContextMenuItem render={<Link />}` or `onClick` — use `ContextMenuLinkItem href` and `onclick`.
 - Mixing navigation and action items without clear close behavior (`closeOnClick`).
 
 ## Useful particle references
 
 - basic pointer menu: `p-context-menu-1`
-- link/navigation with `ContextMenuLinkItem render={<Link … />}`: `p-context-menu-2`
-- nested submenu pattern: `p-context-menu-3`
-- checkbox item pattern: `p-context-menu-4`
-- grouped sections with labels: `p-context-menu-5`
-- icons, shortcuts, and destructive actions: `p-context-menu-6`
-- radio group pattern: `p-context-menu-7`
+- link items: `p-context-menu-2`
+- nested submenu: `p-context-menu-3`
+- checkbox items: `p-context-menu-4`
+- group labels: `p-context-menu-5`
+- icons, shortcuts, destructive: `p-context-menu-6`
+- radio group: `p-context-menu-7`
 - switch-style checkbox items: `p-context-menu-8`
 
 ## Related primitives

@@ -8,35 +8,37 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/empty
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/empty.json
 ```
 
-Manual deps from docs:
-
-```bash
-# No extra runtime dependency required for this primitive.
-```
+Manual deps from docs: none (custom components).
 
 ## Canonical imports
 
-```tsx
-import {
-  Empty,
-  EmptyContent,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from "@/components/ui/empty"
+```svelte
+<script lang="ts">
+  import {
+    Empty,
+    EmptyContent,
+    EmptyDescription,
+    EmptyHeader,
+    EmptyMedia,
+    EmptyTitle
+  } from '#lib/components/ui/empty/index.js';
+</script>
 ```
 
 ## Minimal pattern
 
-```tsx
+```svelte
+<script lang="ts">
+  import InboxIcon from '@lucide/svelte/icons/inbox';
+</script>
+
 <Empty>
   <EmptyHeader>
     <EmptyMedia variant="icon">
-      <Icon />
+      <InboxIcon />
     </EmptyMedia>
     <EmptyTitle>No data</EmptyTitle>
     <EmptyDescription>No data found</EmptyDescription>
@@ -51,9 +53,9 @@ import {
 
 ### Key patterns
 
-Empty state with icon and action:
+`EmptyMedia variant="icon"` frames an icon; the default variant holds anything else (an image, an `Avatar`, an illustration).
 
-```tsx
+```svelte
 <Empty>
   <EmptyHeader>
     <EmptyMedia variant="icon">
@@ -71,18 +73,14 @@ Empty state with icon and action:
 </Empty>
 ```
 
-Always include an actionable next step (button, link) in `EmptyContent`.
-
-### More examples
-
-See `p-empty-1` for the core pattern.
+Always include an actionable next step (button, link) in `EmptyContent`. `EmptyMedia` is also handy outside `Empty`, e.g. inside `CommandEmpty` (`p-command-2`).
 
 ## Common pitfalls
 
-- Presenting empty states without actionable next step.
-- Using empty state component for loading/error states instead of dedicated primitives.
+- Presenting empty states without an actionable next step.
+- Using the empty state for loading/error states instead of `Skeleton`/`Spinner`/`Alert`.
 - Copy-only empty states with no context-specific guidance for recovery.
 
 ## Useful particle references
 
-- core patterns: `p-empty-1`
+- icon + actions: `p-empty-1`

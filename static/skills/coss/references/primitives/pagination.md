@@ -8,91 +8,97 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/pagination
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/pagination.json
 ```
 
-Manual deps from docs:
-
-```bash
-# No extra runtime dependency required for this primitive.
-```
+Manual deps from docs: none (custom components; uses `button` styles and `@lucide/svelte` icons).
 
 ## Canonical imports
 
-```tsx
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination"
+```svelte
+<script lang="ts">
+  import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious
+  } from '#lib/components/ui/pagination/index.js';
+</script>
 ```
 
 ## Minimal pattern
 
-```tsx
+```svelte
 <Pagination>
   <PaginationContent>
     <PaginationItem>
-      <PaginationPrevious href="#" />
+      <PaginationPrevious href="?page=1" />
     </PaginationItem>
     <PaginationItem>
-      <PaginationLink href="#">1</PaginationLink>
+      <PaginationLink href="?page=1">1</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="?page=2" isActive>2</PaginationLink>
     </PaginationItem>
     <PaginationItem>
       <PaginationEllipsis />
     </PaginationItem>
     <PaginationItem>
-      <PaginationNext href="#" />
+      <PaginationNext href="?page=3" />
     </PaginationItem>
   </PaginationContent>
 </Pagination>
 ```
+
+`Pagination` renders `<nav aria-label="pagination">`; `PaginationLink` is an anchor with `isActive` and `size` (button sizes, default `icon`).
 
 ## Patterns from coss particles
 
 ### Key patterns
 
-Full pagination with active page:
+Derive the links from state with `{#each}`:
 
-```tsx
+```svelte
+<script lang="ts">
+  let { currentPage, totalPages }: { currentPage: number; totalPages: number } = $props();
+  const pages = $derived(Array.from({ length: totalPages }, (_, i) => i + 1));
+</script>
+
 <Pagination>
   <PaginationContent>
-    <PaginationItem>
-      <PaginationPrevious href="#" />
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationLink href="#">1</PaginationLink>
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationLink href="#" isActive>2</PaginationLink>
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationLink href="#">3</PaginationLink>
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationEllipsis />
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationNext href="#" />
-    </PaginationItem>
+    {#each pages as page (page)}
+      <PaginationItem>
+        <PaginationLink href={`?page=${page}`} isActive={page === currentPage}>{page}</PaginationLink>
+      </PaginationItem>
+    {/each}
   </PaginationContent>
 </Pagination>
 ```
 
-### More examples
+Prev/next only, with disabled boundaries — use `Button` with `href` (it drops `href` and sets `aria-disabled` when disabled):
 
-See `p-pagination-1` through `p-pagination-3` for various pagination layouts.
+```svelte
+<PaginationContent class="w-full justify-between gap-2">
+  <PaginationItem>
+    <Button disabled={currentPage === 1} href={`?page=${currentPage - 1}`} variant="outline">Previous</Button>
+  </PaginationItem>
+  <PaginationItem>
+    <Button disabled={currentPage === totalPages} href={`?page=${currentPage + 1}`} variant="outline">Next</Button>
+  </PaginationItem>
+</PaginationContent>
+```
 
 ## Common pitfalls
 
-- Using pagination controls without synchronizing data/page state.
+- Using pagination controls without synchronizing data/page state (prefer the URL as source of truth in SvelteKit).
 - Mixing pagination with infinite-scroll UX in the same surface.
 - Missing disabled-state handling on prev/next boundaries.
 
 ## Useful particle references
 
-- core patterns: `p-pagination-1`, `p-pagination-2`, `p-pagination-3`
+- numbered pagination: `p-pagination-1`
+- previous/next only: `p-pagination-2`
+- page-size select with previous/next: `p-pagination-3`

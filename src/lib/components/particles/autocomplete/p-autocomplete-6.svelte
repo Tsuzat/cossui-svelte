@@ -23,7 +23,7 @@
   ];
 </script>
 
-<Autocomplete {items}>
+<Autocomplete mode="both" {items}>
   <AutocompleteInput aria-label="Search items" placeholder="Search items…" showTrigger />
   <AutocompletePopup>
     <AutocompleteEmpty>No items found.</AutocompleteEmpty>

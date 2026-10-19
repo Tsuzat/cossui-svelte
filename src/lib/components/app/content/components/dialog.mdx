@@ -84,7 +84,7 @@ Root component. Wrapper for `Dialog.Root` from ShardsUI. `open` is bindable (`bi
 
 ### DialogTrigger
 
-Trigger button that opens the dialog. Wrapper for `Dialog.Trigger` from ShardsUI. Defaults to `type="button"`. Use the `child` snippet to render a custom element.
+Trigger button that opens the dialog. Wrapper for `Dialog.Trigger` from ShardsUI. Defaults to `type="button"`. Style it with `class` (for example `class={buttonVariants({ variant: 'outline' })}`) and change the rendered tag with `as`; ShardsUI parts have no `child` snippet or render prop, so don't nest a `Button` inside it.
 
 ### DialogCreateHandle
 

@@ -8,40 +8,38 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/card
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/card.json
 ```
 
-Manual deps from docs:
-
-```bash
-# No extra runtime dependency required for this primitive.
-```
+Manual deps from docs: none (custom components, each a styled `div`).
 
 ## Canonical imports
 
-```tsx
-import {
-  Card,
-  CardAction,
-  CardDescription,
-  CardFooter,
-  CardFrame,
-  CardFrameAction,
-  CardFrameDescription,
-  CardFrameFooter,
-  CardFrameHeader,
-  CardFrameTitle,
-  CardHeader,
-  CardPanel,
-  CardTitle,
-} from "@/components/ui/card"
+```svelte
+<script lang="ts">
+  import {
+    Card,
+    CardAction,
+    CardDescription,
+    CardFooter,
+    CardFrame,
+    CardFrameAction,
+    CardFrameDescription,
+    CardFrameFooter,
+    CardFrameHeader,
+    CardFrameTitle,
+    CardHeader,
+    CardPanel,
+    CardTitle
+  } from '#lib/components/ui/card/index.js';
+</script>
 ```
 
 `CardPanel` is also exported as `CardContent`.
 
 ## Minimal pattern
 
-```tsx
+```svelte
 <Card>
   <CardHeader>
     <CardTitle>Title</CardTitle>
@@ -58,21 +56,21 @@ import {
 
 Card with form content:
 
-```tsx
-<Card className="w-full max-w-sm">
+```svelte
+<Card class="w-full max-w-sm">
   <CardHeader>
     <CardTitle>Create project</CardTitle>
     <CardDescription>Deploy your new project in one click.</CardDescription>
   </CardHeader>
-  <CardPanel className="flex flex-col gap-4">
+  <CardPanel class="flex flex-col gap-4">
     <Field>
       <FieldLabel>Name</FieldLabel>
       <Input type="text" placeholder="My project" />
     </Field>
   </CardPanel>
-  <CardFooter className="flex justify-end gap-2">
+  <CardFooter class="flex justify-end gap-2">
     <Button variant="ghost">Cancel</Button>
-    <Button>Create</Button>
+    <Button type="submit">Create</Button>
   </CardFooter>
 </Card>
 ```
@@ -85,7 +83,11 @@ Put header actions in `CardAction`, a sibling of `CardTitle` and `CardDescriptio
 
 `CardFrame` is a muted outer shell with its own header and footer around one or more inner `Card`s (or a `Table variant="card"`). Use it when a section needs a title row, an optional action, and a footnote outside the main surface.
 
-```tsx
+```svelte
+<script lang="ts">
+  import PlusIcon from '@lucide/svelte/icons/plus';
+</script>
+
 <CardFrame>
   <CardFrameHeader>
     <CardFrameTitle>Projects</CardFrameTitle>
@@ -105,13 +107,9 @@ Put header actions in `CardAction`, a sibling of `CardTitle` and `CardDescriptio
 ```
 
 - Keep `CardFrameHeader`, the inner `Card`(s), and `CardFrameFooter` as direct children of `CardFrame`; the frame clips, rounds, and removes shadows on direct `Card` children only.
-- `CardFrameAction` goes inside `CardFrameHeader` as a sibling of the title and description; it sits in the second grid column, vertically centered.
+- `CardFrameAction` goes inside `CardFrameHeader` as a sibling of the title and description.
 - Do not use `CardHeader`/`CardFooter` on the frame itself; those belong to the inner `Card`.
-- For tables, render `Table variant="card"` as a direct child of `CardFrame` (see table guide, `p-table-6` through `p-table-8`).
-
-### More examples
-
-See `p-card-1` through `p-card-11` for various card compositions.
+- For tables, render `Table variant="card"` as a direct child of `CardFrame` (see [table.md](table.md)).
 
 ## Common pitfalls
 
@@ -122,6 +120,8 @@ See `p-card-1` through `p-card-11` for various card compositions.
 
 ## Useful particle references
 
-- core patterns: `p-card-1`, `p-card-2`, `p-card-3`, `p-card-4`, `p-card-5`, `p-card-6`, `p-card-7`, `p-card-8`
-- `CardFrame` with footer: `p-card-4`; with header: `p-card-5`; header + footer: `p-card-6`, `p-card-7`
+- basic card: `p-card-1`
+- authentication cards: `p-card-2`, `p-card-3`
+- `CardFrame` with footer: `p-card-4`; with header: `p-card-5`; header + footer: `p-card-6`; no rounded bottom: `p-card-7`
+- card within a frame: `p-card-8`, `p-card-9`, `p-card-10`
 - `CardFrame` with header action: `p-card-11`

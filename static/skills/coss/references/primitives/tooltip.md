@@ -14,99 +14,111 @@
 ## Install
 
 ```bash
-npx shadcn@latest add @coss/tooltip
+npx shadcn-svelte@latest add https://cossui-svelte.com/r/tooltip.json
 ```
 
 Manual deps from docs:
 
 ```bash
-npm install @base-ui/react
+npm install @shardsui/svelte
 ```
 
 ## Canonical imports
 
-```tsx
-import {
-  Tooltip,
-  TooltipCreateHandle,
-  TooltipPopup,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+```svelte
+<script lang="ts">
+  import { buttonVariants } from '#lib/components/ui/button/index.js';
+  import {
+    Tooltip,
+    TooltipPopup,
+    TooltipProvider,
+    TooltipTrigger
+  } from '#lib/components/ui/tooltip/index.js';
+</script>
 ```
+
+Also exported: `TooltipContent` (alias of `TooltipPopup`), `TooltipHandle` (ShardsUI `Tooltip.Handle` class for detached triggers), `TooltipPrimitive`. There is no `TooltipCreateHandle`.
 
 ## Minimal pattern
 
-```tsx
-<Tooltip>
-  <TooltipTrigger render={<Button variant="outline" />}>
-    Hover me
-  </TooltipTrigger>
-  <TooltipPopup>Helpful hint</TooltipPopup>
-</Tooltip>
+```svelte
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger class={buttonVariants({ variant: 'outline' })}>Hover me</TooltipTrigger>
+    <TooltipPopup>Helpful hint</TooltipPopup>
+  </Tooltip>
+</TooltipProvider>
 ```
+
+`TooltipTrigger` renders a `<button>` (change with `as`). `Tooltip` has bindable `open` and optional `delay` / `closeDelay` (ms). `TooltipPopup` takes `side` (default `top`), `align`, `sideOffset` (default `4`), `alignOffset`, `showArrow`, `customAnchor`.
 
 ## Patterns from coss particles
 
-- **Portal forwarding**: optional `portalProps` on `TooltipPopup` → Base UI `Tooltip.Portal` (`keepMounted`, `container`, …). See [portal-props.md](../portal-props.md).
+- **Portal forwarding**: optional `portalProps` on `TooltipPopup` → ShardsUI `Tooltip.Portal` (`keepMounted`, `container`, …). See [portal-props.md](../portal-props.md).
 
 ### Key patterns
 
-Tooltip on an icon-only button:
+Icon-only button:
 
-```tsx
+```svelte
 <Tooltip>
-  <TooltipTrigger render={<Button size="icon" variant="ghost" aria-label="Settings" />}>
+  <TooltipTrigger aria-label="Settings" class={buttonVariants({ size: 'icon', variant: 'ghost' })}>
     <SettingsIcon aria-hidden="true" />
   </TooltipTrigger>
   <TooltipPopup>Settings</TooltipPopup>
 </Tooltip>
 ```
 
-Tooltip explaining why a button is disabled:
+Tooltip on another primitive's part (a `ToggleGroupItem`, `SelectTrigger`, `InputGroupButton`…). There is no `render`/`asChild` composition, so control `open` and anchor the popup to the part:
 
-```tsx
+```svelte
+<script lang="ts">
+  let ref = $state<HTMLElement | null>(null);
+  let open = $state(false);
+</script>
+
+<Tooltip bind:open>
+  <ToggleGroupItem
+    aria-label="Bold"
+    bind:ref
+    value="bold"
+    onpointerenter={() => (open = true)}
+    onpointerleave={() => (open = false)}
+    onfocus={() => (open = true)}
+    onblur={() => (open = false)}
+  >
+    <BoldIcon />
+  </ToggleGroupItem>
+  <TooltipPopup customAnchor={ref}>Bold</TooltipPopup>
+</Tooltip>
+```
+
+Explaining why a button is disabled — a disabled `Button` has `pointer-events-none` and is skipped in tab order, so make a focusable wrapper the trigger:
+
+```svelte
 <Tooltip>
-  <TooltipTrigger render={<span className="inline-flex" tabIndex={0} />}>
+  <TooltipTrigger as="span" class="inline-flex" tabindex={0}>
     <Button disabled>Publish</Button>
   </TooltipTrigger>
   <TooltipPopup>Add a title before publishing</TooltipPopup>
 </Tooltip>
 ```
 
-- A disabled `Button` sets the native `disabled` attribute and `pointer-events-none`, so it never receives hover or focus. Putting `TooltipTrigger render={<Button disabled />}` directly on it means the tooltip never opens.
-- Render the trigger as a wrapper `span` instead (`TooltipTrigger` renders a `<button>` by default, which cannot contain another button). Hover passes through the disabled button to the span.
-- `tabIndex={0}` keeps the reason reachable by keyboard, since the disabled button is skipped in tab order. Use `inline-flex` (or `block`/`w-full` for full-width buttons) so the wrapper matches the button's box.
-- When the button becomes enabled, drop the wrapper or render the tooltip only while disabled, so the span does not add an extra tab stop.
+When the button becomes enabled, drop the wrapper (or render the tooltip only while disabled) so the span doesn't add an extra tab stop.
 
-Grouped tooltips (shared delay/provider):
-
-```tsx
-<TooltipProvider>
-  <Tooltip>
-    <TooltipTrigger>Item 1</TooltipTrigger>
-    <TooltipPopup>Hint 1</TooltipPopup>
-  </Tooltip>
-  <Tooltip>
-    <TooltipTrigger>Item 2</TooltipTrigger>
-    <TooltipPopup>Hint 2</TooltipPopup>
-  </Tooltip>
-</TooltipProvider>
-```
-
-### More examples
-
-See `p-tooltip-1` through `p-tooltip-3` for basic, grouped, and animated tooltip patterns.
+Grouped tooltips: wrap several in one `TooltipProvider` so adjacent tooltips open instantly once the first is visible.
 
 ## Common pitfalls
 
-- Placing interactive controls inside tooltip content (tooltip should stay informational).
-- Relying on tooltip as sole label for icon-only controls (still provide accessible name).
-- Using tooltip for long-form content that should be popover/dialog.
-- Attaching a tooltip trigger directly to a disabled button; wrap it in a focusable `span` trigger instead (see above).
+- React habits: `render={<Button />}` on `TooltipTrigger`. Use `class={buttonVariants(...)}`, and never nest a `<Button>` inside the trigger (button-in-button) — except in the disabled-wrapper case where the trigger is `as="span"`.
+- Placing interactive controls inside tooltip content.
+- Relying on the tooltip as the only label for icon-only controls (still provide `aria-label`).
+- Using tooltip for long-form content that should be a popover/dialog.
 
 ## Useful particle references
 
-- grouped tooltips: `p-tooltip-2`
-- animated tooltips: `p-tooltip-3`
-- cross-overlay references: `p-dialog-1`, `p-popover-1`, `p-menu-2`
+- basic: `p-tooltip-1`
+- grouped: `p-tooltip-2`
+- toggle group with animated tooltip / vertical group: `p-tooltip-3`, `p-tooltip-4`
+- toolbar with anchored tooltips: `p-toolbar-1`
+- input group addon tooltips: `p-input-group-7`, `p-input-9`
