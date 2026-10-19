@@ -4,13 +4,17 @@
 
 This project is an unofficial port of Coss UI for Svelte.
 
-I first found the unofficial [Svelte port of Origin UI](https://github.com/max-got/originui-svelte) and liked its look and feel. Later, I learned that Origin UI was acquired by coss.com and that an updated component library existed, but only for React.
+This port is what I’ve always wanted for Svelte: one unified, full-featured component library. It builds on the upstream Coss components and extends them with contributions from Shadcn, MapCN, Bits UI, Origin UI and third-party contributors.
 
-Since there was no Svelte option, this project aims to bring those updated components to Svelte 5.
+In a nutshell, everything needed to build an serious application, plus:
 
-Along the way, I noticed that even Coss UI lacks some of the components found in Bits UI and Origin UI. So after exploring through 3rd party projects and pull requests, I brought everything together under one umbrella, mainly for my personal use.
+- **Modern design**: clean, contemporary styling with layered shadows and softly rounded surfaces.
+- **Responsive by default**: widgets and layouts adapt to any screen size, with swipe and touch gestures built in.
+- **Ready to use**: 70 components and 700+ blocks and particles, including forms, fieldsets and skeletons. Spend your time on application logic, not on rebuilding the basics.
+- **Solid foundation**: powered by Shards UI, a Svelte port of Base UI.
+- **Intuitive out of the box**: sensible defaults, so components behave the way you expect.
 
-*__"A full set of good looking components, for the most intuitive web framework."__*
+This work is not affiliated with coss.com and therefore unofficial.
 
 ## ShowCase
 
