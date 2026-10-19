@@ -43,9 +43,12 @@
     }
   };
 
-  const landingEntries = Object.entries({ ...allComponents, ...patterns }).sort(([a], [b]) =>
-    a.localeCompare(b)
-  );
+  // Components whose particles live under another category (range-calendar → calendar).
+  const hidden = new Set(['range-calendar']);
+
+  const landingEntries = Object.entries({ ...allComponents, ...patterns })
+    .filter(([id]) => !hidden.has(id))
+    .sort(([a], [b]) => a.localeCompare(b));
 </script>
 
 {#snippet categoryCard(slug: string, meta: RegistryUIEntry)}
