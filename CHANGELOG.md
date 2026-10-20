@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.9.30](https://github.com/cossui-svelte/cossui-svelte/compare/v0.9.29...v0.9.30) (2026-10-20)
+
+### ✨ Features
+
+* **avatar:** add avatar group with clipped separation and inherited sizing ([c148fcf](https://github.com/cossui-svelte/cossui-svelte/commit/c148fcf9319b06fc97ac1f6fe048902a3343d4b3))
+* bring ai skills up to speed ([51a5a9b](https://github.com/cossui-svelte/cossui-svelte/commit/51a5a9b7089b95825411c6b6744c4bfb6b04fa0b))
+* **chat:** add chat ui landing page and header link ([8c95b03](https://github.com/cossui-svelte/cossui-svelte/commit/8c95b03b96a7b7cb217dab2c843da1d77cc4ac45))
+
+### 🐛 Bug Fixes
+
+* skill install command ([cb3819b](https://github.com/cossui-svelte/cossui-svelte/commit/cb3819b1ea818a567fe38b970238d1e85613407d))
+
+### ♻️ Code Refactoring
+
+* **calendar:** fold range-calendar into calendar ([26c27a3](https://github.com/cossui-svelte/cossui-svelte/commit/26c27a33113a966f00df4bff37780fe7c41faf95))
+
+### 📝 Documentation
+
+* **changelog:** add 0.9.30 entry ([5a211b3](https://github.com/cossui-svelte/cossui-svelte/commit/5a211b3e25dd9c756a654069fe48370ac9978da4))
+* fix install deps, stale claims and broken links ([5c8f0b8](https://github.com/cossui-svelte/cossui-svelte/commit/5c8f0b88703abae5b88be585e7a7ff67db0881e6))
+
 ## [0.9.29](https://github.com/cossui-svelte/cossui-svelte/compare/v0.9.28...v0.9.29) (2026-10-19)
 
 ### 🐛 Bug Fixes
