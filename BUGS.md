@@ -1,13 +1,12 @@
 
 TODO:
 * Firefox - p-map-* don't show round corners
-* Build the cossui-svelte skill, deploy similar to https://www.skills.sh/cosscom/coss/coss
 * Publish cossui-svelte on r/sideprojects, https://www.myvibebook.com/, echojs, hacker news, linkedin, https://svelter.me/
-* add pointer to design/component library from the readme
-* file-upload: it's a hook (useFileUpload) plus particles, not a component, because ui/
 * implement rich-editor and split-pane
-* review navigation category: it's a particle-only category with no component behind it.
 
+* DONE: add pointer to design/component library from the readme
+* DONE: Build the cossui-svelte skill, deploy similar to https://www.skills.sh/cosscom/coss/coss
+* DONE: review navigation category: it's a particle-only category with no component behind it.
 * DONE: Docs
 * DONE: range-calendar should not exist as a category
 * DONE: Segmented control is missing - https://coss.com/ui/particles?tags=segmented%20control
