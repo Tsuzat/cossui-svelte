@@ -5,7 +5,7 @@ description: Breaking changes, migration guides, and notable updates.
 
 This port closely follows the changes from [upstream cossui](https://coss.com/ui/docs/changelog).
 
-<Timeline defaultValue={changelog.length}>
+<Timeline class="mt-10" defaultValue={changelog.length}>
   {#each changelog as item, i (item.title)}
     <TimelineItem step={i + 1} class="group-data-[orientation=vertical]/timeline:sm:ms-32">
       <TimelineHeader>
