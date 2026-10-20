@@ -4,7 +4,7 @@
 </script>
 
 <Button class="rounded-full ps-1">
-  <Avatar class="size-6">
+  <Avatar class="[--avatar-size:--spacing(6)]">
     <AvatarImage
       alt="Luke Tracy"
       src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?w=128&h=128&dpr=2&q=80"

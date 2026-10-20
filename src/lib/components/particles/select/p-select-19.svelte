@@ -42,9 +42,9 @@
 >
   <SelectTrigger aria-label="Select user">
     <span class="flex items-center gap-2">
-      <Avatar class="size-5">
+      <Avatar class="[--avatar-size:--spacing(5)]">
         <AvatarImage alt={selectedUser.label} src={selectedUser.avatar} />
-        <AvatarFallback class="text-[.625rem]">{selectedUser.initials}</AvatarFallback>
+        <AvatarFallback>{selectedUser.initials}</AvatarFallback>
       </Avatar>
       <span class="truncate">{selectedUser.label}</span>
     </span>
@@ -55,9 +55,9 @@
       {#each users as item (item.value)}
         <SelectItem value={item.value}>
           <span class="flex items-center gap-2">
-            <Avatar class="size-5">
+            <Avatar class="[--avatar-size:--spacing(5)]">
               <AvatarImage alt={item.label} src={item.avatar} />
-              <AvatarFallback class="text-[10px]">{item.initials}</AvatarFallback>
+              <AvatarFallback>{item.initials}</AvatarFallback>
             </Avatar>
             <span class="truncate">{item.label}</span>
           </span>

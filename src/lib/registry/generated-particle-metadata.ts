@@ -189,8 +189,21 @@ export const metadata: Record<string, ParticleMetaDefinition> = {
     registryDependencies: ['avatar'],
     meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
   },
+  'p-avatar-6': {
+    description: 'Avatar with user icon fallback',
+    tags: ['avatar'],
+    npmDependencies: ['@lucide/svelte'],
+    registryDependencies: ['avatar'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
   'p-avatar-3': {
     description: 'Avatars with different sizes',
+    tags: ['avatar'],
+    registryDependencies: ['avatar'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
+  'p-avatar-19': {
+    description: 'Avatars sized from a parent element',
     tags: ['avatar'],
     registryDependencies: ['avatar'],
     meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
@@ -201,17 +214,22 @@ export const metadata: Record<string, ParticleMetaDefinition> = {
     registryDependencies: ['avatar'],
     meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
   },
-  'p-avatar-5': {
-    description: 'Overlapping avatar group',
+  'p-avatar-17': {
+    description: 'Avatar rendered as a button',
     tags: ['avatar'],
     registryDependencies: ['avatar'],
     meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
   },
-  'p-avatar-6': {
-    description: 'Avatar with user icon fallback',
+  'p-avatar-18': {
+    description: 'Avatar rendered as a link',
     tags: ['avatar'],
-    npmDependencies: ['@lucide/svelte'],
     registryDependencies: ['avatar'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
+  'p-avatar-20': {
+    description: 'Avatar with a tooltip',
+    tags: ['avatar'],
+    registryDependencies: ['avatar', 'tooltip'],
     meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
   },
   'p-avatar-7': {
@@ -248,6 +266,30 @@ export const metadata: Record<string, ParticleMetaDefinition> = {
     description: 'Avatar with verified badge',
     tags: ['avatar'],
     registryDependencies: ['avatar'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
+  'p-avatar-5': {
+    description: 'Overlapping avatar group',
+    tags: ['avatar'],
+    registryDependencies: ['avatar'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
+  'p-avatar-16': {
+    description: 'Avatar group with a count and the last avatar on top',
+    tags: ['avatar'],
+    registryDependencies: ['avatar'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
+  'p-avatar-15': {
+    description: 'Avatar group with the last avatar on top',
+    tags: ['avatar'],
+    registryDependencies: ['avatar'],
+    meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
+  },
+  'p-avatar-21': {
+    description: 'Avatar group with a tooltip per member',
+    tags: ['avatar'],
+    registryDependencies: ['avatar', 'tooltip'],
     meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
   },
   'p-avatar-13': {

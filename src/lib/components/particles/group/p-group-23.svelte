@@ -83,11 +83,11 @@
         Select
         <ChevronsUpDown class="-me-1!" aria-hidden />
       {:else}
-        <Avatar class="size-5">
+        <Avatar class="[--avatar-size:--spacing(5)]">
           {#if firstMember?.avatar}
             <AvatarImage src={firstMember.avatar} alt={firstMember.label} />
           {/if}
-          <AvatarFallback class="text-[0.5rem]">
+          <AvatarFallback>
             {getInitials(firstMember?.label ?? '')}
           </AvatarFallback>
         </Avatar>
@@ -110,11 +110,11 @@
         <ComboboxCollection>
           {#snippet children(member: Member)}
             <ComboboxItem value={member.id}>
-              <Avatar class="size-5">
+              <Avatar class="[--avatar-size:--spacing(5)]">
                 {#if member.avatar}
                   <AvatarImage src={member.avatar} alt={member.label} />
                 {/if}
-                <AvatarFallback class="text-[0.5rem]">
+                <AvatarFallback>
                   {getInitials(member.label)}
                 </AvatarFallback>
               </Avatar>

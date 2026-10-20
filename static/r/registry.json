@@ -297,6 +297,16 @@
 				},
 				{
 					"type": "registry:ui",
+					"path": "avatar/avatar-group-count.svelte",
+					"target": "$lib/components/ui/avatar/avatar-group-count.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "avatar/avatar-group.svelte",
+					"target": "$lib/components/ui/avatar/avatar-group.svelte"
+				},
+				{
+					"type": "registry:ui",
 					"path": "avatar/avatar-image.svelte",
 					"target": "$lib/components/ui/avatar/avatar-image.svelte"
 				},
@@ -5315,6 +5325,91 @@
 			]
 		},
 		{
+			"name": "p-avatar-15",
+			"title": "Avatar 15",
+			"description": "Avatar group with the last avatar on top",
+			"type": "registry:block",
+			"dependencies": [],
+			"registryDependencies": [
+				"avatar"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-avatar-15.svelte",
+					"target": "$lib/components/particles/avatar/p-avatar-15.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-avatar-16",
+			"title": "Avatar 16",
+			"description": "Avatar group with a count and the last avatar on top",
+			"type": "registry:block",
+			"dependencies": [],
+			"registryDependencies": [
+				"avatar"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-avatar-16.svelte",
+					"target": "$lib/components/particles/avatar/p-avatar-16.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-avatar-17",
+			"title": "Avatar 17",
+			"description": "Avatar rendered as a button",
+			"type": "registry:block",
+			"dependencies": [],
+			"registryDependencies": [
+				"avatar"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-avatar-17.svelte",
+					"target": "$lib/components/particles/avatar/p-avatar-17.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-avatar-18",
+			"title": "Avatar 18",
+			"description": "Avatar rendered as a link",
+			"type": "registry:block",
+			"dependencies": [],
+			"registryDependencies": [
+				"avatar"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-avatar-18.svelte",
+					"target": "$lib/components/particles/avatar/p-avatar-18.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-avatar-19",
+			"title": "Avatar 19",
+			"description": "Avatars sized from a parent element",
+			"type": "registry:block",
+			"dependencies": [],
+			"registryDependencies": [
+				"avatar"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-avatar-19.svelte",
+					"target": "$lib/components/particles/avatar/p-avatar-19.svelte"
+				}
+			]
+		},
+		{
 			"name": "p-avatar-2",
 			"title": "Avatar 2",
 			"description": "Fallback-only avatar",
@@ -5328,6 +5423,42 @@
 					"type": "registry:block",
 					"path": "p-avatar-2.svelte",
 					"target": "$lib/components/particles/avatar/p-avatar-2.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-avatar-20",
+			"title": "Avatar 20",
+			"description": "Avatar with a tooltip",
+			"type": "registry:block",
+			"dependencies": [],
+			"registryDependencies": [
+				"avatar",
+				"tooltip"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-avatar-20.svelte",
+					"target": "$lib/components/particles/avatar/p-avatar-20.svelte"
+				}
+			]
+		},
+		{
+			"name": "p-avatar-21",
+			"title": "Avatar 21",
+			"description": "Avatar group with a tooltip per member",
+			"type": "registry:block",
+			"dependencies": [],
+			"registryDependencies": [
+				"avatar",
+				"tooltip"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-avatar-21.svelte",
+					"target": "$lib/components/particles/avatar/p-avatar-21.svelte"
 				}
 			]
 		},

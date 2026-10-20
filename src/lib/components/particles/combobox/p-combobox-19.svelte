@@ -116,9 +116,9 @@
         <li
           class="flex items-center gap-2 rounded-lg border border-input p-1 ps-2 text-base sm:text-sm"
         >
-          <Avatar class="size-5">
+          <Avatar class="[--avatar-size:--spacing(5)]">
             <AvatarImage alt={member.label} src={member.avatar} />
-            <AvatarFallback class="text-[.625rem]">{member.initials}</AvatarFallback>
+            <AvatarFallback>{member.initials}</AvatarFallback>
           </Avatar>
           <span class="truncate font-medium">{member.label}</span>
           <Badge class="ms-auto" variant="outline">{member.priority}</Badge>

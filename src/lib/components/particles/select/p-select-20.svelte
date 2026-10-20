@@ -43,7 +43,7 @@
 >
   <SelectTrigger aria-label="Select user" class="h-auto py-1.5">
     <span class="flex items-center gap-2">
-      <Avatar class="size-8">
+      <Avatar>
         <AvatarImage alt={selectedUser.label} src={selectedUser.avatar} />
         <AvatarFallback>{selectedUser.initials}</AvatarFallback>
       </Avatar>
@@ -57,7 +57,7 @@
     {#each users as item (item.value)}
       <SelectItem class="py-1.5" value={item.value}>
         <span class="flex items-center gap-2">
-          <Avatar class="size-8">
+          <Avatar>
             <AvatarImage alt={item.label} src={item.avatar} />
             <AvatarFallback>{item.initials}</AvatarFallback>
           </Avatar>

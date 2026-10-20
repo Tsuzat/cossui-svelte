@@ -54,7 +54,7 @@
 <div class="flex w-full max-w-92 flex-col gap-6">
   {#each cards as card (card.user.fallback)}
     <Skeleton loading={!card.isLoaded} class="flex w-full items-center gap-4">
-      <Avatar class="size-10">
+      <Avatar class="[--avatar-size:--spacing(10)]">
         <AvatarImage alt={card.user.name} src={card.user.image} />
         <AvatarFallback>{card.user.fallback}</AvatarFallback>
       </Avatar>

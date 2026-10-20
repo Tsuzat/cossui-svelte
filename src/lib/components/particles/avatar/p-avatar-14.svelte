@@ -1,27 +1,32 @@
 <script lang="ts">
-  import { Avatar, AvatarFallback, AvatarImage } from '#lib/components/ui/avatar/index.js';
+  import {
+    Avatar,
+    AvatarFallback,
+    AvatarGroup,
+    AvatarImage
+  } from '#lib/components/ui/avatar/index.js';
 </script>
 
-<div class="flex -space-x-3">
-  <Avatar class="size-12 ring-2 ring-background">
+<AvatarGroup class="[--avatar-size:--spacing(12)]">
+  <Avatar>
     <AvatarImage
-      alt="U1"
+      alt="Frida Kahlo"
       src="https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=144&h=144&dpr=2&q=80"
     />
-    <AvatarFallback>U1</AvatarFallback>
+    <AvatarFallback>FK</AvatarFallback>
   </Avatar>
-  <Avatar class="size-12 ring-2 ring-background">
+  <Avatar>
     <AvatarImage
-      alt="U2"
+      alt="Nadia Ekman"
       src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?w=144&h=144&dpr=2&q=80"
     />
-    <AvatarFallback>U2</AvatarFallback>
+    <AvatarFallback>NE</AvatarFallback>
   </Avatar>
-  <Avatar class="size-12 ring-2 ring-background">
+  <Avatar>
     <AvatarImage
-      alt="U3"
+      alt="Eli Wren"
       src="https://images.unsplash.com/photo-1655874819398-c6dfbec68ac7?w=144&h=144&dpr=2&q=80"
     />
-    <AvatarFallback>U3</AvatarFallback>
+    <AvatarFallback>EW</AvatarFallback>
   </Avatar>
-</div>
+</AvatarGroup>
