@@ -1,9 +1,9 @@
 <script lang="ts">
   import { getLocalTimeZone, today } from '@internationalized/date';
-  import { RangeCalendar } from '#lib/components/ui/range-calendar/index.js';
+  import { Calendar } from '#lib/components/ui/calendar/index.js';
 
   const start = today(getLocalTimeZone());
   let value = $state({ end: start.add({ days: 7 }), start });
 </script>
 
-<RangeCalendar bind:value />
+<Calendar mode="range" bind:value />

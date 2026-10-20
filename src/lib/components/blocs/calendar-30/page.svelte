@@ -3,10 +3,9 @@
   import ChevronDownIcon from '@lucide/svelte/icons/chevron-down';
   import { formatDateRange } from 'little-date';
   import { buttonVariants } from '#lib/components/ui/button/index.js';
-  import { type DateRange } from '#lib/components/ui/calendar/index.js';
+  import { Calendar, type DateRange } from '#lib/components/ui/calendar/index.js';
   import { Label } from '#lib/components/ui/label/index.js';
   import { Popover, PopoverPopup, PopoverTrigger } from '#lib/components/ui/popover/index.js';
-  import { RangeCalendar } from '#lib/components/ui/range-calendar/index.js';
   import { cn } from '#lib/utils.js';
 
   const id = $props.id();
@@ -38,7 +37,7 @@
       <ChevronDownIcon />
     </PopoverTrigger>
     <PopoverPopup class="w-auto overflow-hidden p-0" align="start">
-      <RangeCalendar bind:value captionLayout="dropdown" />
+      <Calendar mode="range" bind:value captionLayout="dropdown" />
     </PopoverPopup>
   </Popover>
 </div>

@@ -212,10 +212,6 @@ export const custom_components_metadata: Record<string, Partial<RegistryUIEntry>
     description: 'Displays the status of a task that takes a long time.',
     category: 'ui'
   },
-  'range-calendar': {
-    description: 'A calendar component for selecting a date range.',
-    category: 'ui'
-  },
   'radio-group': {
     description:
       'A set of checkable buttons where no more than one of the buttons can be checked at a time.',

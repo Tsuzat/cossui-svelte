@@ -1,7 +1,7 @@
 <script lang="ts">
   import { CalendarDate } from '@internationalized/date';
   import { type DateRange } from '#lib/components/ui/calendar/index.js';
-  import { RangeCalendar } from '#lib/components/ui/range-calendar/index.js';
+  import { Calendar } from '#lib/components/ui/calendar/index.js';
 
   let value = $state<DateRange>({
     start: new CalendarDate(2025, 6, 17),
@@ -10,7 +10,8 @@
 </script>
 
 <div class="flex min-w-0 flex-col gap-2">
-  <RangeCalendar
+  <Calendar
+    mode="range"
     bind:value
     numberOfMonths={2}
     minValue={new CalendarDate(2025, 6, 1)}

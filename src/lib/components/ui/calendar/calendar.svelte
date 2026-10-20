@@ -3,9 +3,9 @@
   import type { Snippet } from 'svelte';
   import type { ButtonVariant } from '#lib/components/ui/button/index.js';
   import type { RenameTypeToMode, WithoutChildrenOrChild } from '#lib/utils.js';
-  import type * as RangeCalendarPrimitiveTypes from '../range-calendar/internal';
-  import type { DateRange } from '../range-calendar/internal/types';
   import type * as CalendarPrimitiveTypes from './internal';
+  import type * as RangeCalendarPrimitiveTypes from './internal/range';
+  import type { DateRange } from './internal/range/types';
 
   export type CalendarMode = 'single' | 'multiple' | 'range';
   export type { DateRange };
@@ -40,11 +40,11 @@
 <script lang="ts">
   import { isEqualMonth } from '@internationalized/date';
   import { cn } from '#lib/utils.js';
-  import * as RangeCalendarPrimitive from '../range-calendar/internal';
-  import RangeCalendarCell from '../range-calendar/range-calendar-cell.svelte';
-  import RangeCalendarDay from '../range-calendar/range-calendar-day.svelte';
+  import RangeCalendarCell from './calendar-range-cell.svelte';
+  import RangeCalendarDay from './calendar-range-day.svelte';
   import * as Calendar from './index.js';
   import * as CalendarPrimitive from './internal';
+  import * as RangeCalendarPrimitive from './internal/range';
 
   let {
     ref = $bindable(null),
@@ -80,7 +80,7 @@
   );
 
   // The day/cell primitives differ between range mode (reusing the
-  // range-calendar's own selection state/styling) and single/multiple mode
+  // the range primitives' own selection state/styling) and single/multiple mode
   // (this component's own state), but share an identical external prop
   // shape, so they can be swapped in as plain component references.
   const CellComponent = $derived(mode === 'range' ? RangeCalendarCell : Calendar.Cell);

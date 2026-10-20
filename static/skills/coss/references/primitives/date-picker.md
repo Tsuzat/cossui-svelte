@@ -4,7 +4,7 @@
 
 - A button/input that opens a calendar to pick a date, range, or several dates.
 
-Date Picker is a **composition**, not a component: `Calendar` (or `RangeCalendar`) inside a `Popover`. The `date-picker` registry item has no code of its own; its particles show the patterns.
+Date Picker is a **composition**, not a component: `Calendar` (any `mode`, including `"range"`) inside a `Popover`. The `date-picker` registry item has no code of its own; its particles show the patterns.
 
 ## Install
 
@@ -54,7 +54,7 @@ Or install a particle directly, e.g. `https://cossui-svelte.com/r/p-date-picker-
 ## Patterns from coss particles
 
 - **Close on select**: `bind:open` on `Popover` and set `open = false` in `Calendar`'s `onValueChange`.
-- **Range**: `RangeCalendar bind:value` (`{ start, end }`), optionally `numberOfMonths={2}`; format both ends in the trigger.
+- **Range**: `Calendar mode="range" bind:value` (`{ start, end }`), optionally `numberOfMonths={2}`; format both ends in the trigger.
 - **Multiple dates**: `Calendar mode="multiple"`.
 - **Date of birth**: `captionLayout="dropdown"` with `minValue`/`maxValue`/`years` on the calendar, inside a `Field`.
 - **Presets**: buttons beside the calendar that set `value` (`today(...)`, `.subtract({ days: 7 })`).

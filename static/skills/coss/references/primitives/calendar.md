@@ -22,7 +22,7 @@ Manual deps from docs:
 npm install @internationalized/date svelte-toolbelt runed
 ```
 
-Calendar is a custom Svelte component (own calendar state, not ShardsUI). It depends on the `button` and `range-calendar` registry items.
+Calendar is a custom Svelte component (own calendar state, not ShardsUI). It depends on the `button` registry item.
 
 ## Canonical imports
 
@@ -30,12 +30,10 @@ Calendar is a custom Svelte component (own calendar state, not ShardsUI). It dep
 <script lang="ts">
   import { getLocalTimeZone, today, type DateValue } from '@internationalized/date';
   import { Calendar, type DateRange } from '#lib/components/ui/calendar/index.js';
-  // Dedicated range calendar:
-  import { RangeCalendar } from '#lib/components/ui/range-calendar/index.js';
 </script>
 ```
 
-Both barrels also export the building-block parts (`Header`, `Heading`, `Nav`, `PrevButton`, `NextButton`, `Months`, `Month`, `Grid`, `GridHead`, `GridBody`, `GridRow`, `HeadCell`, `Cell`, `Day`, `Caption`, `MonthSelect`, `YearSelect`) for custom layouts.
+The barrel also exports the building-block parts (`Header`, `Heading`, `Nav`, `PrevButton`, `NextButton`, `Months`, `Month`, `Grid`, `GridHead`, `GridBody`, `GridRow`, `HeadCell`, `Cell`, `Day`, `Caption`, `MonthSelect`, `YearSelect`) for custom layouts.
 
 ## Minimal pattern
 
@@ -64,7 +62,7 @@ Multiple dates:
 <Calendar mode="multiple" bind:value />
 ```
 
-Date range — `RangeCalendar` (or `Calendar mode="range"`), value is `{ start, end }`:
+Date range — `Calendar mode="range"`, value is `{ start, end }`:
 
 ```svelte
 <script lang="ts">
@@ -72,10 +70,10 @@ Date range — `RangeCalendar` (or `Calendar mode="range"`), value is `{ start, 
   let value = $state({ start, end: start.add({ days: 7 }) });
 </script>
 
-<RangeCalendar bind:value />
+<Calendar mode="range" bind:value />
 ```
 
-Disabled dates — pass a matcher (`excludeDisabled` on `RangeCalendar` prevents ranges spanning disabled days):
+Disabled dates — pass a matcher (`excludeDisabled` in range mode prevents ranges spanning disabled days):
 
 ```svelte
 <script lang="ts">

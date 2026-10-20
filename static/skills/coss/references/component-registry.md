@@ -33,7 +33,7 @@ For optional **`portalProps`** on composed `*Popup` components and **toast** pro
 - **OTPField** — One-time passcode segmented slots. `./references/primitives/otp-field.md`
 - **NumberField** — Numeric entry with stepper controls. `./references/primitives/number-field.md`
 - **Slider** — Continuous/ranged numeric control. `./references/primitives/slider.md`
-- **Calendar / RangeCalendar** — Inline date, multi-date and range calendars. `./references/primitives/calendar.md`
+- **Calendar** — Inline date, multi-date and range calendars. `./references/primitives/calendar.md`
 - **Date Picker** *(composite)* — Calendar in a Popover. `./references/primitives/date-picker.md`
 - **ColorPicker** *(port-only)* — Popover color picker with sliders, inputs, swatches. `./references/primitives/colorpicker.md`
 - **StarRating** *(port-only)* — Star/heart rating input or display. `./references/primitives/starrating.md`

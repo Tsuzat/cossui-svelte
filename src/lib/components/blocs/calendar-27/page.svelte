@@ -6,6 +6,7 @@
   import { cubicInOut } from 'svelte/easing';
   import { buttonVariants } from '#lib/components/ui/button/index.js';
   import { type DateRange } from '#lib/components/ui/calendar/index.js';
+  import { Calendar } from '#lib/components/ui/calendar/index.js';
   import {
     Card,
     CardAction,
@@ -17,7 +18,6 @@
   } from '#lib/components/ui/card/index.js';
   import { Chart, type ChartConfig, ChartTooltip } from '#lib/components/ui/chart/index.js';
   import { Popover, PopoverPopup, PopoverTrigger } from '#lib/components/ui/popover/index.js';
-  import { RangeCalendar } from '#lib/components/ui/range-calendar/index.js';
   import { cn } from '#lib/utils.js';
 
   let value = $state<DateRange | undefined>({
@@ -95,7 +95,8 @@
             : 'June 2025'}
         </PopoverTrigger>
         <PopoverPopup class="w-auto overflow-hidden p-0" align="end">
-          <RangeCalendar
+          <Calendar
+            mode="range"
             class="w-full"
             fixedWeeks
             bind:value

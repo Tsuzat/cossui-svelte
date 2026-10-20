@@ -56,11 +56,11 @@ npm install @internationalized/date svelte-toolbelt runed
 <Calendar mode="single" bind:value />
 ```
 
-Dates are [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/) `DateValue` objects (e.g. `CalendarDate`), not JavaScript `Date`s. For range selection, use `RangeCalendar` (`#lib/components/ui/range-calendar`) or `mode="range"`.
+Dates are [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/) `DateValue` objects (e.g. `CalendarDate`), not JavaScript `Date`s. For range selection, use `mode="range"`; the value is a `{ start, end }` object.
 
 ## API Reference
 
-This is a custom Svelte component (with its own calendar state), not a ShardsUI wrapper. It depends on the `button` and `range-calendar` registry items.
+This is a custom Svelte component (with its own calendar state), not a ShardsUI wrapper. It depends on the `button` registry item.
 
 ### Calendar
 

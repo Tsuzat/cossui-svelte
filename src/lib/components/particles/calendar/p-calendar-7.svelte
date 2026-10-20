@@ -1,6 +1,6 @@
 <script lang="ts">
   import { type DateValue, getLocalTimeZone, today } from '@internationalized/date';
-  import { RangeCalendar } from '#lib/components/ui/range-calendar/index.js';
+  import { Calendar } from '#lib/components/ui/calendar/index.js';
 
   const todayValue = today(getLocalTimeZone());
   const blockedRange1 = { from: todayValue.add({ days: 14 }), to: todayValue.add({ days: 16 }) };
@@ -16,4 +16,4 @@
   }
 </script>
 
-<RangeCalendar excludeDisabled {isDateDisabled} />
+<Calendar mode="range" excludeDisabled {isDateDisabled} />

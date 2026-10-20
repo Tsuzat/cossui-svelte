@@ -9,7 +9,7 @@
     today
   } from '@internationalized/date';
   import { Button } from '#lib/components/ui/button/index.js';
-  import { RangeCalendar } from '#lib/components/ui/range-calendar/index.js';
+  import { Calendar } from '#lib/components/ui/calendar/index.js';
 
   const todayValue = today(getLocalTimeZone());
   const yesterday = {
@@ -128,5 +128,11 @@
       </Button>
     </div>
   </div>
-  <RangeCalendar bind:placeholder bind:value={date} class="max-sm:pb-3 sm:ps-5" {isDateDisabled} />
+  <Calendar
+    mode="range"
+    bind:placeholder
+    bind:value={date}
+    class="max-sm:pb-3 sm:ps-5"
+    {isDateDisabled}
+  />
 </div>

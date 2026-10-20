@@ -2,8 +2,8 @@
   import { DateFormatter, type DateValue, getLocalTimeZone } from '@internationalized/date';
   import CalendarIcon from '@lucide/svelte/icons/calendar';
   import { buttonVariants } from '#lib/components/ui/button/index.js';
+  import { Calendar } from '#lib/components/ui/calendar/index.js';
   import { Popover, PopoverPopup, PopoverTrigger } from '#lib/components/ui/popover/index.js';
-  import { RangeCalendar } from '#lib/components/ui/range-calendar/index.js';
   import { cn } from '#lib/utils.js';
 
   const df = new DateFormatter('en-US', { dateStyle: 'medium' });
@@ -27,6 +27,6 @@
     {/if}
   </PopoverTrigger>
   <PopoverPopup>
-    <RangeCalendar bind:value numberOfMonths={2} />
+    <Calendar mode="range" bind:value numberOfMonths={2} />
   </PopoverPopup>
 </Popover>

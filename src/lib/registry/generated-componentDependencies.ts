@@ -308,7 +308,6 @@ export const COMPONENT_DEPENDENCIES: Record<string, string[]> = {
   'preview-card': ['@shardsui/svelte'],
   progress: ['@shardsui/svelte'],
   'radio-group': ['@shardsui/svelte'],
-  'range-calendar': ['svelte-toolbelt', '@internationalized/date', 'runed'],
   'scroll-area': ['@shardsui/svelte'],
   select: ['@shardsui/svelte', 'tailwind-variants'],
   separator: ['@shardsui/svelte'],

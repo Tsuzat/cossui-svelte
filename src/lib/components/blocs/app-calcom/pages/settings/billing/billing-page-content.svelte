@@ -12,6 +12,7 @@
   import FileTextIcon from '@lucide/svelte/icons/file-text';
   import SearchIcon from '@lucide/svelte/icons/search';
   import { Button } from '#lib/components/ui/button/index.js';
+  import { Calendar } from '#lib/components/ui/calendar/index.js';
   import {
     Card,
     CardFrame,
@@ -48,7 +49,6 @@
   } from '#lib/components/ui/input-group/index.js';
   import { NumberField, NumberFieldInput } from '#lib/components/ui/number-field/index.js';
   import { Popover, PopoverPopup, PopoverTrigger } from '#lib/components/ui/popover/index.js';
-  import { RangeCalendar } from '#lib/components/ui/range-calendar/index.js';
   import { selectTriggerVariants } from '#lib/components/ui/select/index.js';
   import { cn } from '#lib/utils.js';
   import {
@@ -261,7 +261,8 @@
                   {/each}
                 </div>
               </div>
-              <RangeCalendar
+              <Calendar
+                mode="range"
                 bind:placeholder={invoiceMonth}
                 bind:value={invoiceRange}
                 class="max-sm:pb-2 sm:ps-2"

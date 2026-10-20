@@ -436,8 +436,7 @@
 			],
 			"registryDependencies": [
 				"button",
-				"utils",
-				"range-calendar"
+				"utils"
 			],
 			"files": [
 				{
@@ -519,6 +518,16 @@
 					"type": "registry:ui",
 					"path": "calendar/calendar-prev-button.svelte",
 					"target": "$lib/components/ui/calendar/calendar-prev-button.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "calendar/calendar-range-cell.svelte",
+					"target": "$lib/components/ui/calendar/calendar-range-cell.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "calendar/calendar-range-day.svelte",
+					"target": "$lib/components/ui/calendar/calendar-range-day.svelte"
 				},
 				{
 					"type": "registry:ui",
@@ -669,6 +678,36 @@
 					"type": "registry:ui",
 					"path": "calendar/internal/prop-resolvers.ts",
 					"target": "$lib/components/ui/calendar/internal/prop-resolvers.ts"
+				},
+				{
+					"type": "registry:ui",
+					"path": "calendar/internal/range/index.ts",
+					"target": "$lib/components/ui/calendar/internal/range/index.ts"
+				},
+				{
+					"type": "registry:ui",
+					"path": "calendar/internal/range/primitives/cell.svelte",
+					"target": "$lib/components/ui/calendar/internal/range/primitives/cell.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "calendar/internal/range/primitives/day.svelte",
+					"target": "$lib/components/ui/calendar/internal/range/primitives/day.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "calendar/internal/range/primitives/root.svelte",
+					"target": "$lib/components/ui/calendar/internal/range/primitives/root.svelte"
+				},
+				{
+					"type": "registry:ui",
+					"path": "calendar/internal/range/range-calendar-state.svelte.ts",
+					"target": "$lib/components/ui/calendar/internal/range/range-calendar-state.svelte.ts"
+				},
+				{
+					"type": "registry:ui",
+					"path": "calendar/internal/range/types.ts",
+					"target": "$lib/components/ui/calendar/internal/range/types.ts"
 				},
 				{
 					"type": "registry:ui",
@@ -2795,74 +2834,6 @@
 					"type": "registry:ui",
 					"path": "radio-group/radio-group.svelte",
 					"target": "$lib/components/ui/radio-group/radio-group.svelte"
-				}
-			]
-		},
-		{
-			"name": "range-calendar",
-			"title": "Range Calendar",
-			"description": "A calendar component for selecting a date range.",
-			"type": "registry:ui",
-			"dependencies": [
-				"svelte-toolbelt@^0.10.6",
-				"@internationalized/date@^3.12.4",
-				"runed@0.37.1"
-			],
-			"registryDependencies": [
-				"button",
-				"calendar",
-				"utils"
-			],
-			"files": [
-				{
-					"type": "registry:ui",
-					"path": "range-calendar/index.ts",
-					"target": "$lib/components/ui/range-calendar/index.ts"
-				},
-				{
-					"type": "registry:ui",
-					"path": "range-calendar/internal/index.ts",
-					"target": "$lib/components/ui/range-calendar/internal/index.ts"
-				},
-				{
-					"type": "registry:ui",
-					"path": "range-calendar/internal/primitives/cell.svelte",
-					"target": "$lib/components/ui/range-calendar/internal/primitives/cell.svelte"
-				},
-				{
-					"type": "registry:ui",
-					"path": "range-calendar/internal/primitives/day.svelte",
-					"target": "$lib/components/ui/range-calendar/internal/primitives/day.svelte"
-				},
-				{
-					"type": "registry:ui",
-					"path": "range-calendar/internal/primitives/root.svelte",
-					"target": "$lib/components/ui/range-calendar/internal/primitives/root.svelte"
-				},
-				{
-					"type": "registry:ui",
-					"path": "range-calendar/internal/range-calendar-state.svelte.ts",
-					"target": "$lib/components/ui/range-calendar/internal/range-calendar-state.svelte.ts"
-				},
-				{
-					"type": "registry:ui",
-					"path": "range-calendar/internal/types.ts",
-					"target": "$lib/components/ui/range-calendar/internal/types.ts"
-				},
-				{
-					"type": "registry:ui",
-					"path": "range-calendar/range-calendar-cell.svelte",
-					"target": "$lib/components/ui/range-calendar/range-calendar-cell.svelte"
-				},
-				{
-					"type": "registry:ui",
-					"path": "range-calendar/range-calendar-day.svelte",
-					"target": "$lib/components/ui/range-calendar/range-calendar-day.svelte"
-				},
-				{
-					"type": "registry:ui",
-					"path": "range-calendar/range-calendar.svelte",
-					"target": "$lib/components/ui/range-calendar/range-calendar.svelte"
 				}
 			]
 		},
@@ -6781,7 +6752,7 @@
 				"@internationalized/date@^3.12.4"
 			],
 			"registryDependencies": [
-				"range-calendar"
+				"calendar"
 			],
 			"files": [
 				{
@@ -7037,7 +7008,7 @@
 			],
 			"registryDependencies": [
 				"button",
-				"range-calendar"
+				"calendar"
 			],
 			"files": [
 				{
@@ -7057,7 +7028,7 @@
 				"@internationalized/date@^3.12.4"
 			],
 			"registryDependencies": [
-				"range-calendar"
+				"calendar"
 			],
 			"files": [
 				{
@@ -7077,7 +7048,7 @@
 				"@internationalized/date@^3.12.4"
 			],
 			"registryDependencies": [
-				"range-calendar"
+				"calendar"
 			],
 			"files": [
 				{
@@ -7143,7 +7114,7 @@
 				"@internationalized/date@^3.12.4"
 			],
 			"registryDependencies": [
-				"range-calendar"
+				"calendar"
 			],
 			"files": [
 				{
@@ -7223,7 +7194,7 @@
 				"@internationalized/date@^3.12.4"
 			],
 			"registryDependencies": [
-				"range-calendar"
+				"calendar"
 			],
 			"files": [
 				{
@@ -9232,8 +9203,8 @@
 			],
 			"registryDependencies": [
 				"button",
+				"calendar",
 				"popover",
-				"range-calendar",
 				"utils"
 			],
 			"files": [
@@ -9401,8 +9372,8 @@
 			],
 			"registryDependencies": [
 				"button",
+				"calendar",
 				"popover",
-				"range-calendar",
 				"utils"
 			],
 			"files": [

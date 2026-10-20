@@ -8,7 +8,7 @@ type ConfigOpts = {
 /**
  * Configuration state that inherits from parent configurations. Only the
  * `defaultLocale` option is vendored here, as it's the only one used by
- * the Calendar/RangeCalendar components.
+ * the Calendar component (single, multiple and range modes).
  */
 class CossuiConfigState {
   opts: { defaultLocale: ReadableBox<string | undefined> };

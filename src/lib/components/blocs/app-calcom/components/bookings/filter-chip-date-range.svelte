@@ -1,6 +1,6 @@
 <script lang="ts" module>
   import { CalendarDate, type DateValue } from '@internationalized/date';
-  import type { DateRange } from '#lib/components/ui/range-calendar/internal/types.js';
+  import type { DateRange } from '#lib/components/ui/calendar/index.js';
 
   type DateRangePreset = {
     focusMonth: Date;
@@ -158,8 +158,8 @@
   import ChevronsUpDownIcon from '@lucide/svelte/icons/chevrons-up-down';
   import { untrack } from 'svelte';
   import { Button, buttonVariants } from '#lib/components/ui/button/index.js';
+  import { Calendar } from '#lib/components/ui/calendar/index.js';
   import { Popover, PopoverPopup, PopoverTrigger } from '#lib/components/ui/popover/index.js';
-  import { RangeCalendar } from '#lib/components/ui/range-calendar/index.js';
   import { cn } from '#lib/utils.js';
   import FilterChipShell from './filter-chip-shell.svelte';
   import type { ActiveFilter, FilterField } from './filter-chip-types.js';
@@ -311,7 +311,8 @@
             {/each}
           </div>
         </div>
-        <RangeCalendar
+        <Calendar
+          mode="range"
           bind:placeholder={month}
           class="max-sm:pb-3 sm:ps-2"
           numberOfMonths={1}

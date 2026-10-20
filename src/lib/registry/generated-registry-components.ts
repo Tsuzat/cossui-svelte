@@ -515,16 +515,6 @@ const allComponents: RegistryUiData = {
     npmDependencies: ['@shardsui/svelte'],
     registryDependencies: []
   },
-  'range-calendar': {
-    name: 'Range Calendar',
-    category: 'ui',
-    description: 'A calendar component for selecting a date range.',
-    folder: 'range-calendar',
-    isnew: false,
-    istodo: false,
-    npmDependencies: ['@internationalized/date', 'runed', 'svelte-toolbelt'],
-    registryDependencies: ['button', 'calendar']
-  },
   'rich-editor': {
     name: 'Rich Editor',
     category: 'extra',

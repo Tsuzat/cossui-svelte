@@ -1,6 +1,6 @@
 <script lang="ts">
   import { cn } from '#lib/utils.js';
-  import * as RangeCalendarPrimitive from './internal';
+  import * as RangeCalendarPrimitive from './internal/range';
 
   let {
     ref = $bindable(null),

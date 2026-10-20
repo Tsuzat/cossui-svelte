@@ -700,7 +700,7 @@ export const metadata: Record<string, ParticleMetaDefinition> = {
     description: 'Calendar with date range selection',
     tags: ['calendar'],
     npmDependencies: ['@internationalized/date'],
-    registryDependencies: ['range-calendar'],
+    registryDependencies: ['calendar'],
     meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
   },
   'p-calendar-4': {
@@ -728,7 +728,7 @@ export const metadata: Record<string, ParticleMetaDefinition> = {
     description: 'Calendar with disabled dates',
     tags: ['calendar'],
     npmDependencies: ['@internationalized/date'],
-    registryDependencies: ['range-calendar'],
+    registryDependencies: ['calendar'],
     meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
   },
   'p-calendar-8': {
@@ -756,7 +756,7 @@ export const metadata: Record<string, ParticleMetaDefinition> = {
     description: 'Calendar with rounded range selection style',
     tags: ['calendar'],
     npmDependencies: ['@internationalized/date'],
-    registryDependencies: ['range-calendar'],
+    registryDependencies: ['calendar'],
     meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
   },
   'p-calendar-11': {
@@ -833,14 +833,14 @@ export const metadata: Record<string, ParticleMetaDefinition> = {
     description: 'Range calendar with date presets',
     tags: ['calendar', 'button'],
     npmDependencies: ['@internationalized/date'],
-    registryDependencies: ['button', 'range-calendar'],
+    registryDependencies: ['button', 'calendar'],
     meta: { class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]' }
   },
   'p-calendar-22': {
     description: 'Two months calendar',
     tags: ['calendar'],
     npmDependencies: ['@internationalized/date'],
-    registryDependencies: ['range-calendar'],
+    registryDependencies: ['calendar'],
     meta: {
       class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]',
       colSpan: 2
@@ -850,7 +850,7 @@ export const metadata: Record<string, ParticleMetaDefinition> = {
     description: 'Three months calendar',
     tags: ['calendar'],
     npmDependencies: ['@internationalized/date'],
-    registryDependencies: ['range-calendar'],
+    registryDependencies: ['calendar'],
     meta: {
       class: '**:data-[slot=preview]:w-full sm:**:data-[slot=preview]:max-w-[80%]',
       colSpan: 2
@@ -884,14 +884,14 @@ export const metadata: Record<string, ParticleMetaDefinition> = {
     description: 'Date range picker',
     tags: ['date-picker', 'calendar', 'popover', 'button'],
     npmDependencies: ['@internationalized/date', '@lucide/svelte'],
-    registryDependencies: ['button', 'popover', 'range-calendar'],
+    registryDependencies: ['button', 'calendar', 'popover'],
     meta: { class: '**:data-[slot=preview]:w-full **:data-[slot=preview]:max-w-64' }
   },
   'p-date-picker-9': {
     description: 'Two months calendar with range date',
     tags: ['date-picker', 'calendar', 'popover', 'button'],
     npmDependencies: ['@internationalized/date', '@lucide/svelte'],
-    registryDependencies: ['button', 'popover', 'range-calendar'],
+    registryDependencies: ['button', 'calendar', 'popover'],
     meta: { class: '**:data-[slot=preview]:w-full **:data-[slot=preview]:max-w-64' }
   },
   'p-date-picker-3': {

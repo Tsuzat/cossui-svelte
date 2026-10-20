@@ -1,6 +1,6 @@
 <script lang="ts">
   import { CalendarDate } from '@internationalized/date';
-  import { type DateRange } from '#lib/components/ui/calendar/index.js';
+  import { Calendar, type DateRange } from '#lib/components/ui/calendar/index.js';
   import {
     Card,
     CardAction,
@@ -9,7 +9,6 @@
     CardPanel,
     CardTitle
   } from '#lib/components/ui/card/index.js';
-  import { RangeCalendar } from '#lib/components/ui/range-calendar/index.js';
   import {
     Select,
     SelectItem,
@@ -69,7 +68,8 @@
     </CardAction>
   </CardHeader>
   <CardPanel>
-    <RangeCalendar
+    <Calendar
+      mode="range"
       bind:value
       numberOfMonths={2}
       {locale}

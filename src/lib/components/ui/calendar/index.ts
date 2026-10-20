@@ -14,10 +14,11 @@ import Months from './calendar-months.svelte';
 import Nav from './calendar-nav.svelte';
 import NextButton from './calendar-next-button.svelte';
 import PrevButton from './calendar-prev-button.svelte';
+import RangeDay from './calendar-range-day.svelte';
 import YearSelect from './calendar-year-select.svelte';
 import Root from './calendar.svelte';
 
-export type { DateRange } from '../range-calendar/internal/types';
+export type { DateRange } from './internal/range/types';
 export type { CalendarMode, Props as CalendarProps } from './calendar.svelte';
 export {
   Caption,
@@ -36,6 +37,7 @@ export {
   Nav,
   NextButton,
   PrevButton,
+  RangeDay,
   //
   Root as Calendar,
   YearSelect
