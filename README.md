@@ -6,7 +6,7 @@ This project is an unofficial port of Coss UI for Svelte.
 
 This port is what I’ve always wanted for Svelte: one unified, full-featured component library. It builds on the upstream Coss components and extends them with contributions from Shadcn, MapCN, Bits UI, Origin UI and third-party contributors.
 
-In a nutshell, everything needed to build an serious application, plus:
+In a nutshell, everything needed to build a serious application, plus:
 
 - **Modern design**: clean, contemporary styling with layered shadows and softly rounded surfaces.
 - **Responsive by default**: widgets and layouts adapt to any screen size, with swipe and touch gestures built in.
@@ -54,12 +54,12 @@ Other good source of inspiration, sometimes with full component logic just copy/
 
 ### Differences from the original
 
-The Original [Coss UI](https://cossui.com/) is built with Next.js and BaseUI. This port is built with **Svelte** and **BitsUI**.
+The Original [Coss UI](https://cossui.com/) is built with Next.js and BaseUI. This port is built with **Svelte** and **ShardsUI**.
 
 - [x] [SvelteKit](https://svelte.dev) instead of ~~Next.js~~
-- [x] [Lucide Svelte](https://lucide.dev/guide/packages/lucide-svelte) instead of ~~Lucide React~~
+- [x] [Lucide Svelte](https://lucide.dev/guide/packages/lucide-svelte) (`@lucide/svelte`) instead of ~~Lucide React~~
 - [x] [ShardsUI](https://shardsui.com/) instead of ~~Base UI~~
-- [x] Skeleton component is now trivial, thanks to [Phantom-UI](@aejkatappaja/phantom-ui)
+- [x] Skeleton component is now trivial, thanks to [Phantom-UI](https://github.com/Aejkatappaja/phantom-ui)
 - [x] More components, ported from various sources
 
 A few components are built differently, reflecting the intuitive conventions of the Svelte ecosystem and its frameworks.
