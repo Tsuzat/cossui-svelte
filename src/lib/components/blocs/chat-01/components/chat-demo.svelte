@@ -3,7 +3,7 @@
   import LockIcon from '@lucide/svelte/icons/lock';
   import LogOutIcon from '@lucide/svelte/icons/log-out';
   import PinIcon from '@lucide/svelte/icons/pin';
-  import { onDestroy, tick } from 'svelte';
+  import { onDestroy, type Snippet, tick } from 'svelte';
   import { MediaQuery } from 'svelte/reactivity';
   import {
     AlertDialog,
@@ -64,6 +64,13 @@
     'Love that. Let’s pick it up in the walkthrough.',
     'Noted — I’ll bring this back to the group.'
   ];
+
+  let {
+    triggers
+  }: {
+    /** Renders the drawer triggers; receives `select` to open the drawer on a scenario. */
+    triggers?: Snippet<[select: (scenario: ChatScenario) => void]>;
+  } = $props();
 
   const id = $props.id();
   const isDesktop = new MediaQuery('min-width: 768px');
@@ -473,16 +480,20 @@
     }}
     {onOpenChange}
   >
-    <div class="flex max-w-xl flex-wrap justify-center gap-2">
-      {#each CHAT_SCENARIOS as item (item.value)}
-        <DrawerTrigger
-          class={buttonVariants({ variant: 'outline', size: 'sm' })}
-          onclick={() => changeScenario(item.value)}
-        >
-          {item.label}
-        </DrawerTrigger>
-      {/each}
-    </div>
+    {#if triggers}
+      {@render triggers(changeScenario)}
+    {:else}
+      <div class="flex max-w-xl flex-wrap justify-center gap-2">
+        {#each CHAT_SCENARIOS as item (item.value)}
+          <DrawerTrigger
+            class={buttonVariants({ variant: 'outline', size: 'sm' })}
+            onclick={() => changeScenario(item.value)}
+          >
+            {item.label}
+          </DrawerTrigger>
+        {/each}
+      </div>
+    {/if}
     <DrawerPopup
       variant="inset"
       showCloseButton

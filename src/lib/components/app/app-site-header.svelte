@@ -25,10 +25,11 @@
   let { navItems = [], currentProduct = 'ui', products = [], tree = docsNavTree }: Props = $props();
 
   const links = [
+    { path: '/docs', href: resolve('/docs/[...slug]', { slug: '' }), label: 'Docs' },
     { path: '/', href: resolve('/'), label: 'Components' },
     { path: '/particles', href: resolve('/particles'), label: 'Particles' },
     { path: '/blocs', href: resolve('/blocs'), label: 'Blocs' },
-    { path: '/docs', href: resolve('/docs/[...slug]', { slug: '' }), label: 'Docs' }
+    { path: '/chat', href: resolve('/chat'), label: 'Chat UI' }
   ] as const;
 
   const isActive = (href: string) =>
@@ -37,7 +38,12 @@
 
 <SiteHeaderBase {currentProduct} {products}>
   {#snippet mobileNav()}
-    <MobileNav class="flex lg:hidden" items={navItems} pagesNew={PAGES_NEW} {tree} />
+    <MobileNav
+      class="flex lg:hidden"
+      items={[...links.filter((link) => link.path !== '/'), ...navItems]}
+      pagesNew={PAGES_NEW}
+      {tree}
+    />
   {/snippet}
 
   <div class="hidden gap-2 lg:flex">

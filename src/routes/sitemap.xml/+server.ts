@@ -21,6 +21,7 @@ const STATIC_URLS: {
 }[] = [
   { changefreq: 'monthly', priority: '1.0', slug: '' }, // home
   { changefreq: 'monthly', priority: '0.9', slug: 'particles' },
+  { changefreq: 'monthly', priority: '0.8', slug: 'chat' },
   { changefreq: 'monthly', priority: '0.8', slug: 'docs' }
 ];
 
