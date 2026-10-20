@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.0.0](https://github.com/cossui-svelte/cossui-svelte/compare/v0.9.30...v1.0.0) (2026-10-20)
+
+### 🐛 Bug Fixes
+
+* **docs:** restore gap between changelog intro and timeline ([b9bda2c](https://github.com/cossui-svelte/cossui-svelte/commit/b9bda2cbf1589941d4ccebbaf4e15b41cff3721a))
+
+### 📝 Documentation
+
+* bugs update ([9106fb5](https://github.com/cossui-svelte/cossui-svelte/commit/9106fb52a7743746a252415470d2c6465263685a))
+* **changelog:** add 1.0.0 entry ([b839860](https://github.com/cossui-svelte/cossui-svelte/commit/b839860fe89ebafae2b577efb62914e9c8cd5351))
+* remove resources section with coss.com origin link ([b9c09f8](https://github.com/cossui-svelte/cossui-svelte/commit/b9c09f834dde086259c1216bc352002f574a6c35))
+
 ## [0.9.30](https://github.com/cossui-svelte/cossui-svelte/compare/v0.9.29...v0.9.30) (2026-10-20)
 
 ### ✨ Features
