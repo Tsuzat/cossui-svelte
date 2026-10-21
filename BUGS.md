@@ -1,9 +1,9 @@
 
 TODO:
-* Firefox - p-map-* don't show round corners
 * Publish cossui-svelte on r/sideprojects, https://www.myvibebook.com/, echojs, hacker news, linkedin, https://svelter.me/
 * implement rich-editor and split-pane
 
+* DONE: Firefox - p-map-* don't show round corners
 * DONE: add pointer to design/component library from the readme
 * DONE: Build the cossui-svelte skill, deploy similar to https://www.skills.sh/cosscom/coss/coss
 * DONE: review navigation category: it's a particle-only category with no component behind it.
