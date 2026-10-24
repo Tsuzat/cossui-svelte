@@ -83,6 +83,9 @@
       <Tooltip tooltip="Change Language">
         <ComboboxTrigger
           contenteditable="false"
+          onclick={(event) => event.stopPropagation()}
+          onpointerdown={(event) => event.stopPropagation()}
+          onmousedown={(event) => event.stopPropagation()}
           class={buttonVariants({
             variant: 'ghost',
             size: 'sm',

@@ -103,15 +103,6 @@
       .run();
   };
 
-  function handleAIHighlight() {
-    if (currentNodePos === -1) return;
-    editor
-      .chain()
-      .setNodeSelection(currentNodePos)
-      .setAIHighlight({ color: 'var(--color-muted)' })
-      .run();
-  }
-
   const insertNode = () => {
     if (currentNodePos === -1) return;
     const currentNodeSize = currentNode?.nodeSize || 0;
@@ -146,21 +137,29 @@
   bind:node={currentNode}
   bind:pos={currentNodePos}
   bind:element
-  class={cn('gap-0.5', className)}
+  class={cn('0.25 transition-all', className)}
 >
+  <Button
+    variant="ghost"
+    size="icon-sm"
+    class="opacity-60 hover:opacity-100 focus-visible:opacity-100 active:opacity-100"
+    onclick={insertNode}
+  >
+    <Plus />
+  </Button>
   <Menu bind:open>
     <MenuTrigger
       class={buttonVariants({
         variant: 'ghost',
         size: 'icon-sm',
         class:
-          'z-0! size-7! cursor-grab! rounded-sm opacity-60 hover:opacity-100 focus-visible:opacity-100 active:opacity-100 data-[popup-open]:opacity-100'
+          'z-0! cursor-grab! opacity-60 hover:opacity-100 focus-visible:opacity-100 active:opacity-100 data-popup-open:opacity-100'
       })}
       aria-label="Open block menu"
     >
       <GripVertical />
     </MenuTrigger>
-    <MenuPopup class="w-48" portalProps={{ container: element }}>
+    <MenuPopup class="w-48 min-h-fit" portalProps={{ container: element }}>
       <MenuGroup>
         <MenuGroupLabel class="text-muted-foreground capitalize">
           {currentNode?.type.name}
@@ -170,7 +169,7 @@
             <Repeat2 />
             Turn Into
           </MenuSubTrigger>
-          <MenuSubPopup>
+          <MenuSubPopup class="max-h-96 overflow-auto">
             {#each Object.entries(turnIntos) as [key, turnIntoCommands] (key)}
               <MenuGroup>
                 <MenuGroupLabel class="capitalize">{key}</MenuGroupLabel>
@@ -202,7 +201,7 @@
           <Palette />
           Colors
         </MenuSubTrigger>
-        <MenuSubPopup>
+        <MenuSubPopup class="max-h-96 overflow-auto">
           <MenuGroup>
             <MenuGroupLabel>Texts</MenuGroupLabel>
             {#each quickcolors as color (color.label)}
@@ -315,8 +314,8 @@
         </MenuSubPopup>
       </MenuSub>
       <MenuSeparator />
-      <MenuItem onclick={handleDelete}>
-        <Delete class="text-destructive" />
+      <MenuItem variant="destructive" onclick={handleDelete}>
+        <Delete />
         Delete
       </MenuItem>
     </MenuPopup>

@@ -56,7 +56,7 @@
       },
       {
         type: 'callout',
-        attrs: { emoji: '✦' },
+        attrs: { emoji: '💡' },
         content: [
           {
             type: 'paragraph',
@@ -238,7 +238,7 @@
       </footer>
 
       <RichEditor.BubbleMenu />
-      <RichEditor.DragHandleExtended />
+      <RichEditor.DragHandle />
     </div>
   </div>
 </RichEditor>

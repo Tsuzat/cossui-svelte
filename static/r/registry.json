@@ -14084,6 +14084,23 @@
 			]
 		},
 		{
+			"name": "p-rich-editor-2",
+			"title": "Rich editor 2",
+			"description": "Notion-like block editor with table of contents and drag handles",
+			"type": "registry:block",
+			"dependencies": [],
+			"registryDependencies": [
+				"rich-editor"
+			],
+			"files": [
+				{
+					"type": "registry:block",
+					"path": "p-rich-editor-2.svelte",
+					"target": "$lib/components/particles/rich-editor/p-rich-editor-2.svelte"
+				}
+			]
+		},
+		{
 			"name": "p-scroll-area-1",
 			"title": "Scroll area 1",
 			"description": "Basic scroll area",

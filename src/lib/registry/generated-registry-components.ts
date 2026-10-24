@@ -521,7 +521,7 @@ const allComponents: RegistryUiData = {
     description: 'A rich text editor component with formatting options.',
     folder: 'rich-editor',
     isnew: false,
-    istodo: true,
+    istodo: false,
     npmDependencies: [
       '@floating-ui/dom',
       '@lucide/svelte',

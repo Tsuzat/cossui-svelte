@@ -51,18 +51,18 @@
         strategy: 'absolute',
         middleware: [
           autoPlacement({
-            allowedPlacements: ['left']
+            allowedPlacements: ['left', 'left-start', 'left-end']
           })
         ]
       },
       nestedOptions: {
-        enabled: false,
+        enabled: true,
         rules: [],
         defaultRules: true,
         allowedContainers: undefined,
         edgeDetection: {
           threshold: 1,
-          edges: ['left', 'top'],
+          edges: ['left', 'top', 'bottom'],
           strength: 1
         }
       },

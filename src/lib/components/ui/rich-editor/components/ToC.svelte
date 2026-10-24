@@ -33,23 +33,25 @@
       side="left"
       sideOffset={-24}
       align="start"
-      class="flex max-h-120 min-h-8 max-w-56 flex-col items-start gap-1.5 overflow-auto border bg-popover duration-300 fade-in-50 data-[side=left]:slide-in-from-right-30"
+      class="max-h-120 min-h-8 max-w-56 items-start gap-1.5 overflow-auto border bg-popover duration-300 fade-in-50 data-[side=left]:slide-in-from-right-30"
     >
       {#if tocItems === undefined || tocItems.length === 0}
         <div>No contents</div>
       {:else}
-        {#each tocItems as item (item.id)}
-          <a
-            href={`#${item.id}`}
-            class={cn(
-              'nodefault text-sm text-wrap text-foreground transition-all duration-500',
-              item.isScrolledOver && 'text-muted-foreground italic'
-            )}
-            style={`padding-left: calc(1rem * ${item.level - 1});`}
-          >
-            {item.textContent}
-          </a>
-        {/each}
+        <div class="flex flex-col gap-1.5">
+          {#each tocItems as item (item.id)}
+            <a
+              href={`#${item.id}`}
+              class={cn(
+                'nodefault text-sm text-wrap text-foreground transition-all duration-500',
+                item.isScrolledOver && 'text-muted-foreground italic'
+              )}
+              style={`padding-left: calc(1rem * ${item.level - 1});`}
+            >
+              {item.textContent}
+            </a>
+          {/each}
+        </div>
       {/if}
     </TooltipPopup>
   </Tooltip>
