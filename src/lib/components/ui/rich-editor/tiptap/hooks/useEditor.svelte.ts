@@ -1,11 +1,11 @@
-import { browser } from '$app/environment';
 import type { EditorOptions } from '@tiptap/core';
+import { isBrowser } from '.././../helpers.ts';
 import { Editor } from '../Editor.ts';
 
 export const useEditor = (options: Partial<EditorOptions> = {}) => {
   let editor: Editor | undefined = undefined;
 
-  if (browser) {
+  if (isBrowser) {
     editor = new Editor(options);
   }
 

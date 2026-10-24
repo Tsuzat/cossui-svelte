@@ -520,7 +520,7 @@ const allComponents: RegistryUiData = {
     category: 'extra',
     description: 'A rich text editor component with formatting options.',
     folder: 'rich-editor',
-    isnew: false,
+    isnew: true,
     istodo: false,
     npmDependencies: [
       '@floating-ui/dom',
