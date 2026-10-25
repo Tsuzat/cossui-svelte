@@ -551,6 +551,7 @@ const allComponents: RegistryUiData = {
     ],
     registryDependencies: [
       'button',
+      'combobox',
       'input',
       'kbd',
       'menu',

@@ -3,11 +3,13 @@
   import { Input } from '#lib/components/ui/input/index.js';
   import { Popover, PopoverPopup, PopoverTrigger } from '#lib/components/ui/popover/index.js';
   import { cn } from '#lib/utils.js';
+  import { nodeViewPortalProps } from '../helpers';
   import { NodeViewContent, NodeViewWrapper, type NodeViewProps } from '../tiptap/index.js';
 
   const { node, updateAttributes }: NodeViewProps = $props();
 
-  let emoji = $derived(node.attrs.emoji ?? '💡');
+  const emoji = $derived(node.attrs.emoji ?? '💡');
+  const emojiInputId = $props.id();
 
   function handleEmojiInput(e: Event) {
     const target = e.target as HTMLInputElement;
@@ -28,13 +30,19 @@
       >
         {emoji}
       </PopoverTrigger>
-      <PopoverPopup class="flex w-48 flex-col gap-2 shadow-lg" side="bottom" align="start">
+      <!-- Keep the portal outside ProseMirror's DOM; see nodeViewPortalProps for details. -->
+      <PopoverPopup
+        class="flex w-48 flex-col gap-2 shadow-lg"
+        side="bottom"
+        align="start"
+        portalProps={nodeViewPortalProps}
+      >
         <div class="flex flex-col gap-1.5">
-          <label for="emoji" class="text-[10px] font-bold text-muted-foreground uppercase"
+          <label for={emojiInputId} class="text-[10px] font-bold text-muted-foreground uppercase"
             >Emoji Icon</label
           >
           <Input
-            id="emoji"
+            id={emojiInputId}
             value={emoji}
             oninput={handleEmojiInput}
             placeholder="Paste or type an emoji..."

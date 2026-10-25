@@ -63,16 +63,12 @@
 
     if (propsEditor.isActive('link')) return false;
     if (propsEditor.isActive('codeBlock')) return false;
-    if (propsEditor.isActive('image-placeholder')) return false;
-    if (propsEditor.isActive('video-placeholder')) return false;
-    if (propsEditor.isActive('audio-placeholder')) return false;
-    if (propsEditor.isActive('iframe-placeholder')) return false;
+    if (propsEditor.isActive('mediaPlaceholder')) return false;
     if (propsEditor.isActive('image')) return false;
     if (propsEditor.isActive('video')) return false;
     if (propsEditor.isActive('iframe')) return false;
     if (propsEditor.isActive('audio')) return false;
     if (propsEditor.isActive('blockMath') || propsEditor.isActive('inlineMath')) return false;
-    if (propsEditor.isActive('ai-highlight')) return false;
     if (propsEditor.isActive('mermaid')) return false;
 
     const { selection, doc } = state;

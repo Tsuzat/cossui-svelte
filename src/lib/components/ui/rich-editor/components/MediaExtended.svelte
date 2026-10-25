@@ -12,7 +12,7 @@
   import { Button, buttonVariants } from '#lib/components/ui/button/index.js';
   import { Menu, MenuItem, MenuPopup, MenuTrigger } from '#lib/components/ui/menu/index.js';
   import { cn } from '#lib/utils.js';
-  import { duplicateContent } from '../helpers.ts';
+  import { duplicateContent, nodeViewPortalProps } from '../helpers.ts';
   import { NodeViewWrapper } from '../tiptap';
 
   interface MediaExtendedProps extends NodeViewProps {
@@ -232,7 +232,11 @@
           >
             <EllipsisVertical />
           </MenuTrigger>
-          <MenuPopup align="start" class="mt-1 overflow-auto text-sm">
+          <MenuPopup
+            align="start"
+            class="mt-1 overflow-auto text-sm"
+            portalProps={nodeViewPortalProps}
+          >
             <MenuItem
               onclick={() => {
                 if (node.attrs.title === null || node.attrs.title.trim() === '')

@@ -12,14 +12,17 @@
     tooltip: string;
     children: Snippet<[]>;
     shortCut?: string;
+    /** Trigger element type. Use a non-button element when the child is already interactive. */
+    as?: keyof HTMLElementTagNameMap;
+    class?: string;
   }
 
-  const { tooltip, children, shortCut }: Props = $props();
+  const { tooltip, children, shortCut, as = 'button', class: className }: Props = $props();
 </script>
 
 <TooltipProvider>
   <Tooltip>
-    <TooltipTrigger>
+    <TooltipTrigger {as} class={className}>
       {@render children()}
     </TooltipTrigger>
     <TooltipPopup>

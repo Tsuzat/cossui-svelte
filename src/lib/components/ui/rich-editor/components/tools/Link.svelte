@@ -5,12 +5,13 @@
   import { buttonVariants, Button } from '#lib/components/ui/button/index.js';
   import { Input } from '#lib/components/ui/input/index.js';
   import { Popover, PopoverPopup, PopoverTrigger } from '#lib/components/ui/popover/index.js';
+  import { cn } from '#lib/utils.js';
   import { getEditor, useEditorTransaction } from '../../tiptap';
   import Tooltip from '../Tooltip.svelte';
 
   let open = $state(false);
 
-  let value = $state<string>();
+  let value = $state('');
   const editor = getEditor();
   const transaction = useEditorTransaction(editor);
   function isActive() {
@@ -20,35 +21,28 @@
 
   function handleSubmit(e: Event) {
     e.preventDefault();
-    if (value === undefined || value.trim() === '') return;
-    editor.chain().focus().setLink({ href: value }).run();
-    value = undefined;
+    const href = value.trim();
+    if (!href) return;
+    editor.chain().focus().setLink({ href }).run();
+    value = '';
     open = false;
   }
 </script>
 
 <Popover bind:open>
-  <PopoverTrigger>
-    <Tooltip tooltip="Link">
-      <div
-        class={buttonVariants({
-          variant: 'ghost',
-          size: 'icon'
-        })}
-        class:bg-muted={isActive()}
-      >
-        <Link />
-        <ChevronDown class="size-2! text-muted-foreground" />
-      </div>
-    </Tooltip>
-  </PopoverTrigger>
-  <PopoverPopup
-    portalProps={{ container: document.getElementById('nota-editor') ?? undefined }}
-    class="h-fit w-80 rounded-lg p-0!"
-  >
+  <Tooltip tooltip="Link" as="span" class="inline-flex">
+    <PopoverTrigger
+      aria-label="Link"
+      class={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), isActive() && 'bg-muted')}
+    >
+      <Link />
+      <ChevronDown class="size-2! text-muted-foreground" />
+    </PopoverTrigger>
+  </Tooltip>
+  <PopoverPopup class="h-fit w-80 rounded-lg p-0!">
     <form class="flex items-center gap-0.5" onsubmit={handleSubmit}>
       <Input placeholder="Type or paste a link..." bind:value required type="url" />
-      <Tooltip tooltip="Insert link">
+      <Tooltip tooltip="Insert link" as="span" class="inline-flex">
         <Button type="submit" size="icon">
           <Check />
         </Button>

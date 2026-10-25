@@ -33,7 +33,7 @@
 </script>
 
 <Menu>
-  <Tooltip tooltip="Lists">
+  <Tooltip tooltip="Lists" as="span" class="inline-flex">
     {@const Icon = ListIcon()}
     <MenuTrigger
       class={buttonVariants({

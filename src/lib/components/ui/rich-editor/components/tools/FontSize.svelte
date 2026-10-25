@@ -38,7 +38,7 @@
 </script>
 
 <Menu>
-  <Tooltip tooltip="Font Size">
+  <Tooltip tooltip="Font Size" as="span" class="inline-flex">
     <MenuTrigger
       class={buttonVariants({
         variant: 'ghost'

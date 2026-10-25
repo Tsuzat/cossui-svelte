@@ -34,7 +34,7 @@
 </script>
 
 <Menu>
-  <Tooltip tooltip="Alignment">
+  <Tooltip tooltip="Alignment" as="span" class="inline-flex">
     <MenuTrigger
       class={buttonVariants({
         variant: 'ghost',

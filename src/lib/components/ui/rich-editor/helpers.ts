@@ -84,6 +84,23 @@ export const isURL = (str: string): boolean => {
   }
 };
 
+/**
+ * Portal props for Shards UI floating content (popover, menu, combobox) that is
+ * opened from inside a Tiptap node view.
+ *
+ * When such a popup opens, Shards UI marks every outside element with
+ * `data-shards-ui-inert` (used for outside-press detection). If the popup is
+ * still inside the ProseMirror DOM at that moment, the marker is written to
+ * ProseMirror's own nodes. ProseMirror sees those attribute mutations, re-renders
+ * the document and recreates the node view — resetting the popup's `open` state
+ * so it vanishes immediately.
+ *
+ * Mounting the portal up front moves it to `document.body` before the markers
+ * are calculated, so only the app shell (outside the editor) gets marked and the
+ * node view is left untouched.
+ */
+export const nodeViewPortalProps = { keepMounted: true } as const;
+
 export const quickcolors = [
   { label: 'Default', value: '' },
   { label: 'Blue', value: '#0E0E99' },

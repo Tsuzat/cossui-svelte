@@ -2881,6 +2881,7 @@
 			],
 			"registryDependencies": [
 				"button",
+				"combobox",
 				"input",
 				"kbd",
 				"menu",

@@ -5,6 +5,7 @@
   import { Input } from '#lib/components/ui/input/index.js';
   import { Popover, PopoverPopup, PopoverTrigger } from '#lib/components/ui/popover/index.js';
   import { Tabs, TabsList, TabsPanel, TabsTab } from '#lib/components/ui/tabs/index.js';
+  import { nodeViewPortalProps } from '../helpers';
   import { NodeViewWrapper } from '../tiptap';
 
   const { editor, node }: NodeViewProps = $props();
@@ -48,64 +49,69 @@
   });
 
   function setMediaFn(src: string) {
+    const value = src.trim();
+    if (!value) return;
     if (mediaType === 'audio') {
-      editor.chain().focus().setAudio({ src }).run();
+      editor.chain().focus().setAudio({ src: value }).run();
     } else if (mediaType === 'video') {
-      editor.chain().focus().setVideo({ src }).run();
+      editor.chain().focus().setVideo({ src: value }).run();
     } else if (mediaType === 'image') {
-      editor.chain().focus().setImage({ src }).run();
+      editor.chain().focus().setImage({ src: value }).run();
     } else if (mediaType === 'iframe') {
-      editor.chain().focus().setIframe({ src }).run();
+      editor.chain().focus().setIframe({ src: value }).run();
     }
+    open = false;
   }
 </script>
 
 <NodeViewWrapper class="my-2 w-full!">
   {@const Icon = mediaTypeData?.icon}
   {@const text = mediaTypeData?.text}
-  <!-- svelte-ignore a11y_click_events_have_key_events -->
-  <div
-    role="button"
-    tabindex={1}
-    class="flex min-h-14 w-full items-center gap-2 rounded-lg border border-dashed bg-muted/30 p-4 transition-colors hover:bg-muted/50"
-    onclick={() => (open = true)}
-  >
-    <Icon class="size-4 text-muted-foreground" />
-    <span class="text-sm text-muted-foreground" contenteditable={false}>{text}</span>
-
-    <Popover bind:open>
-      <PopoverTrigger class="sr-only left-1/2"></PopoverTrigger>
-      <PopoverPopup portalProps={{ container: undefined }}>
-        <Tabs value="link" class="w-full">
-          <TabsList>
-            <TabsTab value="link">Link</TabsTab>
-            {#if mediaType !== 'iframe'}
-              <TabsTab value="file">File</TabsTab>
-            {/if}
-          </TabsList>
-          <TabsPanel value="link">
-            <form class="flex flex-col gap-2">
-              <Input type="url" bind:value={url} />
-              <Button type="submit" class="capitalize" onclick={() => setMediaFn(url)}
-                >Insert {mediaType}</Button
-              >
+  <Popover bind:open>
+    <PopoverTrigger
+      as="div"
+      contenteditable="false"
+      aria-label={text}
+      class="flex min-h-14 w-full cursor-pointer items-center gap-2 rounded-lg border border-dashed bg-muted/30 p-4 text-start transition-colors hover:bg-muted/50"
+    >
+      <Icon class="size-4 text-muted-foreground" />
+      <span class="text-sm text-muted-foreground">{text}</span>
+    </PopoverTrigger>
+    <PopoverPopup class="w-80" portalProps={nodeViewPortalProps}>
+      <Tabs value="link" class="w-full">
+        <TabsList>
+          <TabsTab value="link">Link</TabsTab>
+          {#if mediaType !== 'iframe'}
+            <TabsTab value="file">File</TabsTab>
+          {/if}
+        </TabsList>
+        <TabsPanel value="link">
+          <form
+            class="flex flex-col gap-2"
+            onsubmit={(e) => {
+              e.preventDefault();
+              setMediaFn(url);
+            }}
+          >
+            <Input type="url" bind:value={url} placeholder="https://..." aria-label="Media URL" />
+            <Button type="submit" class="capitalize">Insert {mediaType}</Button>
+          </form>
+        </TabsPanel>
+        {#if mediaType !== 'iframe'}
+          <TabsPanel value="file">
+            <form class="flex flex-col gap-2" onsubmit={handleFileSubmit}>
+              <Input
+                type="file"
+                aria-label="Media file"
+                onchange={(e) => {
+                  files = (e.currentTarget as HTMLInputElement).files ?? undefined;
+                }}
+              />
+              <Button type="submit" class="capitalize">Insert {mediaType}</Button>
             </form>
           </TabsPanel>
-          {#if mediaType !== 'iframe'}
-            <TabsPanel value="file">
-              <form class="flex flex-col gap-2" onsubmit={handleFileSubmit}>
-                <Input
-                  type="file"
-                  onchange={(e) => {
-                    files = (e.currentTarget as HTMLInputElement).files ?? undefined;
-                  }}
-                />
-                <Button type="submit" class="capitalize">Insert {mediaType}</Button>
-              </form>
-            </TabsPanel>
-          {/if}
-        </Tabs>
-      </PopoverPopup>
-    </Popover>
-  </div>
+        {/if}
+      </Tabs>
+    </PopoverPopup>
+  </Popover>
 </NodeViewWrapper>

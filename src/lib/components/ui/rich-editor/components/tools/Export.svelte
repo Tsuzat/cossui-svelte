@@ -3,6 +3,7 @@
   import { buttonVariants } from '#lib/components/ui/button/index.js';
   import {
     Menu,
+    MenuGroup,
     MenuGroupLabel,
     MenuItem,
     MenuPopup,
@@ -62,14 +63,19 @@
 </script>
 
 <Menu>
-  <MenuTrigger class={buttonVariants({ variant: 'ghost', size: 'icon' })}>
+  <MenuTrigger
+    aria-label="Export document"
+    class={buttonVariants({ variant: 'ghost', size: 'icon' })}
+  >
     <Download />
     <ChevronDown class="size-2! text-muted-foreground" />
   </MenuTrigger>
   <MenuPopup>
-    <MenuGroupLabel>Export As</MenuGroupLabel>
-    <MenuItem onclick={() => handleExport('markdown')}>Markdown</MenuItem>
-    <MenuItem onclick={() => handleExport('html')}>HTML</MenuItem>
-    <MenuItem onclick={() => handleExport('json')}>JSON</MenuItem>
+    <MenuGroup>
+      <MenuGroupLabel>Export As</MenuGroupLabel>
+      <MenuItem onclick={() => handleExport('markdown')}>Markdown</MenuItem>
+      <MenuItem onclick={() => handleExport('html')}>HTML</MenuItem>
+      <MenuItem onclick={() => handleExport('json')}>JSON</MenuItem>
+    </MenuGroup>
   </MenuPopup>
 </Menu>

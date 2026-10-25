@@ -28,7 +28,7 @@
 </script>
 
 <Menu bind:open>
-  <Tooltip tooltip="Quick Colors">
+  <Tooltip tooltip="Quick Colors" as="span" class="inline-flex">
     <MenuTrigger
       class={buttonVariants({
         variant: 'ghost',
