@@ -3,17 +3,6 @@
   import Check from '@lucide/svelte/icons/check';
   import Copy from '@lucide/svelte/icons/copy';
   import { Button, buttonVariants } from '#lib/components/ui/button/index.js';
-  import {
-    Combobox,
-    ComboboxCollection,
-    ComboboxEmpty,
-    ComboboxInput,
-    ComboboxItem,
-    ComboboxList,
-    ComboboxPopup,
-    ComboboxTrigger,
-    ComboboxValue
-  } from '#lib/components/ui/combobox/index.js';
   import { NodeViewContent, NodeViewWrapper, type NodeViewProps } from '../tiptap';
   import Tooltip from './Tooltip.svelte';
 
@@ -72,49 +61,24 @@
         </Button>
       </Tooltip>
     {/if}
-    <Combobox
-      items={languages}
-      value={defaultLanguage}
-      disabled={!editor.isEditable}
-      onValueChange={(language) => {
-        if (typeof language === 'string') changeLanguage(language);
-      }}
-    >
+    <div class="relative print:hidden">
       <Tooltip tooltip="Change Language">
-        <ComboboxTrigger
-          contenteditable="false"
+        <select
+          aria-label="Code block language"
+          value={defaultLanguage}
+          disabled={!editor.isEditable}
+          onchange={(event) => changeLanguage(event.currentTarget.value)}
           onclick={(event) => event.stopPropagation()}
-          onpointerdown={(event) => event.stopPropagation()}
-          onmousedown={(event) => event.stopPropagation()}
-          class={buttonVariants({
-            variant: 'ghost',
-            size: 'sm',
-            class: 'text-muted-foreground capitalize'
-          })}
+          class="h-7 cursor-pointer appearance-none rounded-md pl-1 w-fit! border-0 bg-transparent text-xs font-medium text-muted-foreground capitalize outline-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
         >
-          <ComboboxValue placeholder="plaintext" />
-        </ComboboxTrigger>
+          {#each languages as { label, value } (value)}
+            <option {value} selected={value === defaultLanguage} class="capitalize">
+              {label}
+            </option>
+          {/each}
+        </select>
       </Tooltip>
-      <ComboboxPopup class="w-42 p-0!" align="end">
-        <div class="border-b p-2">
-          <ComboboxInput
-            placeholder="Search..."
-            showTrigger={false}
-            class="rounded-md before:rounded-[calc(var(--radius-md)-1px)]"
-          />
-        </div>
-        <ComboboxEmpty>No languages found.</ComboboxEmpty>
-        <ComboboxList>
-          <ComboboxCollection>
-            {#snippet children(item: { label: string; value: string })}
-              <ComboboxItem value={item.value} label={item.label} class="capitalize">
-                {item.label}
-              </ComboboxItem>
-            {/snippet}
-          </ComboboxCollection>
-        </ComboboxList>
-      </ComboboxPopup>
-    </Combobox>
+    </div>
     <Button
       variant="ghost"
       size="icon-xs"

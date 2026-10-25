@@ -118,7 +118,7 @@
       },
       {
         type: 'codeBlock',
-        attrs: { language: 'ts' },
+        attrs: { language: 'typescript' },
         content: [
           {
             type: 'text',
@@ -162,7 +162,7 @@
 <RichEditor {editor}>
   <div class="w-full max-w-4xl">
     <div
-      class="flex h-130 flex-col overflow-hidden rounded-2xl border bg-card shadow-[0_18px_40px_-30px_rgba(0,0,0,0.45)] sm:h-[560px]"
+      class="flex h-130 flex-col overflow-hidden rounded-2xl border bg-card shadow-[0_18px_40px_-30px_rgba(0,0,0,0.45)] sm:h-140"
     >
       <header
         class="flex shrink-0 items-center justify-between gap-4 border-b bg-muted/20 px-4 py-3 sm:px-5"
